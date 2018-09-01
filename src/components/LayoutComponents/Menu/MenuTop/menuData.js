@@ -14,7 +14,7 @@ export default [
   {
     title: 'อุปกรณ์',
     key: 'Product',
-    icon:'icmn icmn-database',
+    icon: 'icmn icmn-database',
     children: [
       {
         key: 'อุปกรณ์ทั้งหมด',

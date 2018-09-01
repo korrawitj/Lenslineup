@@ -4,10 +4,7 @@ import { message } from 'antd'
 
 export const REDUCER = 'login'
 
-export const submit = ({ username, password } ) => (
-  dispatch,
-  getState,
-) => {
+export const submit = ({ username, password }) => (dispatch, getState) => {
   dispatch(app.addSubmitForm(REDUCER))
 
   let isLoggined = app.login(username, password, dispatch)

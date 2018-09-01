@@ -7,7 +7,7 @@ const defaultPagination = {
   showSizeChanger: true,
   current: 1,
   size: 'small',
-  showTotal: (total) => `Total ${total} items`,
+  showTotal: total => `Total ${total} items`,
   total: 0,
 }
 
