@@ -175,10 +175,10 @@ class MenuTop extends React.Component {
           mode="horizontal"
           className="menuTop__navigation"
         >
-          <Menu.Item key={'settings'}>
+          {/* <Menu.Item key={'settings'}>
             <span className="menuTop__item-title">Settings</span>
             <span className={'icmn icmn-cog menuTop__icon utils__spin-delayed--pseudo-selector'} />
-          </Menu.Item>
+          </Menu.Item> */}
           {menuItems}
         </Menu>
       </div>

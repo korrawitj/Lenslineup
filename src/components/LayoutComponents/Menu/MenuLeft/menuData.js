@@ -11,4 +11,10 @@ export default [
     url: '/empty',
     icon: 'icmn icmn-books',
   },
+  {
+    title: 'Product',
+    key: 'home',
+    url: '/home',
+    icon: 'icmn icmn-books',
+  },
 ]
