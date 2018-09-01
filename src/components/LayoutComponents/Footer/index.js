@@ -9,7 +9,7 @@ class AppFooter extends React.Component {
         <div className="footer__top">
           <div className="row">
             <div className="col-lg-9">
-              <p>
+              {/* <p>
                 <strong>Clean UI Admin Template React - Best Solution for Your App!</strong>
               </p>
               <p>
@@ -23,21 +23,21 @@ class AppFooter extends React.Component {
                 Each file corresponds to a single component, layout, page, plugin or extension – so
                 you can easily find necessary piece of code and edit it for your needs. The package
                 includes both normal and minified CSS files, compiled from SASS.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
         <div className="footer__bottom">
           <div className="row">
             <div className="col-sm-6">
-              <a
+              {/* <a
                 href="https://themeforest.net/item/clean-ui-admin-template-react-redux-ant-design-fully-responsive-freebies/21938700"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mr-4"
               >
                 <Button type="primary">Buy Now 25$</Button>
-              </a>
+              </a> */}
             </div>
             <div className="col-sm-6">
               <div className="footer__copyright">

@@ -111,7 +111,7 @@ class DashboardAlpha extends React.Component {
             />
           </div>
         </div>
-        <div className="row">
+        {/* <div className="row">
           <div className="col-lg-12">
             <div className="card">
               <div className="card-header">
@@ -236,7 +236,7 @@ class DashboardAlpha extends React.Component {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     )
   }

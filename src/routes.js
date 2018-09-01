@@ -27,6 +27,10 @@ const loadableRoutes = {
   '/dashboard/alpha': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
   },
+
+  '/product/list':{
+    component:loadable(()=>import('pages/Product/ProductPage')),
+  }
 }
 
 class Routes extends React.Component {

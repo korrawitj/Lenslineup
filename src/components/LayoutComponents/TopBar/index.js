@@ -13,9 +13,9 @@ class TopBar extends React.Component {
     return (
       <div className="topbar">
         <div className="topbar__left">
-          <IssuesHistory />
+          {/* <IssuesHistory />
           <ProjectManagement />
-          <LiveSearch />
+          <LiveSearch /> */}
         </div>
         <div className="topbar__right">
           <a
@@ -24,10 +24,10 @@ class TopBar extends React.Component {
             rel="noopener noreferrer"
             className="mr-4 d-none d-sm-inline"
           >
-            <Button type="danger">Buy Now 25$</Button>
+            {/* <Button type="danger">Buy Now 25$</Button> */}
           </a>
-          <BitcoinPrice />
-          <HomeMenu />
+          {/* <BitcoinPrice /> */}
+          {/* <HomeMenu /> */}
           <ProfileMenu />
         </div>
       </div>
