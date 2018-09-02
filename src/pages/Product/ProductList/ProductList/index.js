@@ -33,7 +33,7 @@ class ProductList extends React.Component {
       filtered: !!searchText,
       data: tableData
         .map(record => {
-          let match = record.customer.match(reg)
+          let match = record.ProductName.match(reg)
           if (!match) {
             return null
           }
@@ -41,7 +41,7 @@ class ProductList extends React.Component {
             ...record,
             name: (
               <span>
-                {record.customer
+                {record.ProductName
                   .split(reg)
                   .map(
                     (text, i) =>
@@ -87,15 +87,10 @@ class ProductList extends React.Component {
         sorter: (a, b) => a.id - b.id,
       },
       {
-        title: 'Purchase Date',
-        dataIndex: 'date',
-        key: 'date',
-      },
-      {
-        title: 'Customer',
-        dataIndex: 'customer',
-        key: 'customer',
-        sorter: (a, b) => a.customer.length - b.customer.length,
+        title: 'อุปกรณ์',
+        dataIndex: 'ProductName',
+        key: 'ProductName',
+        sorter: (a, b) => a.ProductName.length - b.ProductName.length,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
             {text}
@@ -129,41 +124,25 @@ class ProductList extends React.Component {
         },
       },
       {
-        title: 'Grand Total',
-        dataIndex: 'total',
-        key: 'total',
+        title: 'ราคาเช่า',
+        dataIndex: 'RentPrice',
+        key: 'RentPrice',
         render: text => <span>{'$' + text}</span>,
-        sorter: (a, b) => a.total - b.total,
+        sorter: (a, b) => a.RentPrice - b.RentPrice,
       },
       {
-        title: 'Tax',
-        dataIndex: 'tax',
-        key: 'tax',
+        title: 'หลักประกัน1',
+        dataIndex: 'GuaranteePrice',
+        key: 'GuaranteePrice',
         render: text => <span>{'$' + text}</span>,
-        sorter: (a, b) => a.tax - b.tax,
+        sorter: (a, b) => a.GuaranteePrice - b.GuaranteePrice,
       },
       {
-        title: 'Shipping',
-        dataIndex: 'shipping',
-        key: 'shipping',
+        title: 'หลักประกัน2',
+        dataIndex: 'GuaranteePrice2',
+        key: 'GuaranteePrice2',
         render: text => <span>{'$' + text}</span>,
-        sorter: (a, b) => a.shipping - b.shipping,
-      },
-      {
-        title: 'Quantity',
-        dataIndex: 'quantity',
-        key: 'quantity',
-        sorter: (a, b) => a.quantity - b.quantity,
-      },
-      {
-        title: 'Status',
-        dataIndex: 'status',
-        key: 'status',
-        render: text => (
-          <span className={text === 'Processing' ? 'badge badge-primary' : 'badge badge-default'}>
-            {text}
-          </span>
-        ),
+        sorter: (a, b) => a.GuaranteePrice2 - b.GuaranteePrice2,
       },
       {
         title: 'Action',
@@ -184,7 +163,7 @@ class ProductList extends React.Component {
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
-            <strong>Orders</strong>
+            <strong>อุปกรณ์ทั้งหมด</strong>
           </div>
         </div>
         <div className="card-body">

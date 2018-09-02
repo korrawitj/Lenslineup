@@ -29,12 +29,12 @@ export default [
       {
         key: 'อุปกรณ์ที่ให้ไประหว่างเช่า',
         title: 'อุปกรณ์ที่ให้ไประหว่างเช่า',
-        url: '/',
+        url: '/Product/Include',
       },
       {
         key: 'อุปกรณ์จัดชุด',
         title: 'อุปกรณ์จัดชุด',
-        url: '/',
+        url: '/Product/Set',
       },
     ],
   },

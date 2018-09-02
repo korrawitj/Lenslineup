@@ -28,7 +28,15 @@ const loadableRoutes = {
   },
 
   '/product/list': {
-    component: loadable(() => import('pages/Product/ProductPage')),
+    component: loadable(() => import('pages/Product/ProductList')),
+  },
+
+  '/product/include': {
+    component: loadable(() => import('pages/Product/ProductInclude')),
+  },
+
+  '/product/set': {
+    component: loadable(() => import('pages/Product/ProductSet')),
   },
 }
 
