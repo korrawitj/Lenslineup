@@ -41,12 +41,10 @@ class ProductInclude extends React.Component {
             ...record,
             name: (
               <span>
-                {record.ProductName
-                  .split(reg)
-                  .map(
-                    (text, i) =>
-                      i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text,
-                  )}
+                {record.ProductName.split(reg).map(
+                  (text, i) =>
+                    i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text,
+                )}
               </span>
             ),
           }

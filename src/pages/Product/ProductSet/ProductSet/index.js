@@ -41,12 +41,10 @@ class ProductSet extends React.Component {
             ...record,
             name: (
               <span>
-                {record.SetName
-                  .split(reg)
-                  .map(
-                    (text, i) =>
-                      i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text,
-                  )}
+                {record.SetName.split(reg).map(
+                  (text, i) =>
+                    i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text,
+                )}
               </span>
             ),
           }
