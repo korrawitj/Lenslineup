@@ -6,6 +6,7 @@ import { reduce } from 'lodash'
 import { setLayoutState } from 'ducks/app'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { default as menuData } from './menuData'
+import logo from '../../../../assets/image/logo-final-2x.png';
 import './style.scss'
 
 const { Sider } = Layout
@@ -126,8 +127,8 @@ class MenuLeft extends React.Component {
           onClick={
             this.props.isMobile
               ? () => {
-                  dispatch(setLayoutState({ menuCollapsed: false }))
-                }
+                dispatch(setLayoutState({ menuCollapsed: false }))
+              }
               : undefined
           }
         >
@@ -136,11 +137,11 @@ class MenuLeft extends React.Component {
         </Link>
       </Menu.Item>
     ) : (
-      <Menu.Item key={key} disabled={disabled}>
-        <span className="menuLeft__item-title">{title}</span>
-        {icon && <span className={icon + ' menuLeft__icon'} />}
-      </Menu.Item>
-    )
+          <Menu.Item key={key} disabled={disabled}>
+            <span className="menuLeft__item-title">{title}</span>
+            {icon && <span className={icon + ' menuLeft__icon'} />}
+          </Menu.Item>
+        )
   }
 
   onCollapse = (value, type) => {
@@ -195,13 +196,13 @@ class MenuLeft extends React.Component {
         <div className="menuLeft__logo">
           {params.collapsed ? (
             <div className="menuLeft__logoContainer menuLeft__logoContainer--collapsed">
-              <img src="resources/images/logo-inverse-mobile.png" alt="" />
+              <img src={logo} alt="" width="100%" />
             </div>
           ) : (
-            <div className="menuLeft__logoContainer">
-              <img src="resources/images/logo-inverse.png" alt="" />
-            </div>
-          )}
+              <div className="menuLeft__logoContainer" style={{ textAlign: "center" }}>
+                <img src={logo} alt="" />
+              </div>
+            )}
         </div>
         <Scrollbars
           autoHide
