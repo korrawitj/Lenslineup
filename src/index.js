@@ -1,28 +1,28 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
-import { Helmet } from 'react-helmet'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import createHistory from 'history/createHashHistory'
-import thunk from 'redux-thunk'
-import 'es6-promise/auto'
-import 'setimmediate'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import { Helmet } from 'react-helmet';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createHistory from 'history/createHashHistory';
+import thunk from 'redux-thunk';
+import 'es6-promise/auto';
+import 'setimmediate';
 
-import { LocaleProvider } from 'antd'
-import enGB from 'antd/lib/locale-provider/en_GB'
-import registerServiceWorker from 'registerServiceWorker'
+import { LocaleProvider } from 'antd';
+import enGB from 'antd/lib/locale-provider/en_GB';
+import registerServiceWorker from 'registerServiceWorker';
 
-import Layout from 'components/LayoutComponents/Layout'
-import reducer from 'ducks'
+import Layout from 'components/LayoutComponents/Layout';
+import reducer from 'ducks';
 
-import 'resources/_antd.less' // redefinition AntDesign variables
-import 'bootstrap/dist/css/bootstrap.min.css' // bootstrap styles
+import 'resources/_antd.less'; // redefinition AntDesign variables
+import 'bootstrap/dist/css/bootstrap.min.css'; // bootstrap styles
 
-import 'resources/AntStyles/AntDesign/antd.cleanui.scss'
-import 'resources/CleanStyles/Core/core.cleanui.scss'
-import 'resources/CleanStyles/Vendors/vendors.cleanui.scss'
+import 'resources/AntStyles/AntDesign/antd.cleanui.scss';
+import 'resources/CleanStyles/Core/core.cleanui.scss';
+import 'resources/CleanStyles/Vendors/vendors.cleanui.scss';
 
 const history = createHistory()
 const router = routerMiddleware(history)
@@ -32,6 +32,12 @@ if (isLogger && process.env.NODE_ENV === 'development') {
   const { logger } = require('redux-logger')
   middlewares.push(logger)
 }
+
+// const rootReducer = combineReducers({
+//   reducer,
+//   pcr: productcategoryReducer
+// });
+
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)))
 
 ReactDOM.render(

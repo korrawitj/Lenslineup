@@ -1,10 +1,9 @@
-import React from 'react'
-import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd'
-import tableData from './data.json'
+import React from 'react';
+import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd';
+import tableData from './data.json';
+import { connect } from 'react-redux';
+
 const TreeNode = TreeSelect.TreeNode
-const Option = Select.Option
-const Dragger = Upload.Dragger
-const { TextArea } = Input
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
