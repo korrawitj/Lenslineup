@@ -1,9 +1,9 @@
-import React from 'react'
-import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd'
-import tableData from './data.json'
-import { connect } from 'react-redux'
-import * as actionCreators from '../../../../store/axios/productcategory'
-import axios from 'axios'
+import React from 'react';
+import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd';
+import tableData from './data.json';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../../../store/axios/productcategory';
+import axios from 'axios';
 
 const TreeNode = TreeSelect.TreeNode
 
@@ -83,20 +83,12 @@ class ProductCate extends React.Component {
       },
     ],
   }
-  handleCancel = () => this.setState({ previewVisible: false })
 
   componentDidMount() {
-    axios
-      .get('/json/color/random')
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
-    console.log(this.props.pcr)
+    this.props.getData();
   }
+
+  handleCancel = () => this.setState({ previewVisible: false })
 
   handlePreview = file => {
     this.setState({
@@ -218,6 +210,7 @@ class ProductCate extends React.Component {
             />
           </div>
         </div>
+        <p>{this.props.pcr.new_color}</p>
       </div>
     )
   }

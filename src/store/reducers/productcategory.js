@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionType'
 import { updateObject } from '../utility'
 
 const initialState = {
-  new_color: '',
+  new_color: 'red',
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,8 +10,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.INSERTDATA:
       return state
     case actionTypes.GETDATA:
-      return updateObject(state, action.val)
-
+      console.log(action.val)
+      return updateObject(state, { new_color: action.val });
     default:
       return state
   }
