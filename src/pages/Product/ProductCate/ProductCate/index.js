@@ -7,16 +7,16 @@ const Dragger = Upload.Dragger
 const { TextArea } = Input
 
 class ProductCate extends React.Component {
-    state = {
-      categoryValue: undefined,
-    }
-  
-    onChangeCategory = value => {
-      this.setState({
-        categoryValue: value,
-      })
-    }
-render() {
+  state = {
+    categoryValue: undefined,
+  }
+
+  onChangeCategory = value => {
+    this.setState({
+      categoryValue: value,
+    })
+  }
+  render() {
     let { categoryValue } = this.state
     return (
       <div className="card">
