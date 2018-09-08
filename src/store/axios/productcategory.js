@@ -3,7 +3,7 @@ import * as actionCreators from '../actions/index'
 
 export function getData() {
   return dispatch => {
-    return axios.get('/API/category/getAll').then(response => {
+    return axios.get('/json/color/random').then(response => {
       dispatch(actionCreators.getdata(response.data.new_color))
     })
   }
