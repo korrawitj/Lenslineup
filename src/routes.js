@@ -38,8 +38,8 @@ const loadableRoutes = {
   '/product/set': {
     component: loadable(() => import('pages/Product/ProductSet')),
   },
-  '/product/Cate': {
-    component: loadable(() => import('pages/Product/ProductCate')),
+  '/product/Category': {
+    component: loadable(() => import('pages/Product/ProductCategory')),
   },
 }
 

@@ -24,7 +24,7 @@ export default [
       {
         key: 'ประเภท',
         title: 'ประเภท',
-        url: '/Product/Cate',
+        url: '/Product/Category',
       },
       {
         key: 'อุปกรณ์ที่ให้ไประหว่างเช่า',

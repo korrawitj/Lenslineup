@@ -1,7 +1,7 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import ProductCate from './ProductCate'
+import ProductCate from './ProductsCategory'
 
 class ProductPage extends React.Component {
   static defaultProps = {
