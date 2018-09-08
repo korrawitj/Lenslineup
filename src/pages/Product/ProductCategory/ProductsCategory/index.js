@@ -18,39 +18,55 @@ const defaultPagination = {
 
 const columns = [
   {
-    title: 'ชื่อประเภท',
-    dataIndex: 'FullName',
-    key: 'FullName',
+    title: 'CategoryID',
+    dataIndex: 'CategoryID',
+    key: 'CategoryID',
     render: text => (
       <a className="utils__link--underlined" href="javascript: void(0);">
         {'#' + text}
       </a>
     ),
-    sorter: (a, b) => a.FullName - b.FullName,
+    sorter: (a, b) => a.CategoryID - b.CategoryID,
   },
   {
-    title: 'Sub-Catagory',
-    dataIndex: 'Parentcategory',
-    key: 'Parentcategory',
-    sorter: (a, b) => a.Parentcategory - b.Parentcategory,
+    title: 'ชื่อประเภท',
+    dataIndex: 'Fullname',
+    key: 'Fullname',
     render: text => (
       <a className="utils__link--underlined" href="javascript: void(0);">
         {text}
       </a>
     ),
+    sorter: (a, b) => a.Fullname - b.Fullname,
   },
   {
-    title: 'รูป',
-    dataIndex: 'Picture',
-    key: 'Picture',
-    render: text => <span>{'$' + text}</span>,
+    title: 'ชื่อสั้น',
+    dataIndex: 'Shortname',
+    key: 'Shortname',
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {text}
+      </a>
+    ),
+    sorter: (a, b) => a.Shortname - b.Shortname,
+  },
+  {
+    title: 'Order',
+    dataIndex: 'Order',
+    key: 'Order',
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {'#' + text}
+      </a>
+    ),
+    sorter: (a, b) => a.Order - b.Order,
   },
   {
     title: 'Action',
-    key: 'action',
+    key: 'Action',
     render: (text, record) => (
       <span>
-        <Button icon="cross" size="small">
+        <Button icon="cross" size="small"onClick={()=>(console.log(record))}>   
           Remove
         </Button>
       </span>
@@ -66,8 +82,6 @@ const uploadButton = (
 class ProductCate extends React.Component {
   state = {
     categoryValue: undefined,
-    tableData: tableData.data,
-    data: tableData.data,
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
@@ -122,8 +136,10 @@ class ProductCate extends React.Component {
     })
   }
   render() {
-    let { pager, data } = this.state
+    let { pager } = this.state
     let { categoryValue } = this.state
+    console.log(this.props.pcr.categoryData);
+    console.log(this.state.data);
     // let { categoryData } = this.pcr.categoryData
     return (
       <div className="card">
@@ -205,7 +221,7 @@ class ProductCate extends React.Component {
           <div className="col-lg-6">
             <Table
               columns={columns}
-              dataSource={data}
+              dataSource={this.props.pcr.categoryData}
               pagination={pager}
               onChange={this.handleTableChange}
             />
