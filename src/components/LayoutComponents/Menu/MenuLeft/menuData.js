@@ -5,12 +5,12 @@ export default [
     url: '/dashboard/alpha',
     icon: 'icmn icmn-stack',
   },
-  // {
-  //   title: 'Empty Page',
-  //   key: 'empty',
-  //   url: '/empty',
-  //   icon: 'icmn icmn-books',
-  // },
+  {
+    title: 'Configuration',
+    key: 'Config',
+    url: '/configuration',
+    icon: 'fa fa-gear',
+  },
   {
     title: 'อุปกรณ์',
     key: 'Product',
