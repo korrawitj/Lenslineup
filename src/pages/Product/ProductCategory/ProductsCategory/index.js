@@ -25,13 +25,13 @@ const columns = [
         {'#' + text}
       </a>
     ),
-    sorter: (a, b) => a.FullName.length - b.FullName.length,
+    sorter: (a, b) => a.FullName - b.FullName,
   },
   {
     title: 'Sub-Catagory',
     dataIndex: 'Parentcategory',
     key: 'Parentcategory',
-    sorter: (a, b) => a.Parentcategory.length - b.Parentcategory.length,
+    sorter: (a, b) => a.Parentcategory - b.Parentcategory,
     render: text => (
       <a className="utils__link--underlined" href="javascript: void(0);">
         {text}
@@ -206,12 +206,14 @@ class ProductCate extends React.Component {
               <Button type="default">Cancel</Button>
             </div>
           </div>
+          <div className="col-lg-6">
           <Table
             columns={columns}
             dataSource={data}
             pagination={pager}
             onChange={this.handleTableChange}
           />
+          </div>
         </div>
       </div>
     )
