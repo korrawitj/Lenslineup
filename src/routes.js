@@ -41,6 +41,9 @@ const loadableRoutes = {
   '/product/Category': {
     component: loadable(() => import('pages/Product/ProductCategory')),
   },
+  '/configuration': {
+    component: loadable(() => import('pages/Config/ConfigParameter')),
+  },
 }
 
 class Routes extends React.Component {
