@@ -6,8 +6,8 @@ export function getData() {
     return axios
       .get('/API/category/getAll')
       .then(response => {
-          console.log(response)
-          console.log(response.data)
+        console.log(response)
+        console.log(response.data)
         dispatch(actionCreators.getdata(response.categoryData))
       })
       .catch(error => {
