@@ -20,10 +20,10 @@ import reducer from 'ducks'
 import 'resources/_antd.less' // redefinition AntDesign variables
 import 'bootstrap/dist/css/bootstrap.min.css' // bootstrap styles
 
-import 'resources/AntStyles/AntDesign/antd.cleanui.scss';
-import 'resources/CleanStyles/Core/core.cleanui.scss';
-import 'resources/CleanStyles/Vendors/vendors.cleanui.scss';
-import axios from 'axios';
+import 'resources/AntStyles/AntDesign/antd.cleanui.scss'
+import 'resources/CleanStyles/Core/core.cleanui.scss'
+import 'resources/CleanStyles/Vendors/vendors.cleanui.scss'
+import axios from 'axios'
 
 const history = createHistory()
 const router = routerMiddleware(history)
@@ -34,8 +34,8 @@ if (isLogger && process.env.NODE_ENV === 'development') {
   middlewares.push(logger)
 }
 
-axios.defaults.baseURL = 'http://www.colr.org';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.baseURL = 'http://www.colr.org'
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)))
 

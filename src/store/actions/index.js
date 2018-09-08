@@ -1,4 +1,1 @@
-export {
-    insertdata,
-    getdata
-} from './product'
+export { insertdata, getdata } from './product'

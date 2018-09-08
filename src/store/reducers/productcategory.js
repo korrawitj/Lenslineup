@@ -1,8 +1,8 @@
 import * as actionTypes from '../actions/actionType'
-import { updateObject } from '../utility';
+import { updateObject } from '../utility'
 
 const initialState = {
-  new_color: ''
+  new_color: '',
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.INSERTDATA:
       return state
     case actionTypes.GETDATA:
-      return updateObject(state, action.val);
+      return updateObject(state, action.val)
 
     default:
       return state
