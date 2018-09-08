@@ -4,9 +4,11 @@ import * as actionCreators from '../actions/index'
 export function getData() {
   return dispatch => {
     return axios
-      .get('/json/color/random')
+      .get('/API/category/getAll')
       .then(response => {
-        dispatch(actionCreators.getdata(response.data.new_color))
+          console.log(response)
+          console.log(response.data)
+        dispatch(actionCreators.getdata(response.categoryData))
       })
       .catch(error => {
         console.log('Error axios ' + error)

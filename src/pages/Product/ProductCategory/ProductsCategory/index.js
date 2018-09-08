@@ -124,6 +124,7 @@ class ProductCate extends React.Component {
   render() {
     let { pager, data } = this.state
     let { categoryValue } = this.state
+    // let { categoryData } = this.pcr.categoryData
     return (
       <div className="card">
         <div className="card-header">
@@ -210,7 +211,7 @@ class ProductCate extends React.Component {
             />
           </div>
         </div>
-        <p>{this.props.pcr.new_color}</p>
+        {/* <p>{categoryData}</p> */}
       </div>
     )
   }
