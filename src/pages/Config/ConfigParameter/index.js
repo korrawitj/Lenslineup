@@ -14,7 +14,7 @@ class Configuration extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="Configuration" />
-        <ConfigParameter/>
+        <ConfigParameter />
       </Page>
     )
   }

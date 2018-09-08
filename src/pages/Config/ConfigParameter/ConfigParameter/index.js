@@ -1,7 +1,6 @@
 import React from 'react'
 import { Table, Icon, Input, Button } from 'antd'
 
-
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -13,7 +12,7 @@ const defaultPagination = {
 
 class ConfigParameter extends React.Component {
   state = {
-    data: {Holiday:[{Date:'1',Recive:'true',Recurring:'ture'}]},
+    data: { Holiday: [{ Date: '1', Recive: 'true', Recurring: 'ture' }] },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
@@ -23,8 +22,6 @@ class ConfigParameter extends React.Component {
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
-
-  
 
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -83,9 +80,8 @@ class ConfigParameter extends React.Component {
       },
     ]
 
-    let {Holiday}=this.state.data;
+    let { Holiday } = this.state.data
     return (
-
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
