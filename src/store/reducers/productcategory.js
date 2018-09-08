@@ -1,19 +1,19 @@
-import * as actionTypes from '../actions/actionType';
+import * as actionTypes from '../actions/actionType'
 
 const initialState = {
-    Fullname: '',
-    Shortname: '',
-    Order: '',
-    Parentcategory: ''
+  Fullname: '',
+  Shortname: '',
+  Order: '',
+  Parentcategory: '',
 }
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case actionTypes.INSERTDATA:
-            return state;
-        default:
-            return state;
-    }
-};
+  switch (action.type) {
+    case actionTypes.INSERTDATA:
+      return state
+    default:
+      return state
+  }
+}
 
-export default reducer;
+export default reducer

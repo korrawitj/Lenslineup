@@ -1,3 +1,1 @@
-export {
-    insertdata
-} from './product';
+export { insertdata } from './product'

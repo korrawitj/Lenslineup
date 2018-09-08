@@ -1,1 +1,1 @@
-export const INSERTDATA = 'INSERTDATA';
+export const INSERTDATA = 'INSERTDATA'
