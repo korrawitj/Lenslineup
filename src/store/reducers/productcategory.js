@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
       return state
     case actionTypes.GETDATA:
       console.log(action.val)
-      return updateObject(state, { new_color: action.val });
+      return updateObject(state, { new_color: action.val })
     default:
       return state
   }

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd';
-import tableData from './data.json';
-import { connect } from 'react-redux';
-import * as actionCreators from '../../../../store/axios/productcategory';
-import axios from 'axios';
+import React from 'react'
+import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd'
+import tableData from './data.json'
+import { connect } from 'react-redux'
+import * as actionCreators from '../../../../store/axios/productcategory'
+import axios from 'axios'
 
 const TreeNode = TreeSelect.TreeNode
 
@@ -85,7 +85,7 @@ class ProductCate extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getData();
+    this.props.getData()
   }
 
   handleCancel = () => this.setState({ previewVisible: false })

@@ -9,6 +9,6 @@ export const insertdata = () => {
 export const getdata = value => {
   return {
     type: actionTypes.GETDATA,
-    val: value
+    val: value,
   }
 }
