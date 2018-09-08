@@ -14,7 +14,7 @@ class ProductPage extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="ประเภทอุปกรณ์" />
-        <ProductCate/>
+        <ProductCate />
       </Page>
     )
   }
