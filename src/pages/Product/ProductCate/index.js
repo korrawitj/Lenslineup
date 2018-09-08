@@ -1,10 +1,11 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import ProductCate from './ProductCate/index'
+import ProductCate from './ProductCate'
+
 class ProductPage extends React.Component {
   static defaultProps = {
-    pathName: 'อุปกรณ์',
+    pathName: 'ประเภท',
     roles: ['agent', 'administrator'],
   }
 
@@ -12,8 +13,8 @@ class ProductPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="อุปกรณ์" />
-        <ProductCate />
+        <Helmet title="ประเภทอุปกรณ์" />
+        <ProductCate/>
       </Page>
     )
   }

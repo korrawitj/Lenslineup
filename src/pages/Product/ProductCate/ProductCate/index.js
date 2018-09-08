@@ -155,7 +155,7 @@ class ProductCate extends React.Component {
               </div>
             </div>
             <div className="col-lg-4">
-              <Dragger {...dragprop} className="height-300 d-block mb-3">
+              {/* <Dragger {...dragprop} className="height-300 d-block mb-3">
                 <p className="ant-upload-drag-icon">
                   <Icon type="inbox" />
                 </p>
@@ -171,7 +171,7 @@ class ProductCate extends React.Component {
                     <Icon type="upload" /> Select File
                   </Button>
                 </Upload>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

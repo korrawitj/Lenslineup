@@ -38,6 +38,9 @@ const loadableRoutes = {
   '/product/set': {
     component: loadable(() => import('pages/Product/ProductSet')),
   },
+  '/product/Cate':{
+    component: loadable(() => import('pages/Product/ProductCate')),
+  }
 }
 
 class Routes extends React.Component {
