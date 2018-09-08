@@ -207,12 +207,12 @@ class ProductCate extends React.Component {
             </div>
           </div>
           <div className="col-lg-6">
-          <Table
-            columns={columns}
-            dataSource={data}
-            pagination={pager}
-            onChange={this.handleTableChange}
-          />
+            <Table
+              columns={columns}
+              dataSource={data}
+              pagination={pager}
+              onChange={this.handleTableChange}
+            />
           </div>
         </div>
       </div>
