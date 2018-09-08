@@ -1,47 +1,138 @@
 import React from 'react'
-import { Input, TreeSelect, Select, Button, Upload, Icon, message } from 'antd'
-
+import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd'
+import tableData from './data.json'
 const TreeNode = TreeSelect.TreeNode
 const Option = Select.Option
 const Dragger = Upload.Dragger
 const { TextArea } = Input
 
+const defaultPagination = {
+  pageSizeOptions: ['10', '50', '100', '250'],
+  showSizeChanger: true,
+  current: 1,
+  size: 'small',
+  showTotal: total => `Total ${total} items`,
+  total: 0,
+}
+
+const columns = [
+  {
+    title: 'ชื่อประเภท',
+    dataIndex: 'FullName',
+    key: 'FullName',
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {'#' + text}
+      </a>
+    ),
+    sorter: (a, b) => a.FullName.length - b.FullName.length,
+  },
+  {
+    title: 'Sub-Catagory',
+    dataIndex: 'Parentcategory',
+    key: 'Parentcategory',
+    sorter: (a, b) => a.Parentcategory.length - b.Parentcategory.length,
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {text}
+      </a>
+    ),
+  },
+  {
+    title: 'รูป',
+    dataIndex: 'Picture',
+    key: 'Picture',
+    render: text => <span>{'$' + text}</span>,
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <span>
+        <Button icon="cross" size="small">
+          Remove
+        </Button>
+      </span>
+    ),
+  },
+]
+const uploadButton = (
+  <div>
+    <Icon type="plus" />
+    <div className="ant-upload-text">Upload</div>
+  </div>
+)
 class ProductCate extends React.Component {
   state = {
     categoryValue: undefined,
+    tableData: tableData.data,
+    data: tableData.data,
+    pager: { ...defaultPagination },
+    filterDropdownVisible: false,
+    searchText: '',
+    filtered: false,
+    previewVisible: false,
+    previewImage: '',
+    fileList: [
+      {
+        uid: -1,
+        name: 'xxx.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+    ],
+  }
+  handleCancel = () => this.setState({ previewVisible: false })
+
+  handlePreview = file => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    })
+  }
+  handleTableChange = (pagination, filters, sorter) => {
+    if (this.state.pager) {
+      const pager = { ...this.state.pager }
+      if (pager.pageSize !== pagination.pageSize) {
+        this.pageSize = pagination.pageSize
+        pager.pageSize = pagination.pageSize
+        pager.current = 1
+      } else {
+        pager.current = pagination.current
+      }
+      this.setState({
+        pager: pager,
+      })
+    }
   }
 
+  onInputChange = e => {
+    this.setState({ searchText: e.target.value })
+  }
+  handleChange = ({ fileList }) => this.setState({ fileList })
   onChangeCategory = value => {
     this.setState({
       categoryValue: value,
     })
   }
   render() {
+    let { pager, data } = this.state
     let { categoryValue } = this.state
     return (
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
-            <strong>Product Edit</strong>
+            <strong>Product Category</strong>
           </div>
         </div>
         <div className="card-body">
-          <h4 className="text-black mb-3">
-            <strong>Main Parameters</strong>
-          </h4>
           <div className="row">
-            <div className="col-lg-8">
+            <div className="col-lg-6">
               <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-12">
                   <div className="form-group">
-                    <label htmlFor="product-edit-title">Title</label>
+                    <label htmlFor="product-edit-title">ชื่อประเภท</label>
                     <Input id="product-edit-title" placeholder="Product title" />
-                  </div>
-                </div>
-                <div className="col-lg-6">
-                  <div className="form-group">
-                    <label htmlFor="product-edit-sku">SKU</label>
-                    <Input id="product-edit-sku" placeholder="Product SKU" />
                   </div>
                 </div>
                 <div className="col-lg-12">
@@ -75,87 +166,12 @@ class ProductCate extends React.Component {
                       </TreeNode>
                     </TreeSelect>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="product-edit-shordescr">Short description</label>
-                    <TextArea rows={3} id="product-edit-shordescr" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="product-edit-fulldescr">Full description</label>
-                    <TextArea rows={3} id="product-edit-fulldescr" />
-                  </div>
-                  <h4 className="text-black mt-2 mb-3">
-                    <strong>Pricing</strong>
-                  </h4>
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <label htmlFor="product-edit-totalprice">Total Price</label>
-                        <Input id="product-edit-totalprice" placeholder="Total Price" />
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <label htmlFor="product-edit-discountprice">Discount Price</label>
-                        <Input id="product-edit-discountprice" placeholder="Discount Price" />
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-black mt-2 mb-3">
-                    <strong>Attributes</strong>
-                  </h4>
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <label htmlFor="product-edit-colors">Colors</label>
-                        <Select
-                          id="product-edit-colors"
-                          showSearch
-                          style={{ width: '100%' }}
-                          placeholder="Select a color"
-                          optionFilterProp="children"
-                          filterOption={(input, option) =>
-                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                          }
-                        >
-                          <Option value="blue">Blue</Option>
-                          <Option value="red">Red</Option>
-                          <Option value="green">Green</Option>
-                        </Select>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="form-group">
-                        <label htmlFor="product-edit-size">Size</label>
-                        <Select
-                          id="product-edit-size"
-                          showSearch
-                          style={{ width: '100%' }}
-                          placeholder="Select a size"
-                          optionFilterProp="children"
-                          filterOption={(input, option) =>
-                            option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                          }
-                        >
-                          <Option value="s">Small</Option>
-                          <Option value="m">Middle</Option>
-                          <Option value="xl">Extra large</Option>
-                        </Select>
-                      </div>
-                    </div>
-                    <div className="col-lg-12">
-                      <div className="form-actions">
-                        <Button type="primary" className="mr-2">
-                          Save Product
-                        </Button>
-                        <Button type="default">Cancel</Button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-4">
-              {/* <Dragger {...dragprop} className="height-300 d-block mb-3">
+          </div>
+          <div className="col-lg-4">
+            {/* <Dragger {...dragprop} className="height-300 d-block mb-3">
                 <p className="ant-upload-drag-icon">
                   <Icon type="inbox" />
                 </p>
@@ -164,16 +180,38 @@ class ProductCate extends React.Component {
                   Support for a single or bulk upload. Strictly prohibit from uploading company data
                   or other band files
                 </p>
-              </Dragger>
-              <div>
-                <Upload>
-                  <Button>
-                    <Icon type="upload" /> Select File
-                  </Button>
-                </Upload>
-              </div> */}
+              </Dragger> */}
+
+            <div className="clearfix">
+              <Upload
+                action="//jsonplaceholder.typicode.com/posts/"
+                listType="picture-card"
+                fileList={this.fileList}
+                onPreview={this.handlePreview}
+                onChange={this.handleChange}
+              >
+                {/* {this.fileList.length >= 3 ? null : uploadButton} */}
+                {uploadButton}
+              </Upload>
+              <Modal visible={this.previewVisible} footer={null} onCancel={this.handleCancel}>
+                <img alt="example" style={{ width: '100%' }} src={this.previewImage} />
+              </Modal>
             </div>
           </div>
+          <div className="col-lg-12">
+            <div className="form-actions">
+              <Button type="primary" className="mr-2">
+                Save Product
+              </Button>
+              <Button type="default">Cancel</Button>
+            </div>
+          </div>
+          <Table
+            columns={columns}
+            dataSource={data}
+            pagination={pager}
+            onChange={this.handleTableChange}
+          />
         </div>
       </div>
     )
