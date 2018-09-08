@@ -66,7 +66,7 @@ const columns = [
     key: 'Action',
     render: (text, record) => (
       <span>
-        <Button icon="cross" size="small"onClick={()=>(console.log(record))}>   
+        <Button icon="cross" size="small" onClick={() => console.log(record)}>
           Remove
         </Button>
       </span>
@@ -138,8 +138,8 @@ class ProductCate extends React.Component {
   render() {
     let { pager } = this.state
     let { categoryValue } = this.state
-    console.log(this.props.pcr.categoryData);
-    console.log(this.state.data);
+    console.log(this.props.pcr.categoryData)
+    console.log(this.state.data)
     // let { categoryData } = this.pcr.categoryData
     return (
       <div className="card">

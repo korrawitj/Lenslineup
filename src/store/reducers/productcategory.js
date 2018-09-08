@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionType'
 import { updateObject } from '../utility'
 
 const initialState = {
-  categoryData: []
+  categoryData: [],
 }
 
 const reducer = (state = initialState, action) => {
