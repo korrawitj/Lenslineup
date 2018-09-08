@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, TreeSelect, Select, Button, Upload, Icon, message,Table ,Modal } from 'antd'
+import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd'
 import tableData from './data.json'
 const TreeNode = TreeSelect.TreeNode
 const Option = Select.Option
@@ -61,7 +61,7 @@ const uploadButton = (
     <Icon type="plus" />
     <div className="ant-upload-text">Upload</div>
   </div>
-);
+)
 class ProductCate extends React.Component {
   state = {
     categoryValue: undefined,
@@ -73,20 +73,22 @@ class ProductCate extends React.Component {
     filtered: false,
     previewVisible: false,
     previewImage: '',
-    fileList: [{
-      uid: -1,
-      name: 'xxx.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    }],
+    fileList: [
+      {
+        uid: -1,
+        name: 'xxx.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+    ],
   }
   handleCancel = () => this.setState({ previewVisible: false })
 
-  handlePreview = (file) => {
+  handlePreview = file => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
       previewVisible: true,
-    });
+    })
   }
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -103,7 +105,7 @@ class ProductCate extends React.Component {
       })
     }
   }
-  
+
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
@@ -164,12 +166,12 @@ class ProductCate extends React.Component {
                       </TreeNode>
                     </TreeSelect>
                   </div>
-                  </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-4">
-              {/* <Dragger {...dragprop} className="height-300 d-block mb-3">
+          </div>
+          <div className="col-lg-4">
+            {/* <Dragger {...dragprop} className="height-300 d-block mb-3">
                 <p className="ant-upload-drag-icon">
                   <Icon type="inbox" />
                 </p>
@@ -180,38 +182,38 @@ class ProductCate extends React.Component {
                 </p>
               </Dragger> */}
 
-              <div className="clearfix">
-        <Upload
-          action="//jsonplaceholder.typicode.com/posts/"
-          listType="picture-card"
-          fileList={this.fileList}
-          onPreview={this.handlePreview}
-          onChange={this.handleChange}
-        >
-          {/* {this.fileList.length >= 3 ? null : uploadButton} */}
-          {uploadButton}
-        </Upload>
-        <Modal visible={this.previewVisible} footer={null} onCancel={this.handleCancel}>
-          <img alt="example" style={{ width: '100%' }} src={this.previewImage} />
-        </Modal>
-      </div>
+            <div className="clearfix">
+              <Upload
+                action="//jsonplaceholder.typicode.com/posts/"
+                listType="picture-card"
+                fileList={this.fileList}
+                onPreview={this.handlePreview}
+                onChange={this.handleChange}
+              >
+                {/* {this.fileList.length >= 3 ? null : uploadButton} */}
+                {uploadButton}
+              </Upload>
+              <Modal visible={this.previewVisible} footer={null} onCancel={this.handleCancel}>
+                <img alt="example" style={{ width: '100%' }} src={this.previewImage} />
+              </Modal>
             </div>
-            <div className="col-lg-12">
-                      <div className="form-actions">
-                        <Button type="primary" className="mr-2">
-                          Save Product
-                        </Button>
-                        <Button type="default">Cancel</Button>
-                      </div>
-           </div>
-           <Table
+          </div>
+          <div className="col-lg-12">
+            <div className="form-actions">
+              <Button type="primary" className="mr-2">
+                Save Product
+              </Button>
+              <Button type="default">Cancel</Button>
+            </div>
+          </div>
+          <Table
             columns={columns}
             dataSource={data}
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          </div>
         </div>
+      </div>
     )
   }
 }
