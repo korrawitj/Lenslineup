@@ -1,0 +1,3 @@
+export {
+    insertdata
+} from './product';
