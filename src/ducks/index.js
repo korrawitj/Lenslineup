@@ -10,4 +10,5 @@ export default combineReducers({
   pendingTasks: pendingTasksReducer,
   app,
   login,
+  pcr: productcategoryReducer
 })

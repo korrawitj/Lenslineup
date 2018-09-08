@@ -1,16 +1,17 @@
 import * as actionTypes from '../actions/actionType'
+import { updateObject } from '../utility';
 
 const initialState = {
-  Fullname: '',
-  Shortname: '',
-  Order: '',
-  Parentcategory: '',
+  new_color: ''
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.INSERTDATA:
       return state
+    case actionTypes.GETDATA:
+      return updateObject(state, action.val);
+
     default:
       return state
   }

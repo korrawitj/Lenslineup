@@ -1,9 +1,11 @@
-import React from 'react'
-import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd'
-import tableData from './data.json'
-import { connect } from 'react-redux'
+import React from 'react';
+import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd';
+import tableData from './data.json';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../../../store/axios/productcategory';
+import axios from 'axios';
 
-const TreeNode = TreeSelect.TreeNode
+const TreeNode = TreeSelect.TreeNode;
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -12,7 +14,7 @@ const defaultPagination = {
   size: 'small',
   showTotal: total => `Total ${total} items`,
   total: 0,
-}
+};
 
 const columns = [
   {
@@ -82,6 +84,18 @@ class ProductCate extends React.Component {
     ],
   }
   handleCancel = () => this.setState({ previewVisible: false })
+
+  componentDidMount() {
+    axios.get('/json/color/random')
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    console.log(this.props.pcr);
+  }
 
   handlePreview = file => {
     this.setState({
@@ -170,17 +184,6 @@ class ProductCate extends React.Component {
             </div>
           </div>
           <div className="col-lg-4">
-            {/* <Dragger {...dragprop} className="height-300 d-block mb-3">
-                <p className="ant-upload-drag-icon">
-                  <Icon type="inbox" />
-                </p>
-                <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibit from uploading company data
-                  or other band files
-                </p>
-              </Dragger> */}
-
             <div className="clearfix">
               <Upload
                 action="//jsonplaceholder.typicode.com/posts/"
@@ -219,4 +222,10 @@ class ProductCate extends React.Component {
   }
 }
 
-export default ProductCate
+const mapStateToProps = state => {
+  return {
+    pcr: state.pcr
+  };
+};
+
+export default connect(mapStateToProps, actionCreators)(ProductCate);
