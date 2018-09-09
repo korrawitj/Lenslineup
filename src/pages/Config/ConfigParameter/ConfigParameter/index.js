@@ -212,10 +212,10 @@ class ConfigParameter extends React.Component {
               <Input type="text" value={masterPickupData.name} />
             </div>
             <div className="form-group">
-              <label htmlFor="product-edit-price" value={masterPickupData.pickuptype}>
+              <label htmlFor="product-edit-price" >
                 ปรเภท
               </label>
-              <Input type="text" />
+              <Input type="text" value={masterPickupData.pickuptype}/>
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ค่าส่ง</label>
