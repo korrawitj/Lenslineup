@@ -96,46 +96,46 @@ class ConfigParameter extends React.Component {
             onChange={this.handleTableChange}
           />
         </div>
-            <div className="card-header">
-              <div className="utils__title">
-                <strong>วันหยุดประจำ</strong>
-              </div>
-            </div>
-            <div className="card-body">
-              <Table
-                columns={columns}
-                dataSource={Holiday}
-                pagination={pager}
-                onChange={this.handleTableChange}
-              />
-            </div>
-            <div className="card-header">
-              <div className="utils__title">
-                <strong>จัดการรอบรับคืน</strong>
-              </div>
-            </div>
-            <div className="card-body">
-              <Table
-                columns={columns}
-                dataSource={Holiday}
-                pagination={pager}
-                onChange={this.handleTableChange}
-              />
-            </div>
-            <div className="card-header">
-              <div className="utils__title">
-                <strong>จุดรับของ</strong>
-              </div>
-            </div>
-            <div className="card-body">
-              <Table
-                columns={columns}
-                dataSource={Holiday}
-                pagination={pager}
-                onChange={this.handleTableChange}
-              />
-            </div>
+        <div className="card-header">
+          <div className="utils__title">
+            <strong>วันหยุดประจำ</strong>
           </div>
+        </div>
+        <div className="card-body">
+          <Table
+            columns={columns}
+            dataSource={Holiday}
+            pagination={pager}
+            onChange={this.handleTableChange}
+          />
+        </div>
+        <div className="card-header">
+          <div className="utils__title">
+            <strong>จัดการรอบรับคืน</strong>
+          </div>
+        </div>
+        <div className="card-body">
+          <Table
+            columns={columns}
+            dataSource={Holiday}
+            pagination={pager}
+            onChange={this.handleTableChange}
+          />
+        </div>
+        <div className="card-header">
+          <div className="utils__title">
+            <strong>จุดรับของ</strong>
+          </div>
+        </div>
+        <div className="card-body">
+          <Table
+            columns={columns}
+            dataSource={Holiday}
+            pagination={pager}
+            onChange={this.handleTableChange}
+          />
+        </div>
+      </div>
     )
   }
 }
