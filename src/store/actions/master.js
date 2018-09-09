@@ -1,14 +1,29 @@
 import * as actionTypes from './actionType'
 
-export const masterinsertdata = () => {
-  return {
-    type: actionTypes.INSERTDATA,
-  }
-}
+export const holidaygetdata = value => {
+    return {
+        type: actionTypes.HOLIDAYGETDATA,
+        val: value,
+    }
+};
 
-export const mastergetdata = value => {
-  return {
-    type: actionTypes.GETDATA,
-    val: value,
-  }
-}
+export const holidayshopgetdata = value => {
+    return {
+        type: actionTypes.HOLIDAYSHOPGETDATA,
+        val: value,
+    }
+};
+
+export const managegetdata = value => {
+    return {
+        type: actionTypes.MANAGEGETDATA,
+        val: value,
+    }
+};
+
+export const pickupgetdata = value => {
+    return {
+        type: actionTypes.PICKUPGETDATA,
+        val: value,
+    }
+};
