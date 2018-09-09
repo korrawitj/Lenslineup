@@ -25,13 +25,12 @@ class ProductList extends React.Component {
     let T = record
     confirm({
       title: 'Are you sure delete this row?',
-      content: <h3>Some descriptions</h3>,
+      content: <div>Delelte ProductID = {record.id}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
       onOk() {
         console.log('OK')
-        console.log(T)
       },
       onCancel() {
         console.log('Cancel')
