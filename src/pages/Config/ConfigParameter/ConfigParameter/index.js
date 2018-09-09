@@ -1,7 +1,7 @@
-import React from 'react';
-import { Table, Icon, Input, Button, Modal, Radio } from 'antd';
-import { connect } from 'react-redux';
-import * as actionCreators from '../../../../store/axios/master';
+import React from 'react'
+import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
+import { connect } from 'react-redux'
+import * as actionCreators from '../../../../store/axios/master'
 
 const RadioGroup = Radio.Group
 const defaultPagination = {
@@ -47,10 +47,10 @@ class ConfigParameter extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAllDataHoliday();
-    this.props.getAllDataHolidayShop();
-    this.props.getAllDataManage();
-    this.props.getAllDataPickup();
+    this.props.getAllDataHoliday()
+    this.props.getAllDataHolidayShop()
+    this.props.getAllDataManage()
+    this.props.getAllDataPickup()
   }
 
   addDataHoliday(record) {
@@ -573,6 +573,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   actionCreators,
-)(ConfigParameter);
+)(ConfigParameter)
 
 // export default ConfigParameter
