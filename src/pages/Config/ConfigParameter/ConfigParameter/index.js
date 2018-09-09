@@ -1,6 +1,6 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal } from 'antd'
-
+import { Table, Icon, Input, Button, Modal ,Radio} from 'antd'
+const RadioGroup = Radio.Group
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -41,6 +41,186 @@ class ConfigParameter extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+  }
+  addDataHoliday(record) {
+    let T = record
+    Modal.confirm({
+      title: 'Add Holiday Include',
+      width:1000,
+      content: (
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="form-group">
+              <label htmlFor="product-edit-title">วันที่</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-category">ข้อความ</label>
+              <Input id="product-edit-category" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">จำนวน</label>
+              <Input id="product-edit-price" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">การรับ</label>
+              <div>
+                <RadioGroup name="radiogroup">
+                  <Radio value={true}>Yes</Radio>
+                  <Radio value={false}>No</Radio>
+                </RadioGroup>
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">การคืน</label>
+              <div>
+                <RadioGroup name="radiogroup">
+                  <Radio value={true}>Yes</Radio>
+                  <Radio value={false}>No</Radio>
+                </RadioGroup>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
+  }
+  addDataHolidayShop(record) {
+    let T = record
+    Modal.confirm({
+      title: 'Add Holiday Shop',
+      width:1000,
+      content: (
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="form-group">
+              <label htmlFor="product-edit-title">วันที่</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-category">ข้อความ</label>
+              <Input id="product-edit-category" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">จำนวน</label>
+              <Input id="product-edit-price" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">การรับ</label>
+              <div>
+                <RadioGroup name="radiogroup">
+                  <Radio value={true}>Yes</Radio>
+                  <Radio value={false}>No</Radio>
+                </RadioGroup>
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">การคืน</label>
+              <div>
+                <RadioGroup name="radiogroup">
+                  <Radio value={true}>Yes</Radio>
+                  <Radio value={false}>No</Radio>
+                </RadioGroup>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
+  }
+  addDataManageRecurring(record) {
+    let T = record
+    Modal.confirm({
+      title: 'Add Manage Recurring',
+      width:1000,
+      content: (
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="form-group">
+              <label htmlFor="product-edit-title">Name</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-category">เวลาเริ่ม</label>
+              <Input id="product-edit-category" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-category">เวลาสิ้นสุด</label>
+              <Input id="product-edit-category" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">Offset</label>
+              <Input id="product-edit-price" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">ปรเภท</label>
+              <Input id="product-edit-price" placeholder="" />
+            </div>
+          </div>
+        </div>
+      ),
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
+  }
+  addDataPickup(record) {
+    let T = record
+    Modal.confirm({
+      title: 'Add Pickup',
+      width:1000,
+      content: (
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="form-group">
+              <label htmlFor="product-edit-title">Name</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">ปรเภท</label>
+              <Input id="product-edit-price" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">ค่าส่ง</label>
+              <Input id="product-edit-price" placeholder="" />
+            </div>
+          </div>
+        </div>
+      ),
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
   }
   showDeleteConfirmManageRecurring(record) {
     let T = record
