@@ -1,29 +1,29 @@
 import * as actionTypes from './actionType'
 
 export const holidaygetdata = value => {
-    return {
-        type: actionTypes.HOLIDAYGETDATA,
-        val: value,
-    }
-};
+  return {
+    type: actionTypes.HOLIDAYGETDATA,
+    val: value,
+  }
+}
 
 export const holidayshopgetdata = value => {
-    return {
-        type: actionTypes.HOLIDAYSHOPGETDATA,
-        val: value,
-    }
-};
+  return {
+    type: actionTypes.HOLIDAYSHOPGETDATA,
+    val: value,
+  }
+}
 
 export const managegetdata = value => {
-    return {
-        type: actionTypes.MANAGEGETDATA,
-        val: value,
-    }
-};
+  return {
+    type: actionTypes.MANAGEGETDATA,
+    val: value,
+  }
+}
 
 export const pickupgetdata = value => {
-    return {
-        type: actionTypes.PICKUPGETDATA,
-        val: value,
-    }
-};
+  return {
+    type: actionTypes.PICKUPGETDATA,
+    val: value,
+  }
+}
