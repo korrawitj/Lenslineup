@@ -1,5 +1,8 @@
-import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
+import React from 'react';
+import { Table, Icon, Input, Button, Modal, Radio } from 'antd';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../../../store/axios/master';
+
 const RadioGroup = Radio.Group
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -42,6 +45,14 @@ class ConfigParameter extends React.Component {
     searchText: '',
     filtered: false,
   }
+
+  componentDidMount() {
+    this.props.getAllDataHoliday();
+    this.props.getAllDataHolidayShop();
+    this.props.getAllDataManage();
+    this.props.getAllDataPickup();
+  }
+
   addDataHoliday(record) {
     let T = record
     Modal.confirm({
@@ -478,10 +489,10 @@ class ConfigParameter extends React.Component {
         ),
       },
     ]
-    let { holidayData } = this.state.data
-    let { holidayShopData } = this.state.data
-    let { manageRecurringData } = this.state.data
-    let { masterPickupData } = this.state.data
+    // let { holidayData } = this.state.data
+    // let { holidayShopData } = this.state.data
+    // let { manageRecurringData } = this.state.data
+    // let { masterPickupData } = this.state.data
     return (
       <div className="card">
         <div className="card-header">
@@ -492,7 +503,7 @@ class ConfigParameter extends React.Component {
         <div className="card-body">
           <Table
             columns={columnsholiday}
-            dataSource={holidayData}
+            dataSource={this.props.master.holidayData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
@@ -508,7 +519,7 @@ class ConfigParameter extends React.Component {
         <div className="card-body">
           <Table
             columns={columnsholidayshop}
-            dataSource={holidayShopData}
+            dataSource={this.props.master.holidayShopData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
@@ -524,7 +535,7 @@ class ConfigParameter extends React.Component {
         <div className="card-body">
           <Table
             columns={columnManageRecurring}
-            dataSource={manageRecurringData}
+            dataSource={this.props.master.manageRecurringData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
@@ -540,7 +551,7 @@ class ConfigParameter extends React.Component {
         <div className="card-body">
           <Table
             columns={columnsMasterPickup}
-            dataSource={masterPickupData}
+            dataSource={this.props.master.masterPickupData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
@@ -553,4 +564,15 @@ class ConfigParameter extends React.Component {
   }
 }
 
-export default ConfigParameter
+const mapStateToProps = state => {
+  return {
+    master: state.master,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  actionCreators,
+)(ConfigParameter);
+
+// export default ConfigParameter

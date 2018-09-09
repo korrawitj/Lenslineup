@@ -6,7 +6,7 @@ export function getAllDataHoliday() {
     return axios
       .get('/api/masterHoliday/getAllHoliday')
       .then(response => {
-        dispatch(actionCreators.getdata(response.data.holidayData))
+        dispatch(actionCreators.holidaygetdata(response.data.holidayData))
       })
       .catch(error => {
         console.log('Error axios ' + error)
@@ -19,7 +19,7 @@ export function getAllDataHolidayShop() {
     return axios
       .get('/api/masterHoliday/getAllHolidayShop')
       .then(response => {
-        dispatch(actionCreators.getdata(response.data.holidayShopData))
+        dispatch(actionCreators.holidayshopgetdata(response.data.holidayShopData))
       })
       .catch(error => {
         console.log('Error axios ' + error)
@@ -32,7 +32,7 @@ export function getAllDataManage() {
     return axios
       .get('/api/masterHoliday/getAllMasterManageRecurring')
       .then(response => {
-        dispatch(actionCreators.getdata(response.data.manageRecurringData))
+        dispatch(actionCreators.managegetdata(response.data.manageRecurringData))
       })
       .catch(error => {
         console.log('Error axios ' + error)
@@ -45,7 +45,8 @@ export function getAllDataPickup() {
     return axios
       .get('/api/masterHoliday/getAllMasterPickup')
       .then(response => {
-        dispatch(actionCreators.getdata(response.data.masterPickupData))
+        console.log(response.data.masterPickupData)
+        dispatch(actionCreators.pickupgetdata(response.data.masterPickupData))
       })
       .catch(error => {
         console.log('Error axios ' + error)
