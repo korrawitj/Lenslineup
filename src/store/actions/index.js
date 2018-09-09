@@ -1,3 +1,3 @@
 export { insertdata, getdata } from './product'
 
-export { masterinsertdata, mastergetdata } from './master'
+export { holidaygetdata, holidayshopgetdata, managegetdata, pickupgetdata } from './master'
