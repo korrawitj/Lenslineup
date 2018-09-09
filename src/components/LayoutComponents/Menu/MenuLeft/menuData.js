@@ -6,7 +6,7 @@ export default [
     icon: 'icmn icmn-stack',
   },
   {
-    title: 'Configuration',
+    title: 'ตั้งค่าร้าน',
     key: 'Config',
     url: '/configuration',
     icon: 'fa fa-gear',
@@ -14,7 +14,7 @@ export default [
   {
     title: 'อุปกรณ์',
     key: 'Product',
-    icon: 'icmn icmn-database',
+    icon: 'icmn icmn-drive',
     children: [
       {
         key: 'อุปกรณ์ทั้งหมด',
