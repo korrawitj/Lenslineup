@@ -1,7 +1,7 @@
 import React from 'react'
-import { Table, Icon, Input, Button , Modal } from 'antd'
+import { Table, Icon, Input, Button, Modal } from 'antd'
 import tableData from './data.json'
-const confirm = Modal.confirm;
+const confirm = Modal.confirm
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -29,12 +29,12 @@ class ProductList extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        console.log('OK');
+        console.log('OK')
       },
       onCancel() {
-        console.log('Cancel');
+        console.log('Cancel')
       },
-    });
+    })
   }
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
@@ -165,7 +165,7 @@ class ProductList extends React.Component {
             <Button icon="edit" className="mr-1" size="small">
               View
             </Button>
-            <Button icon="cross" size="small"onClick={this.showDeleteConfirm} type="dashed">
+            <Button icon="cross" size="small" onClick={this.showDeleteConfirm} type="dashed">
               Remove
             </Button>
           </span>
