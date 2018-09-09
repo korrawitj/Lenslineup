@@ -104,7 +104,7 @@ class ProductSet extends React.Component {
     let T = record
     Modal.info({
       title: <div>อุปกรณ์จัดชุด {record.setid}</div>,
-      width:1000,
+      width: 1000,
       content: (
         <div className="row">
           <div className="col-md-4">
@@ -119,7 +119,7 @@ class ProductSet extends React.Component {
             <label>ID</label>
           </div>
           <div className="col-md-6">{record.setid}</div>
-          </div>
+        </div>
       ),
       onOk() {},
     })

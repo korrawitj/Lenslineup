@@ -105,7 +105,7 @@ class ProductInclude extends React.Component {
     let T = record
     Modal.info({
       title: <div>อุปกรณ์จัดชุด {record.ItemID}</div>,
-      width:1000,
+      width: 1000,
       content: (
         <div className="row">
           <div className="col-md-4">
