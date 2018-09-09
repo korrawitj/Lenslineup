@@ -200,9 +200,7 @@ class ProductCate extends React.Component {
                 listType="picture-card"
                 fileList={this.fileList}
                 onPreview={this.handlePreview}
-                onChange={this.handleChange}
-              >
-                {/* {this.fileList.length >= 3 ? null : uploadButton} */}
+                onChange={this.handleChange}>
                 {uploadButton}
               </Upload>
               <Modal visible={this.previewVisible} footer={null} onCancel={this.handleCancel}>
@@ -227,7 +225,6 @@ class ProductCate extends React.Component {
             />
           </div>
         </div>
-        {/* <p>{categoryData}</p> */}
       </div>
     )
   }
