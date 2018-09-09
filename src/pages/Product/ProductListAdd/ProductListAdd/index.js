@@ -2,7 +2,104 @@ import React from 'react'
 import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
-
+const defaultPagination = {
+  pageSizeOptions: ['10', '50', '100', '250'],
+  showSizeChanger: true,
+  current: 1,
+  size: 'small',
+  showTotal: total => `Total ${total} items`,
+  total: 0,
+}
+const columns = [
+  {
+    title: 'View',
+    key: 'CategoryID',
+    render: (text, record) => (
+      <span>
+        <Button icon="cross" size="small" onClick={() => console.log(record)}>
+          View
+        </Button>
+      </span>
+    ),
+  },
+  {
+    title: 'ตัวที่',
+    dataIndex: 'CopyNo',
+    key: 'CopyNo',
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {text}
+      </a>
+    ),
+    sorter: (a, b) => a.CopyNo - b.CopyNo,
+  },
+  {
+    title: 'ชื่อสั้น',
+    dataIndex: 'Serail',
+    key: 'SerialNumber',
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {text}
+      </a>
+    ),
+    sorter: (a, b) => a.SerialNumber - b.SerialNumber,
+  },
+  {
+    title: 'ราคาที่ซื้อ',
+    dataIndex: 'PurchasePrice',
+    key: 'PurchasePrice',
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {'#' + text}
+      </a>
+    ),
+    sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
+  },
+  {
+    title: 'วันที่ซื้อ',
+    dataIndex: 'PurchaseDate',
+    key: 'PurchaseDate',
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {'#' + text}
+      </a>
+    ),
+    sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
+  },
+  {
+    title: 'สถานะ',
+    dataIndex: 'Status',
+    key: 'Status',
+    render: text => (
+      <a className="utils__link--underlined" href="javascript: void(0);">
+        {'#' + text}
+      </a>
+    ),
+    sorter: (a, b) => a.Status - b.Status,
+  },
+  {
+    title: 'แก้ไข',
+    key: 'Edit',
+    render: (text, record) => (
+      <span>
+        <Button icon="cross" size="small" onClick={() => console.log(record)}>
+          Edit
+        </Button>
+      </span>
+    ),
+  },
+  {
+    title: 'ลบ',
+    key: 'Action',
+    render: (text, record) => (
+      <span>
+        <Button icon="cross" size="small" onClick={() => console.log(record)}>
+          Remove
+        </Button>
+      </span>
+    ),
+  },
+]
 class ProductListAdd extends React.Component {
   state = {
     title: 'test',
@@ -11,6 +108,7 @@ class ProductListAdd extends React.Component {
   componentDidMount() {}
 
   render() {
+    let { pager } = this.state
     return (
       <div className="card">
         <div className="card-header">
@@ -22,7 +120,7 @@ class ProductListAdd extends React.Component {
         </div>
         <div className="card-body">
           <div className="row">
-            <div className="col-lg-6">
+            <div className="col-lg-8">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="form-group">
@@ -79,6 +177,26 @@ class ProductListAdd extends React.Component {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="col-lg-4">
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="form-group">
+                    <label htmlFor="product-edit-title">รูปภาพ</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-8">
+              <div className="utils__title">
+                <strong>Product Copy</strong>
+              </div>
+              <Table
+                columns={columns}
+                dataSource=""
+                pagination={pager}
+                onChange={this.handleTableChange}
+              />
             </div>
           </div>
           <div className="col-lg-12">
