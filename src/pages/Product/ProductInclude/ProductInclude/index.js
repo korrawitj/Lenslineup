@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button,Modal } from 'antd'
+import { Table, Icon, Input, Button, Modal } from 'antd'
 import tableData from './data.json'
 
 const defaultPagination = {
@@ -53,7 +53,7 @@ class ProductInclude extends React.Component {
     })
   }
   showDeleteConfirm(record) {
-    let T = record;
+    let T = record
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte Product Include = {record.setid}</div>,
@@ -69,23 +69,27 @@ class ProductInclude extends React.Component {
     })
   }
   addDataConfirm(record) {
-    let T = record;
+    let T = record
     Modal.confirm({
       title: 'Add Product Include',
-      content:   <div className="row">
-      <div className="col-lg-12">
-        <div className="form-group">
-          <label htmlFor="product-edit-title">อุปกรณ์</label>
-          <Input id="product-edit-title" placeholder="" />
+      content: (
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="form-group">
+              <label htmlFor="product-edit-title">อุปกรณ์</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-category">ราคาในสัญญา</label>
+              <Input id="product-edit-category" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">จำนวน</label>
+              <Input id="product-edit-price" placeholder="" />
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="product-edit-category">ราคาในสัญญา</label>
-          <Input id="product-edit-category" placeholder="" />
-        </div>
-        <div className="form-group">
-          <label htmlFor="product-edit-price">จำนวน</label>
-          <Input id="product-edit-price" placeholder="" />
-        </div></div></div>,
+      ),
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
@@ -98,34 +102,27 @@ class ProductInclude extends React.Component {
     })
   }
   showData(record) {
-    let T = record;
+    let T = record
     Modal.info({
       title: <div>อุปกรณ์จัดชุด {record.ItemID}</div>,
       content: (
-
-          <div className="row">
+        <div className="row">
           <div className="col-md-4">
             <label>อุปกรณ์</label>
-         </div>
-         <div className="col-md-6">
-            {record.Copy}
-         </div>
-         <div className="col-md-4">
+          </div>
+          <div className="col-md-6">{record.Copy}</div>
+          <div className="col-md-4">
             <label>ราคาในสัญญา</label>
-         </div>
-         <div className="col-md-6">
-            {record.PromisePrice}
-         </div>
-         <div className="col-md-4">
+          </div>
+          <div className="col-md-6">{record.PromisePrice}</div>
+          <div className="col-md-4">
             <label>จำนวน</label>
-         </div>
-         <div className="col-md-6">
-            {record.Quantity}
-         </div>
-         </div>
+          </div>
+          <div className="col-md-6">{record.Quantity}</div>
+        </div>
       ),
       onOk() {},
-    });
+    })
   }
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -214,10 +211,30 @@ class ProductInclude extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <Button type="primary" shape="circle" icon="search" onClick={() => this.showData(record)}/>
-            <Button shape="circle" icon="plus" onClick={() => this.addDataConfirm(record)}style={{backgroundColor:'#46c938'}}/>
-            <Button shape="circle" icon="edit" onClick={() => this.addDataConfirm(record)} style={{backgroundColor:'#c49f47'}}/>
-            <Button type="danger" shape="circle" icon="delete" onClick={() => this.showDeleteConfirm(record)}/>
+            <Button
+              type="primary"
+              shape="circle"
+              icon="search"
+              onClick={() => this.showData(record)}
+            />
+            <Button
+              shape="circle"
+              icon="plus"
+              onClick={() => this.addDataConfirm(record)}
+              style={{ backgroundColor: '#46c938' }}
+            />
+            <Button
+              shape="circle"
+              icon="edit"
+              onClick={() => this.addDataConfirm(record)}
+              style={{ backgroundColor: '#c49f47' }}
+            />
+            <Button
+              type="danger"
+              shape="circle"
+              icon="delete"
+              onClick={() => this.showDeleteConfirm(record)}
+            />
           </span>
         ),
       },

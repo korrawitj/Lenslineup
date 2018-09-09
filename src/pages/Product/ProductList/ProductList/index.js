@@ -163,10 +163,25 @@ class ProductList extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-         <Button type="primary" shape="circle" icon="search" onClick={this.onSearch}/>
-            <Button shape="circle" icon="plus" onClick={this.onSearch}style={{backgroundColor:'#46c938'}}/>
-            <Button shape="circle" icon="edit" onClick={this.onSearch} style={{backgroundColor:'#c49f47'}}/>
-            <Button type="danger" shape="circle" icon="delete"  onClick={() => this.showDeleteConfirm(record)}/>
+            <Button type="primary" shape="circle" icon="search" onClick={this.onSearch} />
+            <Button
+              shape="circle"
+              icon="plus"
+              onClick={this.onSearch}
+              style={{ backgroundColor: '#46c938' }}
+            />
+            <Button
+              shape="circle"
+              icon="edit"
+              onClick={this.onSearch}
+              style={{ backgroundColor: '#c49f47' }}
+            />
+            <Button
+              type="danger"
+              shape="circle"
+              icon="delete"
+              onClick={() => this.showDeleteConfirm(record)}
+            />
           </span>
         ),
       },
