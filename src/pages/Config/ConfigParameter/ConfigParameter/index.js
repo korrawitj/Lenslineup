@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button ,Modal } from 'antd'
+import { Table, Icon, Input, Button, Modal } from 'antd'
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -12,11 +12,31 @@ const defaultPagination = {
 
 class ConfigParameter extends React.Component {
   state = {
-    data: { holidayData: [{ date: '1', receive: 'true', recurring: 'true' ,message:'sdfsdf'}] 
-          ,holidayShopData: [{ date: '55', receive: 'false', recurring: 'false' ,message:'55555555555555555'}]
-          ,manageRecurringData: [{ manageID: 's',name:'ssss', startdate: 'ssssssss', enddate: 'ssss' ,offset:'55555555555555555',manage_type:'ssssss',pickupID:'55555555'}]
-          ,masterPickupData: [{ pickupID: 's', name: 'ssssssssssss', pickuptype: 'sssssssssssssssssssssssssssss' ,delivery_charge:'55555555555555555'}]
+    data: {
+      holidayData: [{ date: '1', receive: 'true', recurring: 'true', message: 'sdfsdf' }],
+      holidayShopData: [
+        { date: '55', receive: 'false', recurring: 'false', message: '55555555555555555' },
+      ],
+      manageRecurringData: [
+        {
+          manageID: 's',
+          name: 'ssss',
+          startdate: 'ssssssss',
+          enddate: 'ssss',
+          offset: '55555555555555555',
+          manage_type: 'ssssss',
+          pickupID: '55555555',
         },
+      ],
+      masterPickupData: [
+        {
+          pickupID: 's',
+          name: 'ssssssssssss',
+          pickuptype: 'sssssssssssssssssssssssssssss',
+          delivery_charge: '55555555555555555',
+        },
+      ],
+    },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
@@ -145,8 +165,8 @@ class ConfigParameter extends React.Component {
         ),
       },
     ]
-   
-      const columnsholidayshop = [
+
+    const columnsholidayshop = [
       {
         title: 'วันหยุดร้าน',
         dataIndex: 'date',
@@ -278,10 +298,10 @@ class ConfigParameter extends React.Component {
         ),
       },
     ]
-    let { holidayData } = this.state.data;
-    let { holidayShopData} = this.state.data;
-    let {manageRecurringData}=this.state.data;
-    let {masterPickupData}=this.state.data;
+    let { holidayData } = this.state.data
+    let { holidayShopData } = this.state.data
+    let { manageRecurringData } = this.state.data
+    let { masterPickupData } = this.state.data
     return (
       <div className="card">
         <div className="card-header">
@@ -296,11 +316,9 @@ class ConfigParameter extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary"              
-              icon="plus"
-              onClick={() => this.addDataHoliday()}
-              >เพิ่มวันหยุด
-              </Button>
+          <Button type="primary" icon="plus" onClick={() => this.addDataHoliday()}>
+            เพิ่มวันหยุด
+          </Button>
         </div>
         <div className="card-header">
           <div className="utils__title">
@@ -314,11 +332,9 @@ class ConfigParameter extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-                    <Button type="primary"              
-              icon="plus"
-              onClick={() => this.addDataHolidayShop()}
-              >เพิ่มวันหยุดประจำ
-              </Button>
+          <Button type="primary" icon="plus" onClick={() => this.addDataHolidayShop()}>
+            เพิ่มวันหยุดประจำ
+          </Button>
         </div>
         <div className="card-header">
           <div className="utils__title">
@@ -332,11 +348,9 @@ class ConfigParameter extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-                    <Button type="primary"              
-              icon="plus"
-              onClick={() => this.addDataManageRecurring()}
-              >เพิ่มรอบรับคืน
-              </Button>
+          <Button type="primary" icon="plus" onClick={() => this.addDataManageRecurring()}>
+            เพิ่มรอบรับคืน
+          </Button>
         </div>
         <div className="card-header">
           <div className="utils__title">
@@ -350,11 +364,9 @@ class ConfigParameter extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-                    <Button type="primary"              
-              icon="plus"
-              onClick={() => this.addDataPickup()}
-              >เพิ่มจุดรับของ
-              </Button>
+          <Button type="primary" icon="plus" onClick={() => this.addDataPickup()}>
+            เพิ่มจุดรับของ
+          </Button>
         </div>
       </div>
     )
