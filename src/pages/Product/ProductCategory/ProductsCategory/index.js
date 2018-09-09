@@ -202,7 +202,6 @@ class ProductCate extends React.Component {
                 onPreview={this.handlePreview}
                 onChange={this.handleChange}
               >
-                {/* {this.fileList.length >= 3 ? null : uploadButton} */}
                 {uploadButton}
               </Upload>
               <Modal visible={this.previewVisible} footer={null} onCancel={this.handleCancel}>
@@ -227,7 +226,6 @@ class ProductCate extends React.Component {
             />
           </div>
         </div>
-        {/* <p>{categoryData}</p> */}
       </div>
     )
   }
