@@ -1,9 +1,9 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import ProductSet from './ProductSet'
+import ProductListAdd from './ProductListAdd'
 
-class ProductSetPage extends React.Component {
+class ProductListAddPage extends React.Component {
   static defaultProps = {
     pathName: 'อุปกรณ์',
     roles: ['agent', 'administrator'],
@@ -14,10 +14,10 @@ class ProductSetPage extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="อุปกรณ์" />
-        <ProductSet />
+        <ProductListAdd/>
       </Page>
     )
   }
 }
 
-export default ProductSetPage
+export default ProductListAddPage
