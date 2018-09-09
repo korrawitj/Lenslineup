@@ -22,7 +22,7 @@ class ProductList extends React.Component {
     filtered: false,
   }
   showDeleteConfirm(record) {
-    let T = record;
+    let T = record
     confirm({
       title: 'Are you sure delete this row?',
       content: <h3>Some descriptions</h3>,
@@ -31,7 +31,7 @@ class ProductList extends React.Component {
       cancelText: 'No',
       onOk() {
         console.log('OK')
-        console.log(T);
+        console.log(T)
       },
       onCancel() {
         console.log('Cancel')
@@ -167,7 +167,12 @@ class ProductList extends React.Component {
             <Button icon="edit" className="mr-1" size="small">
               View
             </Button>
-            <Button icon="cross" size="small" onClick={()=>this.showDeleteConfirm(record)} type="dashed">
+            <Button
+              icon="cross"
+              size="small"
+              onClick={() => this.showDeleteConfirm(record)}
+              type="dashed"
+            >
               Remove
             </Button>
           </span>
