@@ -1,9 +1,3 @@
-export {
-    insertdata,
-    getdata
-} from './product';
+export { insertdata, getdata } from './product'
 
-export {
-    masterinsertdata,
-    mastergetdata
-} from './master';
+export { masterinsertdata, mastergetdata } from './master'
