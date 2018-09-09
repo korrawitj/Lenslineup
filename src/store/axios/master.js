@@ -45,7 +45,6 @@ export function getAllDataPickup() {
     return axios
       .get('/api/masterHoliday/getAllMasterPickup')
       .then(response => {
-        console.log(response.data.masterPickupData)
         dispatch(actionCreators.pickupgetdata(response.data.masterPickupData))
       })
       .catch(error => {
