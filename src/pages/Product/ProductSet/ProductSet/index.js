@@ -1,7 +1,8 @@
-import React from 'react'
-import { Table, Icon, Input, Button } from 'antd'
-import tableData from './data.json'
-
+import React from 'react';
+import { Table, Icon, Input, Button ,Modal,Radio} from 'antd';
+import tableData from './data.json';
+const RadioGroup = Radio.Group;
+const { TextArea } = Input;
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -20,7 +21,106 @@ class ProductSet extends React.Component {
     searchText: '',
     filtered: false,
   }
+  showDeleteConfirm(record) {
+    let T = record;
+    Modal.confirm({
+      title: 'Are you sure delete this row?',
+      content: <div>Delelte ProductSet = {record.setid}</div>,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
+  }
+  onChange = (e) => {
+    console.log('radio checked', e.target.value);
+    this.setState({
+      value: e.target.value,
+    });
+  }
+  addDataConfirm(record) {
+    Modal.confirm({
+      title: 'Add Product Set',
+      content:   <div className="row">
+      <div className="col-lg-12">
+        <div className="form-group">
+          <label htmlFor="product-edit-title">ชื่อ</label>
+          <Input id="product-edit-title" placeholder="" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="product-edit-category">อุปกรณ์</label>
+          <Input id="product-edit-category" placeholder="" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="product-edit-price">ราคาเช่า</label>
+          <Input id="product-edit-price" placeholder="" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="product-edit-price">แสดงหน้าเว็บ</label>
+          <div>
+          <RadioGroup name="radiogroup">
+            <Radio value={true}>Yes</Radio>
+            <Radio value={false}>No</Radio>
+          </RadioGroup>
+            </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="product-edit-price">คิวจอง</label>
+          <div>
+          <RadioGroup name="radiogroup2" defaultValue={1}>
+            <Radio value={true}>Yes</Radio>
+            <Radio value={false}>No</Radio>
+            </RadioGroup>
+            </div>
+        </div>
+        <div className="form-group">
+          <label htmlFor="product-edit-price">Note</label>
+          <div>
+          <TextArea rows={4} />
+            </div>
+        </div>
+        </div>
+        </div>,
+      okText: 'Yes',
+      okType: 'primary',
+      cancelText: 'No',
+      width:1000,
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
+  }
+  showData(record) {
+    let T = record;
+    Modal.info({
+      title: <div>อุปกรณ์จัดชุด {record.setid}</div>,
+      content: (
 
+          <div className="row">
+          <div className="form-group">
+          <div className="col-lg-12">
+            <label>ชื่่อ </label>{record.SetName}
+            </div>
+            <div className="col-lg-12">
+            <label>ราคาในสัญญา </label>{record.price}
+            </div>
+            <div className="col-lg-12">
+            <label>ID </label>{record.setid}
+            </div>
+          </div>
+        </div>
+      ),
+      onOk() {},
+    });
+  }
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
@@ -143,12 +243,10 @@ class ProductSet extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <Button icon="edit" className="mr-1" size="small">
-              View
-            </Button>
-            <Button icon="cross" size="small">
-              Remove
-            </Button>
+            <Button type="primary" shape="circle" icon="search" onClick={() => this.showData(record)}/>
+            <Button shape="circle" icon="plus" onClick={() => this.addDataConfirm(record)}style={{backgroundColor:'#46c938'}}/>
+            <Button shape="circle" icon="edit" onClick={() => this.addDataConfirm(record)} style={{backgroundColor:'#c49f47'}}/>
+            <Button type="danger" shape="circle" icon="delete" onClick={() => this.showDeleteConfirm(record)}/>
           </span>
         ),
       },

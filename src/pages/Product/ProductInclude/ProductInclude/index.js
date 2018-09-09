@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button } from 'antd'
+import { Table, Icon, Input, Button,Modal } from 'antd'
 import tableData from './data.json'
 
 const defaultPagination = {
@@ -52,7 +52,81 @@ class ProductInclude extends React.Component {
         .filter(record => !!record),
     })
   }
+  showDeleteConfirm(record) {
+    let T = record;
+    Modal.confirm({
+      title: 'Are you sure delete this row?',
+      content: <div>Delelte Product Include = {record.setid}</div>,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
+  }
+  addDataConfirm(record) {
+    let T = record;
+    Modal.confirm({
+      title: 'Add Product Include',
+      content:   <div className="row">
+      <div className="col-lg-12">
+        <div className="form-group">
+          <label htmlFor="product-edit-title">อุปกรณ์</label>
+          <Input id="product-edit-title" placeholder="" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="product-edit-category">ราคาในสัญญา</label>
+          <Input id="product-edit-category" placeholder="" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="product-edit-price">จำนวน</label>
+          <Input id="product-edit-price" placeholder="" />
+        </div></div></div>,
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
+  }
+  showData(record) {
+    let T = record;
+    Modal.info({
+      title: <div>อุปกรณ์จัดชุด {record.ItemID}</div>,
+      content: (
 
+          <div className="row">
+          <div className="col-md-4">
+            <label>อุปกรณ์</label>
+         </div>
+         <div className="col-md-6">
+            {record.Copy}
+         </div>
+         <div className="col-md-4">
+            <label>ราคาในสัญญา</label>
+         </div>
+         <div className="col-md-6">
+            {record.PromisePrice}
+         </div>
+         <div className="col-md-4">
+            <label>จำนวน</label>
+         </div>
+         <div className="col-md-6">
+            {record.Quantity}
+         </div>
+         </div>
+      ),
+      onOk() {},
+    });
+  }
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
       const pager = { ...this.state.pager }
@@ -75,20 +149,20 @@ class ProductInclude extends React.Component {
     const columns = [
       {
         title: 'ItemID',
-        dataIndex: 'id',
-        key: 'id',
+        dataIndex: 'ItemID',
+        key: 'ItemID',
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
             {'#' + text}
           </a>
         ),
-        sorter: (a, b) => a.id - b.id,
+        sorter: (a, b) => a.ProductID - b.ProductID,
       },
       {
         title: 'อุปกรณ์',
-        dataIndex: 'ProductName',
-        key: 'ProductName',
-        sorter: (a, b) => a.ProductName.length - b.ProductName.length,
+        dataIndex: 'Copy',
+        key: 'Copy',
+        sorter: (a, b) => a.Copy.length - b.Copy.length,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
             {text}
@@ -140,12 +214,10 @@ class ProductInclude extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <Button icon="edit" className="mr-1" size="small">
-              View
-            </Button>
-            <Button icon="cross" size="small">
-              Remove
-            </Button>
+            <Button type="primary" shape="circle" icon="search" onClick={() => this.showData(record)}/>
+            <Button shape="circle" icon="plus" onClick={() => this.addDataConfirm(record)}style={{backgroundColor:'#46c938'}}/>
+            <Button shape="circle" icon="edit" onClick={() => this.addDataConfirm(record)} style={{backgroundColor:'#c49f47'}}/>
+            <Button type="danger" shape="circle" icon="delete" onClick={() => this.showDeleteConfirm(record)}/>
           </span>
         ),
       },
