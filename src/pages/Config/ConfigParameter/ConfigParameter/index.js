@@ -33,10 +33,10 @@ class ConfigParameter extends React.Component {
       ],
       masterPickupData: [
         {
-          pickupID: 's',
-          name: 'ssssssssssss',
-          pickuptype: 'sssssssssssssssssssssssssssss',
-          delivery_charge: '55555555555555555',
+          pickupID:'',
+          name: '',
+          pickuptype: '',
+          delivery_charge: '',
         },
       ],
     },
@@ -45,7 +45,6 @@ class ConfigParameter extends React.Component {
     searchText: '',
     filtered: false,
   }
-
   componentDidMount() {
     this.props.getAllDataHoliday()
     this.props.getAllDataHolidayShop()
@@ -200,7 +199,8 @@ class ConfigParameter extends React.Component {
     })
   }
   addDataPickup(record) {
-    let T = record
+    let T = record;
+    let masterPickupData =this.state.data.masterPickupData;
     Modal.confirm({
       title: 'Add Pickup',
       width: 1000,
@@ -209,15 +209,15 @@ class ConfigParameter extends React.Component {
           <div className="col-lg-12">
             <div className="form-group">
               <label htmlFor="product-edit-title">Name</label>
-              <Input id="product-edit-title" placeholder="" />
+              <Input type="text"  value={masterPickupData.name} />
             </div>
             <div className="form-group">
-              <label htmlFor="product-edit-price">ปรเภท</label>
-              <Input id="product-edit-price" placeholder="" />
+              <label htmlFor="product-edit-price" value={masterPickupData.pickuptype}>ปรเภท</label>
+              <Input type="text" />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ค่าส่ง</label>
-              <Input id="product-edit-price" placeholder="" />
+              <Input type="text" value={masterPickupData.delivery_charge} />
             </div>
           </div>
         </div>
@@ -226,7 +226,7 @@ class ConfigParameter extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        console.log('OK')
+        console.log(masterPickupData)
       },
       onCancel() {
         console.log('Cancel')
@@ -494,6 +494,7 @@ class ConfigParameter extends React.Component {
     // let { manageRecurringData } = this.state.data
     // let { masterPickupData } = this.state.data
     return (
+      
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
