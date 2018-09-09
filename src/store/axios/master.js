@@ -40,15 +40,15 @@ export function getAllDataManage() {
   }
 }
 
-// export function getAllDataPickup() {
-//     return dispatch => {
-//         return axios
-//             .get('/api/masterHoliday/getAllHolidayShop')
-//             .then(response => {
-//                 dispatch(actionCreators.getdata(response.data.holidayShopData))
-//             })
-//             .catch(error => {
-//                 console.log('Error axios ' + error)
-//             })
-//     }
-// }
+export function getAllDataPickup() {
+  return dispatch => {
+    return axios
+      .get('/api/masterHoliday/getAllMasterPickup')
+      .then(response => {
+        dispatch(actionCreators.getdata(response.data.masterPickupData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
