@@ -3,26 +3,21 @@ import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal 
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 
-
-
 class ProductListAdd extends React.Component {
   state = {
-    title:'test'
+    title: 'test',
   }
 
-  componentDidMount() {
+  componentDidMount() {}
 
-  }
-
- 
   render() {
     return (
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
-          <div className="utils__title">
-            <strong>เพิ่มอุปกรณ์</strong>
-          </div>
+            <div className="utils__title">
+              <strong>เพิ่มอุปกรณ์</strong>
+            </div>
           </div>
         </div>
         <div className="card-body">
@@ -83,7 +78,6 @@ class ProductListAdd extends React.Component {
                     <Input id="product-edit-title" placeholder="" />
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>
