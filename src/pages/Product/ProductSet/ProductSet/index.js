@@ -104,23 +104,22 @@ class ProductSet extends React.Component {
     let T = record
     Modal.info({
       title: <div>อุปกรณ์จัดชุด {record.setid}</div>,
+      width:1000,
       content: (
         <div className="row">
-          <div className="form-group">
-            <div className="col-lg-12">
-              <label>ชื่่อ </label>
-              {record.SetName}
-            </div>
-            <div className="col-lg-12">
-              <label>ราคาในสัญญา </label>
-              {record.price}
-            </div>
-            <div className="col-lg-12">
-              <label>ID </label>
-              {record.setid}
-            </div>
+          <div className="col-md-4">
+            <label>อุปกรณ์</label>
           </div>
-        </div>
+          <div className="col-md-6">{record.SetName}</div>
+          <div className="col-md-4">
+            <label>ราคาในสัญญา</label>
+          </div>
+          <div className="col-md-6">{record.price}</div>
+          <div className="col-md-4">
+            <label>ID</label>
+          </div>
+          <div className="col-md-6">{record.setid}</div>
+          </div>
       ),
       onOk() {},
     })
