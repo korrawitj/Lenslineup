@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal ,Radio} from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
 const RadioGroup = Radio.Group
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -46,7 +46,7 @@ class ConfigParameter extends React.Component {
     let T = record
     Modal.confirm({
       title: 'Add Holiday Include',
-      width:1000,
+      width: 1000,
       content: (
         <div className="row">
           <div className="col-lg-12">
@@ -98,7 +98,7 @@ class ConfigParameter extends React.Component {
     let T = record
     Modal.confirm({
       title: 'Add Holiday Shop',
-      width:1000,
+      width: 1000,
       content: (
         <div className="row">
           <div className="col-lg-12">
@@ -150,7 +150,7 @@ class ConfigParameter extends React.Component {
     let T = record
     Modal.confirm({
       title: 'Add Manage Recurring',
-      width:1000,
+      width: 1000,
       content: (
         <div className="row">
           <div className="col-lg-12">
@@ -192,7 +192,7 @@ class ConfigParameter extends React.Component {
     let T = record
     Modal.confirm({
       title: 'Add Pickup',
-      width:1000,
+      width: 1000,
       content: (
         <div className="row">
           <div className="col-lg-12">
