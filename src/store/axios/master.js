@@ -41,14 +41,14 @@ export function getAllDataManage() {
 }
 
 export function getAllDataPickup() {
-    return dispatch => {
-        return axios
-            .get('/api/masterHoliday/getAllMasterPickup')
-            .then(response => {
-                dispatch(actionCreators.getdata(response.data.masterPickupData))
-            })
-            .catch(error => {
-                console.log('Error axios ' + error)
-            })
-    }
+  return dispatch => {
+    return axios
+      .get('/api/masterHoliday/getAllMasterPickup')
+      .then(response => {
+        dispatch(actionCreators.getdata(response.data.masterPickupData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
 }
