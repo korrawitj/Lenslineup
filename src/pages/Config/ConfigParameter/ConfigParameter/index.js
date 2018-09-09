@@ -33,7 +33,7 @@ class ConfigParameter extends React.Component {
       ],
       masterPickupData: [
         {
-          pickupID:'',
+          pickupID: '',
           name: '',
           pickuptype: '',
           delivery_charge: '',
@@ -199,8 +199,8 @@ class ConfigParameter extends React.Component {
     })
   }
   addDataPickup(record) {
-    let T = record;
-    let masterPickupData =this.state.data.masterPickupData;
+    let T = record
+    let masterPickupData = this.state.data.masterPickupData
     Modal.confirm({
       title: 'Add Pickup',
       width: 1000,
@@ -209,10 +209,12 @@ class ConfigParameter extends React.Component {
           <div className="col-lg-12">
             <div className="form-group">
               <label htmlFor="product-edit-title">Name</label>
-              <Input type="text"  value={masterPickupData.name} />
+              <Input type="text" value={masterPickupData.name} />
             </div>
             <div className="form-group">
-              <label htmlFor="product-edit-price" value={masterPickupData.pickuptype}>ปรเภท</label>
+              <label htmlFor="product-edit-price" value={masterPickupData.pickuptype}>
+                ปรเภท
+              </label>
               <Input type="text" />
             </div>
             <div className="form-group">
@@ -494,7 +496,6 @@ class ConfigParameter extends React.Component {
     // let { manageRecurringData } = this.state.data
     // let { masterPickupData } = this.state.data
     return (
-      
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
