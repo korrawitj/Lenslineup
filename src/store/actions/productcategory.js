@@ -1,14 +1,36 @@
 import * as actionTypes from './actionType'
 
-export const insertdata = () => {
+export const insertproductcat = () => {
   return {
-    type: actionTypes.INSERTDATA,
+    type: actionTypes.ADDPRODUCTCAT,
+    val: value,
   }
 }
 
-export const getdata = value => {
+export const getAllproductcat = value => {
   return {
-    type: actionTypes.GETDATA,
+    type: actionTypes.GETALLPRODUCTCAT,
+    val: value,
+  }
+}
+
+export const getproductcat = value => {
+  return {
+    type: actionTypes.GETPRODUCTCAT,
+    val: value,
+  }
+}
+
+export const updateproductcat = value => {
+  return {
+    type: actionTypes.UPDATEPRODUCTCAT,
+    val: value,
+  }
+}
+
+export const deleteproductcat = value => {
+  return {
+    type: actionTypes.DELETEPRODUCTCAT,
     val: value,
   }
 }

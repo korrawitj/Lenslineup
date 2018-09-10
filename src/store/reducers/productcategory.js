@@ -7,9 +7,9 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.INSERTDATA:
+    case actionTypes.ADDPRODUCTCAT:
       return state
-    case actionTypes.GETDATA:
+    case actionTypes.GETALLPRODUCTCAT:
       return updateObject(state, { categoryData: action.val })
     default:
       return state
