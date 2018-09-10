@@ -14,5 +14,5 @@ export default combineReducers({
   login,
   pcr: productcategoryReducer,
   master: master,
-  product : product
+  product: product,
 })

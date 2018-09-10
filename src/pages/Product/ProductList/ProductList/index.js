@@ -88,7 +88,6 @@ class ProductList extends React.Component {
   }
   componentDidMount() {
     this.props.getAll()
-
   }
 
   render() {
@@ -214,7 +213,7 @@ class ProductList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    product : state.product,
+    product: state.product,
   }
 }
 
