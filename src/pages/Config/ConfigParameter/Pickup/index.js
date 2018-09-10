@@ -43,15 +43,15 @@ class PickUp extends React.Component {
           <div className="col-lg-12">
             <div className="form-group">
               <label htmlFor="product-edit-title">Name</label>
-              <Input type="text" defaultValue={masterPickupData.name} />
+              <Input type="text" onChange={(e)=>(masterPickupData[0].name=e.target.value)} />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ปรเภท</label>
-              <Input type="text" defaultValue={masterPickupData.pickuptype} />
+              <Input type="text" onChange={(e)=>(masterPickupData[0].pickuptype=e.target.value)}/>
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ค่าส่ง</label>
-              <Input type="text" defaultValue={masterPickupData.delivery_charge} />
+              <Input type="text" onChange={(e)=>(masterPickupData[0].delivery_charge=e.target.value)} />
             </div>
           </div>
         </div>
