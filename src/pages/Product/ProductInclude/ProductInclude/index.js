@@ -1,6 +1,8 @@
 import React from 'react'
 import { Table, Icon, Input, Button, Modal, Upload } from 'antd'
 import tableData from './data.json'
+import * as actionCreators from '../../../../store/axios/productItem'
+import { connect } from 'react-redux'
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -183,6 +185,10 @@ class ProductInclude extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getAllProductItem()
+  }
+
   render() {
     let { pager, data } = this.state
     const columns = [
@@ -199,8 +205,8 @@ class ProductInclude extends React.Component {
       },
       {
         title: 'อุปกรณ์',
-        dataIndex: 'Copy',
-        key: 'Copy',
+        dataIndex: 'Name',
+        key: 'Name',
         sorter: (a, b) => a.Copy.length - b.Copy.length,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
@@ -236,8 +242,8 @@ class ProductInclude extends React.Component {
       },
       {
         title: 'ราคาในสัญญา',
-        dataIndex: 'PromisePrice',
-        key: 'PromisePrice',
+        dataIndex: 'ContractPrice',
+        key: 'ContractPrice',
         render: text => <span>{'$' + text}</span>,
         sorter: (a, b) => a.PromisePrice - b.PromisePrice,
       },
@@ -288,7 +294,7 @@ class ProductInclude extends React.Component {
         <div className="card-body">
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={this.props.productItem.productItemData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
@@ -298,4 +304,13 @@ class ProductInclude extends React.Component {
   }
 }
 
-export default ProductInclude
+const mapStateToProps = state => {
+  return {
+    productItem: state.productItem,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  actionCreators,
+)(ProductInclude)

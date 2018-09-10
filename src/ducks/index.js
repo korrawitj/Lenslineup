@@ -6,7 +6,7 @@ import login from './login'
 import productcategoryReducer from '../store/reducers/productcategory'
 import master from '../store/reducers/master'
 import product from '../store/reducers/product'
-
+import productItem from '../store/reducers/productItem'
 export default combineReducers({
   routing: routerReducer,
   pendingTasks: pendingTasksReducer,
@@ -15,4 +15,5 @@ export default combineReducers({
   pcr: productcategoryReducer,
   master: master,
   product: product,
+  productItem: productItem,
 })
