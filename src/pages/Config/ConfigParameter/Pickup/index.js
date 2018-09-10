@@ -33,8 +33,7 @@ class PickUp extends React.Component {
   componentDidMount() {
     this.props.getAllDataPickup()
   }
-  addDataPickup(record) {
-    let T = record
+  addDataPickup() {
     let masterPickupData = this.state.data.masterPickupData
     Modal.confirm({
       title: 'Add Pickup',
@@ -44,15 +43,15 @@ class PickUp extends React.Component {
           <div className="col-lg-12">
             <div className="form-group">
               <label htmlFor="product-edit-title">Name</label>
-              <Input type="text" value={masterPickupData.name} />
+              <Input type="text" defaultValue={masterPickupData.name} />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ปรเภท</label>
-              <Input type="text" value={masterPickupData.pickuptype} />
+              <Input type="text"  defaultValue={masterPickupData.pickuptype} />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ค่าส่ง</label>
-              <Input type="text" value={masterPickupData.delivery_charge} />
+              <Input type="text"  defaultValue={masterPickupData.delivery_charge} />
             </div>
           </div>
         </div>
@@ -148,7 +147,7 @@ class PickUp extends React.Component {
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
-            <strong>วันหยุดร้าน</strong>
+            <strong>จุดรับของ</strong>
           </div>
         </div>
         <div className="card-body">

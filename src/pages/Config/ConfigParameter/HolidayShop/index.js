@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
-
+const { TextArea} = Input;
 const RadioGroup = Radio.Group
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -28,8 +28,7 @@ class HolidayShop extends React.Component {
   componentDidMount() {
     this.props.getAllDataHolidayShop()
   }
-  addDataHolidayShop(record) {
-    let T = record
+  addDataHolidayShop() {
     Modal.confirm({
       title: 'Add Holiday Shop',
       width: 1000,
@@ -42,11 +41,7 @@ class HolidayShop extends React.Component {
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-category">ข้อความ</label>
-              <Input id="product-edit-category" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">จำนวน</label>
-              <Input id="product-edit-price" placeholder="" />
+              <TextArea autosize={{ minRows: 2, maxRows: 6 }} />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">การรับ</label>

@@ -1,9 +1,9 @@
-import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
-import { connect } from 'react-redux'
-import * as actionCreators from '../../../../store/axios/master'
-
-const RadioGroup = Radio.Group
+import React from 'react';
+import { Table, Icon, Input, Button, Modal, Radio } from 'antd';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../../../store/axios/master';
+const {TextArea}=Input;
+const RadioGroup = Radio.Group;
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -36,9 +36,53 @@ class ManageRecurring extends React.Component {
   componentDidMount() {
     this.props.getAllDataManage()
   }
-
+  addDataManageRecurring() {
+    Modal.confirm({
+      title: 'เพิ่มรอบรับคืน',
+      width: 1000,
+      content: (
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="form-group">
+              <label htmlFor="product-edit-title">วันที่</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-category">เวลาที่เริ่ม</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-category">เวลาที่สิ้นสุด</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">Offset</label>
+              <Input id="product-edit-title" placeholder="" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="product-edit-price">ประเภท</label>
+              <div>
+                <RadioGroup name="radiogroup">
+                  <Radio value={true}>Yes</Radio>
+                  <Radio value={false}>No</Radio>
+                </RadioGroup>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk() {
+        console.log('OK')
+      },
+      onCancel() {
+        console.log('Cancel')
+      },
+    })
+  }
   showDeleteConfirmManageRecurring(record) {
-    let T = record
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte = {record.name}</div>,
@@ -76,89 +120,6 @@ class ManageRecurring extends React.Component {
 
   render() {
     let { pager } = this.state
-
-    const columnsholiday = [
-      {
-        title: 'วันหยุดร้าน',
-        dataIndex: 'date',
-        key: 'date',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.date - b.date,
-      },
-      {
-        title: 'การรับ',
-        dataIndex: 'receive',
-        key: 'receive',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.receive - b.receive,
-      },
-      {
-        title: 'การคืน',
-        dataIndex: 'recurring',
-        key: 'recurring',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.receive - b.receive,
-      },
-      {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-          <span>
-            <Button
-              type="danger"
-              shape="circle"
-              icon="delete"
-              onClick={() => this.showDeleteConfirmHoliday(record)}
-            />
-          </span>
-        ),
-      },
-    ]
-
-    const columnsholidayshop = [
-      {
-        title: 'วันหยุดร้าน',
-        dataIndex: 'date',
-        key: 'date',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.date - b.date,
-      },
-      {
-        title: 'การรับ',
-        dataIndex: 'receive',
-        key: 'receive',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.receive - b.receive,
-      },
-      {
-        title: 'การคืน',
-        dataIndex: 'recurring',
-        key: 'recurring',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.receive - b.receive,
-      },
-      {
-        title: 'ข้อความ',
-        dataIndex: 'message',
-        key: 'message',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.message - b.message,
-      },
-      {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-          <span>
-            <Button
-              type="danger"
-              shape="circle"
-              icon="delete"
-              onClick={() => this.showDeleteConfirmHolidayShop(record)}
-            />
-          </span>
-        ),
-      },
-    ]
     const columnManageRecurring = [
       {
         title: 'ชื่อ',
@@ -210,47 +171,7 @@ class ManageRecurring extends React.Component {
         ),
       },
     ]
-    const columnsMasterPickup = [
-      {
-        title: 'ชื่อ',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.name - b.name,
-      },
-      {
-        title: 'ประเภท',
-        dataIndex: 'pickuptype',
-        key: 'pickuptype',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.pickuptype - b.pickuptype,
-      },
-      {
-        title: 'ค่าส่ง',
-        dataIndex: 'delivery_charge',
-        key: 'delivery_charge',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.delivery_charge - b.delivery_charge,
-      },
-      {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-          <span>
-            <Button
-              type="danger"
-              shape="circle"
-              icon="delete"
-              onClick={() => this.showDeleteConfirmMasterPickup(record)}
-            />
-          </span>
-        ),
-      },
-    ]
-    // let { holidayData } = this.state.data
-    // let { holidayShopData } = this.state.data
-    // let { manageRecurringData } = this.state.data
-    // let { masterPickupData } = this.state.data
+ 
     return (
       <div className="card">
         <div className="card-header">
