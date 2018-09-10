@@ -129,12 +129,18 @@ class ProductCate extends React.Component {
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
-  handleChange = ({ fileList }) => this.setState({ fileList })
+  handleChange = ({ fileList }) => {
+    this.setState({ fileList }) 
+  }
   onChangeCategory = value => {
     this.setState({
       categoryValue: value,
     })
   }
+  onUploadImageSaved(){
+    this.props.UploadImages(this.state.fileList)
+  }
+
   render() {
     let { pager } = this.state
     let { categoryValue } = this.state
@@ -211,7 +217,7 @@ class ProductCate extends React.Component {
           </div>
           <div className="col-lg-12">
             <div className="form-actions">
-              <Button type="primary" className="mr-2">
+              <Button type="primary" className="mr-2" onClick={() => this.onUploadImageSaved()}> 
                 Save Product
               </Button>
               <Button type="default">Cancel</Button>
