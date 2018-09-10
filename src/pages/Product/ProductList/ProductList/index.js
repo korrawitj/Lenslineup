@@ -86,9 +86,7 @@ class ProductList extends React.Component {
       })
     }
   }
-  componentWillMount(){
-    
-  }
+  componentWillMount() {}
 
   render() {
     let { pager, data } = this.state
@@ -221,4 +219,3 @@ export default connect(
   mapStateToProps,
   actionCreators,
 )(ProductList)
-
