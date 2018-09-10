@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio ,DatePicker} from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio, DatePicker } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
 const { TextArea } = Input
