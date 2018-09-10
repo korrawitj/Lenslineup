@@ -37,7 +37,6 @@ class ManageRecurring extends React.Component {
     this.props.getAllDataManage()
   }
 
- 
   showDeleteConfirmManageRecurring(record) {
     let T = record
     Modal.confirm({
@@ -54,11 +53,11 @@ class ManageRecurring extends React.Component {
       },
     })
   }
- 
+
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
-  
+
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
       const pager = { ...this.state.pager }

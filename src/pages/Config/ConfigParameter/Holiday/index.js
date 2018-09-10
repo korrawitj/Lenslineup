@@ -27,7 +27,6 @@ class Holiday extends React.Component {
     this.props.getAllDataHoliday()
   }
 
-  
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
@@ -122,7 +121,7 @@ class Holiday extends React.Component {
             เพิ่มวันหยุด
           </Button>
         </div>
-        </div>
+      </div>
     )
   }
 }

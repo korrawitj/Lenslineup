@@ -16,14 +16,14 @@ const defaultPagination = {
 class PickUp extends React.Component {
   state = {
     data: {
-        masterPickupData: [
-            {
-              pickupID: '',
-              name: '',
-              pickuptype: '',
-              delivery_charge: '',
-            },
-          ],
+      masterPickupData: [
+        {
+          pickupID: '',
+          name: '',
+          pickuptype: '',
+          delivery_charge: '',
+        },
+      ],
     },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
@@ -107,42 +107,42 @@ class PickUp extends React.Component {
     let { pager } = this.state
 
     const columnsMasterPickup = [
-        {
-          title: 'ชื่อ',
-          dataIndex: 'name',
-          key: 'name',
-          render: text => <span>{text}</span>,
-          sorter: (a, b) => a.name - b.name,
-        },
-        {
-          title: 'ประเภท',
-          dataIndex: 'pickuptype',
-          key: 'pickuptype',
-          render: text => <span>{text}</span>,
-          sorter: (a, b) => a.pickuptype - b.pickuptype,
-        },
-        {
-          title: 'ค่าส่ง',
-          dataIndex: 'delivery_charge',
-          key: 'delivery_charge',
-          render: text => <span>{text}</span>,
-          sorter: (a, b) => a.delivery_charge - b.delivery_charge,
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (text, record) => (
-            <span>
-              <Button
-                type="danger"
-                shape="circle"
-                icon="delete"
-                onClick={() => this.showDeleteConfirmMasterPickup(record)}
-              />
-            </span>
-          ),
-        },
-      ]
+      {
+        title: 'ชื่อ',
+        dataIndex: 'name',
+        key: 'name',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.name - b.name,
+      },
+      {
+        title: 'ประเภท',
+        dataIndex: 'pickuptype',
+        key: 'pickuptype',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.pickuptype - b.pickuptype,
+      },
+      {
+        title: 'ค่าส่ง',
+        dataIndex: 'delivery_charge',
+        key: 'delivery_charge',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.delivery_charge - b.delivery_charge,
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <Button
+              type="danger"
+              shape="circle"
+              icon="delete"
+              onClick={() => this.showDeleteConfirmMasterPickup(record)}
+            />
+          </span>
+        ),
+      },
+    ]
 
     return (
       <div className="card">
@@ -162,7 +162,7 @@ class PickUp extends React.Component {
             เพิ่มจุดรับของ
           </Button>
         </div>
-        </div>
+      </div>
     )
   }
 }

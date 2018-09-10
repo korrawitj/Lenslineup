@@ -16,9 +16,9 @@ const defaultPagination = {
 class HolidayShop extends React.Component {
   state = {
     data: {
-        holidayShopData: [
-            { date: '55', receive: 'false', recurring: 'false', message: '55555555555555555' },
-          ],
+      holidayShopData: [
+        { date: '55', receive: 'false', recurring: 'false', message: '55555555555555555' },
+      ],
     },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
@@ -119,49 +119,49 @@ class HolidayShop extends React.Component {
     let { pager } = this.state
 
     const columnsholidayshop = [
-        {
-          title: 'วันหยุดร้าน',
-          dataIndex: 'date',
-          key: 'date',
-          render: text => <span>{text}</span>,
-          sorter: (a, b) => a.date - b.date,
-        },
-        {
-          title: 'การรับ',
-          dataIndex: 'receive',
-          key: 'receive',
-          render: text => <span>{text}</span>,
-          sorter: (a, b) => a.receive - b.receive,
-        },
-        {
-          title: 'การคืน',
-          dataIndex: 'recurring',
-          key: 'recurring',
-          render: text => <span>{text}</span>,
-          sorter: (a, b) => a.receive - b.receive,
-        },
-        {
-          title: 'ข้อความ',
-          dataIndex: 'message',
-          key: 'message',
-          render: text => <span>{text}</span>,
-          sorter: (a, b) => a.message - b.message,
-        },
-        {
-          title: 'Action',
-          key: 'action',
-          render: (text, record) => (
-            <span>
-              <Button
-                type="danger"
-                shape="circle"
-                icon="delete"
-                onClick={() => this.showDeleteConfirmHolidayShop(record)}
-              />
-            </span>
-          ),
-        },
-      ]
+      {
+        title: 'วันหยุดร้าน',
+        dataIndex: 'date',
+        key: 'date',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.date - b.date,
+      },
+      {
+        title: 'การรับ',
+        dataIndex: 'receive',
+        key: 'receive',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.receive - b.receive,
+      },
+      {
+        title: 'การคืน',
+        dataIndex: 'recurring',
+        key: 'recurring',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.receive - b.receive,
+      },
+      {
+        title: 'ข้อความ',
+        dataIndex: 'message',
+        key: 'message',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.message - b.message,
+      },
+      {
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+            <Button
+              type="danger"
+              shape="circle"
+              icon="delete"
+              onClick={() => this.showDeleteConfirmHolidayShop(record)}
+            />
+          </span>
+        ),
+      },
+    ]
 
     return (
       <div className="card">
@@ -181,7 +181,7 @@ class HolidayShop extends React.Component {
             เพิ่มวันหยุดประจำ
           </Button>
         </div>
-        </div>
+      </div>
     )
   }
 }
