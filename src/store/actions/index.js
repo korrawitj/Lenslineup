@@ -12,4 +12,9 @@ export { getAllProductItem, getProductItem, addProductItem, updateProductItem } 
 
 export { holidaygetdata, holidayshopgetdata, managegetdata, pickupgetdata } from './master'
 
-export { getAllProductPackage , getProductPackage ,addProductPackage ,updateProductPackage} from './productPackage'
+export {
+  getAllProductPackage,
+  getProductPackage,
+  addProductPackage,
+  updateProductPackage,
+} from './productPackage'

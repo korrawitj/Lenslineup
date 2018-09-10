@@ -13,10 +13,9 @@ export default combineReducers({
   pendingTasks: pendingTasksReducer,
   app,
   login,
-  pcr : productcategoryReducer,
-  master : master,
-  product : product,
-  productItem : productItem,
-  productPackage : productPackage
-
+  pcr: productcategoryReducer,
+  master: master,
+  product: product,
+  productItem: productItem,
+  productPackage: productPackage,
 })

@@ -173,7 +173,7 @@ class ProductSet extends React.Component {
       })
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     this.props.getAllProductPackage()
   }
   render() {
@@ -298,10 +298,9 @@ class ProductSet extends React.Component {
   }
 }
 
-
 const mapStateToProps = state => {
   return {
-    productPackage : state.productPackage
+    productPackage: state.productPackage,
   }
 }
 
