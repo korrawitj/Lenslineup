@@ -1,6 +1,8 @@
 import React from 'react'
 import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
 import tableData from './data.json'
+import * as actionCreators from '../../../../store/axios/productPackage'
+import { connect } from 'react-redux'
 const RadioGroup = Radio.Group
 const { TextArea } = Input
 const defaultPagination = {
@@ -171,26 +173,28 @@ class ProductSet extends React.Component {
       })
     }
   }
-
+  componentDidMount(){
+    this.props.getAllProductPackage()
+  }
   render() {
     let { pager, data } = this.state
 
     const columns = [
       {
         title: 'Set ID',
-        dataIndex: 'setid',
-        key: 'setid',
+        dataIndex: 'PackageID',
+        key: 'PackageID',
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
-            {'#' + text}
+            {text}
           </a>
         ),
         sorter: (a, b) => a.setid - b.setid,
       },
       {
         title: 'อุปกรณ์',
-        dataIndex: 'SetName',
-        key: 'SetName',
+        dataIndex: 'Name',
+        key: 'Name',
         sorter: (a, b) => a.SetName.length - b.SetName.length,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
@@ -226,8 +230,8 @@ class ProductSet extends React.Component {
       },
       {
         title: 'ราคา',
-        dataIndex: 'price',
-        key: 'price',
+        dataIndex: 'ValuationPrice',
+        key: 'ValuationPrice',
         render: text => <span>{'$' + text}</span>,
         sorter: (a, b) => a.price - b.price,
       },
@@ -284,7 +288,7 @@ class ProductSet extends React.Component {
         <div className="card-body">
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={this.props.productPackage.productPackageData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
@@ -294,4 +298,14 @@ class ProductSet extends React.Component {
   }
 }
 
-export default ProductSet
+
+const mapStateToProps = state => {
+  return {
+    productPackage : state.productPackage
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  actionCreators,
+)(ProductSet)

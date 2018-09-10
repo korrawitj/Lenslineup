@@ -7,13 +7,16 @@ import productcategoryReducer from '../store/reducers/productcategory'
 import master from '../store/reducers/master'
 import product from '../store/reducers/product'
 import productItem from '../store/reducers/productItem'
+import productPackage from '../store/reducers/productPackage'
 export default combineReducers({
   routing: routerReducer,
   pendingTasks: pendingTasksReducer,
   app,
   login,
-  pcr: productcategoryReducer,
-  master: master,
-  product: product,
-  productItem: productItem,
+  pcr : productcategoryReducer,
+  master : master,
+  product : product,
+  productItem : productItem,
+  productPackage : productPackage
+
 })
