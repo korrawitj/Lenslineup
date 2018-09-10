@@ -2,14 +2,13 @@ import * as actionTypes from '../actions/actionType'
 import { updateObject } from '../utility'
 
 const initialState = {
-  getAllProductData: [],
-  productData: null,
+  productData: [],
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GETALLPRODUCT:
-      return updateObject(state, { getAllProductData: action.val })
+      return updateObject(state, { productData: action.val })
     case actionTypes.GETPRODUCT:
       return updateObject(state, { productData: action.val })
     case actionTypes.ADDPRODUCT:
