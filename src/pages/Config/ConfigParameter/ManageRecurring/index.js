@@ -1,9 +1,9 @@
-import React from 'react';
-import { Table, Icon, Input, Button, Modal, Radio } from 'antd';
-import { connect } from 'react-redux';
-import * as actionCreators from '../../../../store/axios/master';
-const {TextArea}=Input;
-const RadioGroup = Radio.Group;
+import React from 'react'
+import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
+import { connect } from 'react-redux'
+import * as actionCreators from '../../../../store/axios/master'
+const { TextArea } = Input
+const RadioGroup = Radio.Group
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -171,7 +171,7 @@ class ManageRecurring extends React.Component {
         ),
       },
     ]
- 
+
     return (
       <div className="card">
         <div className="card-header">

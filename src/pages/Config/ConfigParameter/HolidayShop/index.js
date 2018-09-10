@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
-const { TextArea} = Input;
+const { TextArea } = Input
 const RadioGroup = Radio.Group
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],

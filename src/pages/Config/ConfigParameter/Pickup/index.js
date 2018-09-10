@@ -47,11 +47,11 @@ class PickUp extends React.Component {
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ปรเภท</label>
-              <Input type="text"  defaultValue={masterPickupData.pickuptype} />
+              <Input type="text" defaultValue={masterPickupData.pickuptype} />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ค่าส่ง</label>
-              <Input type="text"  defaultValue={masterPickupData.delivery_charge} />
+              <Input type="text" defaultValue={masterPickupData.delivery_charge} />
             </div>
           </div>
         </div>
