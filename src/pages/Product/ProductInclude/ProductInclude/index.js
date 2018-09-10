@@ -143,7 +143,7 @@ class ProductInclude extends React.Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getAllProductItem()
   }
 
@@ -268,7 +268,7 @@ class ProductInclude extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    productItem : state.productItem,
+    productItem: state.productItem,
   }
 }
 

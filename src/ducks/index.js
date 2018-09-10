@@ -15,5 +15,5 @@ export default combineReducers({
   pcr: productcategoryReducer,
   master: master,
   product: product,
-  productItem : productItem
+  productItem: productItem,
 })
