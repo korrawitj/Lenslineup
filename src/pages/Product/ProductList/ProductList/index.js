@@ -87,28 +87,28 @@ class ProductList extends React.Component {
     }
   }
   componentDidMount() {
-    this.props.getAll()
+    this.props.getAllProduct()
   }
 
   render() {
     let { pager, data } = this.state
-
+    console.log(this.props.product)
     const columns = [
       {
-        title: 'ID',
-        dataIndex: 'id',
-        key: 'id',
+        title: 'ProductID',
+        dataIndex: 'ProductID',
+        key: 'ProductID',
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
-            {'#' + text}
+            {text}
           </a>
         ),
         sorter: (a, b) => a.id - b.id,
       },
       {
         title: 'อุปกรณ์',
-        dataIndex: 'ProductName',
-        key: 'ProductName',
+        dataIndex: 'Name',
+        key: 'Name',
         sorter: (a, b) => a.ProductName.length - b.ProductName.length,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
@@ -144,23 +144,23 @@ class ProductList extends React.Component {
       },
       {
         title: 'ราคาเช่า',
-        dataIndex: 'RentPrice',
-        key: 'RentPrice',
-        render: text => <span>{'$' + text}</span>,
+        dataIndex: 'RentHourFee',
+        key: 'RentHourFee',
+        render: text => <span>{text == null ? "" : text}</span>,
         sorter: (a, b) => a.RentPrice - b.RentPrice,
       },
       {
         title: 'หลักประกัน1',
-        dataIndex: 'GuaranteePrice',
-        key: 'GuaranteePrice',
-        render: text => <span>{'$' + text}</span>,
+        dataIndex: 'DepositType1',
+        key: 'DepositType1',
+        render: text => <span>{text == null ? "" : text}</span>,
         sorter: (a, b) => a.GuaranteePrice - b.GuaranteePrice,
       },
       {
         title: 'หลักประกัน2',
-        dataIndex: 'GuaranteePrice2',
-        key: 'GuaranteePrice2',
-        render: text => <span>{'$' + text}</span>,
+        dataIndex: 'DepositType2',
+        key: 'DepositType2',
+        render: text => <span>{text == null ? "" : text}</span>,
         sorter: (a, b) => a.GuaranteePrice2 - b.GuaranteePrice2,
       },
       {
@@ -201,7 +201,7 @@ class ProductList extends React.Component {
         <div className="card-body">
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={this.props.product.productData}
             pagination={pager}
             onChange={this.handleTableChange}
           />

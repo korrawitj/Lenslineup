@@ -1,12 +1,13 @@
 import axios from 'axios'
 import * as actionCreators from '../actions/index'
 
-export function getAll() {
+export function getAllProduct() {
   return dispatch => {
     return axios
-      .get('/API/category/getAll')
+      .get('/API/product/getAll')
       .then(response => {
-        dispatch(actionCreators.getAllData(response.data.productData))
+        console.log(response.data)
+        dispatch(actionCreators.getAllProduct(response.data.productData))
       })
       .catch(error => {
         console.log('Error axios ' + error)

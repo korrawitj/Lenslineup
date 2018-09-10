@@ -6,7 +6,7 @@ export const addData = () => {
   }
 }
 
-export const getAllData = value => {
+export const getAllProduct = value => {
   return {
     type: actionTypes.GETALLPRODUCT,
     val: value,
