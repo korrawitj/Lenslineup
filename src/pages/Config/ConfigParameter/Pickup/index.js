@@ -34,7 +34,7 @@ class PickUp extends React.Component {
     this.props.getAllDataPickup()
   }
   addDataPickup() {
-    let masterPickupData = this.state.data.masterPickupData
+    let data = this.state.data
     Modal.confirm({
       title: 'Add Pickup',
       width: 1000,
@@ -43,20 +43,20 @@ class PickUp extends React.Component {
           <div className="col-lg-12">
             <div className="form-group">
               <label htmlFor="product-edit-title">Name</label>
-              <Input type="text" onChange={e => (masterPickupData[0].name = e.target.value)} />
+              <Input type="text" onChange={e => (data.masterPickupData[0].name = e.target.value)} />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ปรเภท</label>
               <Input
                 type="text"
-                onChange={e => (masterPickupData[0].pickuptype = e.target.value)}
+                onChange={e => (data.masterPickupData[0].pickuptype = e.target.value)}
               />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">ค่าส่ง</label>
               <Input
                 type="text"
-                onChange={e => (masterPickupData[0].delivery_charge = e.target.value)}
+                onChange={e => (data.masterPickupData[0].delivery_charge = e.target.value)}
               />
             </div>
           </div>
@@ -66,7 +66,7 @@ class PickUp extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        console.log(masterPickupData)
+        console.log(data)
       },
       onCancel() {
         console.log('Cancel')
