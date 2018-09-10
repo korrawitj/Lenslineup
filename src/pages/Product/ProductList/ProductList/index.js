@@ -86,7 +86,10 @@ class ProductList extends React.Component {
       })
     }
   }
-  componentWillMount() {}
+  componentDidMount() {
+    this.props.getAll()
+
+  }
 
   render() {
     let { pager, data } = this.state
@@ -211,7 +214,7 @@ class ProductList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    pcr: state.pcr,
+    product : state.product,
   }
 }
 
