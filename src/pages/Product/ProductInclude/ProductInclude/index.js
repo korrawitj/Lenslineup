@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal } from 'antd'
+import { Table, Icon, Input, Button, Modal ,Upload } from 'antd'
 import tableData from './data.json'
 
 const defaultPagination = {
@@ -19,8 +19,25 @@ class ProductInclude extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+    previewVisible: false,
+    previewImage: '',
+    fileList: [{
+      uid: -1,
+      name: 'xxx.png',
+      status: 'done',
+      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    }],
+  }
+  handleCancel = () => this.setState({ previewVisible: false })
+
+  handlePreview = (file) => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    });
   }
 
+  handleChange = ({ fileList }) => this.setState({ fileList })
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
@@ -68,10 +85,17 @@ class ProductInclude extends React.Component {
       },
     })
   }
-  addDataConfirm(record) {
-    let T = record
+  addDataConfirm() {
+    const { previewVisible, previewImage, fileList } = this.state;
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
     Modal.confirm({
       title: 'Add Product Include',
+      width:1000,
       content: (
         <div className="row">
           <div className="col-lg-12">
@@ -86,6 +110,21 @@ class ProductInclude extends React.Component {
             <div className="form-group">
               <label htmlFor="product-edit-price">จำนวน</label>
               <Input id="product-edit-price" placeholder="" />
+            </div>
+            <div className="form-group">
+            <lable htmlFor="image">รูปภาพ</lable>
+            <Upload
+          action=""
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={this.handlePreview}
+          onChange={this.handleChange}
+        >
+          {fileList.length >= 3 ? null : uploadButton}
+        </Upload>
+        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal>
             </div>
           </div>
         </div>
@@ -106,6 +145,7 @@ class ProductInclude extends React.Component {
     Modal.info({
       title: <div>อุปกรณ์จัดชุด {record.ItemID}</div>,
       width: 1000,
+      
       content: (
         <div className="row">
           <div className="col-md-4">
@@ -143,7 +183,6 @@ class ProductInclude extends React.Component {
 
   render() {
     let { pager, data } = this.state
-
     const columns = [
       {
         title: 'ItemID',
@@ -220,12 +259,6 @@ class ProductInclude extends React.Component {
             />
             <Button
               shape="circle"
-              icon="plus"
-              onClick={() => this.addDataConfirm(record)}
-              style={{ backgroundColor: '#46c938' }}
-            />
-            <Button
-              shape="circle"
               icon="edit"
               onClick={() => this.addDataConfirm(record)}
               style={{ backgroundColor: '#c49f47' }}
@@ -246,6 +279,9 @@ class ProductInclude extends React.Component {
           <div className="utils__title">
             <strong>อุปกรณ์ที่ให้ไประหว่างเช่า</strong>
           </div>
+          <Button type="primary" icon="plus" onClick={() => this.addDataConfirm()}>
+            เพิ่มอุปกรณ์
+          </Button>
         </div>
         <div className="card-body">
           <Table
