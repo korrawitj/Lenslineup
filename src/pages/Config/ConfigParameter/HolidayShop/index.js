@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio ,DatePicker} from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
 const { TextArea } = Input
@@ -37,7 +37,7 @@ class HolidayShop extends React.Component {
           <div className="col-lg-12">
             <div className="form-group">
               <label htmlFor="product-edit-title">วันที่</label>
-              <Input id="product-edit-title" placeholder="" />
+              <DatePicker />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-category">ข้อความ</label>
