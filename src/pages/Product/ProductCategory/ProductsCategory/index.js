@@ -99,7 +99,7 @@ class ProductCate extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getData()
+    this.props.getAllData()
   }
 
   handleCancel = () => this.setState({ previewVisible: false })
