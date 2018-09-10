@@ -1,6 +1,6 @@
 import * as actionTypes from './actionType'
 
-export const insertproductcat = () => {
+export const insertproductcat = (value) => {
   return {
     type: actionTypes.ADDPRODUCTCAT,
     val: value,
