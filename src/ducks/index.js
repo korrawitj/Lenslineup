@@ -5,6 +5,7 @@ import app from './app'
 import login from './login'
 import productcategoryReducer from '../store/reducers/productcategory'
 import master from '../store/reducers/master'
+import product from '../store/reducers/product'
 
 export default combineReducers({
   routing: routerReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   login,
   pcr: productcategoryReducer,
   master: master,
+  product: product,
 })

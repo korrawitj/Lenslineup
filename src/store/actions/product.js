@@ -1,14 +1,14 @@
 import * as actionTypes from './actionType'
 
-export const insertdata = () => {
+export const addData = () => {
   return {
-    type: actionTypes.INSERTDATA,
+    type: actionTypes.ADDPRODUCT,
   }
 }
 
-export const getdata = value => {
+export const getAllData = value => {
   return {
-    type: actionTypes.GETDATA,
+    type: actionTypes.GETALLPRODUCT,
     val: value,
   }
 }

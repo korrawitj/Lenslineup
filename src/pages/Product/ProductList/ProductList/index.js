@@ -1,6 +1,8 @@
 import React from 'react'
 import { Table, Icon, Input, Button, Modal } from 'antd'
 import tableData from './data.json'
+import * as actionCreators from '../../../../store/axios/product'
+import { connect } from 'react-redux'
 const confirm = Modal.confirm
 
 const defaultPagination = {
@@ -83,6 +85,9 @@ class ProductList extends React.Component {
         pager: pager,
       })
     }
+  }
+  componentDidMount() {
+    this.props.getAll()
   }
 
   render() {
@@ -206,4 +211,13 @@ class ProductList extends React.Component {
   }
 }
 
-export default ProductList
+const mapStateToProps = state => {
+  return {
+    product: state.product,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  actionCreators,
+)(ProductList)
