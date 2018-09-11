@@ -10,10 +10,10 @@ export { getAllProduct } from './product'
 
 export { getAllProductItem, getProductItem, addProductItem, updateProductItem } from './productItem'
 
-export { 
-  holidaygetdata, 
-  holidayshopgetdata, 
-  managegetdata, 
+export {
+  holidaygetdata,
+  holidayshopgetdata,
+  managegetdata,
   pickupgetdata,
   holidayadddata,
 } from './master'
