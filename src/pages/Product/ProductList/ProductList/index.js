@@ -1,10 +1,236 @@
-import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload, Radio } from 'antd'
-import tableData from './data.json'
-import * as actionCreators from '../../../../store/axios/product'
-import { connect } from 'react-redux'
-const RadioGroup = Radio.Group
-const confirm = Modal.confirm
+import React from 'react';
+import { Table, Icon, Input, Button, Modal, Upload, Radio,Form } from 'antd';
+import tableData from './data.json';
+import * as actionCreators from '../../../../store/axios/product';
+import { connect } from 'react-redux';
+const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
+const RadioButton = Radio.Button;
+const confirm = Modal.confirm;
+const TextArea=Input.TextArea;
+const CollectionCreateForm = Form.create()(
+  class extends React.Component {
+    render() {
+      const { pager } = this.props;
+      const { visible, onCancel, onCreate, form } = this.props;
+      const { getFieldDecorator } = form;
+      const dataCopy = [
+        {
+          title: 'View',
+          key: 'CategoryID',
+          render: (text, record) => (
+            <span>
+              <Button icon="cross" size="small" onClick={() => console.log(record)}>
+                View
+              </Button>
+            </span>
+          ),
+        },
+        {
+          title: 'ตัวที่',
+          dataIndex: 'CopyNo',
+          key: 'CopyNo',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {text}
+            </a>
+          ),
+          sorter: (a, b) => a.CopyNo - b.CopyNo,
+        },
+        {
+          title: 'ชื่อสั้น',
+          dataIndex: 'Serail',
+          key: 'SerialNumber',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {text}
+            </a>
+          ),
+          sorter: (a, b) => a.SerialNumber - b.SerialNumber,
+        },
+        {
+          title: 'ราคาที่ซื้อ',
+          dataIndex: 'PurchasePrice',
+          key: 'PurchasePrice',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {'#' + text}
+            </a>
+          ),
+          sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
+        },
+        {
+          title: 'วันที่ซื้อ',
+          dataIndex: 'PurchaseDate',
+          key: 'PurchaseDate',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {'#' + text}
+            </a>
+          ),
+          sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
+        },
+        {
+          title: 'สถานะ',
+          dataIndex: 'Status',
+          key: 'Status',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {'#' + text}
+            </a>
+          ),
+          sorter: (a, b) => a.Status - b.Status,
+        },
+        {
+          title: 'แก้ไข',
+          key: 'Edit',
+          render: (text, record) => (
+            <span>
+              <Button icon="cross" size="small" onClick={() => console.log(record)}>
+                Edit
+              </Button>
+            </span>
+          ),
+        },
+        {
+          title: 'ลบ',
+          key: 'Action',
+          render: (text, record) => (
+            <span>
+              <Button icon="cross" size="small" onClick={() => console.log(record)}>
+                Remove
+              </Button>
+            </span>
+          ),
+        },
+      ]
+      return (
+        <Modal
+          width={1000}
+          visible={visible}
+          okText="เพิ่ม"
+          onCancel={onCancel}
+          onOk={onCreate}
+          
+        >
+          <div className="card-header">
+            <div className="utils__title">
+              <div className="utils__title">
+                <strong>เพิ่มอุปกรณ์</strong>
+              </div>
+            </div>
+          </div>
+          <div className="card-body">
+          <Form>
+            <FormItem label="อุุปกรณ์">
+              {getFieldDecorator('productData.Name', {
+                rules: [{ required: true, message: 'กรุณากรอก อุุปกรณ์!' }],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <FormItem label="ประเภท">
+              {getFieldDecorator('productData.CategoryID', {
+                rules: [{ required: true, message: 'กรุณาเลือก ประเภท!' }],
+              })(<Input type="textarea" />)}
+            </FormItem>
+            <FormItem label="ราคาเช่า1วัน">
+              {getFieldDecorator('productData.RentDay_Fee', {
+                rules: [{ required: true, message: 'กรุณากรอก ราคาเช่า!' }],
+              })(
+                <Input />
+              )}
+            </FormItem>
+                        <FormItem label="จำนวนขั้นต่ำวันให้เช่า">
+              {getFieldDecorator('productData.IsDay', {
+                rules: [{ required: true, message: 'กรุณากรอก จำนวนขั้นต่ำวันให้เช่า!' }],
+              })(
+                <Input />
+              )}
+            </FormItem>
+                        <FormItem label="แบบที่ 1">
+              {getFieldDecorator('productData.DepositType1', {
+                rules: [{ required: true, message: 'กรุณากรอก แบบที่ 1!' }],
+              })(
+                <Input />
+              )}
+            </FormItem>
+                                   <FormItem label="แบบที่ 2">
+              {getFieldDecorator('productData.DepositType2', {
+                rules: [{ required: true, message: 'กรุณากรอก แบบที่ 2!' }],
+              })(
+                <Input />
+              )}
+            </FormItem>
+                                   <FormItem label="ราคาในสัญญา">
+              {getFieldDecorator('productData.ContactPrice', {
+                rules: [{ required: true, message: 'กรุณากรอก ราคาในสัญญา!' }],
+              })(   
+                <Input />
+              )}
+            </FormItem>
+                      <FormItem label="Note">
+              {getFieldDecorator('productData.Note')(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
+            </FormItem> 
+                      <FormItem label="QR ID">
+              {getFieldDecorator('productData.QRID')(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
+            </FormItem> 
+                            
+                      <FormItem label="สถานะหน้าเว็บ">
+              {getFieldDecorator('productData.isShow')(
+ <Radio.Group>
+ <RadioButton value={1}>แสดง</RadioButton>
+ <RadioButton value={0}>ไม่แสดง</RadioButton>
+</Radio.Group>
+
+              )}
+            </FormItem> 
+            <FormItem label="สถานะคิวจอง">
+              {getFieldDecorator('productData.Status')(
+ <Radio.Group>
+ <RadioButton value={1}>แสดง</RadioButton>
+ <RadioButton value={0}>ไม่แสดง</RadioButton>
+</Radio.Group>
+
+              )}
+            </FormItem> 
+            {/* <FormItem label="การรับ">
+              {getFieldDecorator('productData.isShow')(
+ <Radio.Group>
+ <Radio value={1}>แสดง</Radio>
+ <Radio value={0}>ไม่แสดง</Radio>
+</Radio.Group>
+
+              )}
+            </FormItem> 
+            <FormItem label="การคืน">
+              {getFieldDecorator('productData.isShow')(
+ <Radio.Group>
+ <Radio value={1}>แสดง</Radio>
+ <Radio value={0}>ไม่แสดง</Radio>
+</Radio.Group>
+
+              )}
+            </FormItem>  */}
+          </Form>
+          <div className="col-lg-8">
+                <div className="utils__title">
+                  <strong>Product Copy</strong>
+                </div>
+                <Table
+                  columns={dataCopy}
+                  dataSource=""
+                  pagination={pager}
+                  onChange={this.handleTableChange}
+                />
+              </div>
+          </div>
+        </Modal>
+      );
+    }
+  }
+);
+
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -24,6 +250,7 @@ class ProductList extends React.Component {
     filtered: false,
     previewVisible: false,
     previewImage: '',
+    visible: false,
     fileList: [
       {
         uid: -1,
@@ -66,8 +293,25 @@ class ProductList extends React.Component {
       ],
     },
   }
-  handleCancel = () => this.setState({ previewVisible: false })
+  handleCancel = () => this.setState({ previewVisible: false,visible:false })
+  showModal = () => {
+    this.setState({ visible: true });
+  }
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
 
+      console.log(values);
+      form.resetFields();
+      this.setState({ visible: false });
+    });
+  }
+  saveFormRef = (formRef) => {
+    this.formRef = formRef;
+  }
   handlePreview = file => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
@@ -94,249 +338,6 @@ class ProductList extends React.Component {
   }
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
-  }
-  addDataProduct() {
-    let data = this.state.dataSend
-    const dataCopy = [
-      {
-        title: 'View',
-        key: 'CategoryID',
-        render: (text, record) => (
-          <span>
-            <Button icon="cross" size="small" onClick={() => console.log(record)}>
-              View
-            </Button>
-          </span>
-        ),
-      },
-      {
-        title: 'ตัวที่',
-        dataIndex: 'CopyNo',
-        key: 'CopyNo',
-        render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {text}
-          </a>
-        ),
-        sorter: (a, b) => a.CopyNo - b.CopyNo,
-      },
-      {
-        title: 'ชื่อสั้น',
-        dataIndex: 'Serail',
-        key: 'SerialNumber',
-        render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {text}
-          </a>
-        ),
-        sorter: (a, b) => a.SerialNumber - b.SerialNumber,
-      },
-      {
-        title: 'ราคาที่ซื้อ',
-        dataIndex: 'PurchasePrice',
-        key: 'PurchasePrice',
-        render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {'#' + text}
-          </a>
-        ),
-        sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
-      },
-      {
-        title: 'วันที่ซื้อ',
-        dataIndex: 'PurchaseDate',
-        key: 'PurchaseDate',
-        render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {'#' + text}
-          </a>
-        ),
-        sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
-      },
-      {
-        title: 'สถานะ',
-        dataIndex: 'Status',
-        key: 'Status',
-        render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {'#' + text}
-          </a>
-        ),
-        sorter: (a, b) => a.Status - b.Status,
-      },
-      {
-        title: 'แก้ไข',
-        key: 'Edit',
-        render: (text, record) => (
-          <span>
-            <Button icon="cross" size="small" onClick={() => console.log(record)}>
-              Edit
-            </Button>
-          </span>
-        ),
-      },
-      {
-        title: 'ลบ',
-        key: 'Action',
-        render: (text, record) => (
-          <span>
-            <Button icon="cross" size="small" onClick={() => console.log(record)}>
-              Remove
-            </Button>
-          </span>
-        ),
-      },
-    ]
-    const { previewVisible, previewImage, fileList } = this.state
-    const uploadButton = (
-      <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    )
-    const { pager } = this.state
-    Modal.confirm({
-      title: 'Add Product',
-      width: 1000,
-      content: (
-        <div className="card">
-          <div className="card-header">
-            <div className="utils__title">
-              <div className="utils__title">
-                <strong>เพิ่มอุปกรณ์</strong>
-              </div>
-            </div>
-          </div>
-          <div className="card-body">
-            <div className="row">
-              <div className="col-lg-8">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">อุปกรณ์</label>
-                      <Input
-                        id="product-edit-title"
-                        onChange={e => (data.productData[0].Name = e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-category">ประเภท</label>
-                      <Input
-                        id="product-edit-category"
-                        onChange={e => (data.productData[0].CategoryID = e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-price">ราคาเช่า1วัน</label>
-                      <Input
-                        id="product-edit-price"
-                        onChange={e => (data.productData[0].RentDay_Fee = e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-day">จำนวนวันขั้นต่ำที่ให้เช่า</label>
-                      <Input
-                        id="product-edit-day"
-                        onChange={e => (data.productData[0].IsDay = e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">แบบที่1</label>
-                      <Input
-                        id="product-edit-title"
-                        onChange={e => (data.productData[0].DepositType1 = e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">แบบที่2</label>
-                      <Input
-                        id="product-edit-title"
-                        onChange={e => (data.productData[0].DepositType2 = e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">ราคาในสัญญา</label>
-                      <Input
-                        id="product-edit-title"
-                        onChange={e => (data.productData[0].ContractPrice = e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">Note</label>
-                      <Input
-                        id="product-edit-title"
-                        onChange={e => (data.productData[0].Note = e.target.value)}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">QR ID</label>
-                      <Input id="product-edit-title" placeholder="" />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">สถานะหน้าเว็บ</label>
-                      <RadioGroup
-                        name="radiogroup"
-                        onChange={e => (data.productData[0].isShow = e.target.value)}
-                      >
-                        <Radio value={1}>แสดง</Radio>
-                        <Radio value={0}>ไม่แสดง</Radio>
-                      </RadioGroup>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">สถานะคิวจอง</label>
-                      <RadioGroup
-                        name="radiogroup"
-                        onChange={e => (data.productData[0].Status = e.target.value)}
-                      >
-                        <Radio value={1}>พร้อมให้เช่า</Radio>
-                        <Radio value={0}>ไม่พร้อมให้เช่า</Radio>
-                      </RadioGroup>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">การรับ</label>
-                      <Input id="product-edit-title" placeholder="" />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">การคืน</label>
-                      <Input id="product-edit-title" placeholder="" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-4">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <label htmlFor="product-edit-title">รูปภาพ</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-8">
-                <div className="utils__title">
-                  <strong>Product Copy</strong>
-                </div>
-                <Table
-                  columns={dataCopy}
-                  dataSource=""
-                  pagination={pager}
-                  onChange={this.handleTableChange}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log(data)
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
-    })
   }
   onSearch = () => {
     const { searchText, tableData } = this.state
@@ -387,7 +388,6 @@ class ProductList extends React.Component {
 
   render() {
     let { pager, data } = this.state
-    console.log(this.props.product)
     const columns = [
       {
         title: 'ProductID',
@@ -492,9 +492,16 @@ class ProductList extends React.Component {
           <div className="utils__title">
             <strong>อุปกรณ์ทั้งหมด</strong>
           </div>
-          <Button type="primary" icon="plus" onClick={() => this.addDataProduct()}>
+          {/* <Button type="primary" icon="plus" onClick={() => this.addDataProduct()}>
             เพิ่มอุปกรณ์
-          </Button>
+          </Button> */}
+          <Button type="primary" onClick={this.showModal}>เพิ่มอุปกรณ์</Button>
+        <CollectionCreateForm
+          wrappedComponentRef={this.saveFormRef}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
+        />
         </div>
         <div className="card-body">
           <Table
