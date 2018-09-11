@@ -27,3 +27,10 @@ export const pickupgetdata = value => {
     val: value,
   }
 }
+
+export const holidayadddata = value => {
+  return {
+    type: actionTypes.HOLIDAYADDDATA,
+    val: value,
+  }
+}

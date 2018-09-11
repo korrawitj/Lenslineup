@@ -52,3 +52,16 @@ export function getAllDataPickup() {
       })
   }
 }
+
+export function AddDataHoliday(data) {
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/addHoliday', data)
+      .then(response => {
+        dispatch(actionCreators.holidayadddata(response.data.holidayData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}

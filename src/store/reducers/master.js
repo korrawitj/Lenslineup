@@ -18,6 +18,8 @@ const reducer = (state = initialState, action) => {
       return updateObject(state, { manageRecurringData: action.val })
     case actionTypes.PICKUPGETDATA:
       return updateObject(state, { masterPickupData: action.val })
+    case actionTypes.HOLIDAYADDDATA:
+      return updateObject(state, { holidayData: action.val })
     default:
       return state
   }
