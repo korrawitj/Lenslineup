@@ -1,9 +1,56 @@
 import React from 'react'
-import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal } from 'antd'
+import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal,Form } from 'antd'
 import tableData from './data.json'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 import axios from 'axios'
+const FormItem = Form.Item;
+
+const CollectionCreateForm = Form.create()(
+  class extends React.Component {
+    render() {
+      const { visible, onCancel, onCreate, form } = this.props;
+      const { getFieldDecorator } = form;
+      return (
+        <Modal
+          width={1000}
+          visible={visible}
+          title="Add Product Category"
+          okText="Create"
+          onCancel={onCancel}
+          onOk={onCreate}
+        >
+          <div className="card-body">
+          <Form layout="vertical">
+            <FormItem label="FullName">
+              {getFieldDecorator('categoryData.FullName', {
+                rules: [{ required: true, message: 'Please input the title of collection!' }],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <FormItem label="ShortName">
+              {getFieldDecorator('categoryData.ShortName', {
+                rules: [{ required: true, message: 'Please input the title of collection!' }],
+              })(
+                <Input />
+              )}
+            </FormItem>
+            <FormItem label="Order">
+              {getFieldDecorator('categoryData.Order')(<Input type="textarea" />)}
+            </FormItem>
+            <FormItem label="Parentcategory">
+              {getFieldDecorator('categoryData.Parentcategory')(<Input type="textarea" />)}
+            </FormItem>       
+          </Form>
+          </div>
+        </Modal>
+      );
+    }
+  }
+);
+
+
 
 const TreeNode = TreeSelect.TreeNode
 
@@ -85,6 +132,7 @@ class ProductCate extends React.Component {
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
+    visible: false,
     filtered: false,
     previewVisible: false,
     previewImage: '',
@@ -97,12 +145,29 @@ class ProductCate extends React.Component {
       },
     ],
   }
+  showModal = () => {
+    this.setState({ visible: true });
+  }
+  handleCreate = () => {
+    const form = this.formRef.props.form;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
 
+      console.log('Received values of form: ', values);
+      form.resetFields();
+      this.setState({ visible: false });
+    });
+  }
+  saveFormRef = (formRef) => {
+    this.formRef = formRef;
+  }
   componentDidMount() {
     this.props.getAllData()
   }
 
-  handleCancel = () => this.setState({ previewVisible: false })
+  handleCancel = () => this.setState({ previewVisible: false, visible: false })
 
   handlePreview = file => {
     this.setState({
@@ -153,86 +218,28 @@ class ProductCate extends React.Component {
           <div className="utils__title">
             <strong>Product Category</strong>
           </div>
+          <Button type="primary" onClick={this.showModal}>
+            เพิ่มประเภท
+          </Button>
+          <CollectionCreateForm
+            wrappedComponentRef={this.saveFormRef}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}
+          />
         </div>
+     
         <div className="card-body">
-          <div className="row">
-            <div className="col-lg-6">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="form-group">
-                    <label htmlFor="product-edit-title">ชื่อประเภท</label>
-                    <Input id="product-edit-title" placeholder="Product title" />
-                  </div>
-                </div>
-                <div className="col-lg-12">
-                  <div className="form-group">
-                    <label htmlFor="product-edit-category">Category</label>
-                    <TreeSelect
-                      id="product-edit-category"
-                      showSearch
-                      style={{ width: '100%', display: 'block' }}
-                      value={categoryValue}
-                      dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                      placeholder="Please select category"
-                      allowClear
-                      multiple
-                      treeDefaultExpandAll
-                      onChange={this.onChangeCategory}
-                    >
-                      <TreeNode value="furniture" title="Furniture" key="0">
-                        <TreeNode value="tables" title="Tables" key="0-0" />
-                        <TreeNode value="chairs" title="Chairs" key="0-1">
-                          <TreeNode value="roundedchairs" title="Rounded Chairs" key="0-1-0" />
-                          <TreeNode value="squaredchairs" title="Squared Chairs" key="0-1-1" />
-                        </TreeNode>
-                      </TreeNode>
-                      <TreeNode value="electronics" title="Electronics" key="1">
-                        <TreeNode value="tv" title="TV" key="1-0" />
-                        <TreeNode value="chairs" title="Consoles" key="1-1">
-                          <TreeNode value="playstation" title="Playstation" key="1-1-0" />
-                          <TreeNode value="xbox" title="Xbox" key="1-1-1" />
-                        </TreeNode>
-                      </TreeNode>
-                    </TreeSelect>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-4">
-            <div className="clearfix">
-              <Upload
-                action="//jsonplaceholder.typicode.com/posts/"
-                listType="picture-card"
-                fileList={this.fileList}
-                onPreview={this.handlePreview}
-                onChange={this.handleChange}
-              >
-                {uploadButton}
-              </Upload>
-              <Modal visible={this.previewVisible} footer={null} onCancel={this.handleCancel}>
-                <img alt="example" style={{ width: '100%' }} src={this.previewImage} />
-              </Modal>
-            </div>
-          </div>
-          <div className="col-lg-12">
-            <div className="form-actions">
-              <Button type="primary" className="mr-2" onClick={() => this.onUploadImageSaved()}>
-                Save Product
-              </Button>
-              <Button type="default">Cancel</Button>
-            </div>
-          </div>
-          <div className="col-lg-6">
-            <Table
+        <Table
               columns={columns}
               dataSource={this.props.pcr.categoryData}
               pagination={pager}
               onChange={this.handleTableChange}
             />
-          </div>
         </div>
-      </div>
+      
+          
+          </div>
     )
   }
 }
