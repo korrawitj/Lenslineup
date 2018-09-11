@@ -1,19 +1,19 @@
-import React from 'react';
-import { Table, Icon, Input, Button, Modal, Upload, Radio,Form } from 'antd';
-import tableData from './data.json';
-import * as actionCreators from '../../../../store/axios/product';
-import { connect } from 'react-redux';
-const FormItem = Form.Item;
-const RadioGroup = Radio.Group;
-const RadioButton = Radio.Button;
-const confirm = Modal.confirm;
-const TextArea=Input.TextArea;
+import React from 'react'
+import { Table, Icon, Input, Button, Modal, Upload, Radio, Form } from 'antd'
+import tableData from './data.json'
+import * as actionCreators from '../../../../store/axios/product'
+import { connect } from 'react-redux'
+const FormItem = Form.Item
+const RadioGroup = Radio.Group
+const RadioButton = Radio.Button
+const confirm = Modal.confirm
+const TextArea = Input.TextArea
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { pager } = this.props;
-      const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
+      const { pager } = this.props
+      const { visible, onCancel, onCreate, form } = this.props
+      const { getFieldDecorator } = form
       const dataCopy = [
         {
           title: 'View',
@@ -105,14 +105,7 @@ const CollectionCreateForm = Form.create()(
         },
       ]
       return (
-        <Modal
-          width={1000}
-          visible={visible}
-          okText="เพิ่ม"
-          onCancel={onCancel}
-          onOk={onCreate}
-          
-        >
+        <Modal width={1000} visible={visible} okText="เพิ่ม" onCancel={onCancel} onOk={onCreate}>
           <div className="card-header">
             <div className="utils__title">
               <div className="utils__title">
@@ -121,80 +114,70 @@ const CollectionCreateForm = Form.create()(
             </div>
           </div>
           <div className="card-body">
-          <Form>
-            <FormItem label="อุุปกรณ์">
-              {getFieldDecorator('productData.Name', {
-                rules: [{ required: true, message: 'กรุณากรอก อุุปกรณ์!' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-            <FormItem label="ประเภท">
-              {getFieldDecorator('productData.CategoryID', {
-                rules: [{ required: true, message: 'กรุณาเลือก ประเภท!' }],
-              })(<Input type="textarea" />)}
-            </FormItem>
-            <FormItem label="ราคาเช่า1วัน">
-              {getFieldDecorator('productData.RentDay_Fee', {
-                rules: [{ required: true, message: 'กรุณากรอก ราคาเช่า!' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-                        <FormItem label="จำนวนขั้นต่ำวันให้เช่า">
-              {getFieldDecorator('productData.IsDay', {
-                rules: [{ required: true, message: 'กรุณากรอก จำนวนขั้นต่ำวันให้เช่า!' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-                        <FormItem label="แบบที่ 1">
-              {getFieldDecorator('productData.DepositType1', {
-                rules: [{ required: true, message: 'กรุณากรอก แบบที่ 1!' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-                                   <FormItem label="แบบที่ 2">
-              {getFieldDecorator('productData.DepositType2', {
-                rules: [{ required: true, message: 'กรุณากรอก แบบที่ 2!' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-                                   <FormItem label="ราคาในสัญญา">
-              {getFieldDecorator('productData.ContactPrice', {
-                rules: [{ required: true, message: 'กรุณากรอก ราคาในสัญญา!' }],
-              })(   
-                <Input />
-              )}
-            </FormItem>
-                      <FormItem label="Note">
-              {getFieldDecorator('productData.Note')(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
-            </FormItem> 
-                      <FormItem label="QR ID">
-              {getFieldDecorator('productData.QRID')(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
-            </FormItem> 
-                            
-                      <FormItem label="สถานะหน้าเว็บ">
-              {getFieldDecorator('productData.isShow')(
- <Radio.Group>
- <RadioButton value={1}>แสดง</RadioButton>
- <RadioButton value={0}>ไม่แสดง</RadioButton>
-</Radio.Group>
+            <Form>
+              <FormItem label="อุุปกรณ์">
+                {getFieldDecorator('productData.Name', {
+                  rules: [{ required: true, message: 'กรุณากรอก อุุปกรณ์!' }],
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="ประเภท">
+                {getFieldDecorator('productData.CategoryID', {
+                  rules: [{ required: true, message: 'กรุณาเลือก ประเภท!' }],
+                })(<Input type="textarea" />)}
+              </FormItem>
+              <FormItem label="ราคาเช่า1วัน">
+                {getFieldDecorator('productData.RentDay_Fee', {
+                  rules: [{ required: true, message: 'กรุณากรอก ราคาเช่า!' }],
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="จำนวนขั้นต่ำวันให้เช่า">
+                {getFieldDecorator('productData.IsDay', {
+                  rules: [{ required: true, message: 'กรุณากรอก จำนวนขั้นต่ำวันให้เช่า!' }],
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="แบบที่ 1">
+                {getFieldDecorator('productData.DepositType1', {
+                  rules: [{ required: true, message: 'กรุณากรอก แบบที่ 1!' }],
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="แบบที่ 2">
+                {getFieldDecorator('productData.DepositType2', {
+                  rules: [{ required: true, message: 'กรุณากรอก แบบที่ 2!' }],
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="ราคาในสัญญา">
+                {getFieldDecorator('productData.ContactPrice', {
+                  rules: [{ required: true, message: 'กรุณากรอก ราคาในสัญญา!' }],
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="Note">
+                {getFieldDecorator('productData.Note')(
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                )}
+              </FormItem>
+              <FormItem label="QR ID">
+                {getFieldDecorator('productData.QRID')(
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                )}
+              </FormItem>
 
-              )}
-            </FormItem> 
-            <FormItem label="สถานะคิวจอง">
-              {getFieldDecorator('productData.Status')(
- <Radio.Group>
- <RadioButton value={1}>แสดง</RadioButton>
- <RadioButton value={0}>ไม่แสดง</RadioButton>
-</Radio.Group>
-
-              )}
-            </FormItem> 
-            {/* <FormItem label="การรับ">
+              <FormItem label="สถานะหน้าเว็บ">
+                {getFieldDecorator('productData.isShow')(
+                  <Radio.Group>
+                    <RadioButton value={1}>แสดง</RadioButton>
+                    <RadioButton value={0}>ไม่แสดง</RadioButton>
+                  </Radio.Group>,
+                )}
+              </FormItem>
+              <FormItem label="สถานะคิวจอง">
+                {getFieldDecorator('productData.Status')(
+                  <Radio.Group>
+                    <RadioButton value={1}>แสดง</RadioButton>
+                    <RadioButton value={0}>ไม่แสดง</RadioButton>
+                  </Radio.Group>,
+                )}
+              </FormItem>
+              {/* <FormItem label="การรับ">
               {getFieldDecorator('productData.isShow')(
  <Radio.Group>
  <Radio value={1}>แสดง</Radio>
@@ -212,24 +195,24 @@ const CollectionCreateForm = Form.create()(
 
               )}
             </FormItem>  */}
-          </Form>
-          <div className="col-lg-8">
-                <div className="utils__title">
-                  <strong>Product Copy</strong>
-                </div>
-                <Table
-                  columns={dataCopy}
-                  dataSource=""
-                  pagination={pager}
-                  onChange={this.handleTableChange}
-                />
+            </Form>
+            <div className="col-lg-8">
+              <div className="utils__title">
+                <strong>Product Copy</strong>
               </div>
+              <Table
+                columns={dataCopy}
+                dataSource=""
+                pagination={pager}
+                onChange={this.handleTableChange}
+              />
+            </div>
           </div>
         </Modal>
-      );
+      )
     }
-  }
-);
+  },
+)
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -293,24 +276,24 @@ class ProductList extends React.Component {
       ],
     },
   }
-  handleCancel = () => this.setState({ previewVisible: false,visible:false })
+  handleCancel = () => this.setState({ previewVisible: false, visible: false })
   showModal = () => {
-    this.setState({ visible: true });
+    this.setState({ visible: true })
   }
   handleCreate = () => {
-    const form = this.formRef.props.form;
+    const form = this.formRef.props.form
     form.validateFields((err, values) => {
       if (err) {
-        return;
+        return
       }
 
-      console.log(values);
-      form.resetFields();
-      this.setState({ visible: false });
-    });
+      console.log(values)
+      form.resetFields()
+      this.setState({ visible: false })
+    })
   }
-  saveFormRef = (formRef) => {
-    this.formRef = formRef;
+  saveFormRef = formRef => {
+    this.formRef = formRef
   }
   handlePreview = file => {
     this.setState({
@@ -495,13 +478,15 @@ class ProductList extends React.Component {
           {/* <Button type="primary" icon="plus" onClick={() => this.addDataProduct()}>
             เพิ่มอุปกรณ์
           </Button> */}
-          <Button type="primary" onClick={this.showModal}>เพิ่มอุปกรณ์</Button>
-        <CollectionCreateForm
-          wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={this.handleCreate}
-        />
+          <Button type="primary" onClick={this.showModal}>
+            เพิ่มอุปกรณ์
+          </Button>
+          <CollectionCreateForm
+            wrappedComponentRef={this.saveFormRef}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}
+          />
         </div>
         <div className="card-body">
           <Table
