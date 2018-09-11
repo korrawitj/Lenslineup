@@ -23,18 +23,18 @@ class Holiday extends React.Component {
     searchText: '',
     filtered: false,
   }
-  handleChange(e){
-    let data = this.state.data;
-    let name = e.target.name;
-    data.holidayData[0][name]=e.target.value;
-    console.log(data);
+  handleChange(e) {
+    let data = this.state.data
+    let name = e.target.name
+    data.holidayData[0][name] = e.target.value
+    console.log(data)
   }
   componentDidMount() {
     this.props.getAllDataHoliday()
   }
   addDataHoliday() {
-    let data= this.state.data;
-    let props= this.props;
+    let data = this.state.data
+    let props = this.props
     Modal.confirm({
       title: 'Add Holiday',
       width: 1000,
@@ -47,7 +47,11 @@ class Holiday extends React.Component {
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-category">ข้อความ</label>
-              <TextArea autosize={{ minRows: 2, maxRows: 6 }} onChange={(e)=>this.handleChange(e)} name="message"/>
+              <TextArea
+                autosize={{ minRows: 2, maxRows: 6 }}
+                onChange={e => this.handleChange(e)}
+                name="message"
+              />
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">การรับ</label>
@@ -74,8 +78,8 @@ class Holiday extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        props.AddDataHoliday(data);
-        console.log(data);
+        props.AddDataHoliday(data)
+        console.log(data)
         console.log('OK')
       },
       onCancel() {

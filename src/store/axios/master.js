@@ -58,7 +58,7 @@ export function AddDataHoliday(data) {
     return axios
       .post('/api/masterHoliday/addHoliday', data)
       .then(response => {
-        console.log(response);
+        console.log(response)
         dispatch(actionCreators.holidayadddata(response.data.holidayData))
       })
       .catch(error => {
