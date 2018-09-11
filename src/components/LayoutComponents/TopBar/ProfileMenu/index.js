@@ -74,7 +74,7 @@ class ProfileMenu extends React.Component {
           onVisibleChange={this.addCount}
         >
           <a className="ant-dropdown-link" href="/">
-            <Badge >
+            <Badge>
               <Avatar className="topbar__avatar" shape="square" size="large" icon="user" />
             </Badge>
           </a>
