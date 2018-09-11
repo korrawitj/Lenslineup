@@ -23,7 +23,7 @@ const loadableRoutes = {
   },
 
   // Dashboards
-  '/dashboard/alpha': {
+  '/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
   },
 
