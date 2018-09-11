@@ -1,42 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
-import { Helmet } from 'react-helmet';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import createHistory from 'history/createHashHistory';
-import thunk from 'redux-thunk';
-import 'es6-promise/auto';
-import 'setimmediate';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
+import { Helmet } from 'react-helmet'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import createHistory from 'history/createHashHistory'
+import thunk from 'redux-thunk'
+import 'es6-promise/auto'
+import 'setimmediate'
 
-import { LocaleProvider } from 'antd';
-import enGB from 'antd/lib/locale-provider/en_GB';
-import registerServiceWorker from 'registerServiceWorker';
+import { LocaleProvider } from 'antd'
+import enGB from 'antd/lib/locale-provider/en_GB'
+import registerServiceWorker from 'registerServiceWorker'
 
-import Layout from 'components/LayoutComponents/Layout';
-import reducer from 'ducks';
+import Layout from 'components/LayoutComponents/Layout'
+import reducer from 'ducks'
 
-import 'resources/_antd.less'; // redefinition AntDesign variables
-import 'bootstrap/dist/css/bootstrap.min.css'; // bootstrap styles
+import 'resources/_antd.less' // redefinition AntDesign variables
+import 'bootstrap/dist/css/bootstrap.min.css' // bootstrap styles
 
-import 'resources/AntStyles/AntDesign/antd.cleanui.scss';
-import 'resources/CleanStyles/Core/core.cleanui.scss';
-import 'resources/CleanStyles/Vendors/vendors.cleanui.scss';
-import axios from 'axios';
+import 'resources/AntStyles/AntDesign/antd.cleanui.scss'
+import 'resources/CleanStyles/Core/core.cleanui.scss'
+import 'resources/CleanStyles/Vendors/vendors.cleanui.scss'
+import axios from 'axios'
 
-const history = createHistory();
-const router = routerMiddleware(history);
-const middlewares = [router, thunk];
-const isLogger = false;
+const history = createHistory()
+const router = routerMiddleware(history)
+const middlewares = [router, thunk]
+const isLogger = false
 if (isLogger && process.env.NODE_ENV === 'development') {
-  const { logger } = require('redux-logger');
-  middlewares.push(logger);
+  const { logger } = require('redux-logger')
+  middlewares.push(logger)
 }
 
-axios.defaults.baseURL = 'http://13.250.43.152:8888';
+axios.defaults.baseURL = 'http://13.250.43.152:8888'
 // axios.defaults.baseURL = 'http://devllu.ddns.net:8888'
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)))
 
@@ -53,6 +53,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 )
-registerServiceWorker();
+registerServiceWorker()
 
-export default history;
+export default history
