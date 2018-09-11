@@ -205,5 +205,3 @@ export default connect(
   mapStateToProps,
   actionCreators,
 )(ManageRecurring)
-
-// export default ConfigParameter

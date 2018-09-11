@@ -189,5 +189,3 @@ export default connect(
   mapStateToProps,
   actionCreators,
 )(Holiday)
-
-// export default ConfigParameter

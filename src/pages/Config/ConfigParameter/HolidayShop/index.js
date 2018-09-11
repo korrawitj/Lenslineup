@@ -191,5 +191,3 @@ export default connect(
   mapStateToProps,
   actionCreators,
 )(HolidayShop)
-
-// export default ConfigParameter

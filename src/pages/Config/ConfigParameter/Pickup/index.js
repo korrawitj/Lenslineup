@@ -182,5 +182,3 @@ export default connect(
   mapStateToProps,
   actionCreators,
 )(PickUp)
-
-// export default ConfigParameter

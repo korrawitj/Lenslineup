@@ -33,35 +33,31 @@ class ProfileMenu extends React.Component {
       <Menu selectable={false}>
         <Menu.Item>
           <div className="rfq__widget__system-status__item">
-            <strong>Hello, {userState.role}</strong>
-            <div>
-              <strong>Billing Plan:</strong> Professional
-              <br />
-            </div>
+            <strong>ยินดีต้อนรับ, {userState.role}</strong>
 
             <div>
-              <strong>Role:</strong> {userState.role}
+              <strong>สิทธิ์:</strong> {userState.role}
             </div>
           </div>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
           <div className="rfq__widget__system-status__item">
-            <strong>Email:</strong> {userState.email}
+            <strong>อีเมล:</strong> {userState.email}
             <br />
-            <strong>Phone:</strong> +1-800-MEDIATEC
+            <strong>เบอร์:</strong> +1-800-0000
           </div>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
           <a href="javascript: void(0);">
-            <i className="topbar__dropdownMenuIcon icmn-user" /> Edit Profile
+            <i className="topbar__dropdownMenuIcon icmn-user" /> แก้ไขโปรไฟล์
           </a>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
           <a href="javascript: void(0);" onClick={logout}>
-            <i className="topbar__dropdownMenuIcon icmn-exit" /> Logout
+            <i className="topbar__dropdownMenuIcon icmn-exit" /> ออกจากระบบ
           </a>
         </Menu.Item>
       </Menu>
