@@ -1,16 +1,16 @@
 import React from 'react'
-import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal,Form } from 'antd'
+import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal, Form } from 'antd'
 import tableData from './data.json'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 import axios from 'axios'
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form } = this.props;
-      const { getFieldDecorator } = form;
+      const { visible, onCancel, onCreate, form } = this.props
+      const { getFieldDecorator } = form
       return (
         <Modal
           width={1000}
@@ -21,36 +21,30 @@ const CollectionCreateForm = Form.create()(
           onOk={onCreate}
         >
           <div className="card-body">
-          <Form layout="vertical">
-            <FormItem label="FullName">
-              {getFieldDecorator('categoryData.FullName', {
-                rules: [{ required: true, message: 'Please input the title of collection!' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-            <FormItem label="ShortName">
-              {getFieldDecorator('categoryData.ShortName', {
-                rules: [{ required: true, message: 'Please input the title of collection!' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-            <FormItem label="Order">
-              {getFieldDecorator('categoryData.Order')(<Input type="textarea" />)}
-            </FormItem>
-            <FormItem label="Parentcategory">
-              {getFieldDecorator('categoryData.Parentcategory')(<Input type="textarea" />)}
-            </FormItem>       
-          </Form>
+            <Form layout="vertical">
+              <FormItem label="FullName">
+                {getFieldDecorator('categoryData.FullName', {
+                  rules: [{ required: true, message: 'Please input the title of collection!' }],
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="ShortName">
+                {getFieldDecorator('categoryData.ShortName', {
+                  rules: [{ required: true, message: 'Please input the title of collection!' }],
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="Order">
+                {getFieldDecorator('categoryData.Order')(<Input type="textarea" />)}
+              </FormItem>
+              <FormItem label="Parentcategory">
+                {getFieldDecorator('categoryData.Parentcategory')(<Input type="textarea" />)}
+              </FormItem>
+            </Form>
           </div>
         </Modal>
-      );
+      )
     }
-  }
-);
-
-
+  },
+)
 
 const TreeNode = TreeSelect.TreeNode
 
@@ -146,22 +140,22 @@ class ProductCate extends React.Component {
     ],
   }
   showModal = () => {
-    this.setState({ visible: true });
+    this.setState({ visible: true })
   }
   handleCreate = () => {
-    const form = this.formRef.props.form;
+    const form = this.formRef.props.form
     form.validateFields((err, values) => {
       if (err) {
-        return;
+        return
       }
 
-      console.log('Received values of form: ', values);
-      form.resetFields();
-      this.setState({ visible: false });
-    });
+      console.log('Received values of form: ', values)
+      form.resetFields()
+      this.setState({ visible: false })
+    })
   }
-  saveFormRef = (formRef) => {
-    this.formRef = formRef;
+  saveFormRef = formRef => {
+    this.formRef = formRef
   }
   componentDidMount() {
     this.props.getAllData()
@@ -228,18 +222,16 @@ class ProductCate extends React.Component {
             onCreate={this.handleCreate}
           />
         </div>
-     
+
         <div className="card-body">
-        <Table
-              columns={columns}
-              dataSource={this.props.pcr.categoryData}
-              pagination={pager}
-              onChange={this.handleTableChange}
-            />
+          <Table
+            columns={columns}
+            dataSource={this.props.pcr.categoryData}
+            pagination={pager}
+            onChange={this.handleTableChange}
+          />
         </div>
-      
-          
-          </div>
+      </div>
     )
   }
 }
