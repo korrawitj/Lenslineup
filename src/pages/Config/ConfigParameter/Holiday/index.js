@@ -16,17 +16,25 @@ const defaultPagination = {
 class Holiday extends React.Component {
   state = {
     data: {
-      holidayData: [{ date: '1', receive: 'true', recurring: 'true', message: 'sdfsdf' }],
+      holidayData: [{ date: '2018-05-22', receive: '0', recurring: '1', message: 'sdfsdf' }],
     },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
   }
+  handleChange(e){
+    let data = this.state.data;
+    let name = e.target.name;
+    data.holidayData[0][name]=e.target.value;
+    console.log(data);
+  }
   componentDidMount() {
     this.props.getAllDataHoliday()
   }
   addDataHoliday() {
+    let data= this.state.data;
+    let props= this.props;
     Modal.confirm({
       title: 'Add Holiday',
       width: 1000,
@@ -39,7 +47,7 @@ class Holiday extends React.Component {
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-category">ข้อความ</label>
-              <TextArea autosize={{ minRows: 2, maxRows: 6 }} />
+              <TextArea autosize={{ minRows: 2, maxRows: 6 }} onChange={(e)=>this.handleChange(e)} name="message"/>
             </div>
             <div className="form-group">
               <label htmlFor="product-edit-price">การรับ</label>
@@ -66,6 +74,8 @@ class Holiday extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
+        props.AddDataHoliday(data);
+        console.log(data);
         console.log('OK')
       },
       onCancel() {
