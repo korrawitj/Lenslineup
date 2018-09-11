@@ -18,14 +18,14 @@ class TopBar extends React.Component {
           <LiveSearch /> */}
         </div>
         <div className="topbar__right">
-          <a
+          {/* <a
             href="https://themeforest.net/item/clean-ui-admin-template-react-redux-ant-design-fully-responsive-freebies/21938700"
             target="_blank"
             rel="noopener noreferrer"
             className="mr-4 d-none d-sm-inline"
           >
-            {/* <Button type="danger">Buy Now 25$</Button> */}
-          </a>
+            <Button type="danger">Buy Now 25$</Button>
+          </a> */}
           {/* <BitcoinPrice /> */}
           {/* <HomeMenu /> */}
           <ProfileMenu />

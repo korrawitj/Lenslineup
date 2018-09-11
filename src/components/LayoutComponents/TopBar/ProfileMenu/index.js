@@ -20,7 +20,7 @@ const mapStateToProps = (state, props) => ({
 )
 class ProfileMenu extends React.Component {
   state = {
-    count: 7,
+    count: 0,
   }
 
   addCount = () => {
@@ -74,7 +74,7 @@ class ProfileMenu extends React.Component {
           onVisibleChange={this.addCount}
         >
           <a className="ant-dropdown-link" href="/">
-            <Badge count={count}>
+            <Badge >
               <Avatar className="topbar__avatar" shape="square" size="large" icon="user" />
             </Badge>
           </a>
