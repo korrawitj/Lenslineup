@@ -203,8 +203,6 @@ class ProductCate extends React.Component {
   render() {
     let { pager } = this.state
     let { categoryValue } = this.state
-    console.log(this.props.pcr.categoryData)
-    console.log(this.state.data)
     // let { categoryData } = this.pcr.categoryData
     return (
       <div className="card">
