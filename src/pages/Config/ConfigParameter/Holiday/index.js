@@ -83,7 +83,7 @@ class Holiday extends React.Component {
       values['holidayData']['date'] = moment(values['holidayData']['date']).format('YYYY-MM-DD')
       console.log('Received values of form: ', values)
       this.props.AddDataHoliday(values)
-      form.resetFields()  
+      form.resetFields()
       this.setState({ visible: false })
     })
   }
@@ -145,14 +145,32 @@ class Holiday extends React.Component {
         title: 'การรับ',
         dataIndex: 'receive',
         key: 'receive',
-        render: text => text===1?<span><i className="fa fa-check-circle-o"/></span>:<span><i className="fa fa-close"/></span> ,
+        render: text =>
+          text === 1 ? (
+            <span>
+              <i className="fa fa-check-circle-o" />
+            </span>
+          ) : (
+            <span>
+              <i className="fa fa-close" />
+            </span>
+          ),
         sorter: (a, b) => a.receive - b.receive,
       },
       {
         title: 'การคืน',
         dataIndex: 'recurring',
         key: 'recurring',
-        render: text => text===1?<span><i className="fa fa-check-circle-o"/></span>:<span><i className="fa fa-close"/></span>,
+        render: text =>
+          text === 1 ? (
+            <span>
+              <i className="fa fa-check-circle-o" />
+            </span>
+          ) : (
+            <span>
+              <i className="fa fa-close" />
+            </span>
+          ),
         sorter: (a, b) => a.receive - b.receive,
       },
       {
