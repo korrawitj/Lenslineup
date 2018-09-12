@@ -1,11 +1,11 @@
-import React from 'react';
-import { Table, Icon, Input, Button, Modal, Radio, DatePicker ,Form} from 'antd';
-import { connect } from 'react-redux';
-import * as actionCreators from '../../../../store/axios/master';
-import { isMoment } from '../../../../../node_modules/moment/moment';
-const FormItem = Form.Item;
-const { TextArea } = Input;
-const RadioGroup = Radio.Group;
+import React from 'react'
+import { Table, Icon, Input, Button, Modal, Radio, DatePicker, Form } from 'antd'
+import { connect } from 'react-redux'
+import * as actionCreators from '../../../../store/axios/master'
+import { isMoment } from '../../../../../node_modules/moment/moment'
+const FormItem = Form.Item
+const { TextArea } = Input
+const RadioGroup = Radio.Group
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
@@ -23,31 +23,26 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="วันที่">
-                {getFieldDecorator('holidayData.date')(
-                <DatePicker 
-                  />
-                )}
+                {getFieldDecorator('holidayData.date')(<DatePicker />)}
               </FormItem>
               <FormItem label="message">
-                {getFieldDecorator('holidayData.message')(
-                <TextArea />
-                )}
+                {getFieldDecorator('holidayData.message')(<TextArea />)}
               </FormItem>
               <FormItem label="การรับ">
-                {getFieldDecorator('holidayData.receive')( 
-                <RadioGroup name="radiogroup">
-                <Radio value={1}>Yes</Radio>
-                <Radio value={0}>No</Radio>
-              </RadioGroup>
-            )}
+                {getFieldDecorator('holidayData.receive')(
+                  <RadioGroup name="radiogroup">
+                    <Radio value={1}>Yes</Radio>
+                    <Radio value={0}>No</Radio>
+                  </RadioGroup>,
+                )}
               </FormItem>
               <FormItem label="การคืน">
-                {getFieldDecorator('holidayData.recurring')( 
-                <RadioGroup name="radiogroup1">
-                <Radio value={1}>Yes</Radio>
-                <Radio value={0}>No</Radio>
-              </RadioGroup>
-            )}
+                {getFieldDecorator('holidayData.recurring')(
+                  <RadioGroup name="radiogroup1">
+                    <Radio value={1}>Yes</Radio>
+                    <Radio value={0}>No</Radio>
+                  </RadioGroup>,
+                )}
               </FormItem>
             </Form>
           </div>
@@ -74,7 +69,7 @@ class Holiday extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
-    visible:false,
+    visible: false,
   }
   showModal = () => {
     this.setState({ visible: true })
@@ -93,7 +88,7 @@ class Holiday extends React.Component {
   saveFormRef = formRef => {
     this.formRef = formRef
   }
-  
+
   handleCancel = () => this.setState({ previewVisible: false, visible: false })
   componentDidMount() {
     this.props.getAllDataHoliday()
@@ -250,7 +245,7 @@ class Holiday extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-       <Button type="primary" onClick={this.showModal}>
+          <Button type="primary" onClick={this.showModal}>
             เพิ่มวันหยุด
           </Button>
           <CollectionCreateForm
