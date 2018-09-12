@@ -80,9 +80,9 @@ class Holiday extends React.Component {
       if (err) {
         return
       }
-      values['holidayData']['date']=moment(values['holidayData']['date']).format('DD-MM-YYYY');
+      values['holidayData']['date'] = moment(values['holidayData']['date']).format('DD-MM-YYYY')
       console.log('Received values of form: ', values)
-      this.props.AddDataHoliday(values);
+      this.props.AddDataHoliday(values)
       form.resetFields()
       this.setState({ visible: false })
     })
