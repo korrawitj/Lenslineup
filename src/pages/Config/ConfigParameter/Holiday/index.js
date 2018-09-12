@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Icon, Input, Button, Modal, Radio, DatePicker, Form } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
-import { isMoment } from '../../../../../node_modules/moment/moment'
+
 const FormItem = Form.Item
 const { TextArea } = Input
 const RadioGroup = Radio.Group
