@@ -67,6 +67,7 @@ class PickUp extends React.Component {
       cancelText: 'No',
       onOk() {
         console.log(data)
+        console.log('sssssssssss')
       },
       onCancel() {
         console.log('Cancel')
