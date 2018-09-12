@@ -31,16 +31,16 @@ const CollectionCreateForm = Form.create()(
               <FormItem label="การรับ">
                 {getFieldDecorator('holidayData.receive')(
                   <RadioGroup name="radiogroup">
-                    <Radio value={1}>Yes</Radio>
-                    <Radio value={0}>No</Radio>
+                    <Radio value={true}>Yes</Radio>
+                    <Radio value={false}>No</Radio>
                   </RadioGroup>,
                 )}
               </FormItem>
               <FormItem label="การคืน">
                 {getFieldDecorator('holidayData.recurring')(
                   <RadioGroup name="radiogroup1">
-                    <Radio value={1}>Yes</Radio>
-                    <Radio value={0}>No</Radio>
+                    <Radio value={true}>Yes</Radio>
+                    <Radio value={false}>No</Radio>
                   </RadioGroup>,
                 )}
               </FormItem>
@@ -80,7 +80,7 @@ class Holiday extends React.Component {
       if (err) {
         return
       }
-      values['holidayData']['date'] = moment(values['holidayData']['date']).format('DD-MM-YYYY')
+      values['holidayData']['date'] = moment(values['holidayData']['date']).format('YYYY-MM-DD')
       console.log('Received values of form: ', values)
       this.props.AddDataHoliday(values)
       form.resetFields()
