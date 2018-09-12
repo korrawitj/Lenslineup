@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Icon, Input, Button, Modal, Radio, DatePicker, Form } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
-
+import moment from 'moment'
 const FormItem = Form.Item
 const { TextArea } = Input
 const RadioGroup = Radio.Group
@@ -80,7 +80,9 @@ class Holiday extends React.Component {
       if (err) {
         return
       }
+      values['holidayData']['date']=moment(values['holidayData']['date']).format('DD-MM-YYYY');
       console.log('Received values of form: ', values)
+      this.props.AddDataHoliday(values);
       form.resetFields()
       this.setState({ visible: false })
     })
