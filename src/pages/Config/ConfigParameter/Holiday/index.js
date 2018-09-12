@@ -1,9 +1,61 @@
-import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio, DatePicker } from 'antd'
-import { connect } from 'react-redux'
-import * as actionCreators from '../../../../store/axios/master'
-const { TextArea } = Input
-const RadioGroup = Radio.Group
+import React from 'react';
+import { Table, Icon, Input, Button, Modal, Radio, DatePicker ,Form} from 'antd';
+import { connect } from 'react-redux';
+import * as actionCreators from '../../../../store/axios/master';
+import { isMoment } from '../../../../../node_modules/moment/moment';
+const FormItem = Form.Item;
+const { TextArea } = Input;
+const RadioGroup = Radio.Group;
+const CollectionCreateForm = Form.create()(
+  class extends React.Component {
+    render() {
+      const { visible, onCancel, onCreate, form } = this.props
+      const { getFieldDecorator } = form
+      return (
+        <Modal
+          width={1000}
+          visible={visible}
+          title="Add Holiday Date"
+          okText="Create"
+          onCancel={onCancel}
+          onOk={onCreate}
+        >
+          <div className="card-body">
+            <Form layout="vertical">
+              <FormItem label="วันที่">
+                {getFieldDecorator('holidayData.date')(
+                <DatePicker 
+                  />
+                )}
+              </FormItem>
+              <FormItem label="message">
+                {getFieldDecorator('holidayData.message')(
+                <TextArea />
+                )}
+              </FormItem>
+              <FormItem label="การรับ">
+                {getFieldDecorator('holidayData.receive')( 
+                <RadioGroup name="radiogroup">
+                <Radio value={1}>Yes</Radio>
+                <Radio value={0}>No</Radio>
+              </RadioGroup>
+            )}
+              </FormItem>
+              <FormItem label="การคืน">
+                {getFieldDecorator('holidayData.recurring')( 
+                <RadioGroup name="radiogroup1">
+                <Radio value={1}>Yes</Radio>
+                <Radio value={0}>No</Radio>
+              </RadioGroup>
+            )}
+              </FormItem>
+            </Form>
+          </div>
+        </Modal>
+      )
+    }
+  },
+)
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -22,71 +74,85 @@ class Holiday extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+    visible:false,
   }
-  handleChange(e) {
-    let data = this.state.data
-    let name = e.target.name
-    data.holidayData[0][name] = e.target.value
-    console.log(data)
+  showModal = () => {
+    this.setState({ visible: true })
   }
+  handleCreate = () => {
+    const form = this.formRef.props.form
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      console.log('Received values of form: ', values)
+      form.resetFields()
+      this.setState({ visible: false })
+    })
+  }
+  saveFormRef = formRef => {
+    this.formRef = formRef
+  }
+  
+  handleCancel = () => this.setState({ previewVisible: false, visible: false })
   componentDidMount() {
     this.props.getAllDataHoliday()
   }
-  addDataHoliday() {
-    let data = this.state.data
-    let props = this.props
-    Modal.confirm({
-      title: 'Add Holiday',
-      width: 1000,
-      content: (
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="form-group">
-              <label htmlFor="product-edit-title">วันที่</label>
-              <DatePicker />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-category">ข้อความ</label>
-              <TextArea
-                autosize={{ minRows: 2, maxRows: 6 }}
-                onChange={e => this.handleChange(e)}
-                name="message"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">การรับ</label>
-              <div>
-                <RadioGroup name="radiogroup">
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </RadioGroup>
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">การคืน</label>
-              <div>
-                <RadioGroup name="radiogroup">
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </RadioGroup>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        props.AddDataHoliday(data)
-        console.log(data)
-        console.log('OK')
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
-    })
-  }
+  // addDataHoliday() {
+  //   let data = this.state.data
+  //   let props = this.props
+  //   Modal.confirm({
+  //     title: 'Add Holiday',
+  //     width: 1000,
+  //     content: (
+  //       <div className="row">
+  //         <div className="col-lg-12">
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-title">วันที่</label>
+  //             <DatePicker />
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-category">ข้อความ</label>
+  //             <TextArea
+  //               autosize={{ minRows: 2, maxRows: 6 }}
+  //               onChange={e => this.handleChange(e)}
+  //               name="message"
+  //             />
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-price">การรับ</label>
+  //             <div>
+  //               <RadioGroup name="radiogroup">
+  //                 <Radio value={true}>Yes</Radio>
+  //                 <Radio value={false}>No</Radio>
+  //               </RadioGroup>
+  //             </div>
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-price">การคืน</label>
+  //             <div>
+  //               <RadioGroup name="radiogroup">
+  //                 <Radio value={true}>Yes</Radio>
+  //                 <Radio value={false}>No</Radio>
+  //               </RadioGroup>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     ),
+  //     okText: 'Yes',
+  //     okType: 'danger',
+  //     cancelText: 'No',
+  //     onOk() {
+  //       props.AddDataHoliday(data)
+  //       console.log(data)
+  //       console.log('OK')
+  //     },
+  //     onCancel() {
+  //       console.log('Cancel')
+  //     },
+  //   })
+  // }
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
@@ -184,9 +250,15 @@ class Holiday extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary" icon="plus" onClick={() => this.addDataHoliday()}>
+       <Button type="primary" onClick={this.showModal}>
             เพิ่มวันหยุด
           </Button>
+          <CollectionCreateForm
+            wrappedComponentRef={this.saveFormRef}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}
+          />
         </div>
       </div>
     )
