@@ -1,10 +1,10 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio ,Form,DatePicker} from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio, Form, DatePicker } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
-const FormItem=Form.Item;
-const TextArea=Input.TextArea;
-const RadioButton = Radio.Button;
+const FormItem = Form.Item
+const TextArea = Input.TextArea
+const RadioButton = Radio.Button
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
@@ -26,16 +26,15 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('masterPickupData.name')(<Input />)}
               </FormItem>
               <FormItem label="ประเภท">
-                {getFieldDecorator('masterPickupData.pickuptype')( 
+                {getFieldDecorator('masterPickupData.pickuptype')(
                   <RadioGroup name="Pickuptype">
-                    <RadioButton  value={true}>รับของ</RadioButton >
-                    <RadioButton  value={false}>คืนของ</RadioButton >
-                  </RadioGroup>,)}
+                    <RadioButton value={true}>รับของ</RadioButton>
+                    <RadioButton value={false}>คืนของ</RadioButton>
+                  </RadioGroup>,
+                )}
               </FormItem>
               <FormItem label="ค่าส่ง">
-                {getFieldDecorator('masterPickupData.delivery_charge')(
-                  <Input/>
-                )}
+                {getFieldDecorator('masterPickupData.delivery_charge')(<Input />)}
               </FormItem>
             </Form>
           </div>
@@ -70,7 +69,7 @@ class PickUp extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
-    visible:false,
+    visible: false,
   }
   componentDidMount() {
     this.props.getAllDataPickup()
@@ -177,7 +176,7 @@ class PickUp extends React.Component {
           </div>
         </div>
         <div className="card-body">
-        <Table
+          <Table
             columns={columnsMasterPickup}
             dataSource={this.props.master.masterPickupData}
             pagination={pager}
