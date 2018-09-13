@@ -83,6 +83,7 @@ class PickUp extends React.Component {
       if (err) {
         return
       }
+      console.log(values)
       form.resetFields()
       this.setState({ visible: false })
     })
