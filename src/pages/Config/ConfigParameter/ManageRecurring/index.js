@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio ,Form,DatePicker} from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio, Form, DatePicker } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
 const RadioGroup = Radio.Group
@@ -23,7 +23,7 @@ const CollectionCreateForm = Form.create()(
         >
           <div className="card-body">
             <Form layout="vertical">
-            <FormItem label="ชื่อ">
+              <FormItem label="ชื่อ">
                 {getFieldDecorator('manageRecurringData.name')(<Input />)}
               </FormItem>
               <FormItem label="วันที่เริ่ม">
@@ -36,7 +36,7 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('manageRecurringData.offset')(<Input />)}
               </FormItem>
               <FormItem label="ประเภท">
-              {getFieldDecorator('manageRecurringData.manage_type')(
+                {getFieldDecorator('manageRecurringData.manage_type')(
                   <RadioGroup name="Pickuptype">
                     <RadioButton value={true}>รับของ</RadioButton>
                     <RadioButton value={false}>คืนของ</RadioButton>
@@ -81,7 +81,7 @@ class ManageRecurring extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
-    visible:false,
+    visible: false,
   }
   componentDidMount() {
     this.props.getAllDataManage()
@@ -203,7 +203,7 @@ class ManageRecurring extends React.Component {
           </div>
         </div>
         <div className="card-body">
-        <Table
+          <Table
             columns={columnManageRecurring}
             dataSource={this.props.master.manageRecurringData}
             pagination={pager}
