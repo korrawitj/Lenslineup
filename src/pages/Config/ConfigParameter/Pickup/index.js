@@ -1,8 +1,49 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio ,Form,DatePicker} from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
-
+const FormItem=Form.Item;
+const TextArea=Input.TextArea;
+const RadioButton = Radio.Button;
+const CollectionCreateForm = Form.create()(
+  class extends React.Component {
+    render() {
+      const { visible, onCancel, onCreate, form } = this.props
+      const { getFieldDecorator } = form
+      return (
+        <Modal
+          width={1000}
+          visible={visible}
+          title="เพิ่มจุดรับของ"
+          okText="เพิ่ม"
+          cancelText="ยกเลิก"
+          onCancel={onCancel}
+          onOk={onCreate}
+        >
+          <div className="card-body">
+            <Form layout="vertical">
+              <FormItem label="ชื่อ">
+                {getFieldDecorator('masterPickupData.name')(<Input />)}
+              </FormItem>
+              <FormItem label="ประเภท">
+                {getFieldDecorator('masterPickupData.pickuptype')( 
+                  <RadioGroup name="Pickuptype">
+                    <RadioButton  value={true}>รับของ</RadioButton >
+                    <RadioButton  value={false}>คืนของ</RadioButton >
+                  </RadioGroup>,)}
+              </FormItem>
+              <FormItem label="ค่าส่ง">
+                {getFieldDecorator('masterPickupData.delivery_charge')(
+                  <Input/>
+                )}
+              </FormItem>
+            </Form>
+          </div>
+        </Modal>
+      )
+    }
+  },
+)
 const RadioGroup = Radio.Group
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -29,51 +70,29 @@ class PickUp extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+    visible:false,
   }
   componentDidMount() {
     this.props.getAllDataPickup()
   }
-  addDataPickup() {
-    let data = this.state.data
-    Modal.confirm({
-      title: 'Add Pickup',
-      width: 1000,
-      content: (
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="form-group">
-              <label htmlFor="product-edit-title">Name</label>
-              <Input type="text" onChange={e => (data.masterPickupData[0].name = e.target.value)} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">ปรเภท</label>
-              <Input
-                type="text"
-                onChange={e => (data.masterPickupData[0].pickuptype = e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">ค่าส่ง</label>
-              <Input
-                type="text"
-                onChange={e => (data.masterPickupData[0].delivery_charge = e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-      ),
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log(data)
-        console.log('sssssssssss')
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
+  showModal = () => {
+    this.setState({ visible: true })
+  }
+  handleCreate = () => {
+    const form = this.formRef.props.form
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      form.resetFields()
+      this.setState({ visible: false })
     })
   }
+  saveFormRef = formRef => {
+    this.formRef = formRef
+  }
+
+  handleCancel = () => this.setState({ previewVisible: false, visible: false })
   showDeleteConfirmMasterPickup(record) {
     let T = record
     Modal.confirm({
@@ -158,15 +177,21 @@ class PickUp extends React.Component {
           </div>
         </div>
         <div className="card-body">
-          <Table
+        <Table
             columns={columnsMasterPickup}
             dataSource={this.props.master.masterPickupData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary" icon="plus" onClick={() => this.addDataPickup()}>
+          <Button type="primary" icon="plus" onClick={this.showModal}>
             เพิ่มจุดรับของ
           </Button>
+          <CollectionCreateForm
+            wrappedComponentRef={this.saveFormRef}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}
+          />
         </div>
       </div>
     )

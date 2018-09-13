@@ -5,12 +5,17 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 import axios from 'axios'
 const FormItem = Form.Item
+const Option = Select.Option;
 
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
       const { visible, onCancel, onCreate, form } = this.props
       const { getFieldDecorator } = form
+      const children = [];
+for (let i = 10; i < 36; i++) {
+  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+}
       return (
         <Modal
           width={1000}
@@ -36,7 +41,13 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('categoryData.Order')(<Input type="textarea" />)}
               </FormItem>
               <FormItem label="Parentcategory">
-                {getFieldDecorator('categoryData.Parentcategory')(<Input type="textarea" />)}
+                {getFieldDecorator('categoryData.Parentcategory')( <Select
+              mode="tags" 
+              style={{ width: '100%' }}
+              tokenSeparators={[',']}
+              >
+              {children}
+              </Select>)}
               </FormItem>
             </Form>
           </div>
