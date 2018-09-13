@@ -6,6 +6,7 @@ export function getAllDataHoliday() {
     return axios
       .get('/api/masterHoliday/getAllHoliday')
       .then(response => {
+        console.log(response)     
         dispatch(actionCreators.holidaygetdata(response.data.holidayData))
       })
       .catch(error => {
@@ -13,6 +14,51 @@ export function getAllDataHoliday() {
       })
   }
 }
+
+export function AddDataHoliday(data) {
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/addHoliday', data)
+      .then(response => {
+        
+      //  dispatch(actionCreators.holidayadddata(response.data.holidayData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+
+export function updateHolidayData(data){
+  debugger
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/updateHoliday',{holidayData:data})
+      .then(response => {
+      //  getAllDataHoliday()
+          //dispatch(actionCreators.holidayadddata(response.data.holidayData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+export function deleteHolidayData(Id){
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/deleteHoliday',{holidayID:Id})
+      .then(response => {
+        getAllDataHoliday()
+          //dispatch(actionCreators.holidayadddata(response.data.holidayData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
 
 export function getAllDataHolidayShop() {
   return dispatch => {
@@ -53,16 +99,3 @@ export function getAllDataPickup() {
   }
 }
 
-export function AddDataHoliday(data) {
-  return dispatch => {
-    return axios
-      .post('/api/masterHoliday/addHoliday', data)
-      .then(response => {
-        console.log(response)
-        dispatch(actionCreators.holidayadddata(response.data.holidayData))
-      })
-      .catch(error => {
-        console.log('Error axios ' + error)
-      })
-  }
-}

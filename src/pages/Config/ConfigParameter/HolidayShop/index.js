@@ -153,6 +153,12 @@ class HolidayShop extends React.Component {
               icon="delete"
               onClick={() => this.showDeleteConfirmHolidayShop(record)}
             />
+            <Button
+              shape="circle"
+              icon="edit"
+              onClick={this.onSearch}
+              style={{ backgroundColor: '#c49f47' }}
+            />
           </span>
         ),
       },

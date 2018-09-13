@@ -9,27 +9,27 @@ const RadioGroup = Radio.Group
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form } = this.props
+      const { visible, onCancel, onCreate, form, holiDaydata } = this.props
       const { getFieldDecorator } = form
       return (
         <Modal
           width={1000}
           visible={visible}
-          title="Add Holiday Date"
-          okText="Create"
+          title="Add Holiday Date" 
+          okText= {holiDaydata.holidayID != null ? "Update" : "Create"}
           onCancel={onCancel}
           onOk={onCreate}
         >
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="วันที่">
-                {getFieldDecorator('holidayData.date')(<DatePicker />)}
+                {getFieldDecorator('holidayData.date',{initialValue: moment(holiDaydata.date)})(<DatePicker val/>)}
               </FormItem>
               <FormItem label="message">
-                {getFieldDecorator('holidayData.message')(<TextArea />)}
+                {getFieldDecorator('holidayData.message',{initialValue:holiDaydata.message})(<TextArea />)}
               </FormItem>
               <FormItem label="การรับ">
-                {getFieldDecorator('holidayData.receive')(
+                {getFieldDecorator('holidayData.receive',{initialValue:holiDaydata.receive})(
                   <RadioGroup name="radiogroup">
                     <Radio value={true}>Yes</Radio>
                     <Radio value={false}>No</Radio>
@@ -37,7 +37,7 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
               <FormItem label="การคืน">
-                {getFieldDecorator('holidayData.recurring')(
+                {getFieldDecorator('holidayData.recurring',{initialValue:holiDaydata.recurring})(
                   <RadioGroup name="radiogroup1">
                     <Radio value={true}>Yes</Radio>
                     <Radio value={false}>No</Radio>
@@ -62,27 +62,39 @@ const defaultPagination = {
 
 class Holiday extends React.Component {
   state = {
-    data: {
-      holidayData: [{ date: '2018-05-22', receive: '0', recurring: '1', message: 'sdfsdf' }],
-    },
+    holidayData : {},//{ date: '55', receive:true, recurring:false, message: '55555555555555555' },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
     visible: false,
   }
+  componentDidMount() {
+    this.props.getAllDataHoliday()
+  }
+   
   showModal = () => {
     this.setState({ visible: true })
   }
   handleCreate = () => {
     const form = this.formRef.props.form
+    const holiDaydata = this.formRef.props.holiDaydata
     form.validateFields((err, values) => {
       if (err) {
         return
       }
       values['holidayData']['date'] = moment(values['holidayData']['date']).format('YYYY-MM-DD')
       console.log('Received values of form: ', values)
-      this.props.AddDataHoliday(values)
+      if(holiDaydata.holidayID != null){
+          holiDaydata.date = values['holidayData']['date']
+          holiDaydata.message = values['holidayData']['message']
+          holiDaydata.receive = values['holidayData']['receive']
+          holiDaydata.recurring = values['holidayData']['recurring']
+          this.props.updateHolidayData(holiDaydata)
+      }else{
+        this.props.AddDataHoliday(values)
+      }
+      
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -91,15 +103,22 @@ class Holiday extends React.Component {
     this.formRef = formRef
   }
 
-  handleCancel = () => this.setState({ previewVisible: false, visible: false })
-  componentDidMount() {
-    this.props.getAllDataHoliday()
+  handleCancel = () => {
+    this.setState({ previewVisible: false, visible: false })
   }
+ 
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
-  showDeleteConfirmHoliday(record) {
-    let T = record
+  onCreateHoliday= () => {
+    this.setState({ holidayData:{} })
+    this.showModal()
+  }
+  onEditHoliday = (record) => {
+    this.setState({holidayData:record})
+    this.showModal()
+  }
+  showDeleteConfirmHoliday(record,parent) {
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte Holiday Date = {record.date}</div>,
@@ -107,13 +126,17 @@ class Holiday extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
+        //parent();
+        parent.deleteHolidayData(record.holidayID)
         console.log('OK')
+        parent.getAllDataHoliday();
       },
       onCancel() {
         console.log('Cancel')
       },
-    })
+    })   
   }
+
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
       const pager = { ...this.state.pager }
@@ -145,32 +168,14 @@ class Holiday extends React.Component {
         title: 'การรับ',
         dataIndex: 'receive',
         key: 'receive',
-        render: text =>
-          text === 1 ? (
-            <span>
-              <i className="fa fa-check-circle-o" />
-            </span>
-          ) : (
-            <span>
-              <i className="fa fa-close" />
-            </span>
-          ),
+        render: text => <span>{text}</span>,
         sorter: (a, b) => a.receive - b.receive,
       },
       {
         title: 'การคืน',
         dataIndex: 'recurring',
         key: 'recurring',
-        render: text =>
-          text === 1 ? (
-            <span>
-              <i className="fa fa-check-circle-o" />
-            </span>
-          ) : (
-            <span>
-              <i className="fa fa-close" />
-            </span>
-          ),
+        render: text => <span>{text}</span>,
         sorter: (a, b) => a.receive - b.receive,
       },
       {
@@ -185,12 +190,19 @@ class Holiday extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
+             <Button
+              shape="circle"
+              icon="edit"
+              onClick={() => this.onEditHoliday(record)}
+              style={{ backgroundColor: '#c49f47' }}
+            />
             <Button
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.showDeleteConfirmHoliday(record)}
+              onClick={() => this.showDeleteConfirmHoliday(record,this.props)}
             />
+           
           </span>
         ),
       },
@@ -210,11 +222,12 @@ class Holiday extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary" onClick={this.showModal}>
+          <Button type="primary" onClick={this.onCreateHoliday}>
             เพิ่มวันหยุด
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
+            holiDaydata = {this.state.holidayData}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}
