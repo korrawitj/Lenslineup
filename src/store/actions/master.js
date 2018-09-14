@@ -14,6 +14,13 @@ export const holidayshopgetdata = value => {
   }
 }
 
+export const addHolidayshopdata = value => {
+  return {
+    type: actionTypes.ADDHOLIDAYSHOPDATA,
+    val: value,
+  }
+}
+
 export const managegetdata = value => {
   return {
     type: actionTypes.MANAGEGETDATA,

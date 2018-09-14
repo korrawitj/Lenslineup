@@ -29,7 +29,6 @@ export function AddDataHoliday(data) {
   }
 }
 
-
 export function updateHolidayData(data){
   debugger
   return dispatch => {
@@ -72,6 +71,51 @@ export function getAllDataHolidayShop() {
       })
   }
 }
+
+
+export function addHolidayShop(data) {
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/addHolidayShop',data)
+      .then(response => {
+        
+      //  dispatch(actionCreators.holidayadddata(response.data.holidayData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+export function deleteHolidayShop(Id){
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/deleteHolidayShop',Id)
+      .then(response => {
+        getAllDataHoliday()
+          //dispatch(actionCreators.holidayadddata(response.data.holidayData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+export function updateHolidayShop(data) {
+  debugger
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/updateHolidayShop',{holidayShopData:data})
+      .then(response => {
+        
+      //  dispatch(actionCreators.holidayadddata(response.data.holidayData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
 
 export function getAllDataManage() {
   return dispatch => {

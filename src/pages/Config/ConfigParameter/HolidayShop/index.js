@@ -1,9 +1,12 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio, DatePicker } from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio, DatePicker, Form } from 'antd'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import * as actionCreators from '../../../../store/axios/master'
+import HolidayModal from './HolidayModal'
 const { TextArea } = Input
 const RadioGroup = Radio.Group
+const FormItem = Form.Item
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -15,11 +18,8 @@ const defaultPagination = {
 
 class HolidayShop extends React.Component {
   state = {
-    data: {
-      holidayShopData: [
-        { date: '55', receive: 'false', recurring: 'false', message: '55555555555555555' },
-      ],
-    },
+    holidayShopData: { shopID:null, date: null, receive: null, recurring: null, message: null },
+    visible: false,
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
@@ -28,46 +28,52 @@ class HolidayShop extends React.Component {
   componentDidMount() {
     this.props.getAllDataHolidayShop()
   }
-  addDataHolidayShop() {
+  showModal = () => {
+    this.setState({ visible: true })
+  }
+  onSubmitData = () => { 
+    const form = this.formRef.props.form
+    const holidayShopData = this.formRef.props.holidayShopData
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      values['holidayShopData']['date'] = moment(values['holidayShopData']['date']).format('YYYY-MM-DD')
+      console.log('Received values of form: ', values)
+      if(holidayShopData.shopID != null){
+          holidayShopData.date = values['holidayShopData']['date']
+          holidayShopData.message = values['holidayShopData']['message']
+          holidayShopData.receive = values['holidayShopData']['receive']
+          holidayShopData.recurring = values['holidayShopData']['recurring']
+          debugger
+           this.props.updateHolidayShop(holidayShopData)
+      }else
+      {
+        this.props.addHolidayShop(values)
+      }
+      
+      form.resetFields()
+      this.setState({ visible: false })
+    })
+  }
+  onAdd  = () => {
+    this.setState({ holidayShopData: {} })
+    this.showModal()
+  }
+  onEdit = record => {
+    this.setState({holidayShopData : record})
+    this.showModal()
+
+  }
+  onDelete = (record,parent) =>{
     Modal.confirm({
-      title: 'Add Holiday Shop',
-      width: 1000,
-      content: (
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="form-group">
-              <label htmlFor="product-edit-title">วันที่</label>
-              <DatePicker />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-category">ข้อความ</label>
-              <TextArea autosize={{ minRows: 2, maxRows: 6 }} />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">การรับ</label>
-              <div>
-                <RadioGroup name="radiogroup">
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </RadioGroup>
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">การคืน</label>
-              <div>
-                <RadioGroup name="radiogroup">
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </RadioGroup>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
+      title: 'Are you sure delete this row?',
+      content: <div>Delelte Holiday Shop Date= {record.date}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
       onOk() {
+        parent.deleteHolidayShop(record.shopID)
         console.log('OK')
       },
       onCancel() {
@@ -75,6 +81,17 @@ class HolidayShop extends React.Component {
       },
     })
   }
+  onCancle = () =>{
+    debugger
+    this.setState({ previewVisible: false, visible: false })
+  }
+  createHolidayShop = () =>{
+
+  }
+  saveFormRef = formRef => {
+    this.formRef = formRef
+  }
+
   showDeleteConfirmHolidayShop(record) {
     let T = record
     Modal.confirm({
@@ -112,7 +129,6 @@ class HolidayShop extends React.Component {
 
   render() {
     let { pager } = this.state
-
     const columnsholidayshop = [
       {
         title: 'วันหยุดร้าน',
@@ -148,16 +164,16 @@ class HolidayShop extends React.Component {
         render: (text, record) => (
           <span>
             <Button
+              shape="circle"
+              icon="edit"
+              onClick={() => this.onEdit(record)}
+              style={{ backgroundColor: '#c49f47' }}
+            />
+             <Button
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.showDeleteConfirmHolidayShop(record)}
-            />
-            <Button
-              shape="circle"
-              icon="edit"
-              onClick={this.onSearch}
-              style={{ backgroundColor: '#c49f47' }}
+              onClick={() => this.onDelete(record,this.props)}
             />
           </span>
         ),
@@ -178,10 +194,18 @@ class HolidayShop extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary" icon="plus" onClick={() => this.addDataHolidayShop()}>
+          <Button type="primary" icon="plus" onClick={this.onAdd}>
             เพิ่มวันหยุดประจำ
           </Button>
         </div>
+        <HolidayModal
+            wrappedComponentRef={this.saveFormRef}
+            holidayShopData = {this.state.holidayShopData}
+            visible={this.state.visible}
+            onCancel={this.onCancle}
+            onSubmitData={this.onSubmitData}
+          />
+      
       </div>
     )
   }
