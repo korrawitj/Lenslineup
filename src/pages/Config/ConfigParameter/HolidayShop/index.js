@@ -162,7 +162,7 @@ class HolidayShop extends React.Component {
               shape="circle"
               icon="edit"
               onClick={() => this.onEdit(record)}
-              style={{ backgroundColor: '#c49f47' }}
+              style={{ backgroundColor: '#7DCEA0' }}
             />
             <Button
               type="danger"

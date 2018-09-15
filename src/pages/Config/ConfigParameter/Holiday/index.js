@@ -217,7 +217,7 @@ class Holiday extends React.Component {
               shape="circle"
               icon="edit"
               onClick={() => this.onEditHoliday(record)}
-              style={{ backgroundColor: '#c49f47' }}
+              style={{ color: '#FFC300' }}
             />
             <Button
               type="danger"
