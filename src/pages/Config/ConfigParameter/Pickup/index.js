@@ -8,7 +8,7 @@ const RadioButton = Radio.Button
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form } = this.props
+      const { visible, onCancel, onCreate, form ,masterPickupData} = this.props
       const { getFieldDecorator } = form
       return (
         <Modal
@@ -23,7 +23,9 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('masterPickupData.name')(<Input />)}
+                {getFieldDecorator('masterPickupData.name',{
+                  initialValue: masterPickupData.name,
+                })(<Input />)}
               </FormItem>
               <FormItem label="ประเภท">
                 {getFieldDecorator('masterPickupData.pickuptype')(
@@ -34,7 +36,10 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
               <FormItem label="ค่าส่ง">
-                {getFieldDecorator('masterPickupData.deliveryCharge')(<Input />)}
+                {getFieldDecorator('masterPickupData.deliveryCharge',{
+                    initialValue:
+                    masterPickupData.deliveryCharge == null ? 0 : masterPickupData.deliveryCharge,
+                  })(<Input />)}
               </FormItem>
             </Form>
           </div>
@@ -55,7 +60,6 @@ const defaultPagination = {
 
 class PickUp extends React.Component {
   state = {
-    data: {
       masterPickupData: [
         {
           pickupID: '',
@@ -64,7 +68,6 @@ class PickUp extends React.Component {
           deliveryCharge: '',
         },
       ],
-    },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
@@ -77,16 +80,24 @@ class PickUp extends React.Component {
   showModal = () => {
     this.setState({ visible: true })
   }
+  onEdit(record) {
+    this.setState({ masterPickupData: record })
+    this.showModal()
+  }
   handleCreate = () => {
     const form = this.formRef.props.form
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-      this.props.AddDataPickup(values.masterPickupData)
+      if (values.masterPickupData.manageID != null) {
+        this.props.updateDataPickup(values.masterPickupData)
+      } else {
+        this.props.AddDataPickup(values.masterPickupData)
+      }
       console.log(values)
       form.resetFields()
-      this.setState({ visible: false })
+      this.setState({ visible: false }) 
     })
   }
   saveFormRef = formRef => {
@@ -94,7 +105,7 @@ class PickUp extends React.Component {
   }
 
   handleCancel = () => this.setState({ previewVisible: false, visible: false })
-  showDeleteConfirmMasterPickup(record) {
+  showDeleteConfirmMasterPickup(record,parent) {
     let T = record
     Modal.confirm({
       title: 'Are you sure delete this row?',
@@ -103,7 +114,7 @@ class PickUp extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        console.log('OK')
+        parent.deleteDataPickup(record.pickupID)
       },
       onCancel() {
         console.log('Cancel')
@@ -159,12 +170,19 @@ class PickUp extends React.Component {
         title: 'Action',
         key: 'action',
         render: (text, record) => (
+          
           <span>
+              <Button
+              shape="circle"
+              icon="edit"
+              onClick={() => this.onEdit(record)}
+              className="palm-btn-warning"
+            />
             <Button
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.showDeleteConfirmMasterPickup(record)}
+              onClick={() => this.showDeleteConfirmMasterPickup(record,this.props)}
             />
           </span>
         ),
@@ -190,6 +208,7 @@ class PickUp extends React.Component {
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
+            masterPickupData={this.state.masterPickupData}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}

@@ -199,7 +199,9 @@ export function deleteDataPickup(Id) {
   return dispatch => {
     return axios
       .post('/api/masterHoliday/deleteMasterPickup', { Id: Id })
-      .then(response => {})
+      .then(response => {
+        console.log(response)
+      })
       .catch(error => {
         console.log('Error axios ' + error)
       })
