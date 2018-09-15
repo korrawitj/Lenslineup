@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload, Radio, Form,Checkbox } from 'antd'
+import { Table, Icon, Input, Button, Modal, Upload, Radio, Form, Checkbox } from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
@@ -114,7 +114,7 @@ const CollectionCreateForm = Form.create()(
           ),
         },
       ]
-      console.log({visible})
+      console.log({ visible })
       return (
         <Modal width={1000} visible={visible} okText="เพิ่ม" onCancel={onCancel} onOk={onCreate}>
           <div className="card-header">
@@ -133,41 +133,36 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('productData.CategoryID')(<Input type="textarea" />)}
               </FormItem>
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
-                {getFieldDecorator('productData.IsDay')(<Checkbox
-                />)}
+                {getFieldDecorator('productData.IsDay')(<Checkbox />)}
               </FormItem>
-              {
-                (form.getFieldValue('productData.IsDay'))===true
-              ?
-              <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
-                {getFieldDecorator('productData.RentDay_Fee')(<Input/>)}
-              </FormItem>
-              :""
-              }
-              <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
-                {getFieldDecorator('productData.IsHaftDay')(<Checkbox
-                />)}
-              </FormItem>
-              {
-                  (form.getFieldValue('productData.IsHaftDay'))===true?
-              <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
-                {getFieldDecorator('productData.RentHalfDay_Fee')(<Input />)}
-              </FormItem>
-              :""
-              }
-               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
-                {getFieldDecorator('productData.IsHour')(<Checkbox
-                />)}
+              {form.getFieldValue('productData.IsDay') === true ? (
+                <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
+                  {getFieldDecorator('productData.RentDay_Fee')(<Input />)}
                 </FormItem>
-                {
-                   (form.getFieldValue('productData.IsHour'))===true
-                   ?
-                   <FormItem {...formItemLayout} label="ราคาเช่าหนุ่งชั่วโมง">
-                   {getFieldDecorator('productData.RentHour_Fee')(<Input />)}
-                 </FormItem>
-                 :""
-                }
-             <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
+              ) : (
+                ''
+              )}
+              <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
+                {getFieldDecorator('productData.IsHaftDay')(<Checkbox />)}
+              </FormItem>
+              {form.getFieldValue('productData.IsHaftDay') === true ? (
+                <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
+                  {getFieldDecorator('productData.RentHalfDay_Fee')(<Input />)}
+                </FormItem>
+              ) : (
+                ''
+              )}
+              <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
+                {getFieldDecorator('productData.IsHour')(<Checkbox />)}
+              </FormItem>
+              {form.getFieldValue('productData.IsHour') === true ? (
+                <FormItem {...formItemLayout} label="ราคาเช่าหนุ่งชั่วโมง">
+                  {getFieldDecorator('productData.RentHour_Fee')(<Input />)}
+                </FormItem>
+              ) : (
+                ''
+              )}
+              <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
                 {getFieldDecorator('productData.RentDay')(<Input />)}
               </FormItem>
 
