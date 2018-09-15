@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload, Radio, Form, Checkbox ,Select} from 'antd'
+import { Table, Icon, Input, Button, Modal, Upload, Radio, Form, Checkbox, Select } from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
@@ -129,7 +129,7 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('productData.Name')(<Input />)}
               </FormItem>
               <FormItem {...formItemLayout} label="แบรน">
-                {getFieldDecorator('productData.BrandID')(  <Select/>)}
+                {getFieldDecorator('productData.BrandID')(<Select />)}
               </FormItem>
               <FormItem {...formItemLayout} label="ประเภท">
                 {getFieldDecorator('productData.CategoryID')(<Input type="textarea" />)}
