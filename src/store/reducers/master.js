@@ -6,7 +6,7 @@ const initialState = {
   holidayShopData: [],
   manageRecurringData: [],
   masterPickupData: [],
-  masterTypeData : []
+  masterTypeData: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,8 +21,8 @@ const reducer = (state = initialState, action) => {
       return updateObject(state, { masterPickupData: action.val })
     case actionTypes.HOLIDAYADDDATA:
       return updateObject(state, { holidayData: action.val })
-    case actionTypes.GETMASTERTYPE :
-      return updateObject(state, {masterTypeData : action.val })
+    case actionTypes.GETMASTERTYPE:
+      return updateObject(state, { masterTypeData: action.val })
     default:
       return state
   }

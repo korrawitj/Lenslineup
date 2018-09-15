@@ -31,7 +31,6 @@ class ManageRecurring extends React.Component {
     searchText: '',
     filtered: false,
     visible: false,
-
   }
   showModal = () => {
     this.setState({ visible: true })
@@ -51,7 +50,7 @@ class ManageRecurring extends React.Component {
     this.setState({ manageRecurringData: {} })
     this.showModal()
   }
-  onEdit(record){
+  onEdit(record) {
     this.setState({ manageRecurringData: record })
     this.showModal()
   }
@@ -61,13 +60,17 @@ class ManageRecurring extends React.Component {
   onSubmitData = () => {
     const form = this.formRef.props.form
     const manageRecurringData = this.formRef.props.manageRecurringData
-   
+
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-      manageRecurringData.startTime = moment(values['manageRecurringData']['startTime']).format('hh:mm:ss')
-      manageRecurringData.endTime = moment(values['manageRecurringData']['endTime']).format('hh:mm:ss')
+      manageRecurringData.startTime = moment(values['manageRecurringData']['startTime']).format(
+        'hh:mm:ss',
+      )
+      manageRecurringData.endTime = moment(values['manageRecurringData']['endTime']).format(
+        'hh:mm:ss',
+      )
       manageRecurringData.offset = values['manageRecurringData']['offset']
       manageRecurringData.name = values['manageRecurringData']['name']
 
@@ -82,7 +85,7 @@ class ManageRecurring extends React.Component {
       this.setState({ visible: false })
     })
   }
-  showDeleteConfirmManageRecurring(record,parent) {
+  showDeleteConfirmManageRecurring(record, parent) {
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte = {record.name}</div>,
@@ -178,7 +181,7 @@ class ManageRecurring extends React.Component {
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.showDeleteConfirmManageRecurring(record,this.props)}
+              onClick={() => this.showDeleteConfirmManageRecurring(record, this.props)}
             />
           </span>
         ),

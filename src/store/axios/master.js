@@ -138,7 +138,7 @@ export function addMasterManageRecurring(data) {
 export function updateMasterManageRecurring(data) {
   return dispatch => {
     return axios
-      .post('/api/masterHoliday/updateMasterManageRecurring', { manageRecurringData : data })
+      .post('/api/masterHoliday/updateMasterManageRecurring', { manageRecurringData: data })
       .then(response => {})
       .catch(error => {
         console.log('Error axios ' + error)
@@ -149,7 +149,7 @@ export function updateMasterManageRecurring(data) {
 export function deleteMasterManageRecurring(Id) {
   return dispatch => {
     return axios
-      .post('/api/masterHoliday/deleteMasterManageRecurring', { Id : Id })
+      .post('/api/masterHoliday/deleteMasterManageRecurring', { Id: Id })
       .then(response => {})
       .catch(error => {
         console.log('Error axios ' + error)
