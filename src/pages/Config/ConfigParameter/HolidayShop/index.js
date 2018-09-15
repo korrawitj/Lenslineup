@@ -45,7 +45,7 @@ class HolidayShop extends React.Component {
         holidayShopData.date = values['holidayShopData']['date']
         holidayShopData.message = values['holidayShopData']['message']
         holidayShopData.receive = values['holidayShopData']['receive']
-        holidayShopData.recurring = values['holidayShopData']['recurring']        
+        holidayShopData.recurring = values['holidayShopData']['recurring']
         this.props.updateHolidayShop(holidayShopData)
       } else {
         this.props.addHolidayShop(values)
