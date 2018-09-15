@@ -46,7 +46,7 @@ export function updateHolidayData(data) {
 export function deleteHolidayData(Id) {
   return dispatch => {
     return axios
-      .post('/api/masterHoliday/deleteHoliday', { holidayID : Id })
+      .post('/api/masterHoliday/deleteHoliday', { holidayID: Id })
       .then(response => {
         getAllDataHoliday()
         //dispatch(actionCreators.holidayadddata(response.data.holidayData))
@@ -86,7 +86,7 @@ export function addHolidayShop(data) {
 export function deleteHolidayShop(Id) {
   return dispatch => {
     return axios
-      .post('/api/masterHoliday/deleteHolidayShop',{Id : Id} )
+      .post('/api/masterHoliday/deleteHolidayShop', { Id: Id })
       .then(response => {
         getAllDataHoliday()
         //dispatch(actionCreators.holidayadddata(response.data.holidayData))
@@ -111,8 +111,6 @@ export function updateHolidayShop(data) {
   }
 }
 
-
-
 export function getAllDataManage() {
   return dispatch => {
     return axios
@@ -126,14 +124,11 @@ export function getAllDataManage() {
   }
 }
 
-
 export function addMasterManageRecurring(data) {
   return dispatch => {
     return axios
-      .post('/api/masterHoliday/addMasterManageRecurring', {manageRecurringData:data})
-      .then(response => {
-        
-      })
+      .post('/api/masterHoliday/addMasterManageRecurring', { manageRecurringData: data })
+      .then(response => {})
       .catch(error => {
         console.log('Error axios ' + error)
       })

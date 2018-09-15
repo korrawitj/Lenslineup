@@ -17,15 +17,14 @@ const defaultPagination = {
 
 class ManageRecurring extends React.Component {
   state = {
-    manageRecurringData: 
-    {
-          manageID: 's',
-          name: 'ssss',
-          startTime: null,
-          endTime: null,
-          offset: 10,
-          manage_type: 'ssssss',
-          pickupID: '55555555',
+    manageRecurringData: {
+      manageID: 's',
+      name: 'ssss',
+      startTime: null,
+      endTime: null,
+      offset: 10,
+      manage_type: 'ssssss',
+      pickupID: '55555555',
     },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
@@ -57,18 +56,17 @@ class ManageRecurring extends React.Component {
       if (err) {
         return
       }
-      manageRecurringData.startTime = values['manageRecurringData']['startTime']
+      manageRecurringData.startTime = moment(values['manageRecurringData']['startTime']).format('hh:mm:ss')
       manageRecurringData.endTime = values['manageRecurringData']['endTime']
       manageRecurringData.offset = values['manageRecurringData']['offset']
       manageRecurringData.name = values['manageRecurringData']['name']
-     
+
       console.log('Received values of form: ', values)
       if (manageRecurringData.manageID != null) {
         debugger
-       
       } else {
         this.props.addMasterManageRecurring(manageRecurringData)
-       // this.props.addHolidayShop(values)
+        // this.props.addHolidayShop(values)
       }
 
       form.resetFields()
@@ -236,13 +234,13 @@ class ManageRecurring extends React.Component {
             เพิ่มรอบรับคืน
           </Button>
         </div>
-        <ManageRecurringModal 
-         wrappedComponentRef={this.saveFormRef}
-         manageRecurringData={this.state.manageRecurringData}
-         visible={this.state.visible}
-         onCancel={this.onCancle}
-         onSubmitData={this.onSubmitData}
-        ></ManageRecurringModal>
+        <ManageRecurringModal
+          wrappedComponentRef={this.saveFormRef}
+          manageRecurringData={this.state.manageRecurringData}
+          visible={this.state.visible}
+          onCancel={this.onCancle}
+          onSubmitData={this.onSubmitData}
+        />
       </div>
     )
   }
