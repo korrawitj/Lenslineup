@@ -6,7 +6,6 @@ export function getAllDataHoliday() {
     return axios
       .get('/api/masterHoliday/getAllHoliday')
       .then(response => {
-        console.log(response)
         dispatch(actionCreators.holidaygetdata(response.data.holidayData))
       })
       .catch(error => {
@@ -116,6 +115,7 @@ export function getAllDataManage() {
     return axios
       .get('/api/masterHoliday/getAllMasterManageRecurring')
       .then(response => {
+        console.log(response)
         dispatch(actionCreators.managegetdata(response.data.manageRecurringData))
       })
       .catch(error => {

@@ -12,3 +12,10 @@ export const getAllProduct = value => {
     val: value,
   }
 }
+
+export const getAllproductcate = value => {
+  return {
+    type: actionTypes.GETALLPRODUCTCAT,
+    val: value,
+  }
+}

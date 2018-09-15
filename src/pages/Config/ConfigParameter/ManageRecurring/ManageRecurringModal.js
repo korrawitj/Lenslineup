@@ -18,7 +18,6 @@ const ManageRecurringModal = Form.create()(
       }
       const { visible, onCancel, onSubmitData, form, manageRecurringData, masterType } = this.props
       const { getFieldDecorator } = form
-
       return (
         <Modal
           title="เพิ่มรอบรับคืน"
@@ -57,7 +56,7 @@ const ManageRecurringModal = Form.create()(
                   {getFieldDecorator('manageRecurringData.offset', {
                     initialValue:
                       manageRecurringData.offset == null ? 0 : manageRecurringData.offset,
-                  })(<InputNumber min={1} max={10} defaultValue={0} />)}
+                  })(<InputNumber min={0} max={10} />)}
                 </FormItem>
               </FormItem>
               <FormItem label="ประเภท">

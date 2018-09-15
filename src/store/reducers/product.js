@@ -3,6 +3,7 @@ import { updateObject } from '../utility'
 
 const initialState = {
   productData: [],
+  productCate: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,8 @@ const reducer = (state = initialState, action) => {
       return updateObject(state, { productData: action.val })
     case actionTypes.DELETEPRODUCT:
       return updateObject(state, { productData: action.val })
+    case actionTypes.GETALLPRODUCTCAT:
+      return updateObject(state, { productCate: action.val })
     default:
       return state
   }

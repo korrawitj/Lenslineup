@@ -14,6 +14,18 @@ export function getAllProduct() {
       })
   }
 }
+export function getAllData() {
+  return dispatch => {
+    return axios
+      .get('/API/category/getAll')
+      .then(response => {
+        dispatch(actionCreators.getAllproductcat(response.data.categoryData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
 
 // export function get(Id) {
 //   return dispatch => {

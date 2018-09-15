@@ -30,9 +30,6 @@ const loadableRoutes = {
   '/product/list': {
     component: loadable(() => import('pages/Product/ProductList')),
   },
-  '/product/list/Add': {
-    component: loadable(() => import('pages/Product/ProductListAdd')),
-  },
 
   '/product/include': {
     component: loadable(() => import('pages/Product/ProductInclude')),

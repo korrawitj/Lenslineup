@@ -26,7 +26,7 @@ const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
       // const { pager } = this.props
-      const { visible, onCancel, onCreate, form, productItemData } = this.props
+      const { visible, onCancel, onCreate, form, productItemData, productCate } = this.props
       const { getFieldDecorator } = form
       const formItemLayout = {
         labelCol: {
@@ -38,6 +38,7 @@ const CollectionCreateForm = Form.create()(
           sm: { span: 16 },
         },
       }
+      console.log({ productCate })
       // const dataCopy = [
       //   {
       //     title: 'View',
@@ -377,6 +378,7 @@ class ProductList extends React.Component {
   }
   componentDidMount() {
     this.props.getAllProduct()
+    this.props.getAllData()
   }
 
   render() {
@@ -488,6 +490,7 @@ class ProductList extends React.Component {
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             productItemData={this.state.productItemData}
+            productCate={this.props.product.productCate}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}
