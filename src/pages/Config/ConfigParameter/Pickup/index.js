@@ -15,7 +15,7 @@ const CollectionCreateForm = Form.create()(
           width={1000}
           visible={visible}
           title="เพิ่มจุดรับของ"
-          okText="เพิ่ม"
+          okText={masterPickupData.pickupID != null ? 'Update' : 'Create'}
           cancelText="ยกเลิก"
           onCancel={onCancel}
           onOk={onCreate}
@@ -91,13 +91,14 @@ class PickUp extends React.Component {
       if (err) {
         return
       }
-      console.log(values)
+
       if (masterPickupData.pickupID != null) {
-        this.props.updateDataPickup(masterPickupData)
+        values.masterPickupData['key']=masterPickupData['key']
+        values.masterPickupData['pickupID']=masterPickupData['pickupID']
+        this.props.updateDataPickup(values.masterPickupData)
       } else {
         this.props.AddDataPickup(values.masterPickupData)
       }
-      console.log(values)
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -143,7 +144,6 @@ class PickUp extends React.Component {
   }
 
   render() {
-    console.log(this.props.master)
     let { pager } = this.state
 
     const columnsMasterPickup = [

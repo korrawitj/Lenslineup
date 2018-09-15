@@ -115,7 +115,6 @@ export function getAllDataManage() {
     return axios
       .get('/api/masterHoliday/getAllMasterManageRecurring')
       .then(response => {
-        console.log(response)
         dispatch(actionCreators.managegetdata(response.data.manageRecurringData))
       })
       .catch(error => {
