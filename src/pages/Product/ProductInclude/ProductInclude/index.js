@@ -1,10 +1,10 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload ,Form} from 'antd'
+import { Table, Icon, Input, Button, Modal, Upload, Form } from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
-const FormItem=Form.Item;
-const TextArea = Input.TextArea;
+const FormItem = Form.Item
+const TextArea = Input.TextArea
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -23,32 +23,26 @@ const CollectionCreateForm = Form.create()(
           width={1000}
           visible={visible}
           title="Add ProductInclude"
-          okText={productItemData.ItemID != null  ? 'Update' : 'Create'}
+          okText={productItemData.ItemID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
         >
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productItemData.Name')(
-                  <Input />
-                )}
+                {getFieldDecorator('productItemData.Name')(<Input />)}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
-                {getFieldDecorator('productItemData.ContractPrice')(
-                  <Input />
-                )}
+                {getFieldDecorator('productItemData.ContractPrice')(<Input />)}
               </FormItem>
               <FormItem label="จำนวน">
-                {getFieldDecorator('productItemData.Quantity')(
-                  <Input />
-                )}
+                {getFieldDecorator('productItemData.Quantity')(<Input />)}
               </FormItem>
               <FormItem label="Note">
                 {getFieldDecorator('productItemData.Note')(
-                    <TextArea autosize={{ minRows: 2, maxRows: 6 }} />
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
-              </FormItem>          
+              </FormItem>
             </Form>
           </div>
         </Modal>
@@ -66,8 +60,8 @@ class ProductInclude extends React.Component {
     filtered: false,
     previewVisible: false,
     previewImage: '',
-    visible:false,
-    productItemData:{},
+    visible: false,
+    productItemData: {},
     fileList: [
       {
         uid: -1,
@@ -95,7 +89,7 @@ class ProductInclude extends React.Component {
       this.setState({ visible: false })
     })
   }
-  handleCancel = () => this.setState({ previewVisible: false ,visible:false })
+  handleCancel = () => this.setState({ previewVisible: false, visible: false })
 
   handlePreview = file => {
     this.setState({
@@ -152,7 +146,7 @@ class ProductInclude extends React.Component {
       },
     })
   }
- 
+
   showData(record) {
     let T = record
     Modal.info({
