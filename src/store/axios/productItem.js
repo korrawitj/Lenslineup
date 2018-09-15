@@ -33,8 +33,7 @@ export function addProductItem(data) {
   return dispatch => {
     return axios
       .post('/API/product/productItem/add', data)
-      .then(response => {
-      })
+      .then(response => {})
       .catch(error => {
         console.log('Error axios ' + error)
       })
@@ -46,8 +45,7 @@ export function updateProductItem(data) {
   return dispatch => {
     return axios
       .post('/API/product/productItem/update', { productItemData: data })
-      .then(response => {
-      })
+      .then(response => {})
       .catch(error => {
         console.log('Error axios ' + error)
       })
