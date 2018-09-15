@@ -136,29 +136,32 @@ class HolidayShop extends React.Component {
         title: 'การรับ',
         dataIndex: 'receive',
         key: 'receive',
-        render: text => <span>
-              <Icon
+        render: text => (
+          <span>
+            <Icon
               style={{ fontSize: '25px' }}
               theme="twoTone"
               twoToneColor={text ? '#52c41a' : '#eb2f96'}
               type={text ? 'check-circle' : 'close-circle'}
             />
-
-        </span>,
+          </span>
+        ),
         sorter: (a, b) => a.receive - b.receive,
       },
       {
         title: 'การคืน',
         dataIndex: 'recurring',
         key: 'recurring',
-        render: text => <span>
-               <Icon
+        render: text => (
+          <span>
+            <Icon
               style={{ fontSize: '25px' }}
               theme="twoTone"
               twoToneColor={text ? '#52c41a' : '#eb2f96'}
               type={text ? 'check-circle' : 'close-circle'}
             />
-        </span>,
+          </span>
+        ),
         sorter: (a, b) => a.receive - b.receive,
       },
       {
