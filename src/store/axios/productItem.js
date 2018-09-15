@@ -21,7 +21,7 @@ export function getProductItem(Id) {
       .post('/API/product/productItem/get', { Id: Id })
       .then(response => {
         console.log(response.data)
-        dispatch(actionCreators.getAllProductItem(response.data.productItemData))
+        dispatch(actionCreators.getProductItem(response.data.productItemData))
       })
       .catch(error => {
         console.log('Error axios ' + error)
