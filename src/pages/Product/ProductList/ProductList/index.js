@@ -1,5 +1,18 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload,DatePicker, Radio, Form, Checkbox, Select ,TreeSelect } from 'antd'
+import {
+  Table,
+  Icon,
+  Input,
+  Button,
+  Modal,
+  Upload,
+  DatePicker,
+  Radio,
+  Form,
+  Checkbox,
+  Select,
+  TreeSelect,
+} from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
@@ -8,12 +21,12 @@ const FormItem = Form.Item
 const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
 const confirm = Modal.confirm
-const {TextArea} = Input
+const { TextArea } = Input
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
       // const { pager } = this.props
-      const { visible, onCancel, onCreate, form ,productItemData} = this.props
+      const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
       const formItemLayout = {
         labelCol: {
@@ -127,20 +140,24 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form>
               <FormItem {...formItemLayout} label="อุุปกรณ์">
-                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(<Input />)}
+                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(
+                  <Input />,
+                )}
               </FormItem>
               <FormItem {...formItemLayout} label="แบรน">
                 {getFieldDecorator('productItemData.BrandID')(<Select />)}
               </FormItem>
               <FormItem {...formItemLayout} label="ประเภท">
-                {getFieldDecorator('productItemData.CategoryID')(<TreeSelect  />)}
+                {getFieldDecorator('productItemData.CategoryID')(<TreeSelect />)}
               </FormItem>
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
                 {getFieldDecorator('productItemData.IsDay')(<Checkbox />)}
               </FormItem>
               {form.getFieldValue('productItemData.IsDay') === true ? (
                 <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
-                  {getFieldDecorator('productItemData.RentDay_Fee',{ initialValue: productItemData.RentDay_Fee })(<Input />)}
+                  {getFieldDecorator('productItemData.RentDay_Fee', {
+                    initialValue: productItemData.RentDay_Fee,
+                  })(<Input />)}
                 </FormItem>
               ) : (
                 ''
@@ -190,16 +207,25 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('productItemData.PurchasePrice')(<Input />)}
               </FormItem>
               <FormItem {...formItemLayout} label="วันที่ซื้อ">
-                {getFieldDecorator('productItemData.PurchaseDate',{ initialValue:productItemData.PurchaseDate==null?null: moment(productItemData.PurchaseDate) })(<DatePicker/>)}
+                {getFieldDecorator('productItemData.PurchaseDate', {
+                  initialValue:
+                    productItemData.PurchaseDate == null
+                      ? null
+                      : moment(productItemData.PurchaseDate),
+                })(<DatePicker />)}
               </FormItem>
               <FormItem {...formItemLayout} label="วันที่หมดประกัน">
-                {getFieldDecorator('productItemData.ExpireDate')(<DatePicker/>)}
+                {getFieldDecorator('productItemData.ExpireDate')(<DatePicker />)}
               </FormItem>
               <FormItem {...formItemLayout} label="สถานที่ซื้อ / สภาพ / ประกัน">
-                {getFieldDecorator('productItemData.Location')(<TextArea autosize={{ minRows: 2, maxRows: 6 }}/>)}
+                {getFieldDecorator('productItemData.Location')(
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                )}
               </FormItem>
               <FormItem {...formItemLayout} label="Remark (สภาพตำหนิ)">
-                {getFieldDecorator('productItemData.Remark')(<TextArea autosize={{ minRows: 2, maxRows: 6 }}/>)}
+                {getFieldDecorator('productItemData.Remark')(
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                )}
               </FormItem>
               <FormItem {...formItemLayout} label="Note">
                 {getFieldDecorator('productItemData.Note')(
@@ -244,7 +270,7 @@ class ProductList extends React.Component {
     tableData: tableData.data,
     data: tableData.data,
     pager: { ...defaultPagination },
-    productItemData:{},
+    productItemData: {},
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
