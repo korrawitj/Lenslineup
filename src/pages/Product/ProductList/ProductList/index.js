@@ -180,7 +180,7 @@ const CollectionCreateForm = Form.create()(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
-              <FormItem {...formItemLayout} label="QR ID">
+              <FormItem {...formItemLayout} label="QR Code">
                 {getFieldDecorator('productData.QRID')(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
