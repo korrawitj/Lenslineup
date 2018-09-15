@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.HOLIDAYADDDATA:
       return updateObject(state, { holidayData: action.val })
     case actionTypes.GETALLMASTERTYPE:
-      return updateObject(state, { masterTypeData : action.val })
+      return updateObject(state, { masterTypeData: action.val })
     default:
       return state
   }

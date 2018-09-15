@@ -24,7 +24,7 @@ class ManageRecurring extends React.Component {
       manage_type: null,
       pickupID: null,
     },
-    masterType : [],
+    masterType: [],
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
@@ -47,7 +47,7 @@ class ManageRecurring extends React.Component {
     this.formRef = formRef
   }
   onAdd = () => {
-    this.setState({ manageRecurringData: {},masterType:this.props.master.masterTypeData})
+    this.setState({ manageRecurringData: {}, masterType: this.props.master.masterTypeData })
     this.showModal()
   }
   onEdit(record) {
@@ -73,7 +73,7 @@ class ManageRecurring extends React.Component {
       )
       manageRecurringData.offset = values['manageRecurringData']['offset']
       manageRecurringData.name = values['manageRecurringData']['name']
-      manageRecurringData.manageTypeId =values['manageRecurringData']['manageTypeId']
+      manageRecurringData.manageTypeId = values['manageRecurringData']['manageTypeId']
 
       console.log('Received values of form: ', values)
       if (manageRecurringData.manageID != null) {
@@ -213,7 +213,7 @@ class ManageRecurring extends React.Component {
           visible={this.state.visible}
           onCancel={this.onCancle}
           onSubmitData={this.onSubmitData}
-          masterType = {this.props.master.masterTypeData}
+          masterType={this.props.master.masterTypeData}
         />
       </div>
     )

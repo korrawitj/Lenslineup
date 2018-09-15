@@ -1,8 +1,8 @@
 import React from 'react'
-import { Input, Modal, Form, TimePicker, InputNumber, Col,Select } from 'antd'
+import { Input, Modal, Form, TimePicker, InputNumber, Col, Select } from 'antd'
 import moment from 'moment'
 const FormItem = Form.Item
-const Option = Select.Option;
+const Option = Select.Option
 const ManageRecurringModal = Form.create()(
   class extends React.Component {
     render() {
@@ -16,9 +16,9 @@ const ManageRecurringModal = Form.create()(
           sm: { span: 16 },
         },
       }
-      const  { visible, onCancel, onSubmitData, form, manageRecurringData, masterType } = this.props
+      const { visible, onCancel, onSubmitData, form, manageRecurringData, masterType } = this.props
       const { getFieldDecorator } = form
-      
+
       return (
         <Modal
           title="เพิ่มรอบรับคืน"
@@ -55,18 +55,23 @@ const ManageRecurringModal = Form.create()(
 
                 <FormItem {...formItemLayout} label="offset">
                   {getFieldDecorator('manageRecurringData.offset', {
-                    initialValue: manageRecurringData.offset == null ? 0 : manageRecurringData.offset,
+                    initialValue:
+                      manageRecurringData.offset == null ? 0 : manageRecurringData.offset,
                   })(<InputNumber min={1} max={10} defaultValue={0} />)}
                 </FormItem>
               </FormItem>
               <FormItem label="ประเภท">
-                {getFieldDecorator('manageRecurringData.manageTypeId',{
-                  initialValue: manageRecurringData.manageTypeId
-                })(<Select  placeholder="Please select" style={{ width: '30%' }}>
-                  {masterType.map((item) => 
-                    <Option selected key={item.TypeID} value={item.TypeID}>{item.TypeName}</Option>      
-                  )}
-                </Select>)}
+                {getFieldDecorator('manageRecurringData.manageTypeId', {
+                  initialValue: manageRecurringData.manageTypeId,
+                })(
+                  <Select placeholder="Please select" style={{ width: '30%' }}>
+                    {masterType.map(item => (
+                      <Option selected key={item.TypeID} value={item.TypeID}>
+                        {item.TypeName}
+                      </Option>
+                    ))}
+                  </Select>,
+                )}
               </FormItem>
             </Form>
           </div>

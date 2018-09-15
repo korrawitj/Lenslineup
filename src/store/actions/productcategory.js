@@ -34,4 +34,3 @@ export const deleteproductcat = value => {
     val: value,
   }
 }
-

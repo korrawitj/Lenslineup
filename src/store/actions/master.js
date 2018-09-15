@@ -42,7 +42,7 @@ export const holidayadddata = value => {
   }
 }
 
-export const masterTypeData = value =>{
+export const masterTypeData = value => {
   return {
     type: actionTypes.GETALLMASTERTYPE,
     val: value,
