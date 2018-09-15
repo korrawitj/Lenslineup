@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, Icon, Input, Button, Modal, Upload, Form } from 'antd'
 import tableData from './data.json'
-import * as actionCreators from '../../../../store/axios/productItem'
+import * as actionCreators from '../../../../store/axios/productinclude'
 import { connect } from 'react-redux'
 const FormItem = Form.Item
 const TextArea = Input.TextArea
@@ -84,7 +84,7 @@ class ProductInclude extends React.Component {
         return
       }
       console.log('Received values of form: ', values)
-
+      console.log(this.props.addProductInclude(values.productIncludeData))
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -192,7 +192,7 @@ class ProductInclude extends React.Component {
     this.showModal()
   }
   componentDidMount() {
-    this.props.getAllProductItem()
+    // this.props.getAllProductInclude()
   }
 
   render() {
@@ -307,7 +307,7 @@ class ProductInclude extends React.Component {
         <div className="card-body">
           <Table
             columns={columns}
-            dataSource={this.props.productItem.productItemData}
+            dataSource={this.props.productInclude.productIncludeData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
@@ -319,7 +319,7 @@ class ProductInclude extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    productItem: state.productItem,
+    productInclude: state.productInclude,
   }
 }
 
