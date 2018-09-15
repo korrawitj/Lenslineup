@@ -1,6 +1,6 @@
 import * as actionTypes from './actionType'
 
-export const getProductInclude= value => {
+export const getProductInclude = value => {
   return {
     type: actionTypes.GETPRODUCTINCLUDE,
     val: value,
