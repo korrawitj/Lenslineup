@@ -188,7 +188,9 @@ export function updateDataPickup(data) {
   return dispatch => {
     return axios
       .post('/api/masterHoliday/updateMasterPickup', { masterPickupData: data })
-      .then(response => {})
+      .then(response => {
+        console.log(response)
+      })
       .catch(error => {
         console.log('Error axios ' + error)
       })

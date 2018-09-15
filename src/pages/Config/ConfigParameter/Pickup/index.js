@@ -86,12 +86,14 @@ class PickUp extends React.Component {
   }
   handleCreate = () => {
     const form = this.formRef.props.form
+    const masterPickupData = this.formRef.props.masterPickupData
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-      if (values.masterPickupData.manageID != null) {
-        this.props.updateDataPickup(values.masterPickupData)
+      console.log(values)
+      if (masterPickupData.pickupID!= null) {
+        this.props.updateDataPickup(masterPickupData)
       } else {
         this.props.AddDataPickup(values.masterPickupData)
       }
