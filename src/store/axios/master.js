@@ -128,7 +128,7 @@ export function addMasterManageRecurring(data) {
   return dispatch => {
     return axios
       .post('/api/masterHoliday/addMasterManageRecurring', { manageRecurringData: data })
-      .then(response => {})
+      .then(response => { })
       .catch(error => {
         console.log('Error axios ' + error)
       })
@@ -139,7 +139,7 @@ export function updateMasterManageRecurring(data) {
   return dispatch => {
     return axios
       .post('/api/masterHoliday/updateMasterManageRecurring', { manageRecurringData: data })
-      .then(response => {})
+      .then(response => { })
       .catch(error => {
         console.log('Error axios ' + error)
       })
@@ -150,7 +150,7 @@ export function deleteMasterManageRecurring(Id) {
   return dispatch => {
     return axios
       .post('/api/masterHoliday/deleteMasterManageRecurring', { Id: Id })
-      .then(response => {})
+      .then(response => { })
       .catch(error => {
         console.log('Error axios ' + error)
       })
@@ -183,6 +183,31 @@ export function AddDataPickup(data) {
       })
   }
 }
+
+export function updateDataPickup(data) {
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/updateMasterPickup', { masterPickupData: data })
+      .then(response => {
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+export function deleteDataPickup(Id) {
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/deleteMasterPickup', { Id: Id })
+      .then(response => {
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
 export function getAllMasterType() {
   return dispatch => {
     return axios
