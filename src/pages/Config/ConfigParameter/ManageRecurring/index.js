@@ -1,7 +1,9 @@
 import React from 'react'
 import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import * as actionCreators from '../../../../store/axios/master'
+import ManageRecurringModal from './ManageRecurringModal'
 const { TextArea } = Input
 const RadioGroup = Radio.Group
 const defaultPagination = {
@@ -15,26 +17,63 @@ const defaultPagination = {
 
 class ManageRecurring extends React.Component {
   state = {
-    data: {
-      manageRecurringData: [
-        {
+    manageRecurringData: 
+    {
           manageID: 's',
           name: 'ssss',
-          startdate: 'ssssssss',
-          enddate: 'ssss',
-          offset: '55555555555555555',
+          startTime: null,
+          endTime: null,
+          offset: 10,
           manage_type: 'ssssss',
           pickupID: '55555555',
-        },
-      ],
     },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+    visible: false,
+  }
+  showModal = () => {
+    this.setState({ visible: true })
   }
   componentDidMount() {
     this.props.getAllDataManage()
+  }
+  saveFormRef = formRef => {
+    this.formRef = formRef
+  }
+  onAdd = () => {
+    this.setState({ manageRecurringData: {} })
+    this.showModal()
+  }
+  onCancle = () => {
+    this.setState({ previewVisible: false, visible: false })
+  }
+  onSubmitData = () => {
+    const form = this.formRef.props.form
+    const manageRecurringData = this.formRef.props.manageRecurringData
+    debugger
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      manageRecurringData.startTime = values['manageRecurringData']['startTime']
+      manageRecurringData.endTime = values['manageRecurringData']['endTime']
+      manageRecurringData.offset = values['manageRecurringData']['offset']
+      manageRecurringData.name = values['manageRecurringData']['name']
+     
+      console.log('Received values of form: ', values)
+      if (manageRecurringData.manageID != null) {
+        debugger
+       
+      } else {
+        this.props.addMasterManageRecurring(manageRecurringData)
+       // this.props.addHolidayShop(values)
+      }
+
+      form.resetFields()
+      this.setState({ visible: false })
+    })
   }
   addDataManageRecurring() {
     Modal.confirm({
@@ -129,9 +168,16 @@ class ManageRecurring extends React.Component {
         sorter: (a, b) => a.date - b.date,
       },
       {
-        title: 'เวลา',
-        dataIndex: 'startdate',
-        key: 'startdate',
+        title: 'เวลาเริ่ม',
+        dataIndex: 'startTime',
+        key: 'startTime',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.receive - b.receive,
+      },
+      {
+        title: 'เวลาสิ้นสุด',
+        dataIndex: 'endTime',
+        key: 'endTime',
         render: text => <span>{text}</span>,
         sorter: (a, b) => a.receive - b.receive,
       },
@@ -186,10 +232,17 @@ class ManageRecurring extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary" icon="plus" onClick={() => this.addDataManageRecurring()}>
+          <Button type="primary" icon="plus" onClick={this.onAdd}>
             เพิ่มรอบรับคืน
           </Button>
         </div>
+        <ManageRecurringModal 
+         wrappedComponentRef={this.saveFormRef}
+         manageRecurringData={this.state.manageRecurringData}
+         visible={this.state.visible}
+         onCancel={this.onCancle}
+         onSubmitData={this.onSubmitData}
+        ></ManageRecurringModal>
       </div>
     )
   }

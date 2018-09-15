@@ -18,7 +18,7 @@ const defaultPagination = {
 
 class HolidayShop extends React.Component {
   state = {
-    holidayShopData: { shopID:null, date: null, receive: null, recurring: null, message: null },
+    holidayShopData: { shopID: null, date: null, receive: null, recurring: null, message: null },
     visible: false,
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
@@ -31,41 +31,41 @@ class HolidayShop extends React.Component {
   showModal = () => {
     this.setState({ visible: true })
   }
-  onSubmitData = () => { 
+  onSubmitData = () => {
     const form = this.formRef.props.form
     const holidayShopData = this.formRef.props.holidayShopData
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-      values['holidayShopData']['date'] = moment(values['holidayShopData']['date']).format('YYYY-MM-DD')
+      values['holidayShopData']['date'] = moment(values['holidayShopData']['date']).format(
+        'YYYY-MM-DD',
+      )
       console.log('Received values of form: ', values)
-      if(holidayShopData.shopID != null){
-          holidayShopData.date = values['holidayShopData']['date']
-          holidayShopData.message = values['holidayShopData']['message']
-          holidayShopData.receive = values['holidayShopData']['receive']
-          holidayShopData.recurring = values['holidayShopData']['recurring']
-          debugger
-           this.props.updateHolidayShop(holidayShopData)
-      }else
-      {
+      if (holidayShopData.shopID != null) {
+        holidayShopData.date = values['holidayShopData']['date']
+        holidayShopData.message = values['holidayShopData']['message']
+        holidayShopData.receive = values['holidayShopData']['receive']
+        holidayShopData.recurring = values['holidayShopData']['recurring']
+        debugger
+        this.props.updateHolidayShop(holidayShopData)
+      } else {
         this.props.addHolidayShop(values)
       }
-      
+
       form.resetFields()
       this.setState({ visible: false })
     })
   }
-  onAdd  = () => {
+  onAdd = () => {
     this.setState({ holidayShopData: {} })
     this.showModal()
   }
   onEdit = record => {
-    this.setState({holidayShopData : record})
+    this.setState({ holidayShopData: record })
     this.showModal()
-
   }
-  onDelete = (record,parent) =>{
+  onDelete = (record, parent) => {
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte Holiday Shop Date= {record.date}</div>,
@@ -81,13 +81,11 @@ class HolidayShop extends React.Component {
       },
     })
   }
-  onCancle = () =>{
+  onCancle = () => {
     debugger
     this.setState({ previewVisible: false, visible: false })
   }
-  createHolidayShop = () =>{
-
-  }
+  createHolidayShop = () => {}
   saveFormRef = formRef => {
     this.formRef = formRef
   }
@@ -169,11 +167,11 @@ class HolidayShop extends React.Component {
               onClick={() => this.onEdit(record)}
               style={{ backgroundColor: '#c49f47' }}
             />
-             <Button
+            <Button
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.onDelete(record,this.props)}
+              onClick={() => this.onDelete(record, this.props)}
             />
           </span>
         ),
@@ -199,13 +197,12 @@ class HolidayShop extends React.Component {
           </Button>
         </div>
         <HolidayModal
-            wrappedComponentRef={this.saveFormRef}
-            holidayShopData = {this.state.holidayShopData}
-            visible={this.state.visible}
-            onCancel={this.onCancle}
-            onSubmitData={this.onSubmitData}
-          />
-      
+          wrappedComponentRef={this.saveFormRef}
+          holidayShopData={this.state.holidayShopData}
+          visible={this.state.visible}
+          onCancel={this.onCancle}
+          onSubmitData={this.onSubmitData}
+        />
       </div>
     )
   }

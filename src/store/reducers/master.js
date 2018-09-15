@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.HOLIDAYGETDATA:
       return updateObject(state, { holidayData: action.val })
     case actionTypes.HOLIDAYSHOPGETDATA:
-      return updateObject(state, { holidayShopData : action.val })
+      return updateObject(state, { holidayShopData: action.val })
     case actionTypes.MANAGEGETDATA:
       return updateObject(state, { manageRecurringData: action.val })
     case actionTypes.PICKUPGETDATA:
