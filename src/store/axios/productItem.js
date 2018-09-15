@@ -55,7 +55,6 @@ export function deleteProductItem(Id) {
     return axios
       .post('/API/product/productItem/delete', { Id: Id })
       .then(response => {
-        getAllDataHoliday()
       })
       .catch(error => {
         console.log('Error axios ' + error)
