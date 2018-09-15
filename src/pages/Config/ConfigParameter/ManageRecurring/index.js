@@ -1,9 +1,58 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio, Form, DatePicker } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
-const { TextArea } = Input
 const RadioGroup = Radio.Group
+const FormItem = Form.Item
+const TextArea = Input.TextArea
+const RadioButton = Radio.Button
+const CollectionCreateForm = Form.create()(
+  class extends React.Component {
+    render() {
+      const { visible, onCancel, onCreate, form } = this.props
+      const { getFieldDecorator } = form
+      return (
+        <Modal
+          width={1000}
+          visible={visible}
+          title="เพิ่มจุดรับของ"
+          okText="เพิ่ม"
+          cancelText="ยกเลิก"
+          onCancel={onCancel}
+          onOk={onCreate}
+        >
+          <div className="card-body">
+            <Form layout="vertical">
+              <FormItem label="ชื่อ">
+                {getFieldDecorator('manageRecurringData.name')(<Input />)}
+              </FormItem>
+              <FormItem label="วันที่เริ่ม">
+                {getFieldDecorator('manageRecurringData.startdate')(<DatePicker />)}
+              </FormItem>
+              <FormItem label="วันที่สิ้นสุด">
+                {getFieldDecorator('manageRecurringData.enddate')(<DatePicker />)}
+              </FormItem>
+              <FormItem label="offset">
+                {getFieldDecorator('manageRecurringData.offset')(<Input />)}
+              </FormItem>
+              <FormItem label="ประเภท">
+                {getFieldDecorator('manageRecurringData.manage_type')(
+                  <RadioGroup name="Pickuptype">
+                    <RadioButton value={true}>รับของ</RadioButton>
+                    <RadioButton value={false}>คืนของ</RadioButton>
+                  </RadioGroup>,
+                )}
+              </FormItem>
+              <FormItem label="สถานที่">
+                {getFieldDecorator('manageRecurringData.pickupID')(<Input />)}
+              </FormItem>
+            </Form>
+          </div>
+        </Modal>
+      )
+    }
+  },
+)
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -32,56 +81,30 @@ class ManageRecurring extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+    visible: false,
   }
   componentDidMount() {
     this.props.getAllDataManage()
   }
-  addDataManageRecurring() {
-    Modal.confirm({
-      title: 'เพิ่มรอบรับคืน',
-      width: 1000,
-      content: (
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="form-group">
-              <label htmlFor="product-edit-title">วันที่</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-category">เวลาที่เริ่ม</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-category">เวลาที่สิ้นสุด</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">Offset</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">ประเภท</label>
-              <div>
-                <RadioGroup name="radiogroup">
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </RadioGroup>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log('OK')
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
+  showModal = () => {
+    this.setState({ visible: true })
+  }
+  handleCreate = () => {
+    const form = this.formRef.props.form
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      console.log(values)
+      form.resetFields()
+      this.setState({ visible: false })
     })
   }
+  saveFormRef = formRef => {
+    this.formRef = formRef
+  }
+
+  handleCancel = () => this.setState({ previewVisible: false, visible: false })
   showDeleteConfirmManageRecurring(record) {
     Modal.confirm({
       title: 'Are you sure delete this row?',
@@ -186,9 +209,15 @@ class ManageRecurring extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary" icon="plus" onClick={() => this.addDataManageRecurring()}>
+          <Button type="primary" icon="plus" onClick={this.showModal}>
             เพิ่มรอบรับคืน
           </Button>
+          <CollectionCreateForm
+            wrappedComponentRef={this.saveFormRef}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}
+          />
         </div>
       </div>
     )
