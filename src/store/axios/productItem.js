@@ -54,8 +54,7 @@ export function deleteProductItem(Id) {
   return dispatch => {
     return axios
       .post('/API/product/productItem/delete', { Id: Id })
-      .then(response => {
-      })
+      .then(response => {})
       .catch(error => {
         console.log('Error axios ' + error)
       })
