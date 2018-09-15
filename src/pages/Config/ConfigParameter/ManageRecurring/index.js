@@ -18,25 +18,31 @@ const defaultPagination = {
 class ManageRecurring extends React.Component {
   state = {
     manageRecurringData: {
-      manageID: 's',
-      name: 'ssss',
-      startTime: null,
-      endTime: null,
-      offset: 10,
-      manage_type: 'ssssss',
-      pickupID: '55555555',
+      manageID: null,
+      name: null,
+      startTime: {},
+      endTime: {},
+      offset: null,
+      manage_type: null,
+      pickupID: null,
     },
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
     visible: false,
+
   }
   showModal = () => {
     this.setState({ visible: true })
   }
   componentDidMount() {
     this.props.getAllDataManage()
+  }
+  componentDidUpdate(prevProps, prevState) {
+    // if(this.state.visible===false){
+    //     this.props.getAllDataManage();
+    // }
   }
   saveFormRef = formRef => {
     this.formRef = formRef
@@ -45,83 +51,38 @@ class ManageRecurring extends React.Component {
     this.setState({ manageRecurringData: {} })
     this.showModal()
   }
+  onEdit(record){
+    this.setState({ manageRecurringData: record })
+    this.showModal()
+  }
   onCancle = () => {
     this.setState({ previewVisible: false, visible: false })
   }
   onSubmitData = () => {
     const form = this.formRef.props.form
     const manageRecurringData = this.formRef.props.manageRecurringData
-    debugger
+   
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-      manageRecurringData.startTime = moment(values['manageRecurringData']['startTime']).format(
-        'hh:mm:ss',
-      )
-      manageRecurringData.endTime = values['manageRecurringData']['endTime']
+      manageRecurringData.startTime = moment(values['manageRecurringData']['startTime']).format('hh:mm:ss')
+      manageRecurringData.endTime = moment(values['manageRecurringData']['endTime']).format('hh:mm:ss')
       manageRecurringData.offset = values['manageRecurringData']['offset']
       manageRecurringData.name = values['manageRecurringData']['name']
 
       console.log('Received values of form: ', values)
       if (manageRecurringData.manageID != null) {
-        debugger
+        this.props.updateMasterManageRecurring(manageRecurringData)
       } else {
         this.props.addMasterManageRecurring(manageRecurringData)
-        // this.props.addHolidayShop(values)
       }
 
       form.resetFields()
       this.setState({ visible: false })
     })
   }
-  addDataManageRecurring() {
-    Modal.confirm({
-      title: 'เพิ่มรอบรับคืน',
-      width: 1000,
-      content: (
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="form-group">
-              <label htmlFor="product-edit-title">วันที่</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-category">เวลาที่เริ่ม</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-category">เวลาที่สิ้นสุด</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">Offset</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">ประเภท</label>
-              <div>
-                <RadioGroup name="radiogroup">
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </RadioGroup>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log('OK')
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
-    })
-  }
-  showDeleteConfirmManageRecurring(record) {
+  showDeleteConfirmManageRecurring(record,parent) {
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte = {record.name}</div>,
@@ -129,7 +90,7 @@ class ManageRecurring extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        console.log('OK')
+        parent.deleteMasterManageRecurring(record.manageID)
       },
       onCancel() {
         console.log('Cancel')
@@ -208,10 +169,16 @@ class ManageRecurring extends React.Component {
         render: (text, record) => (
           <span>
             <Button
+              shape="circle"
+              icon="edit"
+              onClick={() => this.onEdit(record)}
+              style={{ backgroundColor: '#c49f47' }}
+            />
+            <Button
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.showDeleteConfirmManageRecurring(record)}
+              onClick={() => this.showDeleteConfirmManageRecurring(record,this.props)}
             />
           </span>
         ),
