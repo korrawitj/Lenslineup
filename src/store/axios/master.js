@@ -173,7 +173,7 @@ export function getAllDataPickup() {
 export function AddDataPickup(data) {
   return dispatch => {
     return axios
-    .post('/api/masterHoliday/AddMasterPickup', { masterPickupData: data })
+      .post('/api/masterHoliday/AddMasterPickup', { masterPickupData: data })
       .then(response => {
         console.log(response)
         dispatch(actionCreators.pickupadddata(response.data.masterPickupData))

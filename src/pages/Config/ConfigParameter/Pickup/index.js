@@ -82,8 +82,8 @@ class PickUp extends React.Component {
     form.validateFields((err, values) => {
       if (err) {
         return
-      } 
-        this.props.AddDataPickup(values.masterPickupData)
+      }
+      this.props.AddDataPickup(values.masterPickupData)
       console.log(values)
       form.resetFields()
       this.setState({ visible: false })
