@@ -8,6 +8,7 @@ import master from '../store/reducers/master'
 import product from '../store/reducers/product'
 import productItem from '../store/reducers/productItem'
 import productPackage from '../store/reducers/productPackage'
+import productInclude from '../store/reducers/productinclude'
 export default combineReducers({
   routing: routerReducer,
   pendingTasks: pendingTasksReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
   product: product,
   productItem: productItem,
   productPackage: productPackage,
+  productInclude: productInclude,
 })

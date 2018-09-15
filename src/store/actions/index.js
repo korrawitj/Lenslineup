@@ -32,3 +32,10 @@ export {
   addProductPackage,
   updateProductPackage,
 } from './productPackage'
+
+export {
+  getProductInclude,
+  addProductInclude,
+  updateProductInclude,
+  deleteProductInclude,
+} from './productinclude'
