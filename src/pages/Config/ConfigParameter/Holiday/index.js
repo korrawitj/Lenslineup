@@ -3,6 +3,8 @@ import { Table, Icon, Input, Button, Modal, Radio, DatePicker, Form } from 'antd
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
 import moment from 'moment'
+import '../index.css'
+
 const FormItem = Form.Item
 const { TextArea } = Input
 const RadioGroup = Radio.Group
@@ -214,10 +216,11 @@ class Holiday extends React.Component {
         render: (text, record) => (
           <span>
             <Button
+              type="success"
               shape="circle"
               icon="edit"
               onClick={() => this.onEditHoliday(record)}
-              style={{ color: '#FFC300' }}
+              className="palm-btn-warning"
             />
             <Button
               type="danger"

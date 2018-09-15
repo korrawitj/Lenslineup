@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import * as actionCreators from '../../../../store/axios/master'
 import HolidayModal from './HolidayModal'
+import '../index.css'
 const { TextArea } = Input
 const RadioGroup = Radio.Group
 const FormItem = Form.Item
@@ -162,7 +163,7 @@ class HolidayShop extends React.Component {
               shape="circle"
               icon="edit"
               onClick={() => this.onEdit(record)}
-              style={{ backgroundColor: '#7DCEA0' }}
+              className="palm-btn-warning"
             />
             <Button
               type="danger"

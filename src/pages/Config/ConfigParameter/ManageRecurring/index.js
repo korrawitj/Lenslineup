@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import * as actionCreators from '../../../../store/axios/master'
 import ManageRecurringModal from './ManageRecurringModal'
+import '../index.css'
+
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -175,7 +177,7 @@ class ManageRecurring extends React.Component {
               shape="circle"
               icon="edit"
               onClick={() => this.onEdit(record)}
-              style={{ backgroundColor: '#7DCEA0' }}
+              className="palm-btn-warning"
             />
             <Button
               type="danger"
