@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload, Radio, Form, Checkbox } from 'antd'
+import { Table, Icon, Input, Button, Modal, Upload, Radio, Form, Checkbox ,Select} from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
@@ -114,7 +114,6 @@ const CollectionCreateForm = Form.create()(
           ),
         },
       ]
-      console.log({ visible })
       return (
         <Modal width={1000} visible={visible} okText="เพิ่ม" onCancel={onCancel} onOk={onCreate}>
           <div className="card-header">
@@ -128,6 +127,9 @@ const CollectionCreateForm = Form.create()(
             <Form>
               <FormItem {...formItemLayout} label="อุุปกรณ์">
                 {getFieldDecorator('productData.Name')(<Input />)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="แบรน">
+                {getFieldDecorator('productData.BrandID')(  <Select/>)}
               </FormItem>
               <FormItem {...formItemLayout} label="ประเภท">
                 {getFieldDecorator('productData.CategoryID')(<Input type="textarea" />)}
