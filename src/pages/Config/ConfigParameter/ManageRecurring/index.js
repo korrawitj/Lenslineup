@@ -56,7 +56,9 @@ class ManageRecurring extends React.Component {
       if (err) {
         return
       }
-      manageRecurringData.startTime = moment(values['manageRecurringData']['startTime']).format('hh:mm:ss')
+      manageRecurringData.startTime = moment(values['manageRecurringData']['startTime']).format(
+        'hh:mm:ss',
+      )
       manageRecurringData.endTime = values['manageRecurringData']['endTime']
       manageRecurringData.offset = values['manageRecurringData']['offset']
       manageRecurringData.name = values['manageRecurringData']['name']
