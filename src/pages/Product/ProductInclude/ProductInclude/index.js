@@ -1,9 +1,10 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload } from 'antd'
+import { Table, Icon, Input, Button, Modal, Upload ,Form} from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
-
+const FormItem=Form.Item;
+const TextArea = Input.TextArea;
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -12,7 +13,49 @@ const defaultPagination = {
   showTotal: total => `Total ${total} items`,
   total: 0,
 }
-
+const CollectionCreateForm = Form.create()(
+  class extends React.Component {
+    render() {
+      const { visible, onCancel, onCreate, form, productItemData } = this.props
+      const { getFieldDecorator } = form
+      return (
+        <Modal
+          width={1000}
+          visible={visible}
+          title="Add ProductInclude"
+          okText={productItemData.ItemID != null  ? 'Update' : 'Create'}
+          onCancel={onCancel}
+          onOk={onCreate}
+        >
+          <div className="card-body">
+            <Form layout="vertical">
+              <FormItem label="ชื่อ">
+                {getFieldDecorator('productItemData.Name')(
+                  <Input />
+                )}
+              </FormItem>
+              <FormItem label="ราคาในสัญญา">
+                {getFieldDecorator('productItemData.ContractPrice')(
+                  <Input />
+                )}
+              </FormItem>
+              <FormItem label="จำนวน">
+                {getFieldDecorator('productItemData.Quantity')(
+                  <Input />
+                )}
+              </FormItem>
+              <FormItem label="Note">
+                {getFieldDecorator('productItemData.Note')(
+                    <TextArea autosize={{ minRows: 2, maxRows: 6 }} />
+                )}
+              </FormItem>          
+            </Form>
+          </div>
+        </Modal>
+      )
+    }
+  },
+)
 class ProductInclude extends React.Component {
   state = {
     tableData: tableData.data,
@@ -23,6 +66,8 @@ class ProductInclude extends React.Component {
     filtered: false,
     previewVisible: false,
     previewImage: '',
+    visible:false,
+    productItemData:{},
     fileList: [
       {
         uid: -1,
@@ -32,7 +77,25 @@ class ProductInclude extends React.Component {
       },
     ],
   }
-  handleCancel = () => this.setState({ previewVisible: false })
+  showModal = () => {
+    this.setState({ visible: true })
+  }
+  saveFormRef = formRef => {
+    this.formRef = formRef
+  }
+  handleCreate = () => {
+    const form = this.formRef.props.form
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      console.log('Received values of form: ', values)
+
+      form.resetFields()
+      this.setState({ visible: false })
+    })
+  }
+  handleCancel = () => this.setState({ previewVisible: false ,visible:false })
 
   handlePreview = file => {
     this.setState({
@@ -89,61 +152,7 @@ class ProductInclude extends React.Component {
       },
     })
   }
-  addDataConfirm() {
-    const { previewVisible, previewImage, fileList } = this.state
-    const uploadButton = (
-      <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    )
-    Modal.confirm({
-      title: 'Add Product Include',
-      width: 1000,
-      content: (
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="form-group">
-              <label htmlFor="product-edit-title">อุปกรณ์</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-category">ราคาในสัญญา</label>
-              <Input id="product-edit-category" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">จำนวน</label>
-              <Input id="product-edit-price" placeholder="" />
-            </div>
-            <div className="form-group">
-              <lable htmlFor="image">รูปภาพ</lable>
-              <Upload
-                action=""
-                listType="picture-card"
-                fileList={fileList}
-                onPreview={this.handlePreview}
-                onChange={this.handleChange}
-              >
-                {fileList.length >= 3 ? null : uploadButton}
-              </Upload>
-              <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                <img alt="example" style={{ width: '100%' }} src={previewImage} />
-              </Modal>
-            </div>
-          </div>
-        </div>
-      ),
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log('OK')
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
-    })
-  }
+ 
   showData(record) {
     let T = record
     Modal.info({
@@ -184,7 +193,10 @@ class ProductInclude extends React.Component {
       })
     }
   }
-
+  onCreateProductInclude = () => {
+    this.setState({ productItemData: {} })
+    this.showModal()
+  }
   componentDidMount() {
     this.props.getAllProductItem()
   }
@@ -287,9 +299,16 @@ class ProductInclude extends React.Component {
           <div className="utils__title">
             <strong>อุปกรณ์ที่ให้ไประหว่างเช่า</strong>
           </div>
-          <Button type="primary" icon="plus" onClick={() => this.addDataConfirm()}>
-            เพิ่มอุปกรณ์
+          <Button type="primary" icon="plus" onClick={this.onCreateProductInclude}>
+            เพิ่มอุปกรณ์ที่ให้ไประหว่างเช่า
           </Button>
+          <CollectionCreateForm
+            wrappedComponentRef={this.saveFormRef}
+            productItemData={this.state.productItemData}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}
+          />
         </div>
         <div className="card-body">
           <Table

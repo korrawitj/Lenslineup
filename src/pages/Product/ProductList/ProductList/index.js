@@ -179,12 +179,12 @@ const CollectionCreateForm = Form.create()(
               </FormItem>
               <FormItem {...formItemLayout} label="Note">
                 {getFieldDecorator('productData.Note')(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />
                 )}
               </FormItem>
               <FormItem {...formItemLayout} label="QR Code">
                 {getFieldDecorator('productData.QRID')(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />
                 )}
               </FormItem>
 
@@ -193,7 +193,7 @@ const CollectionCreateForm = Form.create()(
                   <Radio.Group>
                     <RadioButton value={true}>แสดง</RadioButton>
                     <RadioButton value={false}>ไม่แสดง</RadioButton>
-                  </Radio.Group>,
+                  </Radio.Group>
                 )}
               </FormItem>
               <FormItem {...formItemLayout} label="สถานะคิวจอง">
