@@ -38,30 +38,30 @@ const ManageRecurringModal = Form.create()(
                 <FormItem {...formItemLayout} label="เวลาเริ่ม">
                   {getFieldDecorator('manageRecurringData.startTime', {
                     initialValue:
-                      (manageRecurringData.startTime != null
+                      manageRecurringData.startTime != null
                         ? moment(manageRecurringData.startTime, 'HH:mm:ss')
-                        : moment('00:00:00', 'HH:mm:ss')),
+                        : moment('00:00:00', 'HH:mm:ss'),
                   })(<TimePicker />)}
                 </FormItem>
 
                 <FormItem {...formItemLayout} label="เวลาสิ้นสุด">
                   {getFieldDecorator('manageRecurringData.endTime', {
-                    initialValue: (manageRecurringData.endTime
+                    initialValue: manageRecurringData.endTime
                       ? moment(manageRecurringData.endTime, 'HH:mm:ss')
-                      : moment('00:00:00', 'HH:mm:ss')),
+                      : moment('00:00:00', 'HH:mm:ss'),
                   })(<TimePicker />)}
                 </FormItem>
 
                 <FormItem {...formItemLayout} label="offset">
                   {getFieldDecorator('manageRecurringData.offset', {
                     initialValue:
-                      (manageRecurringData.offset == null ? 0 : manageRecurringData.offset),
+                      manageRecurringData.offset == null ? 0 : manageRecurringData.offset,
                   })(<InputNumber min={0} max={10} />)}
                 </FormItem>
               </FormItem>
               <FormItem label="ประเภท">
                 {getFieldDecorator('manageRecurringData.manageTypeId', {
-                  initialValue: (manageRecurringData.manageTypeId),
+                  initialValue: manageRecurringData.manageTypeId,
                 })(
                   <Select placeholder="Please select" style={{ width: '30%' }}>
                     {masterType.map(item => (
