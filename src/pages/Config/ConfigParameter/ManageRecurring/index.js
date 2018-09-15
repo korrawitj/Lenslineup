@@ -155,8 +155,8 @@ class ManageRecurring extends React.Component {
       },
       {
         title: 'ประเภท',
-        dataIndex: 'manage_type',
-        key: 'manage_type',
+        dataIndex: 'manageName',
+        key: 'manageName',
         render: text => <span>{text}</span>,
         sorter: (a, b) => a.receive - b.receive,
       },
