@@ -20,5 +20,4 @@ yarn-debug.log*
 yarn-error.log*
 yarn-lock.log*
 yarn.lock*
-/src/**/*.css
 package-lock.json*
