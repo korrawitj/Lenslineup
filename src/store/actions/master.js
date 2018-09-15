@@ -35,6 +35,13 @@ export const pickupgetdata = value => {
   }
 }
 
+export const pickupadddata = value => {
+  return {
+    type: actionTypes.PICKUPADDDATA,
+    val: value,
+  }
+}
+
 export const holidayadddata = value => {
   return {
     type: actionTypes.HOLIDAYADDDATA,

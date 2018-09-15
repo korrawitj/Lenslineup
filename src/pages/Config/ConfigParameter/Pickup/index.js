@@ -34,7 +34,7 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
               <FormItem label="ค่าส่ง">
-                {getFieldDecorator('masterPickupData.delivery_charge')(<Input />)}
+                {getFieldDecorator('masterPickupData.deliveryCharge')(<Input />)}
               </FormItem>
             </Form>
           </div>
@@ -61,7 +61,7 @@ class PickUp extends React.Component {
           pickupID: '',
           name: '',
           pickuptype: '',
-          delivery_charge: '',
+          deliveryCharge: '',
         },
       ],
     },
@@ -83,6 +83,7 @@ class PickUp extends React.Component {
       if (err) {
         return
       }
+      this.props.AddDataPickup(values.masterPickupData)
       console.log(values)
       form.resetFields()
       this.setState({ visible: false })
@@ -129,6 +130,7 @@ class PickUp extends React.Component {
   }
 
   render() {
+    console.log(this.props.master)
     let { pager } = this.state
 
     const columnsMasterPickup = [
@@ -148,10 +150,10 @@ class PickUp extends React.Component {
       },
       {
         title: 'ค่าส่ง',
-        dataIndex: 'delivery_charge',
-        key: 'delivery_charge',
+        dataIndex: 'deliveryCharge',
+        key: 'deliveryCharge',
         render: text => <span>{text}</span>,
-        sorter: (a, b) => a.delivery_charge - b.delivery_charge,
+        sorter: (a, b) => a.deliveryCharge - b.deliveryCharge,
       },
       {
         title: 'Action',

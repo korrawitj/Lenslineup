@@ -170,6 +170,19 @@ export function getAllDataPickup() {
   }
 }
 
+export function AddDataPickup(data) {
+  return dispatch => {
+    return axios
+      .post('/api/masterHoliday/AddMasterPickup', { masterPickupData: data })
+      .then(response => {
+        console.log(response)
+        dispatch(actionCreators.pickupadddata(response.data.masterPickupData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
 export function getAllMasterType() {
   return dispatch => {
     return axios
