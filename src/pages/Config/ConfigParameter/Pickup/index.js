@@ -92,7 +92,7 @@ class PickUp extends React.Component {
         return
       }
       console.log(values)
-      if (masterPickupData.pickupID!= null) {
+      if (masterPickupData.pickupID != null) {
         this.props.updateDataPickup(masterPickupData)
       } else {
         this.props.AddDataPickup(values.masterPickupData)
