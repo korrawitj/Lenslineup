@@ -41,13 +41,11 @@ class HolidayShop extends React.Component {
       values['holidayShopData']['date'] = moment(values['holidayShopData']['date']).format(
         'YYYY-MM-DD',
       )
-      console.log('Received values of form: ', values)
       if (holidayShopData.shopID != null) {
         holidayShopData.date = values['holidayShopData']['date']
         holidayShopData.message = values['holidayShopData']['message']
         holidayShopData.receive = values['holidayShopData']['receive']
-        holidayShopData.recurring = values['holidayShopData']['recurring']
-        debugger
+        holidayShopData.recurring = values['holidayShopData']['recurring']        
         this.props.updateHolidayShop(holidayShopData)
       } else {
         this.props.addHolidayShop(values)
@@ -82,7 +80,6 @@ class HolidayShop extends React.Component {
     })
   }
   onCancle = () => {
-    debugger
     this.setState({ previewVisible: false, visible: false })
   }
   createHolidayShop = () => {}

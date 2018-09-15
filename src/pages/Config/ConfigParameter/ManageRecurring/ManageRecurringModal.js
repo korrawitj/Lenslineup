@@ -18,7 +18,6 @@ const ManageRecurringModal = Form.create()(
       }
       const { visible, onCancel, onSubmitData, form, manageRecurringData, masterType } = this.props
       const { getFieldDecorator } = form
-
       return (
         <Modal
           title="เพิ่มรอบรับคืน"

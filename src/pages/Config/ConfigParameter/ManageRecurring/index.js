@@ -75,7 +75,6 @@ class ManageRecurring extends React.Component {
       manageRecurringData.name = values['manageRecurringData']['name']
       manageRecurringData.manageTypeId = values['manageRecurringData']['manageTypeId']
 
-      console.log('Received values of form: ', values)
       if (manageRecurringData.manageID != null) {
         this.props.updateMasterManageRecurring(manageRecurringData)
       } else {

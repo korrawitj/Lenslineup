@@ -11,7 +11,6 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, holiDaydata } = this.props
       const { getFieldDecorator } = form
-      console.log(holiDaydata)
       return (
         <Modal
           width={1000}
@@ -91,7 +90,6 @@ class Holiday extends React.Component {
         return
       }
       values['holidayData']['date'] = moment(values['holidayData']['date']).format('YYYY-MM-DD')
-      console.log('Received values of form: ', values)
       if (holiDaydata.holidayID != null) {
         holiDaydata.date = values['holidayData']['date']
         holiDaydata.message = values['holidayData']['message']
