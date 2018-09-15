@@ -84,7 +84,7 @@ class ProductInclude extends React.Component {
         return
       }
       console.log('Received values of form: ', values)
-      console.log(this.props.addProductInclude(values.productIncludeData))
+      this.props.addProductInclude(values.productIncludeData)
       form.resetFields()
       this.setState({ visible: false })
     })
