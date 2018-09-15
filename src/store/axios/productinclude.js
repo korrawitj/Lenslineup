@@ -42,7 +42,6 @@ export function deleteProductInclude(ProductID, ItemID) {
     return axios
       .post('/API/product/productInclude/delete', { ProductID: ProductID, ItemID: ItemID })
       .then(response => {
-        getAllDataHoliday()
       })
       .catch(error => {
         console.log('Error axios ' + error)
