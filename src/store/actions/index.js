@@ -16,6 +16,7 @@ export {
   managegetdata,
   pickupgetdata,
   holidayadddata,
+  masterTypeData
 } from './master'
 
 export {

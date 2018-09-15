@@ -169,3 +169,16 @@ export function getAllDataPickup() {
       })
   }
 }
+
+export function getAllMasterType(){
+  return dispatch => {
+    return axios
+      .get('/api/masterHoliday/getAllMasterType')
+      .then(response => {
+        dispatch(actionCreators.masterTypeData(response.data.masterTypeData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  } 
+}

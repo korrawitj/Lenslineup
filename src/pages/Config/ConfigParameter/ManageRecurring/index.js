@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import * as actionCreators from '../../../../store/axios/master'
 import ManageRecurringModal from './ManageRecurringModal'
-const { TextArea } = Input
-const RadioGroup = Radio.Group
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -26,6 +24,7 @@ class ManageRecurring extends React.Component {
       manage_type: null,
       pickupID: null,
     },
+    masterType : [],
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
@@ -37,6 +36,7 @@ class ManageRecurring extends React.Component {
   }
   componentDidMount() {
     this.props.getAllDataManage()
+    this.props.getAllMasterType()
   }
   componentDidUpdate(prevProps, prevState) {
     // if(this.state.visible===false){
@@ -47,7 +47,7 @@ class ManageRecurring extends React.Component {
     this.formRef = formRef
   }
   onAdd = () => {
-    this.setState({ manageRecurringData: {} })
+    this.setState({ manageRecurringData: {},masterType:this.props.master.masterTypeData})
     this.showModal()
   }
   onEdit(record) {
@@ -73,6 +73,7 @@ class ManageRecurring extends React.Component {
       )
       manageRecurringData.offset = values['manageRecurringData']['offset']
       manageRecurringData.name = values['manageRecurringData']['name']
+      manageRecurringData.manageTypeId =values['manageRecurringData']['manageTypeId']
 
       console.log('Received values of form: ', values)
       if (manageRecurringData.manageID != null) {
@@ -212,6 +213,7 @@ class ManageRecurring extends React.Component {
           visible={this.state.visible}
           onCancel={this.onCancle}
           onSubmitData={this.onSubmitData}
+          masterType = {this.props.master.masterTypeData}
         />
       </div>
     )

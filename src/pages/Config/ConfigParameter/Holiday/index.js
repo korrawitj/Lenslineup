@@ -11,6 +11,7 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, holiDaydata } = this.props
       const { getFieldDecorator } = form
+      console.log(holiDaydata)
       return (
         <Modal
           width={1000}
