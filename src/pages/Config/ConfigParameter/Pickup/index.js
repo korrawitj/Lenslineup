@@ -1,20 +1,17 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio, Form, DatePicker ,Checkbox  } from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio, Form, DatePicker, Checkbox } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/master'
 const FormItem = Form.Item
 const TextArea = Input.TextArea
 const RadioButton = Radio.Button
-const CheckboxGroup = Checkbox.Group;
+const CheckboxGroup = Checkbox.Group
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
       const { visible, onCancel, onCreate, form, masterPickupData } = this.props
       const { getFieldDecorator } = form
-      const options = [
-        { label: 'รับของ', value: 'รับของ' },
-        { label: 'คืนของ', value: 'คืนของ' },
-      ];
+      const options = [{ label: 'รับของ', value: 'รับของ' }, { label: 'คืนของ', value: 'คืนของ' }]
 
       return (
         <Modal
@@ -34,9 +31,9 @@ const CollectionCreateForm = Form.create()(
                 })(<Input />)}
               </FormItem>
               <FormItem label="ประเภท">
-                {getFieldDecorator('masterPickupData.pickuptype',{ initialValue: masterPickupData.pickuptype})(
-                 <CheckboxGroup options={options} />
-                )}
+                {getFieldDecorator('masterPickupData.pickuptype', {
+                  initialValue: masterPickupData.pickuptype,
+                })(<CheckboxGroup options={options} />)}
               </FormItem>
               <FormItem label="ค่าส่ง">
                 {getFieldDecorator('masterPickupData.deliveryCharge', {
@@ -97,11 +94,11 @@ class PickUp extends React.Component {
       }
 
       if (masterPickupData.pickupID != null) {
-        values.masterPickupData['key']=masterPickupData['key']
-        values.masterPickupData['pickupID']=masterPickupData['pickupID']
+        values.masterPickupData['key'] = masterPickupData['key']
+        values.masterPickupData['pickupID'] = masterPickupData['pickupID']
         this.props.updateDataPickup(values.masterPickupData)
       } else {
-        values.masterPickupData['pickuptype']=values.masterPickupData['pickuptype'].join(',');
+        values.masterPickupData['pickuptype'] = values.masterPickupData['pickuptype'].join(',')
         this.props.AddDataPickup(values.masterPickupData)
       }
       form.resetFields()
