@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload, Radio, Form } from 'antd'
+import { Table, Icon, Input, Button, Modal, Upload, Radio, Form, Checkbox } from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
@@ -11,9 +11,19 @@ const TextArea = Input.TextArea
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { pager } = this.props
+      // const { pager } = this.props
       const { visible, onCancel, onCreate, form } = this.props
       const { getFieldDecorator } = form
+      const formItemLayout = {
+        labelCol: {
+          xs: { span: 24 },
+          sm: { span: 5 },
+        },
+        wrapperCol: {
+          xs: { span: 24 },
+          sm: { span: 16 },
+        },
+      }
       const dataCopy = [
         {
           title: 'View',
@@ -104,6 +114,7 @@ const CollectionCreateForm = Form.create()(
           ),
         },
       ]
+      console.log({ visible })
       return (
         <Modal width={1000} visible={visible} okText="เพิ่ม" onCancel={onCancel} onOk={onCreate}>
           <div className="card-header">
@@ -115,88 +126,84 @@ const CollectionCreateForm = Form.create()(
           </div>
           <div className="card-body">
             <Form>
-              <FormItem label="อุุปกรณ์">
-                {getFieldDecorator('productData.Name', {
-                  rules: [{ required: true, message: 'กรุณากรอก อุุปกรณ์!' }],
-                })(<Input />)}
+              <FormItem {...formItemLayout} label="อุุปกรณ์">
+                {getFieldDecorator('productData.Name')(<Input />)}
               </FormItem>
-              <FormItem label="ประเภท">
-                {getFieldDecorator('productData.CategoryID', {
-                  rules: [{ required: true, message: 'กรุณาเลือก ประเภท!' }],
-                })(<Input type="textarea" />)}
+              <FormItem {...formItemLayout} label="ประเภท">
+                {getFieldDecorator('productData.CategoryID')(<Input type="textarea" />)}
               </FormItem>
-              <FormItem label="ราคาเช่า1วัน">
-                {getFieldDecorator('productData.RentDay_Fee', {
-                  rules: [{ required: true, message: 'กรุณากรอก ราคาเช่า!' }],
-                })(<Input />)}
+              <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
+                {getFieldDecorator('productData.IsDay')(<Checkbox />)}
               </FormItem>
-              <FormItem label="จำนวนขั้นต่ำวันให้เช่า">
-                {getFieldDecorator('productData.IsDay', {
-                  rules: [{ required: true, message: 'กรุณากรอก จำนวนขั้นต่ำวันให้เช่า!' }],
-                })(<Input />)}
+              {form.getFieldValue('productData.IsDay') === true ? (
+                <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
+                  {getFieldDecorator('productData.RentDay_Fee')(<Input />)}
+                </FormItem>
+              ) : (
+                ''
+              )}
+              <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
+                {getFieldDecorator('productData.IsHaftDay')(<Checkbox />)}
               </FormItem>
-              <FormItem label="แบบที่ 1">
-                {getFieldDecorator('productData.DepositType1', {
-                  rules: [{ required: true, message: 'กรุณากรอก แบบที่ 1!' }],
-                })(<Input />)}
+              {form.getFieldValue('productData.IsHaftDay') === true ? (
+                <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
+                  {getFieldDecorator('productData.RentHalfDay_Fee')(<Input />)}
+                </FormItem>
+              ) : (
+                ''
+              )}
+              <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
+                {getFieldDecorator('productData.IsHour')(<Checkbox />)}
               </FormItem>
-              <FormItem label="แบบที่ 2">
-                {getFieldDecorator('productData.DepositType2', {
-                  rules: [{ required: true, message: 'กรุณากรอก แบบที่ 2!' }],
-                })(<Input />)}
+              {form.getFieldValue('productData.IsHour') === true ? (
+                <FormItem {...formItemLayout} label="ราคาเช่าหนุ่งชั่วโมง">
+                  {getFieldDecorator('productData.RentHour_Fee')(<Input />)}
+                </FormItem>
+              ) : (
+                ''
+              )}
+              <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
+                {getFieldDecorator('productData.RentDay')(<Input />)}
               </FormItem>
-              <FormItem label="ราคาในสัญญา">
-                {getFieldDecorator('productData.ContactPrice', {
-                  rules: [{ required: true, message: 'กรุณากรอก ราคาในสัญญา!' }],
-                })(<Input />)}
+
+              <FormItem {...formItemLayout} label="แบบที่ 1">
+                {getFieldDecorator('productData.DepositType1')(<Input />)}
               </FormItem>
-              <FormItem label="Note">
+              <FormItem {...formItemLayout} label="แบบที่ 2">
+                {getFieldDecorator('productData.DepositType2')(<Input />)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="ราคาในสัญญา">
+                {getFieldDecorator('productData.ContactPrice')(<Input />)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="Note">
                 {getFieldDecorator('productData.Note')(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
-              <FormItem label="QR ID">
+              <FormItem {...formItemLayout} label="QR Code">
                 {getFieldDecorator('productData.QRID')(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
 
-              <FormItem label="สถานะหน้าเว็บ">
+              <FormItem {...formItemLayout} label="สถานะหน้าเว็บ">
                 {getFieldDecorator('productData.isShow')(
                   <Radio.Group>
-                    <RadioButton value={1}>แสดง</RadioButton>
-                    <RadioButton value={0}>ไม่แสดง</RadioButton>
+                    <RadioButton value={true}>แสดง</RadioButton>
+                    <RadioButton value={false}>ไม่แสดง</RadioButton>
                   </Radio.Group>,
                 )}
               </FormItem>
-              <FormItem label="สถานะคิวจอง">
+              <FormItem {...formItemLayout} label="สถานะคิวจอง">
                 {getFieldDecorator('productData.Status')(
                   <Radio.Group>
-                    <RadioButton value={1}>แสดง</RadioButton>
-                    <RadioButton value={0}>ไม่แสดง</RadioButton>
+                    <RadioButton value={true}>พร้อมให้เช่า</RadioButton>
+                    <RadioButton value={false}>ยังไม่พร้อมให้เช่า</RadioButton>
                   </Radio.Group>,
                 )}
               </FormItem>
-              {/* <FormItem label="การรับ">
-              {getFieldDecorator('productData.isShow')(
- <Radio.Group>
- <Radio value={1}>แสดง</Radio>
- <Radio value={0}>ไม่แสดง</Radio>
-</Radio.Group>
-
-              )}
-            </FormItem> 
-            <FormItem label="การคืน">
-              {getFieldDecorator('productData.isShow')(
- <Radio.Group>
- <Radio value={1}>แสดง</Radio>
- <Radio value={0}>ไม่แสดง</Radio>
-</Radio.Group>
-
-              )}
-            </FormItem>  */}
             </Form>
-            <div className="col-lg-8">
+            {/* <div className="col-lg-8">
               <div className="utils__title">
                 <strong>Product Copy</strong>
               </div>
@@ -206,7 +213,7 @@ const CollectionCreateForm = Form.create()(
                 pagination={pager}
                 onChange={this.handleTableChange}
               />
-            </div>
+            </div> */}
           </div>
         </Modal>
       )
@@ -449,12 +456,6 @@ class ProductList extends React.Component {
             <Button type="primary" shape="circle" icon="search" onClick={this.onSearch} />
             <Button
               shape="circle"
-              icon="plus"
-              onClick={this.onSearch}
-              style={{ backgroundColor: '#46c938' }}
-            />
-            <Button
-              shape="circle"
               icon="edit"
               onClick={this.onSearch}
               style={{ backgroundColor: '#c49f47' }}
@@ -478,7 +479,7 @@ class ProductList extends React.Component {
           {/* <Button type="primary" icon="plus" onClick={() => this.addDataProduct()}>
             เพิ่มอุปกรณ์
           </Button> */}
-          <Button type="primary" onClick={this.showModal}>
+          <Button icon="plus" type="primary" onClick={this.showModal}>
             เพิ่มอุปกรณ์
           </Button>
           <CollectionCreateForm
