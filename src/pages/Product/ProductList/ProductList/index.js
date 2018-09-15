@@ -1,18 +1,19 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload, Radio, Form, Checkbox, Select } from 'antd'
+import { Table, Icon, Input, Button, Modal, Upload,DatePicker, Radio, Form, Checkbox, Select ,TreeSelect } from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
+import moment from 'moment'
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
 const confirm = Modal.confirm
-const TextArea = Input.TextArea
+const {TextArea} = Input
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
       // const { pager } = this.props
-      const { visible, onCancel, onCreate, form } = this.props
+      const { visible, onCancel, onCreate, form ,productItemData} = this.props
       const { getFieldDecorator } = form
       const formItemLayout = {
         labelCol: {
@@ -24,96 +25,96 @@ const CollectionCreateForm = Form.create()(
           sm: { span: 16 },
         },
       }
-      const dataCopy = [
-        {
-          title: 'View',
-          key: 'CategoryID',
-          render: (text, record) => (
-            <span>
-              <Button icon="cross" size="small" onClick={() => console.log(record)}>
-                View
-              </Button>
-            </span>
-          ),
-        },
-        {
-          title: 'ตัวที่',
-          dataIndex: 'CopyNo',
-          key: 'CopyNo',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {text}
-            </a>
-          ),
-          sorter: (a, b) => a.CopyNo - b.CopyNo,
-        },
-        {
-          title: 'ชื่อสั้น',
-          dataIndex: 'Serail',
-          key: 'SerialNumber',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {text}
-            </a>
-          ),
-          sorter: (a, b) => a.SerialNumber - b.SerialNumber,
-        },
-        {
-          title: 'ราคาที่ซื้อ',
-          dataIndex: 'PurchasePrice',
-          key: 'PurchasePrice',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {'#' + text}
-            </a>
-          ),
-          sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
-        },
-        {
-          title: 'วันที่ซื้อ',
-          dataIndex: 'PurchaseDate',
-          key: 'PurchaseDate',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {'#' + text}
-            </a>
-          ),
-          sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
-        },
-        {
-          title: 'สถานะ',
-          dataIndex: 'Status',
-          key: 'Status',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {'#' + text}
-            </a>
-          ),
-          sorter: (a, b) => a.Status - b.Status,
-        },
-        {
-          title: 'แก้ไข',
-          key: 'Edit',
-          render: (text, record) => (
-            <span>
-              <Button icon="cross" size="small" onClick={() => console.log(record)}>
-                Edit
-              </Button>
-            </span>
-          ),
-        },
-        {
-          title: 'ลบ',
-          key: 'Action',
-          render: (text, record) => (
-            <span>
-              <Button icon="cross" size="small" onClick={() => console.log(record)}>
-                Remove
-              </Button>
-            </span>
-          ),
-        },
-      ]
+      // const dataCopy = [
+      //   {
+      //     title: 'View',
+      //     key: 'CategoryID',
+      //     render: (text, record) => (
+      //       <span>
+      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
+      //           View
+      //         </Button>
+      //       </span>
+      //     ),
+      //   },
+      //   {
+      //     title: 'ตัวที่',
+      //     dataIndex: 'CopyNo',
+      //     key: 'CopyNo',
+      //     render: text => (
+      //       <a className="utils__link--underlined" href="javascript: void(0);">
+      //         {text}
+      //       </a>
+      //     ),
+      //     sorter: (a, b) => a.CopyNo - b.CopyNo,
+      //   },
+      //   {
+      //     title: 'ชื่อสั้น',
+      //     dataIndex: 'Serail',
+      //     key: 'SerialNumber',
+      //     render: text => (
+      //       <a className="utils__link--underlined" href="javascript: void(0);">
+      //         {text}
+      //       </a>
+      //     ),
+      //     sorter: (a, b) => a.SerialNumber - b.SerialNumber,
+      //   },
+      //   {
+      //     title: 'ราคาที่ซื้อ',
+      //     dataIndex: 'PurchasePrice',
+      //     key: 'PurchasePrice',
+      //     render: text => (
+      //       <a className="utils__link--underlined" href="javascript: void(0);">
+      //         {'#' + text}
+      //       </a>
+      //     ),
+      //     sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
+      //   },
+      //   {
+      //     title: 'วันที่ซื้อ',
+      //     dataIndex: 'PurchaseDate',
+      //     key: 'PurchaseDate',
+      //     render: text => (
+      //       <a className="utils__link--underlined" href="javascript: void(0);">
+      //         {'#' + text}
+      //       </a>
+      //     ),
+      //     sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
+      //   },
+      //   {
+      //     title: 'สถานะ',
+      //     dataIndex: 'Status',
+      //     key: 'Status',
+      //     render: text => (
+      //       <a className="utils__link--underlined" href="javascript: void(0);">
+      //         {'#' + text}
+      //       </a>
+      //     ),
+      //     sorter: (a, b) => a.Status - b.Status,
+      //   },
+      //   {
+      //     title: 'แก้ไข',
+      //     key: 'Edit',
+      //     render: (text, record) => (
+      //       <span>
+      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
+      //           Edit
+      //         </Button>
+      //       </span>
+      //     ),
+      //   },
+      //   {
+      //     title: 'ลบ',
+      //     key: 'Action',
+      //     render: (text, record) => (
+      //       <span>
+      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
+      //           Remove
+      //         </Button>
+      //       </span>
+      //     ),
+      //   },
+      // ]
       return (
         <Modal width={1000} visible={visible} okText="เพิ่ม" onCancel={onCancel} onOk={onCreate}>
           <div className="card-header">
@@ -126,78 +127,95 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form>
               <FormItem {...formItemLayout} label="อุุปกรณ์">
-                {getFieldDecorator('productData.Name')(<Input />)}
+                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(<Input />)}
               </FormItem>
               <FormItem {...formItemLayout} label="แบรน">
-                {getFieldDecorator('productData.BrandID')(<Select />)}
+                {getFieldDecorator('productItemData.BrandID')(<Select />)}
               </FormItem>
               <FormItem {...formItemLayout} label="ประเภท">
-                {getFieldDecorator('productData.CategoryID')(<Input type="textarea" />)}
+                {getFieldDecorator('productItemData.CategoryID')(<TreeSelect  />)}
               </FormItem>
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
-                {getFieldDecorator('productData.IsDay')(<Checkbox />)}
+                {getFieldDecorator('productItemData.IsDay')(<Checkbox />)}
               </FormItem>
-              {form.getFieldValue('productData.IsDay') === true ? (
+              {form.getFieldValue('productItemData.IsDay') === true ? (
                 <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
-                  {getFieldDecorator('productData.RentDay_Fee')(<Input />)}
+                  {getFieldDecorator('productItemData.RentDay_Fee',{ initialValue: productItemData.RentDay_Fee })(<Input />)}
                 </FormItem>
               ) : (
                 ''
               )}
               <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
-                {getFieldDecorator('productData.IsHaftDay')(<Checkbox />)}
+                {getFieldDecorator('productItemData.IsHaftDay')(<Checkbox />)}
               </FormItem>
-              {form.getFieldValue('productData.IsHaftDay') === true ? (
+              {form.getFieldValue('productItemData.IsHaftDay') === true ? (
                 <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
-                  {getFieldDecorator('productData.RentHalfDay_Fee')(<Input />)}
+                  {getFieldDecorator('productItemData.RentHalfDay_Fee')(<Input />)}
                 </FormItem>
               ) : (
                 ''
               )}
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
-                {getFieldDecorator('productData.IsHour')(<Checkbox />)}
+                {getFieldDecorator('productItemData.IsHour')(<Checkbox />)}
               </FormItem>
-              {form.getFieldValue('productData.IsHour') === true ? (
+              {form.getFieldValue('productItemData.IsHour') === true ? (
                 <FormItem {...formItemLayout} label="ราคาเช่าหนุ่งชั่วโมง">
-                  {getFieldDecorator('productData.RentHour_Fee')(<Input />)}
+                  {getFieldDecorator('productItemData.RentHour_Fee')(<Input />)}
                 </FormItem>
               ) : (
                 ''
               )}
               <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
-                {getFieldDecorator('productData.RentDay')(<Input />)}
+                {getFieldDecorator('productItemData.RentDay')(<Input />)}
               </FormItem>
 
               <FormItem {...formItemLayout} label="แบบที่ 1">
-                {getFieldDecorator('productData.DepositType1')(<Input />)}
+                {getFieldDecorator('productItemData.DepositType1')(<Input />)}
               </FormItem>
               <FormItem {...formItemLayout} label="แบบที่ 2">
-                {getFieldDecorator('productData.DepositType2')(<Input />)}
+                {getFieldDecorator('productItemData.DepositType2')(<Input />)}
               </FormItem>
               <FormItem {...formItemLayout} label="ราคาในสัญญา">
-                {getFieldDecorator('productData.ContactPrice')(<Input />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="Note">
-                {getFieldDecorator('productData.Note')(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                )}
+                {getFieldDecorator('productItemData.ContactPrice')(<Input />)}
               </FormItem>
               <FormItem {...formItemLayout} label="QR Code">
-                {getFieldDecorator('productData.QRID')(
+                {getFieldDecorator('productItemData.QRID')(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
-
+              <FormItem {...formItemLayout} label="Serial Number">
+                {getFieldDecorator('productItemData.SerialNumber')(<Input />)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="ราคาที่ซื้อ">
+                {getFieldDecorator('productItemData.PurchasePrice')(<Input />)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="วันที่ซื้อ">
+                {getFieldDecorator('productItemData.PurchaseDate',{ initialValue:productItemData.PurchaseDate==null?null: moment(productItemData.PurchaseDate) })(<DatePicker/>)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="วันที่หมดประกัน">
+                {getFieldDecorator('productItemData.ExpireDate')(<DatePicker/>)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="สถานที่ซื้อ / สภาพ / ประกัน">
+                {getFieldDecorator('productItemData.Location')(<TextArea autosize={{ minRows: 2, maxRows: 6 }}/>)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="Remark (สภาพตำหนิ)">
+                {getFieldDecorator('productItemData.Remark')(<TextArea autosize={{ minRows: 2, maxRows: 6 }}/>)}
+              </FormItem>
+              <FormItem {...formItemLayout} label="Note">
+                {getFieldDecorator('productItemData.Note')(
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                )}
+              </FormItem>
               <FormItem {...formItemLayout} label="สถานะหน้าเว็บ">
-                {getFieldDecorator('productData.isShow')(
+                {getFieldDecorator('productItemData.isShow')(
                   <Radio.Group>
                     <RadioButton value={true}>แสดง</RadioButton>
                     <RadioButton value={false}>ไม่แสดง</RadioButton>
                   </Radio.Group>,
                 )}
               </FormItem>
-              <FormItem {...formItemLayout} label="สถานะคิวจอง">
-                {getFieldDecorator('productData.Status')(
+              <FormItem {...formItemLayout} label="สถานะ">
+                {getFieldDecorator('productItemData.Status')(
                   <Radio.Group>
                     <RadioButton value={true}>พร้อมให้เช่า</RadioButton>
                     <RadioButton value={false}>ยังไม่พร้อมให้เช่า</RadioButton>
@@ -205,17 +223,6 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
             </Form>
-            {/* <div className="col-lg-8">
-              <div className="utils__title">
-                <strong>Product Copy</strong>
-              </div>
-              <Table
-                columns={dataCopy}
-                dataSource=""
-                pagination={pager}
-                onChange={this.handleTableChange}
-              />
-            </div> */}
           </div>
         </Modal>
       )
@@ -237,6 +244,7 @@ class ProductList extends React.Component {
     tableData: tableData.data,
     data: tableData.data,
     pager: { ...defaultPagination },
+    productItemData:{},
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
@@ -251,39 +259,6 @@ class ProductList extends React.Component {
         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
       },
     ],
-    dataSend: {
-      productData: [
-        {
-          ProductID: '',
-          Copy: '',
-          Name: '',
-          SerialNumber: '',
-          ContractPrice: '',
-          PurchasePrice: '',
-          PurchaseDate: '',
-          DisplayName: '',
-          Status: '',
-          DepositType1: '',
-          DepositType2: '',
-          Note: '',
-          isShow: '',
-          MetaTitle: '',
-          MetaDescription: '',
-          Permalink: '',
-          Description: '',
-          CategoryID: '',
-          Description1: '',
-          IsDay: '',
-          RentDay_Fee: '',
-          IsHaftDay: '',
-          RentHaftDay_Fee: '',
-          IsHour: '',
-          RentHour_Fee: '',
-          RentDay: '',
-          BrandName: '',
-        },
-      ],
-    },
   }
   handleCancel = () => this.setState({ previewVisible: false, visible: false })
   showModal = () => {
@@ -486,6 +461,7 @@ class ProductList extends React.Component {
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
+            productItemData={this.state.productItemData}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}

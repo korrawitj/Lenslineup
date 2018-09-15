@@ -16,30 +16,30 @@ const defaultPagination = {
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form, productItemData } = this.props
+      const { visible, onCancel, onCreate, form, productIncludeData } = this.props
       const { getFieldDecorator } = form
       return (
         <Modal
           width={1000}
           visible={visible}
           title="Add ProductInclude"
-          okText={productItemData.ItemID != null ? 'Update' : 'Create'}
+          okText={productIncludeData.ItemID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
         >
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productItemData.Name')(<Input />)}
+                {getFieldDecorator('productIncludeData.Name')(<Input />)}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
-                {getFieldDecorator('productItemData.ContractPrice')(<Input />)}
+                {getFieldDecorator('productIncludeData.ContractPrice')(<Input />)}
               </FormItem>
               <FormItem label="จำนวน">
-                {getFieldDecorator('productItemData.Quantity')(<Input />)}
+                {getFieldDecorator('productIncludeData.Quantity')(<Input />)}
               </FormItem>
               <FormItem label="Note">
-                {getFieldDecorator('productItemData.Note')(
+                {getFieldDecorator('productIncludeData.Note')(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
@@ -61,7 +61,7 @@ class ProductInclude extends React.Component {
     previewVisible: false,
     previewImage: '',
     visible: false,
-    productItemData: {},
+    productIncludeData: {},
     fileList: [
       {
         uid: -1,
@@ -188,7 +188,7 @@ class ProductInclude extends React.Component {
     }
   }
   onCreateProductInclude = () => {
-    this.setState({ productItemData: {} })
+    this.setState({ productIncludeData: {} })
     this.showModal()
   }
   componentDidMount() {
@@ -298,7 +298,7 @@ class ProductInclude extends React.Component {
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
-            productItemData={this.state.productItemData}
+            productIncludeData={this.state.productIncludeData}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}
