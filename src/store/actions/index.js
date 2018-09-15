@@ -8,7 +8,13 @@ export {
 
 export { getAllProduct, getAllproductcate } from './product'
 
-export { getAllProductItem, getProductItem, addProductItem, updateProductItem } from './productItem'
+export {
+  getAllProductItem,
+  getProductItem,
+  addProductItem,
+  updateProductItem,
+  deleteProductItem,
+} from './productItem'
 
 export {
   holidaygetdata,
