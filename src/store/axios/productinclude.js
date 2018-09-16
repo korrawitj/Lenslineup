@@ -19,7 +19,9 @@ export function addProductInclude(data) {
   return dispatch => {
     return axios
       .post('/API/product/productInclude/add', data)
-      .then(response => {console.log(response)})
+      .then(response => {
+        console.log(response)
+      })
       .catch(error => {
         console.log('Error axios ' + error)
       })
