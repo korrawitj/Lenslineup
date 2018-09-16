@@ -15,10 +15,11 @@ export function getProductInclude(Id) {
 }
 
 export function addProductInclude(data) {
+  console.log(data)
   return dispatch => {
     return axios
       .post('/API/product/productInclude/add', data)
-      .then(response => {})
+      .then(response => {console.log(response)})
       .catch(error => {
         console.log('Error axios ' + error)
       })

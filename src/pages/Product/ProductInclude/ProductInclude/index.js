@@ -30,7 +30,7 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productIncludeData.Name')(<Input />)}
+                {getFieldDecorator('productIncludeData.Copy')(<Input />)}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
                 {getFieldDecorator('productIncludeData.ContractPrice')(<Input />)}
@@ -83,8 +83,8 @@ class ProductInclude extends React.Component {
       if (err) {
         return
       }
-      console.log('Received values of form: ', values)
-      this.props.addProductInclude(values.productIncludeData)
+      console.log('Received values of form: ', values.productIncludeData)
+      this.props.addProductInclude(values)
       form.resetFields()
       this.setState({ visible: false })
     })
