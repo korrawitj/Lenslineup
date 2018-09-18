@@ -1,13 +1,24 @@
 import React from 'react'
-import { Input,Tree, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal, Form } from 'antd'
+import {
+  Input,
+  Tree,
+  TreeSelect,
+  Select,
+  Button,
+  Upload,
+  Icon,
+  message,
+  Table,
+  Modal,
+  Form,
+} from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 const FormItem = Form.Item
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
-    
     render() {
-      const { visible, onCancel, onCreate, form,treeData } = this.props
+      const { visible, onCancel, onCreate, form, treeData } = this.props
       const { getFieldDecorator } = form
       return (
         <Modal
@@ -34,14 +45,15 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('categoryData.Order')(<Input type="textarea" />)}
               </FormItem>
               <FormItem label="Parentcategory">
-                {getFieldDecorator('categoryData.Parentcategory')(<TreeSelect
-                  style={{ width: 300 }}
-                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                  treeData={treeData}
-                  placeholder="Please select"
-                  treeDefaultExpandAll
-                  
-                />)}
+                {getFieldDecorator('categoryData.Parentcategory')(
+                  <TreeSelect
+                    style={{ width: 300 }}
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    treeData={treeData}
+                    placeholder="Please select"
+                    treeDefaultExpandAll
+                  />,
+                )}
               </FormItem>
             </Form>
           </div>
@@ -62,27 +74,29 @@ const defaultPagination = {
   total: 0,
 }
 
-const columns = [{
-  title: 'CategoryID',
-  dataIndex: 'CategoryID',
- 
-}, {
-  title: 'Fullname',
-  dataIndex: 'Fullname',
-  width: '12%',
-},{
-  title: 'Shortname',
-  dataIndex: 'Shortname',
-  width: '12%',
-  sorter: (a, b) => a.Shortname.length - b.Shortname.length,
-},{
-  title: 'Order',
-  dataIndex: 'Order',
-  width: '30%',
-  sorter: (a, b) => a.Order.length - b.Order.length,
-
-}];
-
+const columns = [
+  {
+    title: 'CategoryID',
+    dataIndex: 'CategoryID',
+  },
+  {
+    title: 'Fullname',
+    dataIndex: 'Fullname',
+    width: '12%',
+  },
+  {
+    title: 'Shortname',
+    dataIndex: 'Shortname',
+    width: '12%',
+    sorter: (a, b) => a.Shortname.length - b.Shortname.length,
+  },
+  {
+    title: 'Order',
+    dataIndex: 'Order',
+    width: '30%',
+    sorter: (a, b) => a.Order.length - b.Order.length,
+  },
+]
 
 // const columns = [
 //   {
@@ -156,7 +170,6 @@ class ProductCate extends React.Component {
     visible: false,
     filtered: false,
     previewVisible: false,
-   
   }
   showModal = () => {
     this.setState({ visible: true })
@@ -169,14 +182,13 @@ class ProductCate extends React.Component {
       if (err) {
         return
       }
-      values.categoryData.CategoryID = "TESTTTTTT"
+      values.categoryData.CategoryID = 'TESTTTTTT'
       debugger
-      if(CatData != null){
-       
-      }else{
+      if (CatData != null) {
+      } else {
         this.props.addCategory(values)
       }
-     
+
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -186,7 +198,6 @@ class ProductCate extends React.Component {
   }
   componentDidMount() {
     this.props.getAllData()
-   
   }
 
   handleCancel = () => this.setState({ previewVisible: false, visible: false })
@@ -250,7 +261,7 @@ class ProductCate extends React.Component {
         </div>
 
         <div className="card-body">
-          <Table columns={columns}  dataSource={this.props.pcr.categoryData} />
+          <Table columns={columns} dataSource={this.props.pcr.categoryData} />
           {/* <Table
             columns={columns}
             dataSource={this.props.pcr.categoryData}
@@ -258,7 +269,6 @@ class ProductCate extends React.Component {
             onChange={this.handleTableChange}
           /> */}
         </div>
-      
       </div>
     )
   }
