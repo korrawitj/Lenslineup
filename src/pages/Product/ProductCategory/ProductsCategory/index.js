@@ -1,15 +1,13 @@
 import React from 'react'
-import { Input, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal, Form } from 'antd'
-import tableData from './data.json'
+import { Input,Tree, TreeSelect, Select, Button, Upload, Icon, message, Table, Modal, Form } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
-import axios from 'axios'
 const FormItem = Form.Item
-
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
+    
     render() {
-      const { visible, onCancel, onCreate, form } = this.props
+      const { visible, onCancel, onCreate, form,treeData } = this.props
       const { getFieldDecorator } = form
       return (
         <Modal
@@ -36,7 +34,14 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('categoryData.Order')(<Input type="textarea" />)}
               </FormItem>
               <FormItem label="Parentcategory">
-                {getFieldDecorator('categoryData.Parentcategory')(<Input type="textarea" />)}
+                {getFieldDecorator('categoryData.Parentcategory')(<TreeSelect
+                  style={{ width: 300 }}
+                  dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                  treeData={treeData}
+                  placeholder="Please select"
+                  treeDefaultExpandAll
+                  
+                />)}
               </FormItem>
             </Form>
           </div>
@@ -57,63 +62,85 @@ const defaultPagination = {
   total: 0,
 }
 
-const columns = [
-  {
-    title: 'CategoryID',
-    dataIndex: 'CategoryID',
-    key: 'CategoryID',
-    render: text => (
-      <a className="utils__link--underlined" href="javascript: void(0);">
-        {'#' + text}
-      </a>
-    ),
-    sorter: (a, b) => a.CategoryID - b.CategoryID,
-  },
-  {
-    title: 'ชื่อประเภท',
-    dataIndex: 'Fullname',
-    key: 'Fullname',
-    render: text => (
-      <a className="utils__link--underlined" href="javascript: void(0);">
-        {text}
-      </a>
-    ),
-    sorter: (a, b) => a.Fullname - b.Fullname,
-  },
-  {
-    title: 'ชื่อสั้น',
-    dataIndex: 'Shortname',
-    key: 'Shortname',
-    render: text => (
-      <a className="utils__link--underlined" href="javascript: void(0);">
-        {text}
-      </a>
-    ),
-    sorter: (a, b) => a.Shortname - b.Shortname,
-  },
-  {
-    title: 'Order',
-    dataIndex: 'Order',
-    key: 'Order',
-    render: text => (
-      <a className="utils__link--underlined" href="javascript: void(0);">
-        {'#' + text}
-      </a>
-    ),
-    sorter: (a, b) => a.Order - b.Order,
-  },
-  {
-    title: 'Action',
-    key: 'Action',
-    render: (text, record) => (
-      <span>
-        <Button icon="cross" size="small" onClick={() => console.log(record)}>
-          Remove
-        </Button>
-      </span>
-    ),
-  },
-]
+const columns = [{
+  title: 'CategoryID',
+  dataIndex: 'CategoryID',
+ 
+}, {
+  title: 'Fullname',
+  dataIndex: 'Fullname',
+  width: '12%',
+},{
+  title: 'Shortname',
+  dataIndex: 'Shortname',
+  width: '12%',
+  sorter: (a, b) => a.Shortname.length - b.Shortname.length,
+},{
+  title: 'Order',
+  dataIndex: 'Order',
+  width: '30%',
+  sorter: (a, b) => a.Order.length - b.Order.length,
+
+}];
+
+
+// const columns = [
+//   {
+//     title: 'CategoryID',
+//     dataIndex: 'CategoryID',
+//     key: 'CategoryID',
+//     render: text => (
+//       <a className="utils__link--underlined" href="javascript: void(0);">
+//         {'#' + text}
+//       </a>
+//     ),
+//     sorter: (a, b) => a.CategoryID - b.CategoryID,
+//   },
+//   {
+//     title: 'ชื่อประเภท',
+//     dataIndex: 'Fullname',
+//     key: 'Fullname',
+//     render: text => (
+//       <a className="utils__link--underlined" href="javascript: void(0);">
+//         {text}
+//       </a>
+//     ),
+//     sorter: (a, b) => a.Fullname - b.Fullname,
+//   },
+//   {
+//     title: 'ชื่อสั้น',
+//     dataIndex: 'Shortname',
+//     key: 'Shortname',
+//     render: text => (
+//       <a className="utils__link--underlined" href="javascript: void(0);">
+//         {text}
+//       </a>
+//     ),
+//     sorter: (a, b) => a.Shortname - b.Shortname,
+//   },
+//   {
+//     title: 'Order',
+//     dataIndex: 'Order',
+//     key: 'Order',
+//     render: text => (
+//       <a className="utils__link--underlined" href="javascript: void(0);">
+//         {'#' + text}
+//       </a>
+//     ),
+//     sorter: (a, b) => a.Order - b.Order,
+//   },
+//   {
+//     title: 'Action',
+//     key: 'Action',
+//     render: (text, record) => (
+//       <span>
+//         <Button icon="cross" size="small" onClick={() => console.log(record)}>
+//           Remove
+//         </Button>
+//       </span>
+//     ),
+//   },
+// ]
 const uploadButton = (
   <div>
     <Icon type="plus" />
@@ -129,27 +156,27 @@ class ProductCate extends React.Component {
     visible: false,
     filtered: false,
     previewVisible: false,
-    previewImage: '',
-    fileList: [
-      {
-        uid: -1,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-    ],
+   
   }
   showModal = () => {
     this.setState({ visible: true })
   }
   handleCreate = () => {
     const form = this.formRef.props.form
+    const CatData = this.formRef.props.categoryData
+    debugger
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-
-      console.log('Received values of form: ', values)
+      values.categoryData.CategoryID = "TESTTTTTT"
+      debugger
+      if(CatData != null){
+       
+      }else{
+        this.props.addCategory(values)
+      }
+     
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -159,6 +186,7 @@ class ProductCate extends React.Component {
   }
   componentDidMount() {
     this.props.getAllData()
+   
   }
 
   handleCancel = () => this.setState({ previewVisible: false, visible: false })
@@ -203,7 +231,6 @@ class ProductCate extends React.Component {
   render() {
     let { pager } = this.state
     let { categoryValue } = this.state
-    // let { categoryData } = this.pcr.categoryData
     return (
       <div className="card">
         <div className="card-header">
@@ -215,6 +242,7 @@ class ProductCate extends React.Component {
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
+            treeData={this.props.pcr.categoryData}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}
@@ -222,13 +250,15 @@ class ProductCate extends React.Component {
         </div>
 
         <div className="card-body">
-          <Table
+          <Table columns={columns}  dataSource={this.props.pcr.categoryData} />
+          {/* <Table
             columns={columns}
             dataSource={this.props.pcr.categoryData}
             pagination={pager}
             onChange={this.handleTableChange}
-          />
+          /> */}
         </div>
+      
       </div>
     )
   }

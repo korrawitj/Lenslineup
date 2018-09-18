@@ -14,6 +14,19 @@ export function getAllData() {
   }
 }
 
+export function addCategory(data) {
+  return dispatch => {
+    return axios
+      .post('/API/category/add',data)
+      .then(response => {
+       // dispatch(actionCreators.getAllproductcat(response.data.categoryData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
 export function UploadImages(data) {
   return dispatch => {
     let formdat = new FormData()
