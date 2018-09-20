@@ -50,3 +50,24 @@ export function deleteProductInclude(ProductID, ItemID) {
       })
   }
 }
+
+export function uploadProductPhoto(fileList){
+  return dispatch => {
+    return new Promise(function(resolve, reject) {
+
+      const formData = new FormData();
+      fileList.forEach((file) => {
+        formData.append('productPhoto', file);
+      });
+      axios.post('/API/product/uploadImages',formData)
+      .then(result =>{
+        return result
+      })
+      .catch(err =>{
+        return err
+      })
+    })
+    
+  }
+  
+}

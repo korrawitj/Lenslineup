@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, TreeSelect, Button, Icon, Table, Modal, Form } from 'antd'
+import { Input, TreeSelect, Button, Icon, Table, Modal, Form, Upload, message} from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 const FormItem = Form.Item
@@ -65,12 +65,6 @@ const defaultPagination = {
   total: 0,
 }
 
-const uploadButton = (
-  <div>
-    <Icon type="plus" />
-    <div className="ant-upload-text">Upload</div>
-  </div>
-)
 
 class ProductCate extends React.Component {
   state = {
@@ -82,7 +76,11 @@ class ProductCate extends React.Component {
     visible: false,
     filtered: false,
     previewVisible: false,
+    fileList: [],
+    uploading: false,
+    ProductID:"a8cd1d3e-f220-47c9-934f-f1608837959d"
   }
+
   showModal = () => {
     this.setState({ visible: true })
   }
@@ -118,11 +116,10 @@ class ProductCate extends React.Component {
       }
 
       if (CatData.CategoryID != null) {
-        debugger
         values.categoryData.CategoryID = CatData.CategoryID
         this.props.updateCategory(values)
-      } else {
-        debugger
+      } 
+      else{
         this.props.addCategory(values)
       }
 
@@ -139,44 +136,27 @@ class ProductCate extends React.Component {
     this.props.getAllData()
   }
 
-  // handlePreview = file => {
-  //   this.setState({
-  //     previewImage: file.url || file.thumbUrl,
-  //     previewVisible: true,
-  //   })
-  // }
-  // handleTableChange = (pagination, filters, sorter) => {
-  //   if (this.state.pager) {
-  //     const pager = { ...this.state.pager }
-  //     if (pager.pageSize !== pagination.pageSize) {
-  //       this.pageSize = pagination.pageSize
-  //       pager.pageSize = pagination.pageSize
-  //       pager.current = 1
-  //     } else {
-  //       pager.current = pagination.current
-  //     }
-  //     this.setState({
-  //       pager: pager,
-  //     })
-  //   }
-  // }
-
-  // onInputChange = e => {
-  //   this.setState({ searchText: e.target.value })
-  // }
-  // handleChange = ({ fileList }) => {
-  //   this.setState({ fileList })
-  // }
-  // onChangeCategory = value => {
-  //   this.setState({
-  //     categoryValue: value,
-  //   })
-  // }
-  // onUploadImageSaved() {
-  //   this.props.UploadImages(this.state.fileList)
-  // }
-
   render() {
+    
+    const photos = {
+      name: 'productPhoto',
+      multiple: true,
+      data:{ProductID : this.state.ProductID},
+      action: 'http://localhost:8888/API/product/uploadImages',
+      onChange(info) {
+        const status = info.file.status;
+        if (status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (status === 'done') {
+
+          message.success(`${info.file.name} file uploaded successfully.`);
+          debugger
+        } else if (status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      },
+    };
     const columns = [
       {
         title: 'Fullname',
@@ -217,6 +197,7 @@ class ProductCate extends React.Component {
       },
     ]
     return (
+      
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
@@ -225,6 +206,17 @@ class ProductCate extends React.Component {
           <Button type="primary" onClick={this.onAdd}>
             เพิ่มประเภท
           </Button>
+         <div>
+         <div>
+      </div>
+         <Dragger {...photos}>
+          <p className="ant-upload-drag-icon">
+            <Icon type="inbox" />
+          </p>
+          <p className="ant-upload-text">Click or drag file to this area to upload</p>
+          <p className="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+        </Dragger>,
+         </div>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             categoryData={this.state.categoryData}
@@ -237,17 +229,13 @@ class ProductCate extends React.Component {
 
         <div className="card-body">
           <Table columns={columns} dataSource={this.props.pcr.categoryData} />
-          {/* <Table
-            columns={columns}
-            dataSource={this.props.pcr.categoryData}
-            pagination={pager}
-            onChange={this.handleTableChange}
-          /> */}
         </div>
       </div>
     )
   }
 }
+
+const Dragger = Upload.Dragger;
 
 const mapStateToProps = state => {
   return {
