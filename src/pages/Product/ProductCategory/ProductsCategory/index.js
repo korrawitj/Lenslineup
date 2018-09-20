@@ -1,28 +1,20 @@
 import React from 'react'
-import {
-  Input,
-  TreeSelect,
-  Button,
-  Icon,
-  Table,
-  Modal,
-  Form,
-} from 'antd'
+import { Input, TreeSelect, Button, Icon, Table, Modal, Form } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 const FormItem = Form.Item
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form, treeData,categoryData } = this.props
+      const { visible, onCancel, onCreate, form, treeData, categoryData } = this.props
       const { getFieldDecorator } = form
-      const {Fullname,Shortname,Parentcategory} = categoryData
+      const { Fullname, Shortname, Parentcategory } = categoryData
       return (
         <Modal
           width={1000}
           visible={visible}
           title="Add Product Category"
-          okText={categoryData.CategoryID != null ? "Update" : "Create"} 
+          okText={categoryData.CategoryID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
         >
@@ -31,19 +23,22 @@ const CollectionCreateForm = Form.create()(
               <FormItem label="FullName">
                 {getFieldDecorator('categoryData.Fullname', {
                   rules: [{ required: true, message: 'Please input the title of collection!' }],
-                  initialValue:Fullname
-                })(<Input  type="text" />)}
+                  initialValue: Fullname,
+                })(<Input type="text" />)}
               </FormItem>
               <FormItem label="ShortName">
-                {getFieldDecorator('categoryData.Shortname', {initialValue:Shortname,
+                {getFieldDecorator('categoryData.Shortname', {
+                  initialValue: Shortname,
                   rules: [{ required: true, message: 'Please input the title of collection!' }],
                 })(<Input type="text" />)}
               </FormItem>
               <FormItem label="Order">
-                {getFieldDecorator('categoryData.Order',{initialValue:categoryData.Order})(<Input type="textarea" />)}
+                {getFieldDecorator('categoryData.Order', { initialValue: categoryData.Order })(
+                  <Input type="textarea" />,
+                )}
               </FormItem>
               <FormItem label="Parentcategory">
-                {getFieldDecorator('categoryData.Parentcategory',{initialValue:Parentcategory })(
+                {getFieldDecorator('categoryData.Parentcategory', { initialValue: Parentcategory })(
                   <TreeSelect
                     style={{ width: 300 }}
                     dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
@@ -60,7 +55,6 @@ const CollectionCreateForm = Form.create()(
     }
   },
 )
-
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -80,7 +74,7 @@ const uploadButton = (
 
 class ProductCate extends React.Component {
   state = {
-    categoryData:{},
+    categoryData: {},
     categoryValue: undefined,
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
@@ -88,21 +82,19 @@ class ProductCate extends React.Component {
     visible: false,
     filtered: false,
     previewVisible: false,
-   
   }
   showModal = () => {
     this.setState({ visible: true })
   }
-  onAdd =() =>{
-    this.setState({ categoryData : {} })
+  onAdd = () => {
+    this.setState({ categoryData: {} })
     this.showModal()
   }
   onEdit(record) {
-    this.setState({ categoryData : record })
+    this.setState({ categoryData: record })
     this.showModal()
-
   }
-  onDelete = (record,propsParam) =>{
+  onDelete = (record, propsParam) => {
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delete {record.Fullname}</div>,
@@ -124,7 +116,7 @@ class ProductCate extends React.Component {
       if (err) {
         return
       }
-     
+
       if (CatData.CategoryID != null) {
         debugger
         values.categoryData.CategoryID = CatData.CategoryID
@@ -147,7 +139,6 @@ class ProductCate extends React.Component {
     this.props.getAllData()
   }
 
- 
   // handlePreview = file => {
   //   this.setState({
   //     previewImage: file.url || file.thumbUrl,
@@ -236,7 +227,7 @@ class ProductCate extends React.Component {
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
-            categoryData = {this.state.categoryData}
+            categoryData={this.state.categoryData}
             treeData={this.props.pcr.categoryData}
             visible={this.state.visible}
             onCancel={this.handleCancel}

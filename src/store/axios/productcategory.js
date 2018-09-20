@@ -42,7 +42,7 @@ export function updateCategory(data) {
 export function DeleteCategory(Id) {
   return dispatch => {
     return axios
-      .post('/API/category/delete',{CategoryID:Id})
+      .post('/API/category/delete', { CategoryID: Id })
       .then(response => {
         // dispatch(actionCreators.getAllproductcat(response.data.categoryData))
       })
