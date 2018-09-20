@@ -26,6 +26,31 @@ export function addCategory(data) {
       })
   }
 }
+export function updateCategory(data) {
+  return dispatch => {
+    return axios
+      .post('/API/category/update', data)
+      .then(response => {
+        // dispatch(actionCreators.getAllproductcat(response.data.categoryData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+export function DeleteCategory(Id) {
+  return dispatch => {
+    return axios
+      .post('/API/category/delete',{CategoryID:Id})
+      .then(response => {
+        // dispatch(actionCreators.getAllproductcat(response.data.categoryData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
 
 export function UploadImages(data) {
   return dispatch => {
