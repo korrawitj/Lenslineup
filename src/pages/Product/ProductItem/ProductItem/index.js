@@ -184,7 +184,7 @@ class ProductItem extends React.Component {
         .filter(record => !!record),
     })
   }
-  showDeleteConfirm(record) {
+  showDeleteConfirm(record,props) {
     let T = record
     Modal.confirm({
       title: 'Are you sure delete this row?',
@@ -193,7 +193,7 @@ class ProductItem extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        console.log('OK')
+        props.deleteProductItem(record.ItemID)
       },
       onCancel() {
         console.log('Cancel')
@@ -343,7 +343,7 @@ class ProductItem extends React.Component {
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.showDeleteConfirm(record)}
+              onClick={() => this.showDeleteConfirm(record,this.props)}
             />
           </span>
         ),
