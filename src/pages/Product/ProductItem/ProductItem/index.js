@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, Icon, Input, Button, Modal, Upload, Form } from 'antd'
 import tableData from './data.json'
-import * as actionCreators from '../../../../store/axios/productinclude'
+import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
 const FormItem = Form.Item
 const TextArea = Input.TextArea
@@ -36,7 +36,7 @@ const CollectionCreateForm = Form.create()(
       }
     }
     render() {
-      const { visible, onCancel, onCreate, form, productIncludeData } = this.props
+      const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
       const { uploading } = this.state
       const props = {
@@ -63,24 +63,24 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title="Add ProductInclude"
-          okText={productIncludeData.ItemID != null ? 'Update' : 'Create'}
+          title="Add ProductItem"
+          okText={productItemData.ItemID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
         >
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productIncludeData.Copy')(<Input />)}
+                {getFieldDecorator('productItemData.Name')(<Input />)}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
-                {getFieldDecorator('productIncludeData.ContractPrice')(<Input />)}
+                {getFieldDecorator('productItemData.ContractPrice')(<Input />)}
               </FormItem>
               <FormItem label="จำนวน">
-                {getFieldDecorator('productIncludeData.Quantity')(<Input />)}
+                {getFieldDecorator('productItemData.Quantity')(<Input />)}
               </FormItem>
               <FormItem label="Note">
-                {getFieldDecorator('productIncludeData.Note')(
+                {getFieldDecorator('productItemData.Note')(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
@@ -107,7 +107,7 @@ const CollectionCreateForm = Form.create()(
     }
   },
 )
-class ProductInclude extends React.Component {
+class ProductItem extends React.Component {
   state = {
     tableData: tableData.data,
     data: tableData.data,
@@ -118,7 +118,7 @@ class ProductInclude extends React.Component {
     previewVisible: false,
     previewImage: '',
     visible: false,
-    productIncludeData: {},
+    productItemData: {},
     fileList: [
       {
         uid: -1,
@@ -140,7 +140,7 @@ class ProductInclude extends React.Component {
       if (err) {
         return
       }
-      console.log('Received values of form: ', values.productIncludeData)
+      console.log('Received values of form: ', values.productItemData)
       this.props.addProductInclude(values)
       form.resetFields()
       this.setState({ visible: false })
@@ -191,7 +191,7 @@ class ProductInclude extends React.Component {
     let T = record
     Modal.confirm({
       title: 'Are you sure delete this row?',
-      content: <div>Delelte Product Include = {record.setid}</div>,
+      content: <div>Delelte Product Item = {record.ItemID}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
@@ -215,11 +215,11 @@ class ProductInclude extends React.Component {
           <div className="col-md-4">
             <label>อุปกรณ์</label>
           </div>
-          <div className="col-md-6">{record.Copy}</div>
+          <div className="col-md-6">{record.Name}</div>
           <div className="col-md-4">
             <label>ราคาในสัญญา</label>
           </div>
-          <div className="col-md-6">{record.PromisePrice}</div>
+          <div className="col-md-6">{record.ContractPrice}</div>
           <div className="col-md-4">
             <label>จำนวน</label>
           </div>
@@ -244,8 +244,8 @@ class ProductInclude extends React.Component {
       })
     }
   }
-  onCreateProductInclude = () => {
-    this.setState({ productIncludeData: {} })
+  onCreateProductItem = () => {
+    this.setState({ productItemData: {} })
     this.showModal()
   }
   componentDidMount() {
@@ -318,6 +318,13 @@ class ProductInclude extends React.Component {
         sorter: (a, b) => a.Quantity - b.Quantity,
       },
       {
+        title: 'Note',
+        dataIndex: 'Note',
+        key: 'Note',
+        render: text => <span>{'$' + text}</span>,
+        sorter: (a, b) => a.Note - b.Note,
+      },
+      {
         title: 'Action',
         key: 'action',
         render: (text, record) => (
@@ -350,12 +357,12 @@ class ProductInclude extends React.Component {
           <div className="utils__title">
             <strong>อุปกรณ์ที่ให้ไประหว่างเช่า</strong>
           </div>
-          <Button type="primary" icon="plus" onClick={this.onCreateProductInclude}>
+          <Button type="primary" icon="plus" onClick={this.onCreateProductItem}>
             เพิ่มอุปกรณ์ที่ให้ไประหว่างเช่า
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
-            productIncludeData={this.state.productIncludeData}
+            productItemData={this.state.productItemData}
             onUpload={this.props.uploadProductPhoto}
             visible={this.state.visible}
             onCancel={this.handleCancel}
@@ -365,7 +372,7 @@ class ProductInclude extends React.Component {
         <div className="card-body">
           <Table
             columns={columns}
-            dataSource={this.props.productInclude.productIncludeData}
+            dataSource={this.props.productItemData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
@@ -377,11 +384,11 @@ class ProductInclude extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    productInclude: state.productInclude,
+    productItemData: state.productItemData,
   }
 }
 
 export default connect(
   mapStateToProps,
   actionCreators,
-)(ProductInclude)
+)(ProductItem)

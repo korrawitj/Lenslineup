@@ -2,14 +2,16 @@
     "data": [{
       "ItemID": 2412,
       "key": "1",
-      "Copy": "Damon",
-      "PromisePrice": 56,
-      "Quantity": 5
+      "Name": "Damon",
+      "ContractPrice": 56,
+      "Quantity": 5,
+      "Note":"test"
     }, {
       "ItemID": 11111,
       "key": "2",
-      "Copy": "Aamon",
-      "PromisePrice": 1156,
-      "Quantity": 11
+      "Name": "Aamon",
+      "ContractPrice": 1156,
+      "Quantity": 11,
+      "Note":"test"
     }]
   }
