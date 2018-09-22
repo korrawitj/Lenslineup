@@ -28,7 +28,6 @@ export function getProductItem(Id) {
 }
 
 export function addProductItem(data) {
-  console.log(data)
   return dispatch => {
     return axios
       .post('/API/product/productItem/add', data)
@@ -42,7 +41,6 @@ export function addProductItem(data) {
 }
 
 export function updateProductItem(data) {
-  debugger
   return dispatch => {
     return axios
       .post('/API/product/productItem/update', { productItemData: data })

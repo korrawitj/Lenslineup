@@ -62,7 +62,7 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title="Add ProductItem"
+          title={productItemData.ItemID != null ? 'Add Product Item' : 'Update Product Item'}
           okText={productItemData.ItemID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
@@ -70,16 +70,16 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productItemData.Name')(<Input />)}
+                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(<Input />)}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
-                {getFieldDecorator('productItemData.ContractPrice')(<Input />)}
+                {getFieldDecorator('productItemData.ContractPrice', { initialValue: productItemData.ContractPrice })(<Input />)}
               </FormItem>
               <FormItem label="จำนวน">
-                {getFieldDecorator('productItemData.Quantity')(<Input />)}
+                {getFieldDecorator('productItemData.Quantity', { initialValue: productItemData.Quantity })(<Input />)}
               </FormItem>
               <FormItem label="Note">
-                {getFieldDecorator('productItemData.Note')(
+                {getFieldDecorator('productItemData.Note', { initialValue: productItemData.Note })(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
@@ -133,12 +133,20 @@ class ProductItem extends React.Component {
   }
   handleCreate = () => {
     const form = this.formRef.props.form
+    const productItemData = this.formRef.props.productItemData
     form.validateFields((err, values) => {
       if (err) {
         return
       }
       console.log('Received values of form: ', values.productItemData)
-      this.props.addProductItem(values)
+      if (productItemData.ItemID != null) {
+        values.productItemData['key'] = productItemData['key']
+        values.productItemData['ItemID'] = productItemData['ItemID']
+        this.props.updateProductItem(values.productItemData)
+      } else {
+        this.props.addProductItem(values.productItemData)
+      }
+    
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -248,7 +256,10 @@ class ProductItem extends React.Component {
   componentDidMount() {
     this.props.getAllProductItem()
   }
-
+  onEditProductItem = record => {
+    this.setState({ productItemData: record })
+    this.showModal()
+  }
   render() {
     // console.log(this.props.productItemData)
     let { pager, data } = this.state
@@ -336,7 +347,7 @@ class ProductItem extends React.Component {
             <Button
               shape="circle"
               icon="edit"
-              onClick={() => this.addDataConfirm(record)}
+              onClick={() => this.onEditProductItem(record,this.props)}
               style={{ backgroundColor: '#c49f47' }}
             />
             <Button
