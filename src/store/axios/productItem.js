@@ -33,7 +33,9 @@ export function addProductItem(data) {
   return dispatch => {
     return axios
       .post('/API/product/productItem/add', data)
-      .then(response => {console.log(response)})
+      .then(response => {
+        console.log(response)
+      })
       .catch(error => {
         console.log('Error axios ' + error)
       })
