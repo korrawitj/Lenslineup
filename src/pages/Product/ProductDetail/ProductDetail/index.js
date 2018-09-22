@@ -129,7 +129,7 @@ const CollectionCreateForm = Form.create()(
       //   },
       // ]
       return (
-          <div>
+        <div>
           <div className="card-body">
             <Form>
               <FormItem {...formItemLayout} label="อุุปกรณ์">
@@ -377,10 +377,10 @@ class ProductDetail extends React.Component {
         <div className="card-header">
           <div className="utils__title">
             <strong>จัดการอุปกรณ์</strong>
-          </div>       
+          </div>
         </div>
         <div className="card-body">
-        <CollectionCreateForm
+          <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             productItemData={this.state.productItemData}
             productCate={this.props.product.productCate}
@@ -388,7 +388,7 @@ class ProductDetail extends React.Component {
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}
           />
-      </div>
+        </div>
       </div>
     )
   }
