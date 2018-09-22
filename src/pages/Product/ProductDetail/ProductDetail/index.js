@@ -128,7 +128,7 @@ const CollectionCreateForm = Form.create()(
           ),
         },
       ]
-      
+
       return (
         <div>
           <div className="card-body">
@@ -243,15 +243,13 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
               <div className="card-header">
-          <div className="utils__title">
-            <strong>อุปรกณ์ที่ให้ไประหว่างเช่า</strong>
+                <div className="utils__title">
+                  <strong>อุปรกณ์ที่ให้ไประหว่างเช่า</strong>
+                </div>
+              </div>
+              <div className="card-body" />
+            </Form>
           </div>
-        </div>
-          <div className="card-body">
-          </div >
-        </Form>
-          </div>
-
         </div>
       )
     }
