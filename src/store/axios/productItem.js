@@ -43,7 +43,7 @@ export function addProductItem(data) {
 export function updateProductItem(data) {
   return dispatch => {
     return axios
-      .post('/API/product/productItem/update', { productItemData: data })
+      .post('/API/product/productItem/update', data)
       .then(response => {
         console.log(response)
       })

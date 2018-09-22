@@ -159,11 +159,15 @@ class ProductItem extends React.Component {
         values.productItemData['ItemID'] = productItemData['ItemID']
 
         const formData = new FormData()
+        //
+        console.log(values.productItemData['Test'])
         values.productItemData['Test'].fileList.forEach(x => {
           console.log(x)
-          formData.append('Test', x)
+          formData.append('productPhoto', x)
         })
-        // this.props.updateProductItem(values.productItemData)
+        formData.append('productPhoto', values.productItemData['Test'].file)
+        formData.append('productItemData',values.productItemData)
+        this.props.updateProductItem(formData)
       } else {
         // this.props.addProductItem(values.productItemData)
         console.log(values)
