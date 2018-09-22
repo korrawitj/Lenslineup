@@ -31,6 +31,10 @@ const loadableRoutes = {
     component: loadable(() => import('pages/Product/ProductList')),
   },
 
+  '/product/detail': {
+    component: loadable(() => import('pages/Product/ProductDetail')),
+  },
+
   '/product/item': {
     component: loadable(() => import('pages/Product/ProductItem')),
   },
@@ -38,9 +42,11 @@ const loadableRoutes = {
   '/product/set': {
     component: loadable(() => import('pages/Product/ProductSet')),
   },
+
   '/product/Category': {
     component: loadable(() => import('pages/Product/ProductCategory')),
   },
+
   '/configuration': {
     component: loadable(() => import('pages/Config/ConfigParameter')),
   },
