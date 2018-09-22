@@ -17,6 +17,7 @@ import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
@@ -39,96 +40,7 @@ const CollectionCreateForm = Form.create()(
         },
       }
       console.log({ productCate })
-      // const dataCopy = [
-      //   {
-      //     title: 'View',
-      //     key: 'CategoryID',
-      //     render: (text, record) => (
-      //       <span>
-      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
-      //           View
-      //         </Button>
-      //       </span>
-      //     ),
-      //   },
-      //   {
-      //     title: 'ตัวที่',
-      //     dataIndex: 'CopyNo',
-      //     key: 'CopyNo',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.CopyNo - b.CopyNo,
-      //   },
-      //   {
-      //     title: 'ชื่อสั้น',
-      //     dataIndex: 'Serail',
-      //     key: 'SerialNumber',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.SerialNumber - b.SerialNumber,
-      //   },
-      //   {
-      //     title: 'ราคาที่ซื้อ',
-      //     dataIndex: 'PurchasePrice',
-      //     key: 'PurchasePrice',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {'#' + text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
-      //   },
-      //   {
-      //     title: 'วันที่ซื้อ',
-      //     dataIndex: 'PurchaseDate',
-      //     key: 'PurchaseDate',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {'#' + text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
-      //   },
-      //   {
-      //     title: 'สถานะ',
-      //     dataIndex: 'Status',
-      //     key: 'Status',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {'#' + text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.Status - b.Status,
-      //   },
-      //   {
-      //     title: 'แก้ไข',
-      //     key: 'Edit',
-      //     render: (text, record) => (
-      //       <span>
-      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
-      //           Edit
-      //         </Button>
-      //       </span>
-      //     ),
-      //   },
-      //   {
-      //     title: 'ลบ',
-      //     key: 'Action',
-      //     render: (text, record) => (
-      //       <span>
-      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
-      //           Remove
-      //         </Button>
-      //       </span>
-      //     ),
-      //   },
-      // ]
+
       return (
         <Modal width={1000} visible={visible} okText="เพิ่ม" onCancel={onCancel} onOk={onCreate}>
           <div className="card-header">
@@ -161,8 +73,8 @@ const CollectionCreateForm = Form.create()(
                   })(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
                 {getFieldDecorator('productItemData.IsHaftDay')(<Checkbox />)}
               </FormItem>
@@ -171,8 +83,8 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('productItemData.RentHalfDay_Fee')(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
                 {getFieldDecorator('productItemData.IsHour')(<Checkbox />)}
               </FormItem>
@@ -181,8 +93,8 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('productItemData.RentHour_Fee')(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
                 {getFieldDecorator('productItemData.RentDay')(<Input />)}
               </FormItem>
@@ -484,9 +396,11 @@ class ProductList extends React.Component {
           {/* <Button type="primary" icon="plus" onClick={() => this.addDataProduct()}>
             เพิ่มอุปกรณ์
           </Button> */}
-          <Button icon="plus" type="primary" onClick={this.showModal}>
-            เพิ่มอุปกรณ์
-          </Button>
+          <Link to="/Product/detail" className="navbar-item">
+            <Button icon="plus" type="primary">
+              เพิ่มอุปกรณ์
+            </Button>
+          </Link>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             productItemData={this.state.productItemData}
