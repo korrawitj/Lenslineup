@@ -6,6 +6,7 @@ export function getAllProductItem() {
     return axios
       .get('/API/product/productItem/getAll')
       .then(response => {
+        console.log(response)
         dispatch(actionCreators.getAllProductItem(response.data.productItemData))
       })
       .catch(error => {
@@ -28,10 +29,13 @@ export function getProductItem(Id) {
 }
 
 export function addProductItem(data) {
+  console.log(data)
   return dispatch => {
     return axios
       .post('/API/product/productItem/add', data)
-      .then(response => {})
+      .then(response => {
+        console.log(response)
+      })
       .catch(error => {
         console.log('Error axios ' + error)
       })

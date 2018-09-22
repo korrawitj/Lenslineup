@@ -141,7 +141,7 @@ class ProductItem extends React.Component {
         return
       }
       console.log('Received values of form: ', values.productItemData)
-      this.props.addProductInclude(values)
+      this.props.addProductItem(values)
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -249,10 +249,11 @@ class ProductItem extends React.Component {
     this.showModal()
   }
   componentDidMount() {
-    //this.props.getAllProductInclude()
+    this.props.getAllProductItem()
   }
 
   render() {
+    console.log(this.props.productItemData)
     let { pager, data } = this.state
     const columns = [
       {
@@ -384,7 +385,7 @@ class ProductItem extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    productItemData: state.productItemData,
+    productItem: state.productItemData,
   }
 }
 
