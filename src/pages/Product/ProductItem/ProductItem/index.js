@@ -89,8 +89,17 @@ const CollectionCreateForm = Form.create()(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
+              <FormItem label="Note">
+                {getFieldDecorator('productItemData.Test')(
+                               <Upload {...props}>
+                               <Button>
+                                 <Icon type="upload" /> Select File
+                               </Button>
+                             </Upload>
+                )}
+              </FormItem>
             </Form>
-            <div>
+            {/* <div>
               <Upload {...props}>
                 <Button>
                   <Icon type="upload" /> Select File
@@ -105,7 +114,7 @@ const CollectionCreateForm = Form.create()(
               >
                 {uploading ? 'uploading' : 'start upload'}
               </Button>
-            </div>
+            </div> */}
           </div>
         </Modal>
       )
@@ -122,14 +131,14 @@ class ProductItem extends React.Component {
     previewImage: '',
     visible: false,
     productItemData: {},
-    fileList: [
-      {
-        uid: -1,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-    ],
+    // fileList: [
+    //   {
+    //     uid: -1,
+    //     name: 'xxx.png',
+    //     status: 'done',
+    //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    //   },
+    // ],
   }
   showModal = () => {
     this.setState({ visible: true })
@@ -148,9 +157,16 @@ class ProductItem extends React.Component {
       if (productItemData.ItemID != null) {
         values.productItemData['key'] = productItemData['key']
         values.productItemData['ItemID'] = productItemData['ItemID']
-        this.props.updateProductItem(values.productItemData)
+
+        const formData = new FormData()
+        values.productItemData['Test'].fileList.forEach(x => {
+          console.log(x)
+          formData.append('Test',x)
+        })
+        // this.props.updateProductItem(values.productItemData)
       } else {
-        this.props.addProductItem(values.productItemData)
+        // this.props.addProductItem(values.productItemData)
+        console.log(values)
       }
 
       form.resetFields()
