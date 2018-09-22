@@ -1,6 +1,5 @@
 import React from 'react'
 import { Table, Icon, Input, Button, Modal, Upload, Form } from 'antd'
-import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
 const FormItem = Form.Item
@@ -109,8 +108,6 @@ const CollectionCreateForm = Form.create()(
 )
 class ProductItem extends React.Component {
   state = {
-    tableData: tableData.data,
-    data: tableData.data,
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
@@ -253,7 +250,7 @@ class ProductItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.productItemData)
+    // console.log(this.props.productItemData)
     let { pager, data } = this.state
     const columns = [
       {
@@ -385,7 +382,7 @@ class ProductItem extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    productItem: state.productItemData,
+    productItemData: state.productItemData,
   }
 }
 
