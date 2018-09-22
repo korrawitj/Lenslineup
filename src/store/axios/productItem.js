@@ -44,7 +44,7 @@ export function updateProductItem(data) {
   return dispatch => {
     return axios
       .post('/API/product/productItem/update', { productItemData: data })
-      .then(response => {})
+      .then(response => {console.log(response)})
       .catch(error => {
         console.log('Error axios ' + error)
       })
