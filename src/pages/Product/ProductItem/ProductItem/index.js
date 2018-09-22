@@ -166,7 +166,7 @@ class ProductItem extends React.Component {
           formData.append('productPhoto', x)
         })
         formData.append('productPhoto', values.productItemData['Test'].file)
-        formData.append('productItemData',values.productItemData)
+        formData.append('productItemData', values.productItemData)
         this.props.updateProductItem(formData)
       } else {
         // this.props.addProductItem(values.productItemData)
