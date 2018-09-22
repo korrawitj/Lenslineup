@@ -70,13 +70,19 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(<Input />)}
+                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(
+                  <Input />,
+                )}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
-                {getFieldDecorator('productItemData.ContractPrice', { initialValue: productItemData.ContractPrice })(<Input />)}
+                {getFieldDecorator('productItemData.ContractPrice', {
+                  initialValue: productItemData.ContractPrice,
+                })(<Input />)}
               </FormItem>
               <FormItem label="จำนวน">
-                {getFieldDecorator('productItemData.Quantity', { initialValue: productItemData.Quantity })(<Input />)}
+                {getFieldDecorator('productItemData.Quantity', {
+                  initialValue: productItemData.Quantity,
+                })(<Input />)}
               </FormItem>
               <FormItem label="Note">
                 {getFieldDecorator('productItemData.Note', { initialValue: productItemData.Note })(
@@ -146,7 +152,7 @@ class ProductItem extends React.Component {
       } else {
         this.props.addProductItem(values.productItemData)
       }
-    
+
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -347,7 +353,7 @@ class ProductItem extends React.Component {
             <Button
               shape="circle"
               icon="edit"
-              onClick={() => this.onEditProductItem(record,this.props)}
+              onClick={() => this.onEditProductItem(record, this.props)}
               style={{ backgroundColor: '#c49f47' }}
             />
             <Button
