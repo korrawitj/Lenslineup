@@ -91,11 +91,11 @@ const CollectionCreateForm = Form.create()(
               </FormItem>
               <FormItem label="Note">
                 {getFieldDecorator('productItemData.Test')(
-                               <Upload {...props}>
-                               <Button>
-                                 <Icon type="upload" /> Select File
-                               </Button>
-                             </Upload>
+                  <Upload {...props}>
+                    <Button>
+                      <Icon type="upload" /> Select File
+                    </Button>
+                  </Upload>,
                 )}
               </FormItem>
             </Form>
@@ -161,7 +161,7 @@ class ProductItem extends React.Component {
         const formData = new FormData()
         values.productItemData['Test'].fileList.forEach(x => {
           console.log(x)
-          formData.append('Test',x)
+          formData.append('Test', x)
         })
         // this.props.updateProductItem(values.productItemData)
       } else {
