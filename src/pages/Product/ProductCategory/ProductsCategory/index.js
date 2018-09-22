@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, TreeSelect, Button, Icon, Table, Modal, Form, Upload, message} from 'antd'
+import { Input, TreeSelect, Button, Icon, Table, Modal, Form, Upload, message } from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 const FormItem = Form.Item
@@ -65,7 +65,6 @@ const defaultPagination = {
   total: 0,
 }
 
-
 class ProductCate extends React.Component {
   state = {
     categoryData: {},
@@ -78,7 +77,7 @@ class ProductCate extends React.Component {
     previewVisible: false,
     fileList: [],
     uploading: false,
-    ProductID:"a8cd1d3e-f220-47c9-934f-f1608837959d"
+    ProductID: 'a8cd1d3e-f220-47c9-934f-f1608837959d',
   }
 
   showModal = () => {
@@ -118,8 +117,7 @@ class ProductCate extends React.Component {
       if (CatData.CategoryID != null) {
         values.categoryData.CategoryID = CatData.CategoryID
         this.props.updateCategory(values)
-      } 
-      else{
+      } else {
         this.props.addCategory(values)
       }
 
@@ -137,26 +135,24 @@ class ProductCate extends React.Component {
   }
 
   render() {
-    
     const photos = {
       name: 'productPhoto',
       multiple: true,
-      data:{ProductID : this.state.ProductID},
+      data: { ProductID: this.state.ProductID },
       action: 'http://localhost:8888/API/product/uploadImages',
       onChange(info) {
-        const status = info.file.status;
+        const status = info.file.status
         if (status !== 'uploading') {
-          console.log(info.file, info.fileList);
+          console.log(info.file, info.fileList)
         }
         if (status === 'done') {
-
-          message.success(`${info.file.name} file uploaded successfully.`);
+          message.success(`${info.file.name} file uploaded successfully.`)
           debugger
         } else if (status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
+          message.error(`${info.file.name} file upload failed.`)
         }
       },
-    };
+    }
     const columns = [
       {
         title: 'Fullname',
@@ -197,7 +193,6 @@ class ProductCate extends React.Component {
       },
     ]
     return (
-      
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
@@ -206,17 +201,20 @@ class ProductCate extends React.Component {
           <Button type="primary" onClick={this.onAdd}>
             เพิ่มประเภท
           </Button>
-         <div>
-         <div>
-      </div>
-         <Dragger {...photos}>
-          <p className="ant-upload-drag-icon">
-            <Icon type="inbox" />
-          </p>
-          <p className="ant-upload-text">Click or drag file to this area to upload</p>
-          <p className="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
-        </Dragger>,
-         </div>
+          <div>
+            <div />
+            <Dragger {...photos}>
+              <p className="ant-upload-drag-icon">
+                <Icon type="inbox" />
+              </p>
+              <p className="ant-upload-text">Click or drag file to this area to upload</p>
+              <p className="ant-upload-hint">
+                Support for a single or bulk upload. Strictly prohibit from uploading company data
+                or other band files
+              </p>
+            </Dragger>
+            ,
+          </div>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             categoryData={this.state.categoryData}
@@ -235,7 +233,7 @@ class ProductCate extends React.Component {
   }
 }
 
-const Dragger = Upload.Dragger;
+const Dragger = Upload.Dragger
 
 const mapStateToProps = state => {
   return {

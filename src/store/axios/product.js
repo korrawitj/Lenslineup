@@ -27,18 +27,15 @@ export function getAllData() {
   }
 }
 
-export function uploadProductPhoto(data){
-  const formData = new FormData();
+export function uploadProductPhoto(data) {
+  const formData = new FormData()
   // fileList.forEach((file) => {
   //   formData.append('files[]', file);
   // });
-  axios.post()
-  .then(result =>{
-
-  })
-  .catch(err =>{
-
-  })
+  axios
+    .post()
+    .then(result => {})
+    .catch(err => {})
 }
 
 // export function get(Id) {

@@ -20,53 +20,45 @@ const CollectionCreateForm = Form.create()(
       uploading: false,
     }
     handleUpload = () => {
-      const { fileList } = this.state;
-      
-      try
-      {
+      const { fileList } = this.state
+
+      try {
         this.setState({
           uploading: false,
-        });
+        })
         this.props.onUpload(fileList)
-      }
-      catch(err){
-        
-      }
-      finally{
+      } catch (err) {
+      } finally {
         this.setState({
           uploading: false,
-          fileList:[]
-        });
+          fileList: [],
+        })
       }
-      
-      
-  
-      
-    }  
+    }
     render() {
       const { visible, onCancel, onCreate, form, productIncludeData } = this.props
       const { getFieldDecorator } = form
-      const { uploading } = this.state;
+      const { uploading } = this.state
       const props = {
-      action: '//jsonplaceholder.typicode.com/posts/',
-      onRemove: (file) => {
-        this.setState(({ fileList }) => {
-          const index = fileList.indexOf(file);
-          const newFileList = fileList.slice();
-          newFileList.splice(index, 1);
-          return {
-            fileList: newFileList,
-          };
-        });
-      },
-      beforeUpload: (file) => {
-        this.setState(({ fileList }) => ({
-          fileList: [...fileList, file],
-        }));
-        return false;
-      },
-      fileList: this.state.fileList,
-    };
+        action: '//jsonplaceholder.typicode.com/posts/',
+        onRemove: file => {
+          this.setState(({ fileList }) => {
+            const index = fileList.indexOf(file)
+            const newFileList = fileList.slice()
+            newFileList.splice(index, 1)
+            return {
+              fileList: newFileList,
+            }
+          })
+        },
+        beforeUpload: file => {
+          this.setState(({ fileList }) => ({
+            fileList: [...fileList, file],
+          }))
+          return false
+        },
+        fileList: this.state.fileList,
+      }
       return (
         <Modal
           width={1000}
@@ -93,22 +85,22 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
             </Form>
-                <div>
-            <Upload {...props}>
-              <Button>
-                <Icon type="upload" /> Select File
+            <div>
+              <Upload {...props}>
+                <Button>
+                  <Icon type="upload" /> Select File
+                </Button>
+              </Upload>
+              <Button
+                className="upload-demo-start"
+                type="primary"
+                onClick={this.handleUpload}
+                disabled={this.state.fileList.length === 0}
+                loading={uploading}
+              >
+                {uploading ? 'uploading' : 'start upload'}
               </Button>
-            </Upload>
-            <Button
-              className="upload-demo-start"
-              type="primary"
-              onClick={this.handleUpload}
-              disabled={this.state.fileList.length === 0}
-              loading={uploading}
-            >
-              {uploading ? 'uploading' : 'start upload' }
-            </Button>
-          </div>
+            </div>
           </div>
         </Modal>
       )
@@ -257,7 +249,7 @@ class ProductInclude extends React.Component {
     this.showModal()
   }
   componentDidMount() {
-     //this.props.getAllProductInclude()
+    //this.props.getAllProductInclude()
   }
 
   render() {
