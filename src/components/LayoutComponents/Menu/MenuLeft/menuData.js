@@ -19,7 +19,7 @@ export default [
       {
         key: 'อุปกรณ์ทั้งหมด',
         title: 'อุปกรณ์ทั้งหมด',
-        url: '/Product/List',
+        url: '/Product/list',
       },
       {
         key: 'ประเภท',

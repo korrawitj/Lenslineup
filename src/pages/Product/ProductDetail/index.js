@@ -13,7 +13,7 @@ class ProductPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="อุปกรณ์" />
+        <Helmet title="จัดการอุปกรณ์" />
         <ProductDetail />
       </Page>
     )
