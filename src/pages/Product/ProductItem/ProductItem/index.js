@@ -36,7 +36,7 @@ const CollectionCreateForm = Form.create()(
       }
     }
     render() {
-      const { visible, onCancel, onCreate, form, productItemData  } = this.props
+      const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
       const { uploading } = this.state
       const props = {
