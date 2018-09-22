@@ -6,7 +6,6 @@ export function getAllProductItem() {
     return axios
       .get('/API/product/productItem/getAll')
       .then(response => {
-        console.log(response)
         dispatch(actionCreators.getAllProductItem(response.data.productItemData))
       })
       .catch(error => {
