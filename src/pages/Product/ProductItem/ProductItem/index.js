@@ -370,7 +370,7 @@ class ProductItem extends React.Component {
         <div className="card-body">
           <Table
             columns={columns}
-            dataSource={this.props.productItemData}
+            dataSource={this.props.productItemData.productItemData}
             pagination={pager}
             onChange={this.handleTableChange}
           />
