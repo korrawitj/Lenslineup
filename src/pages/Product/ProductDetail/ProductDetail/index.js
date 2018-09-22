@@ -13,20 +13,15 @@ import {
   Select,
   TreeSelect,
 } from 'antd'
-import tableData from './data.json'
+
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
 import moment from 'moment'
 const FormItem = Form.Item
-const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
-const confirm = Modal.confirm
-const { TextArea } = Input
+const { getFieldDecorator } = this.props.form;
 class ProductList extends React.Component {
   state = {
-    tableData: tableData.data,
-    data: tableData.data,
-    pager: { ...defaultPagination },
     productItemData: {},
     filterDropdownVisible: false,
     searchText: '',
@@ -44,12 +39,24 @@ class ProductList extends React.Component {
     ],
   }
   componentDidMount() {
-    this.props.getAllProduct()
-    this.props.getAllData()
+    // this.props.getAllProduct()
+    // this.props.getAllData()  
   }
 
   render() {
-    let { pager, data } = this.state
+    const { TextArea } = Input
+
+const productItemData=this.state
+    const formItemLayout = {
+    labelCol: {
+    xs: { span: 24 },
+    sm: { span: 5 },
+    },
+    wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+    },  
+    }
     return (
       <div className="card">
         <div className="card-header">
@@ -73,7 +80,7 @@ class ProductList extends React.Component {
             <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
               {getFieldDecorator('productItemData.IsDay')(<Checkbox />)}
             </FormItem>
-            {form.getFieldValue('productItemData.IsDay') === true ? (
+            {/* {Form.getFieldValue('productItemData.IsDay') === true ? (
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
                 {getFieldDecorator('productItemData.RentDay_Fee', {
                   initialValue: productItemData.RentDay_Fee,
@@ -81,11 +88,11 @@ class ProductList extends React.Component {
               </FormItem>
             ) : (
               ''
-            )}
+            )} */}
             <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
               {getFieldDecorator('productItemData.IsHaftDay')(<Checkbox />)}
             </FormItem>
-            {form.getFieldValue('productItemData.IsHaftDay') === true ? (
+            {/* {Form.getFieldValue('productItemData.IsHaftDay') === true ? (
               <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
                 {getFieldDecorator('productItemData.RentHalfDay_Fee')(<Input />)}
               </FormItem>
@@ -95,13 +102,13 @@ class ProductList extends React.Component {
             <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
               {getFieldDecorator('productItemData.IsHour')(<Checkbox />)}
             </FormItem>
-            {form.getFieldValue('productItemData.IsHour') === true ? (
+            {Form.getFieldValue('productItemData.IsHour') === true ? (
               <FormItem {...formItemLayout} label="ราคาเช่าหนุ่งชั่วโมง">
                 {getFieldDecorator('productItemData.RentHour_Fee')(<Input />)}
               </FormItem>
             ) : (
               ''
-            )}
+            )} */}
             <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
               {getFieldDecorator('productItemData.RentDay')(<Input />)}
             </FormItem>
