@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Icon, Input, Button, Modal, Upload, Form } from 'antd'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
+import '../../index.css'
 const FormItem = Form.Item
 const TextArea = Input.TextArea
 const defaultPagination = {
@@ -374,7 +375,7 @@ class ProductItem extends React.Component {
               shape="circle"
               icon="edit"
               onClick={() => this.onEditProductItem(record, this.props)}
-              style={{ backgroundColor: '#c49f47' }}
+              className="palm-btn-warning"
             />
             <Button
               type="danger"
