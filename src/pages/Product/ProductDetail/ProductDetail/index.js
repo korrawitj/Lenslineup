@@ -19,7 +19,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 const FormItem = Form.Item
 const RadioButton = Radio.Button
-const { getFieldDecorator } = this.props.form;
+const { getFieldDecorator } = this.props.form
 class ProductList extends React.Component {
   state = {
     productItemData: {},
@@ -40,22 +40,22 @@ class ProductList extends React.Component {
   }
   componentDidMount() {
     // this.props.getAllProduct()
-    // this.props.getAllData()  
+    // this.props.getAllData()
   }
 
   render() {
     const { TextArea } = Input
 
-const productItemData=this.state
+    const productItemData = this.state
     const formItemLayout = {
-    labelCol: {
-    xs: { span: 24 },
-    sm: { span: 5 },
-    },
-    wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
-    },  
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 5 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+      },
     }
     return (
       <div className="card">
