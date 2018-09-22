@@ -29,12 +29,12 @@ const CollectionCreateForm = Form.create()(
       const { getFieldDecorator } = form
       const formItemLayout = {
         labelCol: {
-          xs: { span: 24 },
+          xs: { span: 10 },
           sm: { span: 5 },
         },
         wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 16 },
+          xs: { span: 14 },
+          sm: { span: 19 },
         },
       }
       console.log({ productCate })
@@ -154,8 +154,8 @@ const CollectionCreateForm = Form.create()(
                   })(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
                 {getFieldDecorator('productItemData.IsHaftDay')(<Checkbox />)}
               </FormItem>
@@ -164,8 +164,8 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('productItemData.RentHalfDay_Fee')(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
                 {getFieldDecorator('productItemData.IsHour')(<Checkbox />)}
               </FormItem>
@@ -174,8 +174,8 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('productItemData.RentHour_Fee')(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
                 {getFieldDecorator('productItemData.RentDay')(<Input />)}
               </FormItem>
@@ -244,7 +244,7 @@ const CollectionCreateForm = Form.create()(
               </FormItem>
               <div className="card-header">
                 <div className="utils__title">
-                  <strong>อุปรกณ์ที่ให้ไประหว่างเช่า</strong>
+                  <strong>อุปกรณ์ที่ให้ไประหว่างเช่า</strong>
                 </div>
               </div>
               <div className="card-body" />
