@@ -17,3 +17,22 @@
     color: #ffc107;
     border-color: #ffc107;
 }
+.palm-btn-primary {
+    color: #29a9ff;
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
+}
+.palm-btn-primary:hover {
+    color: #fff;
+    background-color: #29a9ff;
+    border-color: #29a9ff;
+}
+.palm-btn-primary:active {
+    color: #fff;
+    background-color: #1f94e2;
+    border-color: #1f94e2;
+}
+.palm-btn-primary:focus {
+    color: #29a9ff;
+    border-color: #29a9ff;
+}

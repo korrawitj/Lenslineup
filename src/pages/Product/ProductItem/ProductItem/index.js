@@ -366,10 +366,10 @@ class ProductItem extends React.Component {
         render: (text, record) => (
           <span>
             <Button
-              type="primary"
               shape="circle"
               icon="search"
               onClick={() => this.showData(record)}
+              className="palm-btn-primary"
             />
             <Button
               shape="circle"
