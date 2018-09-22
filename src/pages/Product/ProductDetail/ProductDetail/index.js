@@ -38,96 +38,97 @@ const CollectionCreateForm = Form.create()(
         },
       }
       console.log({ productCate })
-      // const dataCopy = [
-      //   {
-      //     title: 'View',
-      //     key: 'CategoryID',
-      //     render: (text, record) => (
-      //       <span>
-      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
-      //           View
-      //         </Button>
-      //       </span>
-      //     ),
-      //   },
-      //   {
-      //     title: 'ตัวที่',
-      //     dataIndex: 'CopyNo',
-      //     key: 'CopyNo',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.CopyNo - b.CopyNo,
-      //   },
-      //   {
-      //     title: 'ชื่อสั้น',
-      //     dataIndex: 'Serail',
-      //     key: 'SerialNumber',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.SerialNumber - b.SerialNumber,
-      //   },
-      //   {
-      //     title: 'ราคาที่ซื้อ',
-      //     dataIndex: 'PurchasePrice',
-      //     key: 'PurchasePrice',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {'#' + text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
-      //   },
-      //   {
-      //     title: 'วันที่ซื้อ',
-      //     dataIndex: 'PurchaseDate',
-      //     key: 'PurchaseDate',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {'#' + text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
-      //   },
-      //   {
-      //     title: 'สถานะ',
-      //     dataIndex: 'Status',
-      //     key: 'Status',
-      //     render: text => (
-      //       <a className="utils__link--underlined" href="javascript: void(0);">
-      //         {'#' + text}
-      //       </a>
-      //     ),
-      //     sorter: (a, b) => a.Status - b.Status,
-      //   },
-      //   {
-      //     title: 'แก้ไข',
-      //     key: 'Edit',
-      //     render: (text, record) => (
-      //       <span>
-      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
-      //           Edit
-      //         </Button>
-      //       </span>
-      //     ),
-      //   },
-      //   {
-      //     title: 'ลบ',
-      //     key: 'Action',
-      //     render: (text, record) => (
-      //       <span>
-      //         <Button icon="cross" size="small" onClick={() => console.log(record)}>
-      //           Remove
-      //         </Button>
-      //       </span>
-      //     ),
-      //   },
-      // ]
+      const productInclude = [
+        {
+          title: 'View',
+          key: 'CategoryID',
+          render: (text, record) => (
+            <span>
+              <Button icon="cross" size="small" onClick={() => console.log(record)}>
+                View
+              </Button>
+            </span>
+          ),
+        },
+        {
+          title: 'ตัวที่',
+          dataIndex: 'CopyNo',
+          key: 'CopyNo',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {text}
+            </a>
+          ),
+          sorter: (a, b) => a.CopyNo - b.CopyNo,
+        },
+        {
+          title: 'ชื่อสั้น',
+          dataIndex: 'Serail',
+          key: 'SerialNumber',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {text}
+            </a>
+          ),
+          sorter: (a, b) => a.SerialNumber - b.SerialNumber,
+        },
+        {
+          title: 'ราคาที่ซื้อ',
+          dataIndex: 'PurchasePrice',
+          key: 'PurchasePrice',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {'#' + text}
+            </a>
+          ),
+          sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
+        },
+        {
+          title: 'วันที่ซื้อ',
+          dataIndex: 'PurchaseDate',
+          key: 'PurchaseDate',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {'#' + text}
+            </a>
+          ),
+          sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
+        },
+        {
+          title: 'สถานะ',
+          dataIndex: 'Status',
+          key: 'Status',
+          render: text => (
+            <a className="utils__link--underlined" href="javascript: void(0);">
+              {'#' + text}
+            </a>
+          ),
+          sorter: (a, b) => a.Status - b.Status,
+        },
+        {
+          title: 'แก้ไข',
+          key: 'Edit',
+          render: (text, record) => (
+            <span>
+              <Button icon="cross" size="small" onClick={() => console.log(record)}>
+                Edit
+              </Button>
+            </span>
+          ),
+        },
+        {
+          title: 'ลบ',
+          key: 'Action',
+          render: (text, record) => (
+            <span>
+              <Button icon="cross" size="small" onClick={() => console.log(record)}>
+                Remove
+              </Button>
+            </span>
+          ),
+        },
+      ]
+      
       return (
         <div>
           <div className="card-body">
@@ -241,8 +242,16 @@ const CollectionCreateForm = Form.create()(
                   </Radio.Group>,
                 )}
               </FormItem>
-            </Form>
+              <div className="card-header">
+          <div className="utils__title">
+            <strong>อุปรกณ์ที่ให้ไประหว่างเช่า</strong>
           </div>
+        </div>
+          <div className="card-body">
+          </div >
+        </Form>
+          </div>
+
         </div>
       )
     }
