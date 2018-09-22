@@ -1,7 +1,7 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import ProductInclude from './ProductInclude'
+import ProductItem from './ProductItem'
 
 class ProductPage extends React.Component {
   static defaultProps = {
@@ -14,7 +14,7 @@ class ProductPage extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="อุปกรณ์" />
-        <ProductInclude />
+        <ProductItem />
       </Page>
     )
   }
