@@ -223,7 +223,7 @@ class ProductItem extends React.Component {
           <div className="col-md-6">{record.Quantity}</div>
         </div>
       ),
-      onOk() {},
+      onOk() { },
     })
   }
   handleTableChange = (pagination, filters, sorter) => {
