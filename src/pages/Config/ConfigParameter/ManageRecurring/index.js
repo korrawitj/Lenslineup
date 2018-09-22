@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import * as actionCreators from '../../../../store/axios/master'
 import ManageRecurringModal from './ManageRecurringModal'
-import '../index.css'
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],

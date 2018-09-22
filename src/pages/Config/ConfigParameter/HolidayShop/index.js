@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import * as actionCreators from '../../../../store/axios/master'
 import HolidayModal from './HolidayModal'
-import '../index.css'
 const { TextArea } = Input
 const RadioGroup = Radio.Group
 const FormItem = Form.Item
