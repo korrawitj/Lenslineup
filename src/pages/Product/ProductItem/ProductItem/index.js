@@ -3,6 +3,7 @@ import { Table, Icon, Input, Button, Modal, Upload, Form,message } from 'antd'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
 import '../../index.css'
+import Picturewall from './Picturewall'
 const FormItem = Form.Item
 const TextArea = Input.TextArea
 const defaultPagination = {
@@ -151,7 +152,8 @@ const CollectionCreateForm = Form.create()(
                     </Button>
                   </Upload>,
                 )} */}
-                <Upload
+                <Picturewall/>
+                {/* <Upload
                   name="avatar"
                   listType="picture-card"
                   className="avatar-uploader"
@@ -160,7 +162,7 @@ const CollectionCreateForm = Form.create()(
                   onChange={this.handleChange}
                 >
                   {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-                </Upload>
+                </Upload> */}
               </FormItem>
             </Form>
             {/* <div>
