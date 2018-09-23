@@ -13,12 +13,12 @@ import {
   Checkbox,
   Select,
   TreeSelect,
-  message
+  message,
 } from 'antd'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { relative } from 'path';
+import { relative } from 'path'
 import './detail.css'
 
 const FormItem = Form.Item
@@ -159,9 +159,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(
-                            <Input />,
-                          )}
+                          {getFieldDecorator('productItemData.Name', {
+                            initialValue: productItemData.Name,
+                          })(<Input />)}
                         </FormItem>
                       </div>
                     </div>
@@ -195,21 +195,19 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
-                        {form.getFieldValue('productItemData.IsDay') === true ?
-                          (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentDay_Fee', {
-                                initialValue: productItemData.RentDay_Fee,
-                              })(<InputNumber className="inputnumber" />)}
-                            </FormItem>
-                          ) :
-                          (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentDay_Fee', {
-                                initialValue: productItemData.RentDay_Fee,
-                              })(<InputNumber className="inputnumber" disabled />)}
-                            </FormItem>
-                          )}
+                        {form.getFieldValue('productItemData.IsDay') === true ? (
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentDay_Fee', {
+                              initialValue: productItemData.RentDay_Fee,
+                            })(<InputNumber className="inputnumber" />)}
+                          </FormItem>
+                        ) : (
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentDay_Fee', {
+                              initialValue: productItemData.RentDay_Fee,
+                            })(<InputNumber className="inputnumber" disabled />)}
+                          </FormItem>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -222,17 +220,19 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
-                        {form.getFieldValue('productItemData.IsHaftDay') === true ?
-                          (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentHalfDay_Fee')(<InputNumber className="inputnumber" />)}
-                            </FormItem>
-                          ) :
-                          (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentHalfDay_Fee')(<InputNumber className="inputnumber" disabled />)}
-                            </FormItem>
-                          )}
+                        {form.getFieldValue('productItemData.IsHaftDay') === true ? (
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentHalfDay_Fee')(
+                              <InputNumber className="inputnumber" />,
+                            )}
+                          </FormItem>
+                        ) : (
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentHalfDay_Fee')(
+                              <InputNumber className="inputnumber" disabled />,
+                            )}
+                          </FormItem>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -245,17 +245,19 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
-                        {form.getFieldValue('productItemData.IsHour') === true ?
-                          (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentHour_Fee')(<InputNumber className="inputnumber" />)}
-                            </FormItem>
-                          ) :
-                          (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentHour_Fee')(<InputNumber className="inputnumber" disabled />)}
-                            </FormItem>
-                          )}
+                        {form.getFieldValue('productItemData.IsHour') === true ? (
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentHour_Fee')(
+                              <InputNumber className="inputnumber" />,
+                            )}
+                          </FormItem>
+                        ) : (
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentHour_Fee')(
+                              <InputNumber className="inputnumber" disabled />,
+                            )}
+                          </FormItem>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -267,7 +269,7 @@ const CollectionCreateForm = Form.create()(
                           {getFieldDecorator('productItemData.RentDay')(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6"></div>
+                      <div className="col-md-6" />
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
@@ -278,7 +280,7 @@ const CollectionCreateForm = Form.create()(
                           {getFieldDecorator('productItemData.DepositType1')(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6"></div>
+                      <div className="col-md-6" />
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
@@ -289,7 +291,7 @@ const CollectionCreateForm = Form.create()(
                           {getFieldDecorator('productItemData.DepositType2')(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6"></div>
+                      <div className="col-md-6" />
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
@@ -300,7 +302,7 @@ const CollectionCreateForm = Form.create()(
                           {getFieldDecorator('productItemData.ContactPrice')(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6"></div>
+                      <div className="col-md-6" />
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
@@ -311,7 +313,7 @@ const CollectionCreateForm = Form.create()(
                           {getFieldDecorator('productItemData.PurchasePrice')(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6"></div>
+                      <div className="col-md-6" />
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
@@ -419,7 +421,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                   </Form>
                 </div>
-              </div >
+              </div>
             </div>
             <div className="col-md-5">
               <div className="row">
@@ -438,10 +440,12 @@ const CollectionCreateForm = Form.create()(
                             <p className="ant-upload-drag-icon">
                               <Icon type="inbox" />
                             </p>
-                            <p className="ant-upload-text">คลิกหรือลากไฟล์ วางในพื้นที่นี้เพื่ออับโหลด</p>
+                            <p className="ant-upload-text">
+                              คลิกหรือลากไฟล์ วางในพื้นที่นี้เพื่ออับโหลด
+                            </p>
                             <p className="ant-upload-hint">
-                              Support for a single or bulk upload. Strictly prohibit from uploading company data
-                              or other band files
+                              Support for a single or bulk upload. Strictly prohibit from uploading
+                              company data or other band files
                             </p>
                           </Dragger>
                           <div>
@@ -466,8 +470,7 @@ const CollectionCreateForm = Form.create()(
                       </div>
                     </div>
                     <hr />
-                    <div className="card-body">
-                    </div>
+                    <div className="card-body" />
                   </div>
                 </div>
               </div>
@@ -482,16 +485,14 @@ const CollectionCreateForm = Form.create()(
                   </div>
                 </div>
                 <hr />
-                <div className="card-body">
-                </div>
+                <div className="card-body" />
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col-md-12">
               <div className="card">
-                <div className="card-body">
-                </div>
+                <div className="card-body" />
               </div>
             </div>
           </div>
@@ -625,7 +626,7 @@ class ProductDetail extends React.Component {
     }
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
   render() {
     return (
