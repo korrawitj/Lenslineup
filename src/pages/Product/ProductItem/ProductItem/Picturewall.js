@@ -34,13 +34,16 @@ class PicturesWall extends React.Component {
 const mapStateToProps = state => {
   return {
     fileData: state.fileData,
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
-    onUpload: (upload) => dispatch(actionCreators.uploadImage(upload)),
-  };
-};
+    onUpload: upload => dispatch(actionCreators.uploadImage(upload)),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PicturesWall);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PicturesWall)
