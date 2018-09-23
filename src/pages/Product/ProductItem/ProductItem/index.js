@@ -67,7 +67,7 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title={productItemData.ItemID != null ? 'Update Product Item':'Add Product Item' }
+          title={productItemData.ItemID != null ? 'Update Product Item' : 'Add Product Item'}
           okText={productItemData.ItemID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
@@ -174,7 +174,7 @@ class ProductItem extends React.Component {
         values.productItemData['key'] = productItemData['key']
         values.productItemData['ItemID'] = productItemData['ItemID']
         // const formData = new FormData()
-        
+
         // console.log(values.productItemData['Test'])
         // values.productItemData['Test'].fileList.forEach(x => {
         //   console.log(x)
@@ -186,7 +186,7 @@ class ProductItem extends React.Component {
         // this.props.updateProductItem(formData)
       } else {
         console.log(productItemData)
-        values.productItemData['phoductPhoto']=productItemData.fileData.productPhoto
+        values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
         // // productItemData['Name']=values.productItemData['Name']
         // // productItemData['ContractPrice']=values.productItemData['ContractPrice']
         // // productItemData['Quantity']=values.productItemData['Quantity']
