@@ -486,6 +486,7 @@ class ProductItem extends React.Component {
 const mapStateToProps = state => {
   return {
     productItemData: state.productItemData,
+    fileData: state.fileData,
   }
 }
 
