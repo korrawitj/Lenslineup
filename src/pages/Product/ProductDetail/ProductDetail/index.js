@@ -19,6 +19,8 @@ import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { relative } from 'path'
+import ProductImage from '../../../../components/ProductComponents/ProductDetail/ProductImage/ProductImage'
+
 import './detail.css'
 
 const FormItem = Form.Item
@@ -26,119 +28,12 @@ const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
 const confirm = Modal.confirm
 const { TextArea } = Input
-const Dragger = Upload.Dragger
-const dragprop = {
-  name: 'file',
-  multiple: true,
-  action: '//jsonplaceholder.typicode.com/posts/',
-  onChange(info) {
-    const status = info.file.status
-    if (status !== 'uploading') {
-      console.log(info.file, info.fileList)
-    }
-    if (status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully.`)
-    } else if (status === 'error') {
-      message.error(`${info.file.name} file upload failed.`)
-    }
-  },
-}
 
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
       const { visible, onCancel, onCreate, form, productItemData, productCate } = this.props
       const { getFieldDecorator } = form
-      const productInclude = [
-        {
-          title: 'View',
-          key: 'CategoryID',
-          render: (text, record) => (
-            <span>
-              <Button icon="cross" size="small" onClick={() => console.log(record)}>
-                View
-              </Button>
-            </span>
-          ),
-        },
-        {
-          title: 'ตัวที่',
-          dataIndex: 'CopyNo',
-          key: 'CopyNo',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {text}
-            </a>
-          ),
-          sorter: (a, b) => a.CopyNo - b.CopyNo,
-        },
-        {
-          title: 'ชื่อสั้น',
-          dataIndex: 'Serail',
-          key: 'SerialNumber',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {text}
-            </a>
-          ),
-          sorter: (a, b) => a.SerialNumber - b.SerialNumber,
-        },
-        {
-          title: 'ราคาที่ซื้อ',
-          dataIndex: 'PurchasePrice',
-          key: 'PurchasePrice',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {'#' + text}
-            </a>
-          ),
-          sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
-        },
-        {
-          title: 'วันที่ซื้อ',
-          dataIndex: 'PurchaseDate',
-          key: 'PurchaseDate',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {'#' + text}
-            </a>
-          ),
-          sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
-        },
-        {
-          title: 'สถานะ',
-          dataIndex: 'Status',
-          key: 'Status',
-          render: text => (
-            <a className="utils__link--underlined" href="javascript: void(0);">
-              {'#' + text}
-            </a>
-          ),
-          sorter: (a, b) => a.Status - b.Status,
-        },
-        {
-          title: 'แก้ไข',
-          key: 'Edit',
-          render: (text, record) => (
-            <span>
-              <Button icon="cross" size="small" onClick={() => console.log(record)}>
-                Edit
-              </Button>
-            </span>
-          ),
-        },
-        {
-          title: 'ลบ',
-          key: 'Action',
-          render: (text, record) => (
-            <span>
-              <Button icon="cross" size="small" onClick={() => console.log(record)}>
-                Remove
-              </Button>
-            </span>
-          ),
-        },
-      ]
 
       return (
         <div>
@@ -202,12 +97,12 @@ const CollectionCreateForm = Form.create()(
                             })(<InputNumber className="inputnumber" />)}
                           </FormItem>
                         ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productItemData.RentDay_Fee', {
-                              initialValue: productItemData.RentDay_Fee,
-                            })(<InputNumber className="inputnumber" disabled />)}
-                          </FormItem>
-                        )}
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentDay_Fee', {
+                                initialValue: productItemData.RentDay_Fee,
+                              })(<InputNumber className="inputnumber" disabled />)}
+                            </FormItem>
+                          )}
                       </div>
                     </div>
                     <div className="row">
@@ -227,12 +122,12 @@ const CollectionCreateForm = Form.create()(
                             )}
                           </FormItem>
                         ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productItemData.RentHalfDay_Fee')(
-                              <InputNumber className="inputnumber" disabled />,
-                            )}
-                          </FormItem>
-                        )}
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentHalfDay_Fee')(
+                                <InputNumber className="inputnumber" disabled />,
+                              )}
+                            </FormItem>
+                          )}
                       </div>
                     </div>
                     <div className="row">
@@ -252,12 +147,12 @@ const CollectionCreateForm = Form.create()(
                             )}
                           </FormItem>
                         ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productItemData.RentHour_Fee')(
-                              <InputNumber className="inputnumber" disabled />,
-                            )}
-                          </FormItem>
-                        )}
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentHour_Fee')(
+                                <InputNumber className="inputnumber" disabled />,
+                              )}
+                            </FormItem>
+                          )}
                       </div>
                     </div>
                     <div className="row">
@@ -426,39 +321,7 @@ const CollectionCreateForm = Form.create()(
             <div className="col-md-5">
               <div className="row">
                 <div className="col-md-12">
-                  <div className="card">
-                    <div className="card-header">
-                      <div className="utils__title">
-                        <strong>จัดการรูป</strong>
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-md-12">
-                          <Dragger {...dragprop} className="height-300 d-block mb-3">
-                            <p className="ant-upload-drag-icon">
-                              <Icon type="inbox" />
-                            </p>
-                            <p className="ant-upload-text">
-                              คลิกหรือลากไฟล์ วางในพื้นที่นี้เพื่ออับโหลด
-                            </p>
-                            <p className="ant-upload-hint">
-                              Support for a single or bulk upload. Strictly prohibit from uploading
-                              company data or other band files
-                            </p>
-                          </Dragger>
-                          <div>
-                            <Upload>
-                              <Button>
-                                <Icon type="upload" /> เลือกไฟล์
-                              </Button>
-                            </Upload>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <ProductImage />
                 </div>
               </div>
               <div className="row">
@@ -626,7 +489,7 @@ class ProductDetail extends React.Component {
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     return (
