@@ -14,6 +14,7 @@ export {
   addProductItem,
   updateProductItem,
   deleteProductItem,
+  uploadImage,
 } from './productItem'
 
 export {

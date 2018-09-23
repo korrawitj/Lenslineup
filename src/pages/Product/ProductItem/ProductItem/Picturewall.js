@@ -1,5 +1,7 @@
 import React from 'react'
 import { Upload, Icon, Modal } from 'antd'
+import * as actionCreators from '../../../../store/actions/index'
+import { connect } from 'react-redux'
 
 class PicturesWall extends React.Component {
   render() {
@@ -29,4 +31,16 @@ class PicturesWall extends React.Component {
   }
 }
 
-export default PicturesWall
+const mapStateToProps = state => {
+  return {
+    fileData: state.fileData,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onUpload: (upload) => dispatch(actionCreators.uploadImage(upload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PicturesWall);
