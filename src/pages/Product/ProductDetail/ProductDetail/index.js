@@ -97,12 +97,12 @@ const CollectionCreateForm = Form.create()(
                             })(<InputNumber className="inputnumber" />)}
                           </FormItem>
                         ) : (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentDay_Fee', {
-                                initialValue: productItemData.RentDay_Fee,
-                              })(<InputNumber className="inputnumber" disabled />)}
-                            </FormItem>
-                          )}
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentDay_Fee', {
+                              initialValue: productItemData.RentDay_Fee,
+                            })(<InputNumber className="inputnumber" disabled />)}
+                          </FormItem>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -122,12 +122,12 @@ const CollectionCreateForm = Form.create()(
                             )}
                           </FormItem>
                         ) : (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentHalfDay_Fee')(
-                                <InputNumber className="inputnumber" disabled />,
-                              )}
-                            </FormItem>
-                          )}
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentHalfDay_Fee')(
+                              <InputNumber className="inputnumber" disabled />,
+                            )}
+                          </FormItem>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -147,12 +147,12 @@ const CollectionCreateForm = Form.create()(
                             )}
                           </FormItem>
                         ) : (
-                            <FormItem className="inputcenter">
-                              {getFieldDecorator('productItemData.RentHour_Fee')(
-                                <InputNumber className="inputnumber" disabled />,
-                              )}
-                            </FormItem>
-                          )}
+                          <FormItem className="inputcenter">
+                            {getFieldDecorator('productItemData.RentHour_Fee')(
+                              <InputNumber className="inputnumber" disabled />,
+                            )}
+                          </FormItem>
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -489,7 +489,7 @@ class ProductDetail extends React.Component {
     }
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
   render() {
     return (
