@@ -201,7 +201,7 @@ class ProductCate extends React.Component {
           <Button type="primary" onClick={this.onAdd}>
             เพิ่มประเภท
           </Button>
-          <div>
+          {/* <div>
             <div />
             <Dragger {...photos}>
               <p className="ant-upload-drag-icon">
@@ -214,7 +214,7 @@ class ProductCate extends React.Component {
               </p>
             </Dragger>
             ,
-          </div>
+          </div> */}
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             categoryData={this.state.categoryData}

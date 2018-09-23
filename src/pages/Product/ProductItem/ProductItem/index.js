@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload, Form } from 'antd'
+import { Table, Icon, Input, Button, Modal, Upload, Form,message } from 'antd'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
 import '../../index.css'
@@ -13,11 +13,57 @@ const defaultPagination = {
   showTotal: total => `Total ${total} items`,
   total: 0,
 }
+
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+function beforeUpload(file) {
+  const isJPG = file.type === 'image/jpeg';
+  if (!isJPG) {
+    message.error('You can only upload JPG file!');
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error('Image must smaller than 2MB!');
+  }
+  return isJPG && isLt2M;
+}
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     state = {
       fileList: [],
       uploading: false,
+      NewFileList:[]
+    }
+    handleChange = (info) => {
+      this.setState({NewFileList: info.fileList})
+      console.log(this.state.NewFileList)
+      // info.fileList.forEach(item => {
+      //   getBase64(item.originFileObj,imageUrl=>{
+      //     console.log(imageUrl)
+      //   })
+      //   //console.log(item)
+      // })
+      // getBase64(info.file.originFileObj, imageUrl =>{
+      
+      //   this.setState({
+      //     imageUrl,
+      //     loading: false,
+      //   })
+      // });
+      // this.state.NewFileList.push(this.state.imageUrl) 
+    //  console.log(this.state.imageUrl)
+      getBase64(info.file.originFileObj, imageUrl =>{
+        
+        this.setState({
+              imageUrl,
+              loading: false,
+        })
+      });
+     
+     // this.props.onUpload({ImageSource:this.state.imageUrl})
     }
     handleUpload = () => {
       const { fileList } = this.state
@@ -36,6 +82,13 @@ const CollectionCreateForm = Form.create()(
       }
     }
     render() {
+      const uploadButton = (
+        <div>
+          <Icon type={this.state.loading ? 'loading' : 'plus'} />
+          <div className="ant-upload-text">Upload</div>
+        </div>
+      );
+      const imageUrl = this.state.imageUrl;
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
       const { uploading } = this.state
@@ -91,13 +144,23 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
               <FormItem label="Note">
-                {getFieldDecorator('productItemData.Test')(
+                {/* {getFieldDecorator('productItemData.Test')(
                   <Upload {...props}>
                     <Button>
                       <Icon type="upload" /> Select File
                     </Button>
                   </Upload>,
-                )}
+                )} */}
+                <Upload
+                  name="avatar"
+                  listType="picture-card"
+                  className="avatar-uploader"
+                  showUploadList={false}
+                  
+                  onChange={this.handleChange}
+                >
+                  {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+                </Upload>
               </FormItem>
             </Form>
             {/* <div>
@@ -150,6 +213,7 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
+    console.log(form)
     form.validateFields((err, values) => {
       if (err) {
         return
@@ -158,9 +222,8 @@ class ProductItem extends React.Component {
       if (productItemData.ItemID != null) {
         values.productItemData['key'] = productItemData['key']
         values.productItemData['ItemID'] = productItemData['ItemID']
-
         const formData = new FormData()
-        //
+        
         console.log(values.productItemData['Test'])
         values.productItemData['Test'].fileList.forEach(x => {
           console.log(x)
@@ -168,7 +231,8 @@ class ProductItem extends React.Component {
         })
         formData.append('productPhoto', values.productItemData['Test'].file)
         formData.append('productItemData', values.productItemData)
-        this.props.updateProductItem(formData)
+        console.log(values)
+       // this.props.updateProductItem(formData)
       } else {
         // this.props.addProductItem(values.productItemData)
         console.log(values)
@@ -399,10 +463,11 @@ class ProductItem extends React.Component {
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             productItemData={this.state.productItemData}
-            onUpload={this.props.uploadProductPhoto}
+            onUpload={this.props.updateProductItem}
             visible={this.state.visible}
             onCancel={this.handleCancel}
             onCreate={this.handleCreate}
+            
           />
         </div>
         <div className="card-body">
