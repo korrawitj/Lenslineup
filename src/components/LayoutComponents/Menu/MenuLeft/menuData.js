@@ -30,7 +30,7 @@ export default [
             title: 'เพิ่มอุปกรณ์',
             url: '/Product/list/detail',
           },
-        ]
+        ],
       },
       {
         key: 'ประเภท',

@@ -153,8 +153,8 @@ const CollectionCreateForm = Form.create()(
                   })(<Input />)}
                 </FormItem>
               ) : (
-                  ''
-                )}
+                ''
+              )}
               <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
                 {getFieldDecorator('productItemData.IsHaftDay')(<Checkbox />)}
               </FormItem>
@@ -163,8 +163,8 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('productItemData.RentHalfDay_Fee')(<Input />)}
                 </FormItem>
               ) : (
-                  ''
-                )}
+                ''
+              )}
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
                 {getFieldDecorator('productItemData.IsHour')(<Checkbox />)}
               </FormItem>
@@ -173,8 +173,8 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('productItemData.RentHour_Fee')(<Input />)}
                 </FormItem>
               ) : (
-                  ''
-                )}
+                ''
+              )}
               <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
                 {getFieldDecorator('productItemData.RentDay')(<Input />)}
               </FormItem>
@@ -370,9 +370,7 @@ class ProductDetail extends React.Component {
       })
     }
   }
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
 
   render() {
     return (
