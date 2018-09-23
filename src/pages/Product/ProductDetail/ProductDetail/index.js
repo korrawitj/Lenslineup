@@ -37,7 +37,6 @@ const CollectionCreateForm = Form.create()(
           sm: { span: 19 },
         },
       }
-      console.log({ productCate })
       const productInclude = [
         {
           title: 'View',
@@ -138,7 +137,7 @@ const CollectionCreateForm = Form.create()(
                   <Input />,
                 )}
               </FormItem>
-              <FormItem {...formItemLayout} label="แบรน">
+              <FormItem {...formItemLayout} label="ยี่ห้อ">
                 {getFieldDecorator('productItemData.BrandID')(<Select />)}
               </FormItem>
               <FormItem {...formItemLayout} label="ประเภท">
@@ -154,8 +153,8 @@ const CollectionCreateForm = Form.create()(
                   })(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
                 {getFieldDecorator('productItemData.IsHaftDay')(<Checkbox />)}
               </FormItem>
@@ -164,8 +163,8 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('productItemData.RentHalfDay_Fee')(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
                 {getFieldDecorator('productItemData.IsHour')(<Checkbox />)}
               </FormItem>
@@ -174,8 +173,8 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('productItemData.RentHour_Fee')(<Input />)}
                 </FormItem>
               ) : (
-                ''
-              )}
+                  ''
+                )}
               <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
                 {getFieldDecorator('productItemData.RentDay')(<Input />)}
               </FormItem>
@@ -294,8 +293,6 @@ class ProductDetail extends React.Component {
       if (err) {
         return
       }
-
-      console.log(values)
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -374,8 +371,7 @@ class ProductDetail extends React.Component {
     }
   }
   componentDidMount() {
-    // this.props.getAllProduct()
-    // this.props.getAllData()
+
   }
 
   render() {

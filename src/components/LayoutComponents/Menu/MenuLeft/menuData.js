@@ -17,9 +17,20 @@ export default [
     icon: 'icmn icmn-drive',
     children: [
       {
-        key: 'อุปกรณ์ทั้งหมด',
-        title: 'อุปกรณ์ทั้งหมด',
-        url: '/Product/list',
+        key: 'รายการอุปกรณ์',
+        title: 'รายการอุปกรณ์',
+        children: [
+          {
+            key: 'อุปกรณ์ทั้งหมด',
+            title: 'อุปกรณ์ทั้งหมด',
+            url: '/Product/list',
+          },
+          {
+            key: 'เพิ่มอุปกรณ์',
+            title: 'เพิ่มอุปกรณ์',
+            url: '/Product/list/detail',
+          },
+        ]
       },
       {
         key: 'ประเภท',
