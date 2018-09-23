@@ -29,16 +29,7 @@ class PicturesWall extends React.Component {
     this.setState({ fileList: data.fileList })
     // console.log(this.state.NewFileList)
     // console.log(info.fileList)
-    data.fileList.forEach(x => {
-      console.log(x)
-      getBase64(x.originFileObj, imageUrl => {
-        this.setState({
-          imageUrl,
-        })
-      })
-      // console.log(this.state.imageUrl)
-    })
-
+    this.props.onUpload({productPhoto:this.state.fileList})
     // this.props.onUpload({ImageSource:this.state.imageUrl})
   }
   // handleChange = ({ fileList }) => {

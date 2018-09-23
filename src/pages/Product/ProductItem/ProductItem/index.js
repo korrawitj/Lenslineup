@@ -33,39 +33,6 @@ function beforeUpload(file) {
 }
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
-    state = {
-      fileList: [],
-      uploading: false,
-      NewFileList: [],
-    }
-    handleChange = info => {
-      this.setState({ NewFileList: info.fileList })
-      console.log(this.state.NewFileList)
-      getBase64(info.file.originFileObj, imageUrl => {
-        this.setState({
-          imageUrl,
-          loading: false,
-        })
-      })
-
-      // this.props.onUpload({ImageSource:this.state.imageUrl})
-    }
-    handleUpload = () => {
-      const { fileList } = this.state
-
-      try {
-        this.setState({
-          uploading: false,
-        })
-        this.props.onUpload(fileList)
-      } catch (err) {
-      } finally {
-        this.setState({
-          uploading: false,
-          fileList: [],
-        })
-      }
-    }
     render() {
       // const uploadButton = (
       //   <div>
@@ -73,7 +40,6 @@ const CollectionCreateForm = Form.create()(
       //     <div className="ant-upload-text">Upload</div>
       //   </div>
       // )
-      const imageUrl = this.state.imageUrl
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
       // const { uploading } = this.state
@@ -101,7 +67,7 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title={productItemData.ItemID != null ? 'Add Product Item' : 'Update Product Item'}
+          title={productItemData.ItemID != null ? 'Update Product Item':'Add Product Item' }
           okText={productItemData.ItemID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
@@ -128,7 +94,7 @@ const CollectionCreateForm = Form.create()(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
-              <FormItem label="Note">
+              <FormItem label="Upload">
                 {/* {getFieldDecorator('productItemData.Test')(
                   <Upload {...props}>
                     <Button>
@@ -199,17 +165,16 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
-    console.log(form)
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-      console.log('Received values of form: ', values.productItemData)
+      // console.log('Received values of form: ', values.productItemData)
       if (productItemData.ItemID != null) {
         values.productItemData['key'] = productItemData['key']
         values.productItemData['ItemID'] = productItemData['ItemID']
         // const formData = new FormData()
-
+        
         // console.log(values.productItemData['Test'])
         // values.productItemData['Test'].fileList.forEach(x => {
         //   console.log(x)
@@ -220,8 +185,14 @@ class ProductItem extends React.Component {
         // console.log(values)
         // this.props.updateProductItem(formData)
       } else {
-        // this.props.addProductItem(values.productItemData)
-        console.log(values)
+        console.log(productItemData)
+        values.productItemData['phoductPhoto']=productItemData.fileData.productPhoto
+        // // productItemData['Name']=values.productItemData['Name']
+        // // productItemData['ContractPrice']=values.productItemData['ContractPrice']
+        // // productItemData['Quantity']=values.productItemData['Quantity']
+        // // productItemData['Note']=values.productItemData['Note']
+        this.props.addProductItem(values.productItemData)
+        console.log(values.productItemData)
       }
 
       form.resetFields()
@@ -338,7 +309,6 @@ class ProductItem extends React.Component {
     this.showModal()
   }
   render() {
-    // console.log(this.props.productItemData)
     let { pager, data } = this.state
     const columns = [
       {
@@ -448,7 +418,7 @@ class ProductItem extends React.Component {
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
-            productItemData={this.state.productItemData}
+            productItemData={this.props.productItemData}
             onUpload={this.props.updateProductItem}
             visible={this.state.visible}
             onCancel={this.handleCancel}
