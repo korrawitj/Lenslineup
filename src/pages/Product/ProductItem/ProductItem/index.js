@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Upload, Form, message } from 'antd'
+import { Table, Icon, Input, Button, Modal, Form, message } from 'antd'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
 import '../../index.css'
@@ -41,21 +41,6 @@ const CollectionCreateForm = Form.create()(
     handleChange = info => {
       this.setState({ NewFileList: info.fileList })
       console.log(this.state.NewFileList)
-      // info.fileList.forEach(item => {
-      //   getBase64(item.originFileObj,imageUrl=>{
-      //     console.log(imageUrl)
-      //   })
-      //   //console.log(item)
-      // })
-      // getBase64(info.file.originFileObj, imageUrl =>{
-
-      //   this.setState({
-      //     imageUrl,
-      //     loading: false,
-      //   })
-      // });
-      // this.state.NewFileList.push(this.state.imageUrl)
-      //  console.log(this.state.imageUrl)
       getBase64(info.file.originFileObj, imageUrl => {
         this.setState({
           imageUrl,
@@ -82,36 +67,36 @@ const CollectionCreateForm = Form.create()(
       }
     }
     render() {
-      const uploadButton = (
-        <div>
-          <Icon type={this.state.loading ? 'loading' : 'plus'} />
-          <div className="ant-upload-text">Upload</div>
-        </div>
-      )
+      // const uploadButton = (
+      //   <div>
+      //     <Icon type={this.state.loading ? 'loading' : 'plus'} />
+      //     <div className="ant-upload-text">Upload</div>
+      //   </div>
+      // )
       const imageUrl = this.state.imageUrl
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
-      const { uploading } = this.state
-      const props = {
-        action: '//jsonplaceholder.typicode.com/posts/',
-        onRemove: file => {
-          this.setState(({ fileList }) => {
-            const index = fileList.indexOf(file)
-            const newFileList = fileList.slice()
-            newFileList.splice(index, 1)
-            return {
-              fileList: newFileList,
-            }
-          })
-        },
-        beforeUpload: file => {
-          this.setState(({ fileList }) => ({
-            fileList: [...fileList, file],
-          }))
-          return false
-        },
-        fileList: this.state.fileList,
-      }
+      // const { uploading } = this.state
+      // const props = {
+      //   action: '//jsonplaceholder.typicode.com/posts/',
+      //   onRemove: file => {
+      //     this.setState(({ fileList }) => {
+      //       const index = fileList.indexOf(file)
+      //       const newFileList = fileList.slice()
+      //       newFileList.splice(index, 1)
+      //       return {
+      //         fileList: newFileList,
+      //       }
+      //     })
+      //   },
+      //   beforeUpload: file => {
+      //     this.setState(({ fileList }) => ({
+      //       fileList: [...fileList, file],
+      //     }))
+      //     return false
+      //   },
+      //   fileList: this.state.fileList,
+      // }
       return (
         <Modal
           width={1000}
@@ -223,16 +208,16 @@ class ProductItem extends React.Component {
       if (productItemData.ItemID != null) {
         values.productItemData['key'] = productItemData['key']
         values.productItemData['ItemID'] = productItemData['ItemID']
-        const formData = new FormData()
+        // const formData = new FormData()
 
-        console.log(values.productItemData['Test'])
-        values.productItemData['Test'].fileList.forEach(x => {
-          console.log(x)
-          formData.append('productPhoto', x)
-        })
-        formData.append('productPhoto', values.productItemData['Test'].file)
-        formData.append('productItemData', values.productItemData)
-        console.log(values)
+        // console.log(values.productItemData['Test'])
+        // values.productItemData['Test'].fileList.forEach(x => {
+        //   console.log(x)
+        //   formData.append('productPhoto', x)
+        // })
+        // formData.append('productPhoto', values.productItemData['Test'].file)
+        // formData.append('productItemData', values.productItemData)
+        // console.log(values)
         // this.props.updateProductItem(formData)
       } else {
         // this.props.addProductItem(values.productItemData)
@@ -471,12 +456,12 @@ class ProductItem extends React.Component {
           />
         </div>
         <div className="card-body">
-          <Table
+          {/* <Table
             columns={columns}
             dataSource={this.props.productItemData.productItemData}
             pagination={pager}
             onChange={this.handleTableChange}
-          />
+          /> */}
         </div>
       </div>
     )
@@ -486,7 +471,6 @@ class ProductItem extends React.Component {
 const mapStateToProps = state => {
   return {
     productItemData: state.productItemData,
-    fileData: state.fileData,
   }
 }
 
