@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio ,Form,Upload} from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio, Form, Upload } from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/productPackage'
 import { connect } from 'react-redux'
@@ -72,9 +72,9 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productPackageData.Name', { initialValue: productPackageData.Name })(
-                  <Input />,
-                )}
+                {getFieldDecorator('productPackageData.Name', {
+                  initialValue: productPackageData.Name,
+                })(<Input />)}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
                 {getFieldDecorator('productPackageData.ValuationPrice', {
@@ -87,14 +87,14 @@ const CollectionCreateForm = Form.create()(
                 })(<Input />)}
               </FormItem>
               <FormItem label="Note">
-                {getFieldDecorator('productPackageData.DepositType1', { initialValue: productPackageData.DepositType1 })(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                )}
+                {getFieldDecorator('productPackageData.DepositType1', {
+                  initialValue: productPackageData.DepositType1,
+                })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
               </FormItem>
               <FormItem label="Note">
-                {getFieldDecorator('productPackageData.DepositType2', { initialValue: productPackageData.DepositType2 })(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                )}
+                {getFieldDecorator('productPackageData.DepositType2', {
+                  initialValue: productPackageData.DepositType2,
+                })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
               </FormItem>
               <FormItem label="Note">
                 {getFieldDecorator('productItemData.Test')(
