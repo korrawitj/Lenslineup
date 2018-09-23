@@ -13,7 +13,7 @@ class PicturesWall extends React.Component {
     previewVisible: false,
     previewImage: '',
     fileList: [],
-    datasend:[],
+    datasend: [],
   }
 
   handleCancel = () => this.setState({ previewVisible: false })
@@ -24,9 +24,9 @@ class PicturesWall extends React.Component {
       previewVisible: true,
     })
   }
-  handleChange =  (data) => {
+  handleChange = data => {
     // this.setState({ NewFileList: data.fileList })
-    this.setState({ fileList:data.fileList})
+    this.setState({ fileList: data.fileList })
     // console.log(this.state.NewFileList)
     // console.log(info.fileList)
     data.fileList.forEach(x => {
