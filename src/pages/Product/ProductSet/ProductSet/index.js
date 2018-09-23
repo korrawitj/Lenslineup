@@ -65,7 +65,9 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title={productPackageData.PackageID != null ? 'Add Product Package' : 'Update Product Package'}
+          title={
+            productPackageData.PackageID != null ? 'Add Product Package' : 'Update Product Package'
+          }
           okText={productPackageData.PackageID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
@@ -112,7 +114,7 @@ class ProductSet extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
-    productPackageData:{},
+    productPackageData: {},
   }
   showDeleteConfirm(record) {
     let T = record
