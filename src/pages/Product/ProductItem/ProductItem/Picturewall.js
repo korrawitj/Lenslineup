@@ -13,6 +13,7 @@ class PicturesWall extends React.Component {
     previewVisible: false,
     previewImage: '',
     fileList: [],
+    datasend:[],
   }
 
   handleCancel = () => this.setState({ previewVisible: false })
@@ -23,18 +24,19 @@ class PicturesWall extends React.Component {
       previewVisible: true,
     })
   }
-  handleChange = info => {
-    this.setState({ NewFileList: info.fileList })
+  handleChange =  (data) => {
+    // this.setState({ NewFileList: data.fileList })
+    this.setState({ fileList:data.fileList})
     // console.log(this.state.NewFileList)
     // console.log(info.fileList)
-    info.fileList.forEach(x => {
+    data.fileList.forEach(x => {
+      console.log(x)
       getBase64(x.originFileObj, imageUrl => {
-        console.log(x)
         this.setState({
           imageUrl,
         })
       })
-      console.log(this.state.imageUrl)
+      // console.log(this.state.imageUrl)
     })
 
     // this.props.onUpload({ImageSource:this.state.imageUrl})
