@@ -3,6 +3,7 @@ import {
   Table,
   Icon,
   Input,
+  InputNumber,
   Button,
   Modal,
   Upload,
@@ -12,31 +13,42 @@ import {
   Checkbox,
   Select,
   TreeSelect,
+  message
 } from 'antd'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { relative } from 'path';
+import './detail.css'
+
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
 const confirm = Modal.confirm
 const { TextArea } = Input
+const Dragger = Upload.Dragger
+const dragprop = {
+  name: 'file',
+  multiple: true,
+  action: '//jsonplaceholder.typicode.com/posts/',
+  onChange(info) {
+    const status = info.file.status
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList)
+    }
+    if (status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully.`)
+    } else if (status === 'error') {
+      message.error(`${info.file.name} file upload failed.`)
+    }
+  },
+}
+
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      // const { pager } = this.props
       const { visible, onCancel, onCreate, form, productItemData, productCate } = this.props
       const { getFieldDecorator } = form
-      const formItemLayout = {
-        labelCol: {
-          xs: { span: 10 },
-          sm: { span: 5 },
-        },
-        wrapperCol: {
-          xs: { span: 14 },
-          sm: { span: 19 },
-        },
-      }
       const productInclude = [
         {
           title: 'View',
@@ -130,124 +142,358 @@ const CollectionCreateForm = Form.create()(
 
       return (
         <div>
-          <div className="card-body">
-            <Form>
-              <FormItem {...formItemLayout} label="อุุปกรณ์">
-                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(
-                  <Input />,
-                )}
-              </FormItem>
-              <FormItem {...formItemLayout} label="ยี่ห้อ">
-                {getFieldDecorator('productItemData.BrandID')(<Select />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="ประเภท">
-                {getFieldDecorator('productItemData.CategoryID')(<TreeSelect />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
-                {getFieldDecorator('productItemData.IsDay')(<Checkbox />)}
-              </FormItem>
-              {form.getFieldValue('productItemData.IsDay') === true ? (
-                <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งวัน">
-                  {getFieldDecorator('productItemData.RentDay_Fee', {
-                    initialValue: productItemData.RentDay_Fee,
-                  })(<Input />)}
-                </FormItem>
-              ) : (
-                ''
-              )}
-              <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
-                {getFieldDecorator('productItemData.IsHaftDay')(<Checkbox />)}
-              </FormItem>
-              {form.getFieldValue('productItemData.IsHaftDay') === true ? (
-                <FormItem {...formItemLayout} label="ราคาเช่าครึ่งวัน">
-                  {getFieldDecorator('productItemData.RentHalfDay_Fee')(<Input />)}
-                </FormItem>
-              ) : (
-                ''
-              )}
-              <FormItem {...formItemLayout} label="ราคาเช่าหนึ่งชั่วโมง">
-                {getFieldDecorator('productItemData.IsHour')(<Checkbox />)}
-              </FormItem>
-              {form.getFieldValue('productItemData.IsHour') === true ? (
-                <FormItem {...formItemLayout} label="ราคาเช่าหนุ่งชั่วโมง">
-                  {getFieldDecorator('productItemData.RentHour_Fee')(<Input />)}
-                </FormItem>
-              ) : (
-                ''
-              )}
-              <FormItem {...formItemLayout} label="จำนวนวันขั้นต่ำที่ให้เช่า">
-                {getFieldDecorator('productItemData.RentDay')(<Input />)}
-              </FormItem>
-
-              <FormItem {...formItemLayout} label="แบบที่ 1">
-                {getFieldDecorator('productItemData.DepositType1')(<Input />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="แบบที่ 2">
-                {getFieldDecorator('productItemData.DepositType2')(<Input />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="ราคาในสัญญา">
-                {getFieldDecorator('productItemData.ContactPrice')(<Input />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="QR Code">
-                {getFieldDecorator('productItemData.QRID')(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                )}
-              </FormItem>
-              <FormItem {...formItemLayout} label="Serial Number">
-                {getFieldDecorator('productItemData.SerialNumber')(<Input />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="ราคาที่ซื้อ">
-                {getFieldDecorator('productItemData.PurchasePrice')(<Input />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="วันที่ซื้อ">
-                {getFieldDecorator('productItemData.PurchaseDate', {
-                  initialValue:
-                    productItemData.PurchaseDate == null
-                      ? null
-                      : moment(productItemData.PurchaseDate),
-                })(<DatePicker />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="วันที่หมดประกัน">
-                {getFieldDecorator('productItemData.ExpireDate')(<DatePicker />)}
-              </FormItem>
-              <FormItem {...formItemLayout} label="สถานที่ซื้อ / สภาพ / ประกัน">
-                {getFieldDecorator('productItemData.Location')(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                )}
-              </FormItem>
-              <FormItem {...formItemLayout} label="Remark (สภาพตำหนิ)">
-                {getFieldDecorator('productItemData.Remark')(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                )}
-              </FormItem>
-              <FormItem {...formItemLayout} label="Note">
-                {getFieldDecorator('productItemData.Note')(
-                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                )}
-              </FormItem>
-              <FormItem {...formItemLayout} label="สถานะหน้าเว็บ">
-                {getFieldDecorator('productItemData.isShow')(
-                  <Radio.Group>
-                    <RadioButton value={true}>แสดง</RadioButton>
-                    <RadioButton value={false}>ไม่แสดง</RadioButton>
-                  </Radio.Group>,
-                )}
-              </FormItem>
-              <FormItem {...formItemLayout} label="สถานะ">
-                {getFieldDecorator('productItemData.Status')(
-                  <Radio.Group>
-                    <RadioButton value={true}>พร้อมให้เช่า</RadioButton>
-                    <RadioButton value={false}>ยังไม่พร้อมให้เช่า</RadioButton>
-                  </Radio.Group>,
-                )}
-              </FormItem>
-              <div className="card-header">
-                <div className="utils__title">
-                  <strong>อุปกรณ์ที่ให้ไประหว่างเช่า</strong>
+          <div className="row">
+            <div className="col-md-7">
+              <div className="card">
+                <div className="card-header">
+                  <div className="utils__title">
+                    <strong>จัดการอุปกรณ์</strong>
+                  </div>
+                </div>
+                <hr />
+                <div className="card-body">
+                  <Form>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ชื่ออุปกรณ์ : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(
+                            <Input />,
+                          )}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ยี่ห้อ : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.BrandID')(<Select />)}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ประเภท : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.CategoryID')(<TreeSelect />)}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ราคาเช่าหนึ่งวัน : </label>
+                      </div>
+                      <div className="col-md-1 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.IsDay')(<Checkbox />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-8 inputcenter">
+                        {form.getFieldValue('productItemData.IsDay') === true ?
+                          (
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentDay_Fee', {
+                                initialValue: productItemData.RentDay_Fee,
+                              })(<InputNumber className="inputnumber" />)}
+                            </FormItem>
+                          ) :
+                          (
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentDay_Fee', {
+                                initialValue: productItemData.RentDay_Fee,
+                              })(<InputNumber className="inputnumber" disabled />)}
+                            </FormItem>
+                          )}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ราคาเช่าครึ่งวัน : </label>
+                      </div>
+                      <div className="col-md-1 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.IsHaftDay')(<Checkbox />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-8 inputcenter">
+                        {form.getFieldValue('productItemData.IsHaftDay') === true ?
+                          (
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentHalfDay_Fee')(<InputNumber className="inputnumber" />)}
+                            </FormItem>
+                          ) :
+                          (
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentHalfDay_Fee')(<InputNumber className="inputnumber" disabled />)}
+                            </FormItem>
+                          )}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ราคาเช่าหนึ่งชั่วโมง : </label>
+                      </div>
+                      <div className="col-md-1 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.IsHour')(<Checkbox />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-8 inputcenter">
+                        {form.getFieldValue('productItemData.IsHour') === true ?
+                          (
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentHour_Fee')(<InputNumber className="inputnumber" />)}
+                            </FormItem>
+                          ) :
+                          (
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentHour_Fee')(<InputNumber className="inputnumber" disabled />)}
+                            </FormItem>
+                          )}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>จำนวนวันขั้นต่ำที่ให้เช่า : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.RentDay')(<InputNumber />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6"></div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>แบบที่ 1 : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.DepositType1')(<InputNumber />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6"></div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>แบบที่ 2 : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.DepositType2')(<InputNumber />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6"></div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ราคาในสัญญา : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.ContactPrice')(<InputNumber />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6"></div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ราคาที่ซื้อ : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.PurchasePrice')(<InputNumber />)}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6"></div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>Serial Number : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.SerialNumber')(<Input />)}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>วันที่ซื้อ : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.PurchaseDate', {
+                            initialValue:
+                              productItemData.PurchaseDate == null
+                                ? null
+                                : moment(productItemData.PurchaseDate),
+                          })(<DatePicker />)}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>วันที่หมดประกัน : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.ExpireDate')(<DatePicker />)}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>สถานที่ซื้อ/ประกัน : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.Location')(
+                            <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                          )}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <br />
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>Remark (สภาพตำหนิ) : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.Remark')(
+                            <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                          )}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <br />
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>Note : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.Note')(
+                            <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                          )}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <br />
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>สถานะหน้าเว็บ : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.isShow')(
+                            <Radio.Group>
+                              <RadioButton value={true}>แสดง</RadioButton>
+                              <RadioButton value={false}>ไม่แสดง</RadioButton>
+                            </Radio.Group>,
+                          )}
+                        </FormItem>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>สถานะอุปกรณ์ : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productItemData.Status')(
+                            <Radio.Group>
+                              <RadioButton value={true}>พร้อมให้เช่า</RadioButton>
+                              <RadioButton value={false}>ยังไม่พร้อมให้เช่า</RadioButton>
+                            </Radio.Group>,
+                          )}
+                        </FormItem>
+                      </div>
+                    </div>
+                  </Form>
+                </div>
+              </div >
+            </div>
+            <div className="col-md-5">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="card">
+                    <div className="card-header">
+                      <div className="utils__title">
+                        <strong>จัดการรูป</strong>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col-md-12">
+                          <Dragger {...dragprop} className="height-300 d-block mb-3">
+                            <p className="ant-upload-drag-icon">
+                              <Icon type="inbox" />
+                            </p>
+                            <p className="ant-upload-text">คลิกหรือลากไฟล์ วางในพื้นที่นี้เพื่ออับโหลด</p>
+                            <p className="ant-upload-hint">
+                              Support for a single or bulk upload. Strictly prohibit from uploading company data
+                              or other band files
+                            </p>
+                          </Dragger>
+                          <div>
+                            <Upload>
+                              <Button>
+                                <Icon type="upload" /> เลือกไฟล์
+                              </Button>
+                            </Upload>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="card-body" />
-            </Form>
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="card">
+                    <div className="card-header">
+                      <div className="utils__title">
+                        <strong>อุปกรณ์ที่ติดไปด้วย</strong>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="card-body">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card">
+                <div className="card-header">
+                  <div className="utils__title">
+                    <strong>อุปกรณ์ (Copy)</strong>
+                  </div>
+                </div>
+                <hr />
+                <div className="card-body">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card">
+                <div className="card-body">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )
@@ -283,10 +529,13 @@ class ProductDetail extends React.Component {
       },
     ],
   }
+
   handleCancel = () => this.setState({ previewVisible: false, visible: false })
+
   showModal = () => {
     this.setState({ visible: true })
   }
+
   handleCreate = () => {
     const form = this.formRef.props.form
     form.validateFields((err, values) => {
@@ -297,9 +546,11 @@ class ProductDetail extends React.Component {
       this.setState({ visible: false })
     })
   }
+
   saveFormRef = formRef => {
     this.formRef = formRef
   }
+
   handlePreview = file => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
@@ -308,6 +559,7 @@ class ProductDetail extends React.Component {
   }
 
   handleChange = ({ fileList }) => this.setState({ fileList })
+
   showDeleteConfirm(record) {
     let T = record
     confirm({
@@ -324,9 +576,11 @@ class ProductDetail extends React.Component {
       },
     })
   }
+
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
+
   onSearch = () => {
     const { searchText, tableData } = this.state
     let reg = new RegExp(searchText, 'gi')
@@ -370,26 +624,26 @@ class ProductDetail extends React.Component {
       })
     }
   }
-  componentDidMount() {}
+
+  componentDidMount() { }
 
   render() {
     return (
-      <div className="card">
-        <div className="card-header">
-          <div className="utils__title">
-            <strong>จัดการอุปกรณ์</strong>
-          </div>
-        </div>
-        <div className="card-body">
-          <CollectionCreateForm
-            wrappedComponentRef={this.saveFormRef}
-            productItemData={this.state.productItemData}
-            productCate={this.props.product.productCate}
-            visible={this.state.visible}
-            onCancel={this.handleCancel}
-            onCreate={this.handleCreate}
-          />
-        </div>
+      <div>
+        <CollectionCreateForm
+          wrappedComponentRef={this.saveFormRef}
+          productItemData={this.state.productItemData}
+          productCate={this.props.product.productCate}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}
+        />
+        {/* 
+        <FormItem {...formItemLayout} label="QR Code">
+          {getFieldDecorator('productItemData.QRID')(
+            <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+          )}
+        </FormItem> */}
       </div>
     )
   }
