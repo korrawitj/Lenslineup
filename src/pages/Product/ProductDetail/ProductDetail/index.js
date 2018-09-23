@@ -20,6 +20,7 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import { relative } from 'path'
 import ProductImage from '../../../../components/ProductComponents/ProductDetail/ProductImage/ProductImage'
+import ProductInclude from '../../../../components/ProductComponents/ProductDetail/ProductInclude/ProductInclude'
 
 import './detail.css'
 
@@ -97,12 +98,12 @@ const CollectionCreateForm = Form.create()(
                             })(<InputNumber className="inputnumber" />)}
                           </FormItem>
                         ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productItemData.RentDay_Fee', {
-                              initialValue: productItemData.RentDay_Fee,
-                            })(<InputNumber className="inputnumber" disabled />)}
-                          </FormItem>
-                        )}
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentDay_Fee', {
+                                initialValue: productItemData.RentDay_Fee,
+                              })(<InputNumber className="inputnumber" disabled />)}
+                            </FormItem>
+                          )}
                       </div>
                     </div>
                     <div className="row">
@@ -122,12 +123,12 @@ const CollectionCreateForm = Form.create()(
                             )}
                           </FormItem>
                         ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productItemData.RentHalfDay_Fee')(
-                              <InputNumber className="inputnumber" disabled />,
-                            )}
-                          </FormItem>
-                        )}
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentHalfDay_Fee')(
+                                <InputNumber className="inputnumber" disabled />,
+                              )}
+                            </FormItem>
+                          )}
                       </div>
                     </div>
                     <div className="row">
@@ -147,12 +148,12 @@ const CollectionCreateForm = Form.create()(
                             )}
                           </FormItem>
                         ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productItemData.RentHour_Fee')(
-                              <InputNumber className="inputnumber" disabled />,
-                            )}
-                          </FormItem>
-                        )}
+                            <FormItem className="inputcenter">
+                              {getFieldDecorator('productItemData.RentHour_Fee')(
+                                <InputNumber className="inputnumber" disabled />,
+                              )}
+                            </FormItem>
+                          )}
                       </div>
                     </div>
                     <div className="row">
@@ -326,15 +327,7 @@ const CollectionCreateForm = Form.create()(
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <div className="card">
-                    <div className="card-header">
-                      <div className="utils__title">
-                        <strong>อุปกรณ์ที่ติดไปด้วย</strong>
-                      </div>
-                    </div>
-                    <hr />
-                    <div className="card-body" />
-                  </div>
+                  <ProductInclude />
                 </div>
               </div>
             </div>
@@ -489,7 +482,7 @@ class ProductDetail extends React.Component {
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     return (
