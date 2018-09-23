@@ -14,6 +14,7 @@ const defaultPagination = {
   showTotal: total => `Total ${total} items`,
   total: 0,
 }
+
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     state = {
@@ -64,7 +65,7 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title={productPackageData.PackageID != null ? 'Add Product Item' : 'Update Product Item'}
+          title={productPackageData.PackageID != null ? 'Add Product Package' : 'Update Product Package'}
           okText={productPackageData.PackageID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
           onOk={onCreate}
@@ -89,21 +90,12 @@ const CollectionCreateForm = Form.create()(
               <FormItem label="Note">
                 {getFieldDecorator('productPackageData.DepositType1', {
                   initialValue: productPackageData.DepositType1,
-                })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
+                })(<Input />)}
               </FormItem>
               <FormItem label="Note">
                 {getFieldDecorator('productPackageData.DepositType2', {
                   initialValue: productPackageData.DepositType2,
-                })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
-              </FormItem>
-              <FormItem label="Note">
-                {getFieldDecorator('productItemData.Test')(
-                  <Upload {...props}>
-                    <Button>
-                      <Icon type="upload" /> Select File
-                    </Button>
-                  </Upload>,
-                )}
+                })(<Input />)}
               </FormItem>
             </Form>
           </div>
@@ -120,12 +112,13 @@ class ProductSet extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+    productPackageData:{},
   }
   showDeleteConfirm(record) {
     let T = record
     Modal.confirm({
       title: 'Are you sure delete this row?',
-      content: <div>Delelte ProductSet = {record.setid}</div>,
+      content: <div>Delelte ProductSet = {record.PackageID}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
@@ -142,6 +135,38 @@ class ProductSet extends React.Component {
     this.setState({
       value: e.target.value,
     })
+  }
+  showModal = () => {
+    this.setState({ visible: true })
+  }
+  saveFormRef = formRef => {
+    this.formRef = formRef
+  }
+  handleCreate = () => {
+    const form = this.formRef.props.form
+    const productPackageData = this.formRef.props.productPackageData
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      console.log('Received values of form: ', values.productPackageData)
+      // if (productItemData.ItemID != null) {
+      //   values.productItemData['key'] = productItemData['key']
+      //   values.productItemData['ItemID'] = productItemData['ItemID']
+      // } else {
+      //   // this.props.addProductItem(values.productItemData)
+      //   console.log(values)
+      // }
+
+      form.resetFields()
+      this.setState({ visible: false })
+    })
+  }
+  handleCancel = () => this.setState({ previewVisible: false, visible: false })
+
+  onCreateProductPackage = () => {
+    this.setState({ productPackageData: {} })
+    this.showModal()
   }
   // addDataConfirm(record) {
   //   Modal.confirm({
@@ -203,22 +228,30 @@ class ProductSet extends React.Component {
   showData(record) {
     let T = record
     Modal.info({
-      title: <div>อุปกรณ์จัดชุด {record.setid}</div>,
+      title: <div>อุปกรณ์จัดชุด {record.PackageID}</div>,
       width: 1000,
       content: (
         <div className="row">
           <div className="col-md-4">
             <label>อุปกรณ์</label>
           </div>
-          <div className="col-md-6">{record.SetName}</div>
+          <div className="col-md-6">{record.Name}</div>
           <div className="col-md-4">
             <label>ราคาในสัญญา</label>
           </div>
-          <div className="col-md-6">{record.price}</div>
+          <div className="col-md-6">{record.ValuationPrice}</div>
           <div className="col-md-4">
-            <label>ID</label>
+            <label>วันที่เช่า</label>
           </div>
-          <div className="col-md-6">{record.setid}</div>
+          <div className="col-md-6">{record.RentDay}</div>
+          <div className="col-md-4">
+            <label>แบบที่1</label>
+          </div>
+          <div className="col-md-6">{record.DepositType1}</div>
+          <div className="col-md-4">
+            <label>แบบที่2</label>
+          </div>
+          <div className="col-md-6">{record.DepositType2}</div>
         </div>
       ),
       onOk() {},
@@ -279,7 +312,7 @@ class ProductSet extends React.Component {
 
     const columns = [
       {
-        title: 'Set ID',
+        title: 'Package ID',
         dataIndex: 'PackageID',
         key: 'PackageID',
         render: text => (
@@ -331,7 +364,7 @@ class ProductSet extends React.Component {
         dataIndex: 'ValuationPrice',
         key: 'ValuationPrice',
         render: text => <span>{'$' + text}</span>,
-        sorter: (a, b) => a.price - b.price,
+        sorter: (a, b) => a.ValuationPrice - b.ValuationPrice,
       },
       {
         title: 'Status',
@@ -376,6 +409,17 @@ class ProductSet extends React.Component {
           <div className="utils__title">
             <strong>อุปกรณ์จัดชุด</strong>
           </div>
+          <Button type="primary" icon="plus" onClick={this.onCreateProductPackage}>
+            เพิ่มอุปกรณ์จัดชุด
+          </Button>
+          <CollectionCreateForm
+            wrappedComponentRef={this.saveFormRef}
+            productPackageData={this.state.productPackageData}
+            // onUpload={this.props.uploadProductPhoto}
+            visible={this.state.visible}
+            onCancel={this.handleCancel}
+            onCreate={this.handleCreate}
+          />
         </div>
         <div className="card-body">
           <Table
