@@ -1,9 +1,10 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Radio } from 'antd'
+import { Table, Icon, Input, Button, Modal, Radio ,Form,Upload} from 'antd'
 import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/productPackage'
 import { connect } from 'react-redux'
 const RadioGroup = Radio.Group
+const FormItem = Form.Item
 const { TextArea } = Input
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -13,7 +14,104 @@ const defaultPagination = {
   showTotal: total => `Total ${total} items`,
   total: 0,
 }
+const CollectionCreateForm = Form.create()(
+  class extends React.Component {
+    state = {
+      fileList: [],
+      uploading: false,
+    }
+    handleUpload = () => {
+      const { fileList } = this.state
 
+      try {
+        this.setState({
+          uploading: false,
+        })
+        this.props.onUpload(fileList)
+      } catch (err) {
+      } finally {
+        this.setState({
+          uploading: false,
+          fileList: [],
+        })
+      }
+    }
+    render() {
+      const { visible, onCancel, onCreate, form, productPackageData } = this.props
+      const { getFieldDecorator } = form
+      const { uploading } = this.state
+      const props = {
+        action: '//jsonplaceholder.typicode.com/posts/',
+        onRemove: file => {
+          this.setState(({ fileList }) => {
+            const index = fileList.indexOf(file)
+            const newFileList = fileList.slice()
+            newFileList.splice(index, 1)
+            return {
+              fileList: newFileList,
+            }
+          })
+        },
+        beforeUpload: file => {
+          this.setState(({ fileList }) => ({
+            fileList: [...fileList, file],
+          }))
+          return false
+        },
+        fileList: this.state.fileList,
+      }
+      return (
+        <Modal
+          width={1000}
+          visible={visible}
+          title={productPackageData.PackageID != null ? 'Add Product Item' : 'Update Product Item'}
+          okText={productPackageData.PackageID != null ? 'Update' : 'Create'}
+          onCancel={onCancel}
+          onOk={onCreate}
+        >
+          <div className="card-body">
+            <Form layout="vertical">
+              <FormItem label="ชื่อ">
+                {getFieldDecorator('productPackageData.Name', { initialValue: productPackageData.Name })(
+                  <Input />,
+                )}
+              </FormItem>
+              <FormItem label="ราคาในสัญญา">
+                {getFieldDecorator('productPackageData.ValuationPrice', {
+                  initialValue: productPackageData.ValuationPrice,
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="จำนวน">
+                {getFieldDecorator('productPackageData.RentDay', {
+                  initialValue: productPackageData.RentDay,
+                })(<Input />)}
+              </FormItem>
+              <FormItem label="Note">
+                {getFieldDecorator('productPackageData.DepositType1', { initialValue: productPackageData.DepositType1 })(
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                )}
+              </FormItem>
+              <FormItem label="Note">
+                {getFieldDecorator('productPackageData.DepositType2', { initialValue: productPackageData.DepositType2 })(
+                  <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
+                )}
+              </FormItem>
+              <FormItem label="Note">
+                {getFieldDecorator('productItemData.Test')(
+                  <Upload {...props}>
+                    <Button>
+                      <Icon type="upload" /> Select File
+                    </Button>
+                  </Upload>,
+                )}
+              </FormItem>
+            </Form>
+          </div>
+        </Modal>
+      )
+    }
+  },
+)
 class ProductSet extends React.Component {
   state = {
     tableData: tableData.data,
@@ -45,63 +143,63 @@ class ProductSet extends React.Component {
       value: e.target.value,
     })
   }
-  addDataConfirm(record) {
-    Modal.confirm({
-      title: 'Add Product Set',
-      content: (
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="form-group">
-              <label htmlFor="product-edit-title">ชื่อ</label>
-              <Input id="product-edit-title" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-category">อุปกรณ์</label>
-              <Input id="product-edit-category" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">ราคาเช่า</label>
-              <Input id="product-edit-price" placeholder="" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">แสดงหน้าเว็บ</label>
-              <div>
-                <RadioGroup name="radiogroup">
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </RadioGroup>
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">คิวจอง</label>
-              <div>
-                <RadioGroup name="radiogroup2" defaultValue={1}>
-                  <Radio value={true}>Yes</Radio>
-                  <Radio value={false}>No</Radio>
-                </RadioGroup>
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="product-edit-price">Note</label>
-              <div>
-                <TextArea rows={4} />
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-      okText: 'Yes',
-      okType: 'primary',
-      cancelText: 'No',
-      width: 1000,
-      onOk() {
-        console.log('OK')
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
-    })
-  }
+  // addDataConfirm(record) {
+  //   Modal.confirm({
+  //     title: 'Add Product Set',
+  //     content: (
+  //       <div className="row">
+  //         <div className="col-lg-12">
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-title">ชื่อ</label>
+  //             <Input id="product-edit-title" placeholder="" />
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-category">อุปกรณ์</label>
+  //             <Input id="product-edit-category" placeholder="" />
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-price">ราคาเช่า</label>
+  //             <Input id="product-edit-price" placeholder="" />
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-price">แสดงหน้าเว็บ</label>
+  //             <div>
+  //               <RadioGroup name="radiogroup">
+  //                 <Radio value={true}>Yes</Radio>
+  //                 <Radio value={false}>No</Radio>
+  //               </RadioGroup>
+  //             </div>
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-price">คิวจอง</label>
+  //             <div>
+  //               <RadioGroup name="radiogroup2" defaultValue={1}>
+  //                 <Radio value={true}>Yes</Radio>
+  //                 <Radio value={false}>No</Radio>
+  //               </RadioGroup>
+  //             </div>
+  //           </div>
+  //           <div className="form-group">
+  //             <label htmlFor="product-edit-price">Note</label>
+  //             <div>
+  //               <TextArea rows={4} />
+  //             </div>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     ),
+  //     okText: 'Yes',
+  //     okType: 'primary',
+  //     cancelText: 'No',
+  //     width: 1000,
+  //     onOk() {
+  //       console.log('OK')
+  //     },
+  //     onCancel() {
+  //       console.log('Cancel')
+  //     },
+  //   })
+  // }
   showData(record) {
     let T = record
     Modal.info({
@@ -255,12 +353,6 @@ class ProductSet extends React.Component {
               shape="circle"
               icon="search"
               onClick={() => this.showData(record)}
-            />
-            <Button
-              shape="circle"
-              icon="plus"
-              onClick={() => this.addDataConfirm(record)}
-              style={{ backgroundColor: '#46c938' }}
             />
             <Button
               shape="circle"
