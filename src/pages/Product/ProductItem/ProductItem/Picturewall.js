@@ -12,35 +12,30 @@ class PicturesWall extends React.Component {
     NewFileList: [],
     previewVisible: false,
     previewImage: '',
-    fileList: [
-
-    ],
-    
-  };
+    fileList: [],
+  }
 
   handleCancel = () => this.setState({ previewVisible: false })
 
-  handlePreview = (file) => {
+  handlePreview = file => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
       previewVisible: true,
-    });
+    })
   }
   handleChange = info => {
     this.setState({ NewFileList: info.fileList })
     // console.log(this.state.NewFileList)
     // console.log(info.fileList)
-    info.fileList.forEach(x=>{ 
+    info.fileList.forEach(x => {
       getBase64(x.originFileObj, imageUrl => {
         console.log(x)
         this.setState({
-          imageUrl
+          imageUrl,
         })
-
       })
       console.log(this.state.imageUrl)
     })
-
 
     // this.props.onUpload({ImageSource:this.state.imageUrl})
   }

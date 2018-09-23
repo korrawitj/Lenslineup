@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.DELETEPRODUCTITEM:
       return updateObject(state, { productItemData: action.val })
     case actionTypes.UPLOADIMAGE:
-    console.log(action.val)
+      console.log(action.val)
       return updateObject(state, { fileData: action.val })
     default:
       return state
