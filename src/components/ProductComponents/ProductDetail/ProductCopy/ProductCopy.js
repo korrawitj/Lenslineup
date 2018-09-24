@@ -1,6 +1,5 @@
 import React from 'react'
-import { Icon, Input, Button, Modal, Table } from 'antd'
-
+import { Table, Icon, Input, Button, Modal, Form, message } from 'antd'
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -9,14 +8,22 @@ const defaultPagination = {
   showTotal: total => `Total ${total} items`,
   total: 0,
 }
-class ProductInclude extends React.Component {
+class ProductCopy extends React.Component {
   state = {
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
     previewVisible: false,
+    previewImage: '',
+    visible: false,
   }
+  handleCancel = () => this.setState({ previewVisible: false })
+
+  onInputChange = e => {
+    this.setState({ searchText: e.target.value })
+  }
+
   onSearch = () => {
     const { searchText, tableData } = this.state
     let reg = new RegExp(searchText, 'gi')
@@ -60,32 +67,6 @@ class ProductInclude extends React.Component {
       },
     })
   }
-
-  showData(record) {
-    let T = record
-    Modal.info({
-      title: <div>อุปกรณ์จัดชุด {record.ItemID}</div>,
-      width: 1000,
-
-      content: (
-        <div className="row">
-          <div className="col-md-4">
-            <label>อุปกรณ์</label>
-          </div>
-          <div className="col-md-6">{record.Name}</div>
-          <div className="col-md-4">
-            <label>ราคาในสัญญา</label>
-          </div>
-          <div className="col-md-6">{record.ContractPrice}</div>
-          <div className="col-md-4">
-            <label>จำนวน</label>
-          </div>
-          <div className="col-md-6">{record.Quantity}</div>
-        </div>
-      ),
-      onOk() {},
-    })
-  }
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
       const pager = { ...this.state.pager }
@@ -101,26 +82,25 @@ class ProductInclude extends React.Component {
       })
     }
   }
-
   render() {
     let { pager, data } = this.state
     const columns = [
-      // {
-      //   title: 'ItemID',
-      //   dataIndex: 'ItemID',
-      //   key: 'ItemID',
-      //   render: text => (
-      //     <a className="utils__link--underlined" href="javascript: void(0);">
-      //       {'#' + text}
-      //     </a>
-      //   ),
-      //   sorter: (a, b) => a.ItemID - b.ItemID,
-      // },
       {
-        title: 'อุปกรณ์',
-        dataIndex: 'Name',
-        key: 'Name',
-        sorter: (a, b) => a.Name.length - b.Name.length,
+        title: 'View',
+        dataIndex: 'ProductID',
+        key: 'ProductID',
+        render: text => (
+          <a className="utils__link--underlined" href="javascript: void(0);">
+            {'#' + text}
+          </a>
+        ),
+        sorter: (a, b) => a.ProductID - b.ProductID,
+      },
+      {
+        title: 'ตัวที่',
+        dataIndex: 'Copy',
+        key: 'Copy',
+        sorter: (a, b) => a.Copy.length - b.Copy.length,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
             {text}
@@ -154,59 +134,80 @@ class ProductInclude extends React.Component {
         },
       },
       {
-        title: 'ราคา',
-        dataIndex: 'ContractPrice',
-        key: 'ContractPrice',
+        title: 'Serail',
+        dataIndex: 'Serail',
+        key: 'Serail',
         render: text => <span>{text}</span>,
-        sorter: (a, b) => a.ContractPrice - b.ContractPrice,
+        sorter: (a, b) => a.Serail - b.Serail,
       },
       {
-        title: 'จำนวน',
-        dataIndex: 'Quantity',
-        key: 'Quantity',
+        title: 'ราคาที่ซื้อ',
+        dataIndex: 'PurchasePrice',
+        key: 'PurchasePrice',
         render: text => <span>{text}</span>,
-        sorter: (a, b) => a.Quantity - b.Quantity,
+        sorter: (a, b) => a.PurchasePrice - b.PurchasePrice,
       },
       {
-        title: 'แสดงหน้าเว็บ',
-        dataIndex: 'IsShow',
-        key: 'IsShow',
+        title: 'วันที่ซื้อ',
+        dataIndex: 'PurchaseDate',
+        key: 'PurchaseDate',
         render: text => <span>{text}</span>,
-        sorter: (a, b) => a.IsShow - b.IsShow,
+        sorter: (a, b) => a.PurchaseDate - b.PurchaseDate,
       },
       {
-        title: 'Action',
+        title: 'อายุ',
+        dataIndex: 'Note',
+        key: 'Note',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.Note - b.Note,
+      },
+      {
+        title: 'สถานะ',
+        dataIndex: 'Note',
+        key: 'Note',
+        render: text => <span>{text}</span>,
+        sorter: (a, b) => a.Note - b.Note,
+      },
+      {
+        title: 'แก้ไข',
         key: 'action',
         render: (text, record) => (
           <span>
             <Button
-              type="danger"
               shape="circle"
-              icon="delete"
-              onClick={() => this.showDeleteConfirm(record, this.props)}
+              icon="edit"
+            //   onClick={() => this.onEditProductItem(record, this.props)}
+              className="palm-btn-warning"
+            />
+          
+          </span>
+        ),
+      },
+      {
+        title: 'ลบ',
+        key: 'action',
+        render: (text, record) => (
+          <span>
+         <Button
+            type="danger"
+            shape="circle"
+            icon="delete"
+            // onClick={() => this.showDeleteConfirm(record, this.props)}
             />
           </span>
         ),
       },
     ]
+    
     return (
-      <div className="card">
-        <div className="card-header">
-          <div className="utils__title">
-            <strong>อุปกรณ์ที่ติดไปด้วย</strong>
-          </div>
-        </div>
-        <hr />
-        <div className="card-body" />
         <Table
-          columns={columns}
-          // dataSource={this.props.productItemData.productItemData}
-          pagination={pager}
-          onChange={this.handleTableChange}
-        />
-      </div>
+            columns={columns}
+            // dataSource={this.props.productItemData.productItemData}
+            pagination={pager}
+            onChange={this.handleTableChange}
+          />
     )
   }
 }
 
-export default ProductInclude
+export default ProductCopy

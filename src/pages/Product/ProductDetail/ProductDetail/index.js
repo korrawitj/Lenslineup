@@ -21,7 +21,7 @@ import moment from 'moment'
 import { relative } from 'path'
 import ProductImage from '../../../../components/ProductComponents/ProductDetail/ProductImage/ProductImage'
 import ProductInclude from '../../../../components/ProductComponents/ProductDetail/ProductInclude/ProductInclude'
-
+import ProductCopy from '../../../../components/ProductComponents/ProductDetail/ProductCopy/ProductCopy'
 import './detail.css'
 
 const FormItem = Form.Item
@@ -342,6 +342,7 @@ const CollectionCreateForm = Form.create()(
                 </div>
                 <hr />
                 <div className="card-body" />
+                <ProductCopy/>
               </div>
             </div>
           </div>
