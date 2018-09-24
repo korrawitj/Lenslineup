@@ -176,10 +176,9 @@ class ProductCopy extends React.Component {
             <Button
               shape="circle"
               icon="edit"
-            //   onClick={() => this.onEditProductItem(record, this.props)}
+              //   onClick={() => this.onEditProductItem(record, this.props)}
               className="palm-btn-warning"
             />
-          
           </span>
         ),
       },
@@ -188,24 +187,24 @@ class ProductCopy extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-         <Button
-            type="danger"
-            shape="circle"
-            icon="delete"
-            // onClick={() => this.showDeleteConfirm(record, this.props)}
+            <Button
+              type="danger"
+              shape="circle"
+              icon="delete"
+              // onClick={() => this.showDeleteConfirm(record, this.props)}
             />
           </span>
         ),
       },
     ]
-    
+
     return (
-        <Table
-            columns={columns}
-            // dataSource={this.props.productItemData.productItemData}
-            pagination={pager}
-            onChange={this.handleTableChange}
-          />
+      <Table
+        columns={columns}
+        // dataSource={this.props.productItemData.productItemData}
+        pagination={pager}
+        onChange={this.handleTableChange}
+      />
     )
   }
 }

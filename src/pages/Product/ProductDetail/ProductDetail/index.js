@@ -342,7 +342,7 @@ const CollectionCreateForm = Form.create()(
                 </div>
                 <hr />
                 <div className="card-body" />
-                <ProductCopy/>
+                <ProductCopy />
               </div>
             </div>
           </div>
