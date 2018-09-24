@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon, Input, Button, Modal ,Table} from 'antd'
+import { Icon, Input, Button, Modal, Table } from 'antd'
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -101,9 +101,8 @@ class ProductInclude extends React.Component {
       })
     }
   }
-  
-  render() 
-  {
+
+  render() {
     let { pager, data } = this.state
     const columns = [
       {
@@ -211,12 +210,12 @@ class ProductInclude extends React.Component {
         </div>
         <hr />
         <div className="card-body" />
-         <Table
-            columns={columns}
-            // dataSource={this.props.productItemData.productItemData}
-            pagination={pager}
-            onChange={this.handleTableChange}
-          /> 
+        <Table
+          columns={columns}
+          // dataSource={this.props.productItemData.productItemData}
+          pagination={pager}
+          onChange={this.handleTableChange}
+        />
       </div>
     )
   }
