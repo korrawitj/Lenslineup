@@ -165,7 +165,7 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
-    console.log(productItemData.fileData) 
+    console.log(productItemData.fileData)
     form.validateFields((err, values) => {
       if (err) {
         return
@@ -187,7 +187,7 @@ class ProductItem extends React.Component {
         // this.props.updateProductItem(formData)
       } else {
         console.log(productItemData)
-        
+
         values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
         // // productItemData['Name']=values.productItemData['Name']
         // // productItemData['ContractPrice']=values.productItemData['ContractPrice']
