@@ -15,54 +15,12 @@ const defaultPagination = {
   total: 0,
 }
 
-function getBase64(img, callback) {
-  const reader = new FileReader()
-  reader.addEventListener('load', () => callback(reader.result))
-  reader.readAsDataURL(img)
-}
-function beforeUpload(file) {
-  const isJPG = file.type === 'image/jpeg'
-  if (!isJPG) {
-    message.error('You can only upload JPG file!')
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!')
-  }
-  return isJPG && isLt2M
-}
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      // const uploadButton = (
-      //   <div>
-      //     <Icon type={this.state.loading ? 'loading' : 'plus'} />
-      //     <div className="ant-upload-text">Upload</div>
-      //   </div>
-      // )
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
-      // const { uploading } = this.state
-      // const props = {
-      //   action: '//jsonplaceholder.typicode.com/posts/',
-      //   onRemove: file => {
-      //     this.setState(({ fileList }) => {
-      //       const index = fileList.indexOf(file)
-      //       const newFileList = fileList.slice()
-      //       newFileList.splice(index, 1)
-      //       return {
-      //         fileList: newFileList,
-      //       }
-      //     })
-      //   },
-      //   beforeUpload: file => {
-      //     this.setState(({ fileList }) => ({
-      //       fileList: [...fileList, file],
-      //     }))
-      //     return false
-      //   },
-      //   fileList: this.state.fileList,
-      // }
+
       return (
         <Modal
           width={1000}
@@ -95,42 +53,9 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
               <FormItem label="Upload">
-                {/* {getFieldDecorator('productItemData.Test')(
-                  <Upload {...props}>
-                    <Button>
-                      <Icon type="upload" /> Select File
-                    </Button>
-                  </Upload>,
-                )} */}
                 <Picturewall />
-                {/* <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                  
-                  onChange={this.handleChange}
-                >
-                  {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-                </Upload> */}
               </FormItem>
             </Form>
-            {/* <div>
-              <Upload {...props}>
-                <Button>
-                  <Icon type="upload" /> Select File
-                </Button>
-              </Upload>
-              <Button
-                className="upload-demo-start"
-                type="primary"
-                onClick={this.handleUpload}
-                disabled={this.state.fileList.length === 0}
-                loading={uploading}
-              >
-                {uploading ? 'uploading' : 'start upload'}
-              </Button>
-            </div> */}
           </div>
         </Modal>
       )
@@ -147,14 +72,6 @@ class ProductItem extends React.Component {
     previewImage: '',
     visible: false,
     productItemData: {},
-    // fileList: [
-    //   {
-    //     uid: -1,
-    //     name: 'xxx.png',
-    //     status: 'done',
-    //     url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    //   },
-    // ],
   }
   showModal = () => {
     this.setState({ visible: true })
@@ -165,32 +82,18 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
+    console.log(productItemData.fileData)
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-      // console.log('Received values of form: ', values.productItemData)
       if (productItemData.ItemID != null) {
         values.productItemData['key'] = productItemData['key']
         values.productItemData['ItemID'] = productItemData['ItemID']
-        // const formData = new FormData()
-
-        // console.log(values.productItemData['Test'])
-        // values.productItemData['Test'].fileList.forEach(x => {
-        //   console.log(x)
-        //   formData.append('productPhoto', x)
-        // })
-        // formData.append('productPhoto', values.productItemData['Test'].file)
-        // formData.append('productItemData', values.productItemData)
-        // console.log(values)
-        // this.props.updateProductItem(formData)
       } else {
         console.log(productItemData)
+
         values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
-        // // productItemData['Name']=values.productItemData['Name']
-        // // productItemData['ContractPrice']=values.productItemData['ContractPrice']
-        // // productItemData['Quantity']=values.productItemData['Quantity']
-        // // productItemData['Note']=values.productItemData['Note']
         this.props.addProductItem(values.productItemData)
         console.log(values.productItemData)
       }
@@ -426,12 +329,12 @@ class ProductItem extends React.Component {
           />
         </div>
         <div className="card-body">
-          {/* <Table
+          <Table
             columns={columns}
             dataSource={this.props.productItemData.productItemData}
             pagination={pager}
             onChange={this.handleTableChange}
-          /> */}
+          />
         </div>
       </div>
     )
