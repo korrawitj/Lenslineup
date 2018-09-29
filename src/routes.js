@@ -50,6 +50,10 @@ const loadableRoutes = {
   '/configuration': {
     component: loadable(() => import('pages/Config/ConfigParameter')),
   },
+
+  '/order/list': {
+    component: loadable(() => import('pages/Order/OrderList')),
+  },
 }
 
 class Routes extends React.Component {

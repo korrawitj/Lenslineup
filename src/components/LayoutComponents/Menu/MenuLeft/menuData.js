@@ -49,4 +49,16 @@ export default [
       },
     ],
   },
+  {
+    title: 'รายการหน้าร้าน',
+    key: 'Order',
+    icon: 'icmn icmn-tongue',
+    children: [
+      {
+        key: 'รายการทั้งหมด',
+        title: 'รายการทั้งหมด',
+        url: '/order/list',
+      }
+    ]
+  }
 ]
