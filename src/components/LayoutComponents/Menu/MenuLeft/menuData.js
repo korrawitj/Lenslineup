@@ -49,4 +49,20 @@ export default [
       },
     ],
   },
+  {
+    title: 'รายการหน้าร้าน',
+    key: 'Order',
+    icon: 'icmn icmn-folder',
+    children: [
+      {
+        key: 'เพิ่มรายการจอง',
+        title: 'เพิ่มรายการจอง',
+      },
+      {
+        key: 'รายการทั้งหมด',
+        title: 'รายการทั้งหมด',
+        url: '/order/list',
+      },
+    ],
+  },
 ]
