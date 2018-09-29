@@ -58,7 +58,7 @@ export default [
         key: 'รายการทั้งหมด',
         title: 'รายการทั้งหมด',
         url: '/order/list',
-      }
-    ]
-  }
+      },
+    ],
+  },
 ]
