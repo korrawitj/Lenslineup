@@ -57,11 +57,22 @@ export default [
       {
         key: 'เพิ่มรายการจอง',
         title: 'เพิ่มรายการจอง',
+        url: '/order/list/detail',
       },
       {
         key: 'รายการทั้งหมด',
         title: 'รายการทั้งหมด',
         url: '/order/list',
+      },
+      {
+        key: 'รายการรับวันนี้',
+        title: 'รายการรับวันนี้',
+        url: '/order/receive',
+      },
+      {
+        key: 'รายการคืนวันนี้',
+        title: 'รายการคืนวันนี้',
+        url: '/order/restore',
       },
     ],
   },

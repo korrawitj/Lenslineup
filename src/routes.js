@@ -54,6 +54,18 @@ const loadableRoutes = {
   '/order/list': {
     component: loadable(() => import('pages/Order/OrderList')),
   },
+
+  '/order/list/detail': {
+    component: loadable(() => import('pages/Order/OrderDetail')),
+  },
+
+  '/order/receive': {
+    component: loadable(() => import('pages/Order/OrderReceive')),
+  },
+
+  '/order/restore': {
+    component: loadable(() => import('pages/Order/OrderRestore')),
+  },
 }
 
 class Routes extends React.Component {
