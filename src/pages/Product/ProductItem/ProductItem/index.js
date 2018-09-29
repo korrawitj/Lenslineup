@@ -20,7 +20,7 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
-  
+
       return (
         <Modal
           width={1000}
@@ -52,11 +52,10 @@ const CollectionCreateForm = Form.create()(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
-              <FormItem label="Upload">              
-                <Picturewall  />
+              <FormItem label="Upload">
+                <Picturewall />
               </FormItem>
             </Form>
-            
           </div>
         </Modal>
       )
@@ -83,7 +82,7 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
-    console.log(productItemData.fileData) 
+    console.log(productItemData.fileData)
     form.validateFields((err, values) => {
       if (err) {
         return
@@ -91,10 +90,9 @@ class ProductItem extends React.Component {
       if (productItemData.ItemID != null) {
         values.productItemData['key'] = productItemData['key']
         values.productItemData['ItemID'] = productItemData['ItemID']
-
       } else {
         console.log(productItemData)
-        
+
         values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
         this.props.addProductItem(values.productItemData)
         console.log(values.productItemData)
