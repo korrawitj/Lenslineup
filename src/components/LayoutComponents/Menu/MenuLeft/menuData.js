@@ -57,7 +57,6 @@ export default [
       {
         key: 'เพิ่มรายการจอง',
         title: 'เพิ่มรายการจอง',
-        
       },
       {
         key: 'รายการทั้งหมด',
@@ -65,5 +64,5 @@ export default [
         url: '/order/list',
       },
     ],
-  }, 
+  },
 ]
