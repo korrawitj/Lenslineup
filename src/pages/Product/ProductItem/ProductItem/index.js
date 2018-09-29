@@ -90,6 +90,10 @@ class ProductItem extends React.Component {
       if (productItemData.ItemID != null) {
         values.productItemData['key'] = productItemData['key']
         values.productItemData['ItemID'] = productItemData['ItemID']
+        values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
+        console.log(productItemData)
+
+        this.props.updateProductItem(values.productItemData)
       } else {
         console.log(productItemData)
 
