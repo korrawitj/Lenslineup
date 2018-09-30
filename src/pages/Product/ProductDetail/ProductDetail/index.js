@@ -359,8 +359,7 @@ const CollectionCreateForm = Form.create()(
             <div className="col-md-12">
               <div className="card">
                 <div className="card-body" />
-                <Button>Create
-                </Button>
+                <Button>Create</Button>
               </div>
             </div>
           </div>
