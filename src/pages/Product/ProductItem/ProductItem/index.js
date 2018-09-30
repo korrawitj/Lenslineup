@@ -20,7 +20,7 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
-      
+
       return (
         <Modal
           width={1000}
@@ -28,7 +28,8 @@ const CollectionCreateForm = Form.create()(
           title={productItemData.ItemID != null ? 'Update Product Item' : 'Add Product Item'}
           okText={productItemData.ItemID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
-          onOk={onCreate}>
+          onOk={onCreate}
+        >
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
@@ -52,9 +53,7 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
               <FormItem label="Upload">
-                <Picturewall 
-                 defaultFileList = {productItemData}
-                />
+                <Picturewall defaultFileList={productItemData} />
               </FormItem>
             </Form>
           </div>
