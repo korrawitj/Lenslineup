@@ -33,7 +33,15 @@ const { TextArea } = Input
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form, productData,productCate,productItem } = this.props
+      const {
+        visible,
+        onCancel,
+        onCreate,
+        form,
+        productData,
+        productCate,
+        productItem,
+      } = this.props
       const { getFieldDecorator } = form
       return (
         <div>
@@ -228,7 +236,7 @@ const CollectionCreateForm = Form.create()(
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.PurchaseDate', {
                             initialValue:
-                            productData.PurchaseDate == null
+                              productData.PurchaseDate == null
                                 ? null
                                 : moment(productData.PurchaseDate),
                           })(<DatePicker />)}
@@ -491,7 +499,7 @@ class ProductDetail extends React.Component {
   render() {
     return (
       <div>
-        <CollectionCreateForm 
+        <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           productData={this.props.product.productData}
           productCate={this.props.product.productCate}
