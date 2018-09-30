@@ -20,7 +20,7 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
-
+      console.log(productItemData)
       return (
         <Modal
           width={1000}
