@@ -9,7 +9,6 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  console.log(action.val)
   switch (action.type) {
     case actionTypes.GETALLPRODUCT:
       return updateObject(state, { productData: action.val })

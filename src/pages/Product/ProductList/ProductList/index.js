@@ -91,33 +91,7 @@ class ProductList extends React.Component {
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
   }
-  onSearch = () => {
-    const { searchText, tableData } = this.state
-    let reg = new RegExp(searchText, 'gi')
-    this.setState({
-      filterDropdownVisible: false,
-      filtered: !!searchText,
-      data: tableData
-        .map(record => {
-          let match = record.ProductName.match(reg)
-          if (!match) {
-            return null
-          }
-          return {
-            ...record,
-            name: (
-              <span>
-                {record.ProductName.split(reg).map(
-                  (text, i) =>
-                    i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text,
-                )}
-              </span>
-            ),
-          }
-        })
-        .filter(record => !!record),
-    })
-  }
+
 
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -137,6 +111,7 @@ class ProductList extends React.Component {
   componentDidMount() {
     this.props.getAllProduct()
     this.props.getAllData()
+    this.props.getAllProductItem()
   }
 
   render() {
@@ -233,7 +208,6 @@ class ProductList extends React.Component {
         ),
       },
     ]
-    console.log(this.props.product)
     return (
       <div className="card">
         <div className="card-header">
