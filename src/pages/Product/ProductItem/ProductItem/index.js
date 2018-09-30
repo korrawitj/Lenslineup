@@ -20,7 +20,7 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
-
+      
       return (
         <Modal
           width={1000}
@@ -28,8 +28,7 @@ const CollectionCreateForm = Form.create()(
           title={productItemData.ItemID != null ? 'Update Product Item' : 'Add Product Item'}
           okText={productItemData.ItemID != null ? 'Update' : 'Create'}
           onCancel={onCancel}
-          onOk={onCreate}
-        >
+          onOk={onCreate}>
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
@@ -53,7 +52,9 @@ const CollectionCreateForm = Form.create()(
                 )}
               </FormItem>
               <FormItem label="Upload">
-                <Picturewall />
+                <Picturewall 
+                 defaultFileList = {productItemData}
+                />
               </FormItem>
             </Form>
           </div>
@@ -82,6 +83,7 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
+    debugger
     console.log(productItemData.fileData)
     form.validateFields((err, values) => {
       if (err) {
@@ -325,7 +327,7 @@ class ProductItem extends React.Component {
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
-            productItemData={this.props.productItemData}
+            productItemData={this.state.productItemData}
             onUpload={this.props.updateProductItem}
             visible={this.state.visible}
             onCancel={this.handleCancel}
