@@ -45,6 +45,7 @@ export function getProductItem(data) {
     return axios
       .post('/API/product/productItem/get', data)
       .then(response => {
+        console.log(response.data.productItemData)
         dispatch(actionCreators.getproductitemdata(response.data.productItemData))
       })
       .catch(error => {

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Icon, Input, Button, Modal, Table } from 'antd'
-
+import { Icon, Input, Button, Modal, Table ,Select } from 'antd'
+const Option = Select.Option
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -14,6 +14,7 @@ class ProductInclude extends React.Component {
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
+    ProductIncludeData:'',
     filtered: false,
     previewVisible: false,
   }
@@ -60,7 +61,6 @@ class ProductInclude extends React.Component {
       },
     })
   }
-
   showData(record) {
     let T = record
     Modal.info({
@@ -85,6 +85,18 @@ class ProductInclude extends React.Component {
       ),
       onOk() {},
     })
+  }
+  handleChange =(value)=> {
+    this.setState({ ProductIncludeData:value })
+    // console.log(this.state.ProductIncludeData)
+  }
+  handleAdd=()=>{
+    // console.log(this.state.ProductIncludeData)
+    console.log(this.state.ProductIncludeData)
+    const Test = {Id:this.state.ProductIncludeData}
+    const x = this.props.getId(Test)
+    console.log(x)
+    // console.log(x)
   }
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -171,11 +183,27 @@ class ProductInclude extends React.Component {
             <strong>อุปกรณ์ที่ติดไปด้วย</strong>
           </div>
         </div>
+        <div className="row">
+        <div className="col-md-6">
+        
+        <Select placeholder="Please select" style={{ width: '100%' }} onChange={this.handleChange} >
+                    {this.props.TTT.map(item => (
+                      <Option selected key={item.ItemID} value={item.ItemID}>
+                        {item.Name}
+                      </Option>
+                    ))}
+        </Select>
+        </div>
+        <div className="col-md-2">
+        <Button onClick={this.handleAdd}>Add
+          </Button>
+          </div>
+          </div>
         <hr />
         <div className="card-body" />
         <Table
           columns={columns}
-          dataSource={this.props.TTT}
+          // dataSource={this.props.TTT}
           pagination={pager}
           onChange={this.handleTableChange}
         />

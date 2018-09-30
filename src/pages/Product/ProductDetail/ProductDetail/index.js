@@ -41,6 +41,7 @@ const CollectionCreateForm = Form.create()(
         productData,
         productCate,
         productItem,
+        productItemByID
       } = this.props
       const { getFieldDecorator } = form
       return (
@@ -334,7 +335,7 @@ const CollectionCreateForm = Form.create()(
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <ProductInclude TTT={productItem} />
+                  <ProductInclude TTT={productItem} getId={productItemByID} />
                 </div>
               </div>
             </div>
@@ -503,10 +504,11 @@ class ProductDetail extends React.Component {
           wrappedComponentRef={this.saveFormRef}
           productData={this.props.product.productData}
           productCate={this.props.product.productCate}
-          productItem={this.props.product.productItemData}
+          productItem={this.props.product.productItemDataAll}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
+          productItemByID={this.props.getProductItem}
         />
         {/* 
         <FormItem {...formItemLayout} label="QR Code">
