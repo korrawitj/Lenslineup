@@ -17,7 +17,7 @@ class ProductInclude extends React.Component {
     ProductIncludeData: '',
     filtered: false,
     previewVisible: false,
-    arrayvar:[]
+    arrayvar: [],
   }
   onSearch = () => {
     const { searchText, tableData } = this.state
@@ -91,14 +91,13 @@ class ProductInclude extends React.Component {
     this.setState({ ProductIncludeData: value })
     // console.log(this.state.ProductIncludeData)
   }
-  handleAdd = async() => {
+  handleAdd = async () => {
     // console.log(this.state.ProductIncludeData)
     // console.log(this.state.ProductIncludeData)
     const Test = { Id: this.state.ProductIncludeData }
 
-    if(!this.props.ssss.some(item =>  Test.Id=== item.key))
-    {
-    const x = await this.props.getId(Test)
+    if (!this.props.ssss.some(item => Test.Id === item.key)) {
+      const x = await this.props.getId(Test)
     }
     // console.log(this.props.ssss)
     // this.setState({
