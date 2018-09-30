@@ -109,8 +109,6 @@ class ProductList extends React.Component {
   }
   componentDidMount() {
     this.props.getAllProduct()
-    this.props.getAllData()
-    this.props.getAllProductItem()
   }
 
   render() {
