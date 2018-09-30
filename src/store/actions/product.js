@@ -19,3 +19,24 @@ export const getAllproductcate = value => {
     val: value,
   }
 }
+
+export const getAllproductitemdata = value => {
+  return {
+    type: actionTypes.GETALLPRODUCTITEM,
+    val: value,
+  }
+}
+
+export const getproductitemdata = value => {
+  return {
+    type: actionTypes.GETPRODUCTITEM,
+    val: value,
+  }
+}
+
+export const getproductincludedata = value => {
+  return {
+    type: actionTypes.GETPRODUCTINCLUDE,
+    val: value,
+  }
+}

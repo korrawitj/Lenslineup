@@ -6,7 +6,6 @@ export function getAllProduct() {
     return axios
       .get('/API/product/getAll')
       .then(response => {
-        console.log(response.data)
         dispatch(actionCreators.getAllProduct(response.data.productData))
       })
       .catch(error => {
@@ -14,12 +13,52 @@ export function getAllProduct() {
       })
   }
 }
+
 export function getAllData() {
   return dispatch => {
     return axios
       .get('/API/category/getAll')
       .then(response => {
         dispatch(actionCreators.getAllproductcat(response.data.categoryData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+export function getAllProductItem() {
+  return dispatch => {
+    return axios
+      .get('/API/product/productItem/getAll')
+      .then(response => {
+        dispatch(actionCreators.getAllproductitemdata(response.data.productItemData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+export function getProductItem(data) {
+  return dispatch => {
+    return axios
+      .post('/API/product/productItem/get', data)
+      .then(response => {
+        dispatch(actionCreators.getproductitemdata(response.data.productItemData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
+export function getProductInclude(data) {
+  return dispatch => {
+    return axios
+      .post('/API/product/productInclude/get', data)
+      .then(response => {
+        dispatch(actionCreators.getproductincludedata(response.data.productIncludeData))
       })
       .catch(error => {
         console.log('Error axios ' + error)

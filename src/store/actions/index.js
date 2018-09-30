@@ -6,7 +6,13 @@ export {
   deleteproductcat,
 } from './productcategory'
 
-export { getAllProduct, getAllproductcate } from './product'
+export {
+  getAllProduct,
+  getAllproductcate,
+  getAllproductitemdata,
+  getproductitemdata,
+  getproductincludedata,
+} from './product'
 
 export {
   getAllProductItem,
