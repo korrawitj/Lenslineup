@@ -6,7 +6,7 @@ const initialState = {
   productCate: [],
   productItemData: [],
   productIncludeData: [],
-  productItemDataAll:[],
+  productItemDataAll: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GETALLPRODUCTITEM:
       return updateObject(state, { productItemDataAll: action.val })
     case actionTypes.GETPRODUCTITEM:
-    console.log(action.val)
+      console.log(action.val)
       return updateObject(state, { productItemData: action.val })
     case actionTypes.GETPRODUCTINCLUDE:
       return updateObject(state, { productIncludeData: action.val })

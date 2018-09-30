@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Input, Button, Modal, Table ,Select } from 'antd'
+import { Icon, Input, Button, Modal, Table, Select } from 'antd'
 const Option = Select.Option
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -14,7 +14,7 @@ class ProductInclude extends React.Component {
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
-    ProductIncludeData:'',
+    ProductIncludeData: '',
     filtered: false,
     previewVisible: false,
   }
@@ -86,14 +86,14 @@ class ProductInclude extends React.Component {
       onOk() {},
     })
   }
-  handleChange =(value)=> {
-    this.setState({ ProductIncludeData:value })
+  handleChange = value => {
+    this.setState({ ProductIncludeData: value })
     // console.log(this.state.ProductIncludeData)
   }
-  handleAdd=()=>{
+  handleAdd = () => {
     // console.log(this.state.ProductIncludeData)
     console.log(this.state.ProductIncludeData)
-    const Test = {Id:this.state.ProductIncludeData}
+    const Test = { Id: this.state.ProductIncludeData }
     const x = this.props.getId(Test)
     console.log(x)
     // console.log(x)
@@ -184,21 +184,23 @@ class ProductInclude extends React.Component {
           </div>
         </div>
         <div className="row">
-        <div className="col-md-6">
-        
-        <Select placeholder="Please select" style={{ width: '100%' }} onChange={this.handleChange} >
-                    {this.props.TTT.map(item => (
-                      <Option selected key={item.ItemID} value={item.ItemID}>
-                        {item.Name}
-                      </Option>
-                    ))}
-        </Select>
+          <div className="col-md-6">
+            <Select
+              placeholder="Please select"
+              style={{ width: '100%' }}
+              onChange={this.handleChange}
+            >
+              {this.props.TTT.map(item => (
+                <Option selected key={item.ItemID} value={item.ItemID}>
+                  {item.Name}
+                </Option>
+              ))}
+            </Select>
+          </div>
+          <div className="col-md-2">
+            <Button onClick={this.handleAdd}>Add</Button>
+          </div>
         </div>
-        <div className="col-md-2">
-        <Button onClick={this.handleAdd}>Add
-          </Button>
-          </div>
-          </div>
         <hr />
         <div className="card-body" />
         <Table

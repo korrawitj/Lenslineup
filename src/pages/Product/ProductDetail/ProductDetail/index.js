@@ -41,7 +41,7 @@ const CollectionCreateForm = Form.create()(
         productData,
         productCate,
         productItem,
-        productItemByID
+        productItemByID,
       } = this.props
       const { getFieldDecorator } = form
       return (
