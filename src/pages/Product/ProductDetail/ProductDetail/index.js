@@ -42,6 +42,7 @@ const CollectionCreateForm = Form.create()(
         productCate,
         productItem,
         productItemByID,
+        dataSourceTa,
       } = this.props
       const { getFieldDecorator } = form
       return (
@@ -335,7 +336,7 @@ const CollectionCreateForm = Form.create()(
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <ProductInclude TTT={productItem} getId={productItemByID} />
+                  <ProductInclude TTT={productItem} getId={productItemByID} ssss={dataSourceTa} />
                 </div>
               </div>
             </div>
@@ -498,6 +499,7 @@ class ProductDetail extends React.Component {
   }
 
   render() {
+    console.log(this.props.product.productItemData)
     return (
       <div>
         <CollectionCreateForm
@@ -505,6 +507,7 @@ class ProductDetail extends React.Component {
           productData={this.props.product.productData}
           productCate={this.props.product.productCate}
           productItem={this.props.product.productItemDataAll}
+          dataSourceTa={this.props.product.productItemData}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}

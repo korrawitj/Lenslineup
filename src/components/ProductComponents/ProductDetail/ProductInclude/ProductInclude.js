@@ -17,6 +17,7 @@ class ProductInclude extends React.Component {
     ProductIncludeData: '',
     filtered: false,
     previewVisible: false,
+    arrayvar:[]
   }
   onSearch = () => {
     const { searchText, tableData } = this.state
@@ -90,12 +91,20 @@ class ProductInclude extends React.Component {
     this.setState({ ProductIncludeData: value })
     // console.log(this.state.ProductIncludeData)
   }
-  handleAdd = () => {
+  handleAdd = async() => {
     // console.log(this.state.ProductIncludeData)
-    console.log(this.state.ProductIncludeData)
+    // console.log(this.state.ProductIncludeData)
     const Test = { Id: this.state.ProductIncludeData }
-    const x = this.props.getId(Test)
-    console.log(x)
+
+    if(!this.props.ssss.some(item =>  Test.Id=== item.key))
+    {
+    const x = await this.props.getId(Test)
+    }
+    // console.log(this.props.ssss)
+    // this.setState({
+    //   arrayvar: [...this.state.arrayvar, x]
+    // })
+    // console.log(this.state.arrayvar)
     // console.log(x)
   }
   handleTableChange = (pagination, filters, sorter) => {
@@ -154,13 +163,6 @@ class ProductInclude extends React.Component {
         sorter: (a, b) => a.Quantity - b.Quantity,
       },
       {
-        title: 'แสดงหน้าเว็บ',
-        dataIndex: 'IsShow',
-        key: 'IsShow',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.IsShow - b.IsShow,
-      },
-      {
         title: 'Action',
         key: 'action',
         render: (text, record) => (
@@ -205,7 +207,7 @@ class ProductInclude extends React.Component {
         <div className="card-body" />
         <Table
           columns={columns}
-          // dataSource={this.props.TTT}
+          dataSource={this.props.ssss}
           pagination={pager}
           onChange={this.handleTableChange}
         />
