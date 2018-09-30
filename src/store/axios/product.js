@@ -66,65 +66,41 @@ export function getProductInclude(data) {
   }
 }
 
-export function uploadProductPhoto(data) {
-  const formData = new FormData()
-  // fileList.forEach((file) => {
-  //   formData.append('files[]', file);
-  // });
-  axios
-    .post()
-    .then(result => {})
-    .catch(err => {})
+export function addProduct(data) {
+  return dispatch => {
+    return axios
+      .post('/API/product/add', data)
+      .then(response => {
+        dispatch(actionCreators.addproduct(response.data.productData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
 }
 
-// export function get(Id) {
-//   return dispatch => {
-//     return axios
-//       .ProductId('/API/category/getAll', { ProductId: Id })
-//       .then(response => {
-//         dispatch(actionCreators.getdata(response.data.categoryData))
-//       })
-//       .catch(error => {
-//         console.log('Error axios ' + error)
-//       })
-//   }
-// }
+export function updateProduct(data) {
+  return dispatch => {
+    return axios
+      .post('/API/product/update', data)
+      .then(response => {
+        dispatch(actionCreators.updateproduct(response.data.productData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
 
-// export function Add() {
-//   return dispatch => {
-//     return axios
-//       .get('/API/category/getAll')
-//       .then(response => {
-//         dispatch(actionCreators.getdata(response.data.categoryData))
-//       })
-//       .catch(error => {
-//         console.log('Error axios ' + error)
-//       })
-//   }
-// }
-
-// export function Update() {
-//   return dispatch => {
-//     return axios
-//       .get('/API/category/getAll')
-//       .then(response => {
-//         dispatch(actionCreators.getdata(response.data.categoryData))
-//       })
-//       .catch(error => {
-//         console.log('Error axios ' + error)
-//       })
-//   }
-// }
-
-// export function Delete() {
-//   return dispatch => {
-//     return axios
-//       .get('/API/category/getAll')
-//       .then(response => {
-//         dispatch(actionCreators.getdata(response.data.categoryData))
-//       })
-//       .catch(error => {
-//         console.log('Error axios ' + error)
-//       })
-//   }
-// }
+export function deleteProduct(data) {
+  return dispatch => {
+    return axios
+      .post('/API/product/delete', data)
+      .then(response => {
+        dispatch(actionCreators.deleteproduct(response.data.productData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}

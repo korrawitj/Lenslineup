@@ -12,6 +12,9 @@ export {
   getAllproductitemdata,
   getproductitemdata,
   getproductincludedata,
+  addproduct,
+  updateproduct,
+  deleteproduct,
 } from './product'
 
 export {
