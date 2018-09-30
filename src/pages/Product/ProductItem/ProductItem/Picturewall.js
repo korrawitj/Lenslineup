@@ -17,29 +17,27 @@ class PicturesWall extends React.Component {
       previewVisible: true,
     })
   }
-  handleChange = data => {  
-
+  handleChange = data => {
     this.setState({ fileList: data.fileList })
-    let propsData = this.props 
+    let propsData = this.props
     debugger
     this.props.onUpload({ productPhoto: this.state.fileList })
-    
   }
- 
-  render() {   
-    let phoductPhoto  = this.props.defaultFileList.phoductPhoto
-    if(phoductPhoto == null || undefined){
+
+  render() {
+    let phoductPhoto = this.props.defaultFileList.phoductPhoto
+    if (phoductPhoto == null || undefined) {
       phoductPhoto = []
     }
     const props2 = {
       listType: 'picture-card',
       defaultFileList: [...phoductPhoto],
       className: 'upload-list-inline',
-      onPreview:this.handlePreview,
-      onChange:this.handleChange,
+      onPreview: this.handlePreview,
+      onChange: this.handleChange,
       //fileList:fileList
-    };
-    
+    }
+
     const { previewVisible, previewImage, fileList } = this.state
     debugger
     const uploadButton = (
@@ -50,9 +48,7 @@ class PicturesWall extends React.Component {
     )
     return (
       <div className="clearfix">
-        <Upload {...props2}   >
-          {uploadButton}
-        </Upload>
+        <Upload {...props2}>{uploadButton}</Upload>
         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
