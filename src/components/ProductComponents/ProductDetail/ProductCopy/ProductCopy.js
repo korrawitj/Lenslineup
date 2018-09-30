@@ -163,14 +163,14 @@ class ProductCopy extends React.Component {
       },
       {
         title: 'สถานะ',
-        dataIndex: 'Note',
-        key: 'Note',
+        dataIndex: 'Status',
+        key: 'Status',
         render: text => <span>{text}</span>,
-        sorter: (a, b) => a.Note - b.Note,
+        sorter: (a, b) => a.Status - b.Status,
       },
       {
         title: 'แก้ไข',
-        key: 'action',
+        key: 'edit',
         render: (text, record) => (
           <span>
             <Button
@@ -184,7 +184,7 @@ class ProductCopy extends React.Component {
       },
       {
         title: 'ลบ',
-        key: 'action',
+        key: 'delete',
         render: (text, record) => (
           <span>
             <Button
