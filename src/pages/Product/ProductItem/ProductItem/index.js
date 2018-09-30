@@ -91,19 +91,19 @@ class ProductItem extends React.Component {
         // productItemData.Quantity = values.productItemData['Quantity']
         // productItemData.Note=values.productItemData['Note']
         // productItemData.phoductPhoto=this.props.productItemData.fileData.productPhoto
-        values.productItemData['ItemID']=productItemData.ItemID
-        values.productItemData['phoductPhoto']=this.props.productItemData.fileData.productPhoto
-        values.productItemData['ImageID']=productItemData.ImageID
-         console.log(values)
+        values.productItemData['ItemID'] = productItemData.ItemID
+        values.productItemData['phoductPhoto'] = this.props.productItemData.fileData.productPhoto
+        values.productItemData['ImageID'] = productItemData.ImageID
+        console.log(values)
         // values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
 
-         this.props.updateProductItem(values)
+        this.props.updateProductItem(values)
       } else {
-        productItemData.Name=values.productItemData['Name']
-        productItemData.ContractPrice =values.productItemData['ContractPrice']
+        productItemData.Name = values.productItemData['Name']
+        productItemData.ContractPrice = values.productItemData['ContractPrice']
         productItemData.Quantity = values.productItemData['Quantity']
-        productItemData.Note=values.productItemData['Note']
-        productItemData.phoductPhoto=this.props.productItemData.fileData.productPhoto
+        productItemData.Note = values.productItemData['Note']
+        productItemData.phoductPhoto = this.props.productItemData.fileData.productPhoto
         // console.log(productItemData)
         // productItemData['phoductPhoto']= productItemData.fileData.productPhoto
         // values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
