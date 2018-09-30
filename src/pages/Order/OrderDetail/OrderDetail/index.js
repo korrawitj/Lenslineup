@@ -29,13 +29,7 @@ const { TextArea } = Input
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const {
-        visible,
-        onCancel,
-        onCreate,
-        form,
-        orderData,
-      } = this.props
+      const { visible, onCancel, onCreate, form, orderData } = this.props
       const { getFieldDecorator } = form
       return (
         <div>
@@ -93,12 +87,10 @@ const CollectionCreateForm = Form.create()(
             </div>
             <div className="col-md-5">
               <div className="row">
-                <div className="col-md-12">
-                </div>
+                <div className="col-md-12" />
               </div>
               <div className="row">
-                <div className="col-md-12">
-                </div>
+                <div className="col-md-12" />
               </div>
             </div>
           </div>
@@ -107,7 +99,7 @@ const CollectionCreateForm = Form.create()(
               <div className="card">
                 <div className="card-header">
                   <div className="utils__title">
-                    <strong></strong>
+                    <strong />
                   </div>
                 </div>
                 <hr />
