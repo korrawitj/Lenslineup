@@ -92,7 +92,6 @@ class ProductList extends React.Component {
     this.setState({ searchText: e.target.value })
   }
 
-
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
       const pager = { ...this.state.pager }
