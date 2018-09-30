@@ -33,7 +33,7 @@ if (isLogger && process.env.NODE_ENV === 'development') {
   const { logger } = require('redux-logger')
   middlewares.push(logger)
 }
-axios.defaults.baseURL = 'http://192.168.1.28:8888'
+axios.defaults.baseURL = 'http://192.168.1.8:8888'
 // axios.defaults.baseURL = 'http://13.250.43.152:8888'
 // axios.defaults.baseURL = 'http://devllu.ddns.net:8888'
 axios.defaults.headers.post['Content-Type'] = 'application/json'

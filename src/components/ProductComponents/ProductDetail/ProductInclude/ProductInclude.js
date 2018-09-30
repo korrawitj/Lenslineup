@@ -200,7 +200,7 @@ class ProductInclude extends React.Component {
         <div className="card-body" />
         <Table
           columns={columns}
-          // dataSource={this.props.productItemData.productItemData}
+          dataSource={this.props.TTT}
           pagination={pager}
           onChange={this.handleTableChange}
         />

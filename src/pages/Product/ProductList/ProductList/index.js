@@ -30,8 +30,6 @@ const defaultPagination = {
 
 class ProductList extends React.Component {
   state = {
-    tableData: tableData.data,
-    data: tableData.data,
     pager: { ...defaultPagination },
     productItemData: {},
     filterDropdownVisible: false,
@@ -235,6 +233,7 @@ class ProductList extends React.Component {
         ),
       },
     ]
+    console.log(this.props.product)
     return (
       <div className="card">
         <div className="card-header">

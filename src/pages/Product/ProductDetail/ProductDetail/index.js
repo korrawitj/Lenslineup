@@ -327,7 +327,9 @@ const CollectionCreateForm = Form.create()(
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <ProductInclude />
+                  <ProductInclude 
+                  TTT={productItemData.ProductInclude}
+                  />
                 </div>
               </div>
             </div>
@@ -483,7 +485,9 @@ class ProductDetail extends React.Component {
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.getAllProduct()
+  }
 
   render() {
     return (
