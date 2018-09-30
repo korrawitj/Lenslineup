@@ -359,6 +359,8 @@ const CollectionCreateForm = Form.create()(
             <div className="col-md-12">
               <div className="card">
                 <div className="card-body" />
+                <Button>Create
+                </Button>
               </div>
             </div>
           </div>
@@ -513,6 +515,7 @@ class ProductDetail extends React.Component {
           onCreate={this.handleCreate}
           productItemByID={this.props.getProductItem}
         />
+
         {/* 
         <FormItem {...formItemLayout} label="QR Code">
           {getFieldDecorator('productItemData.QRID')(
