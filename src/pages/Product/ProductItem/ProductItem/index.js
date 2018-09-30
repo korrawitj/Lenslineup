@@ -20,7 +20,6 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
-      console.log(productItemData)
       return (
         <Modal
           width={1000}
@@ -82,25 +81,34 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
-    debugger
-    console.log(productItemData.fileData)
     form.validateFields((err, values) => {
       if (err) {
         return
       }
       if (productItemData.ItemID != null) {
-        values.productItemData['key'] = productItemData['key']
-        values.productItemData['ItemID'] = productItemData['ItemID']
-        values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
-        console.log(productItemData)
+        // productItemData.Name=values.productItemData['Name']
+        // productItemData.ContractPrice =values.productItemData['ContractPrice']
+        // productItemData.Quantity = values.productItemData['Quantity']
+        // productItemData.Note=values.productItemData['Note']
+        // productItemData.phoductPhoto=this.props.productItemData.fileData.productPhoto
+        values.productItemData['ItemID']=productItemData.ItemID
+        values.productItemData['phoductPhoto']=this.props.productItemData.fileData.productPhoto
+        values.productItemData['ImageID']=productItemData.ImageID
+         console.log(values)
+        // values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
 
-        this.props.updateProductItem(values.productItemData)
+         this.props.updateProductItem(values)
       } else {
-        console.log(productItemData)
-
-        values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
-        this.props.addProductItem(values.productItemData)
-        console.log(values.productItemData)
+        productItemData.Name=values.productItemData['Name']
+        productItemData.ContractPrice =values.productItemData['ContractPrice']
+        productItemData.Quantity = values.productItemData['Quantity']
+        productItemData.Note=values.productItemData['Note']
+        productItemData.phoductPhoto=this.props.productItemData.fileData.productPhoto
+        // console.log(productItemData)
+        // productItemData['phoductPhoto']= productItemData.fileData.productPhoto
+        // values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
+        // console.log(values)
+        this.props.addProductItem(productItemData)
       }
 
       form.resetFields()
