@@ -327,9 +327,7 @@ const CollectionCreateForm = Form.create()(
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <ProductInclude 
-                  TTT={productItemData.ProductInclude}
-                  />
+                  <ProductInclude TTT={productItemData.ProductInclude} />
                 </div>
               </div>
             </div>
