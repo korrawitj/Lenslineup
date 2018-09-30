@@ -20,7 +20,7 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, productItemData } = this.props
       const { getFieldDecorator } = form
-
+      console.log(productItemData)
       return (
         <Modal
           width={1000}
@@ -325,7 +325,7 @@ class ProductItem extends React.Component {
           </Button>
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
-            productItemData={this.props.productItemData}
+            productItemData={this.state.productItemData}
             onUpload={this.props.updateProductItem}
             visible={this.state.visible}
             onCancel={this.handleCancel}
