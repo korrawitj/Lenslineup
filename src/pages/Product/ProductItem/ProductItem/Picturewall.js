@@ -17,31 +17,31 @@ class PicturesWall extends React.Component {
       previewVisible: true,
     })
   }
-  handleChange = data => {
-    this.setState({ fileList: data.fileList })
-    let propsData = this.props
-    this.props.onUpload({ productPhoto: this.state.fileList })
-  }
+  handleChange = data => {  
 
-  render() {
-    let phoductPhoto = this.props.defaultFileList.phoductPhoto
-    if (phoductPhoto == null || undefined) {
+    this.setState({ fileList: data.fileList })
+    let propsData = this.props 
+    debugger
+    this.props.onUpload({ productPhoto: this.state.fileList })
+    
+  }
+ 
+  render() {   
+    let phoductPhoto  = this.props.defaultFileList.phoductPhoto
+    if(phoductPhoto == null || undefined){
       phoductPhoto = []
     }
-    //const files = []
-    //debugger
-    // const files = this.props.productItemData.productItemData[0].phoductPhoto
-
     const props2 = {
       listType: 'picture-card',
       defaultFileList: [...phoductPhoto],
       className: 'upload-list-inline',
-      onPreview: this.handlePreview,
-      onChange: this.handleChange,
+      onPreview:this.handlePreview,
+      onChange:this.handleChange,
       //fileList:fileList
-    }
-
+    };
+    
     const { previewVisible, previewImage, fileList } = this.state
+    debugger
     const uploadButton = (
       <div>
         <Icon type="plus" />
@@ -50,7 +50,9 @@ class PicturesWall extends React.Component {
     )
     return (
       <div className="clearfix">
-        <Upload {...props2}>{uploadButton}</Upload>
+        <Upload {...props2}   >
+          {uploadButton}
+        </Upload>
         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
@@ -60,9 +62,9 @@ class PicturesWall extends React.Component {
 }
 
 const mapStateToProps = state => {
-  // return {
-  //   productItemData: state.productItemData,
-  // }
+  return {
+    productItemData: state.productItemData,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
