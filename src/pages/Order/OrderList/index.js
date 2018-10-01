@@ -3,7 +3,7 @@ import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
 import OrderList from './OrderList'
 
-class ProductPage extends React.Component {
+class OrderPage extends React.Component {
   static defaultProps = {
     pathName: 'รายการหน้าร้าน',
     roles: ['agent', 'administrator'],
@@ -20,4 +20,4 @@ class ProductPage extends React.Component {
   }
 }
 
-export default ProductPage
+export default OrderPage

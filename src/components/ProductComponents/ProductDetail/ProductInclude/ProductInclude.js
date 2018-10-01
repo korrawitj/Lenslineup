@@ -1,6 +1,6 @@
 import React from 'react'
-import { Icon, Input, Button, Modal, Table } from 'antd'
-
+import { Icon, Input, Button, Modal, Table, Select } from 'antd'
+const Option = Select.Option
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
   showSizeChanger: true,
@@ -14,8 +14,10 @@ class ProductInclude extends React.Component {
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
+    ProductIncludeData: '',
     filtered: false,
     previewVisible: false,
+    arrayvar: [],
   }
   onSearch = () => {
     const { searchText, tableData } = this.state
@@ -60,7 +62,6 @@ class ProductInclude extends React.Component {
       },
     })
   }
-
   showData(record) {
     let T = record
     Modal.info({
@@ -85,6 +86,25 @@ class ProductInclude extends React.Component {
       ),
       onOk() {},
     })
+  }
+  handleChange = value => {
+    this.setState({ ProductIncludeData: value })
+    // console.log(this.state.ProductIncludeData)
+  }
+  handleAdd = async () => {
+    // console.log(this.state.ProductIncludeData)
+    // console.log(this.state.ProductIncludeData)
+    const Test = { Id: this.state.ProductIncludeData }
+
+    if (!this.props.ssss.some(item => Test.Id === item.key)) {
+      const x = await this.props.getId(Test)
+    }
+    // console.log(this.props.ssss)
+    // this.setState({
+    //   arrayvar: [...this.state.arrayvar, x]
+    // })
+    // console.log(this.state.arrayvar)
+    // console.log(x)
   }
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -142,13 +162,6 @@ class ProductInclude extends React.Component {
         sorter: (a, b) => a.Quantity - b.Quantity,
       },
       {
-        title: 'แสดงหน้าเว็บ',
-        dataIndex: 'IsShow',
-        key: 'IsShow',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.IsShow - b.IsShow,
-      },
-      {
         title: 'Action',
         key: 'action',
         render: (text, record) => (
@@ -171,11 +184,29 @@ class ProductInclude extends React.Component {
             <strong>อุปกรณ์ที่ติดไปด้วย</strong>
           </div>
         </div>
+        <div className="row">
+          <div className="col-md-6">
+            <Select
+              placeholder="Please select"
+              style={{ width: '100%' }}
+              onChange={this.handleChange}
+            >
+              {this.props.TTT.map(item => (
+                <Option selected key={item.ItemID} value={item.ItemID}>
+                  {item.Name}
+                </Option>
+              ))}
+            </Select>
+          </div>
+          <div className="col-md-2">
+            <Button onClick={this.handleAdd}>Add</Button>
+          </div>
+        </div>
         <hr />
         <div className="card-body" />
         <Table
           columns={columns}
-          dataSource={this.props.TTT}
+          dataSource={this.props.ssss}
           pagination={pager}
           onChange={this.handleTableChange}
         />

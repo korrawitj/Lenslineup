@@ -4,3 +4,9 @@ export const updateObject = (oldObject, updatedValues) => {
     ...updatedValues,
   }
 }
+export const updateObjectArray = (oldObject, updatedValues) => {
+  return {
+    ...oldObject,
+    updatedValues,
+  }
+}

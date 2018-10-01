@@ -1,11 +1,12 @@
 import * as actionTypes from '../actions/actionType'
-import { updateObject } from '../utility'
+import { updateObject, updateObjectArray } from '../utility'
 
 const initialState = {
   productData: [],
   productCate: [],
   productItemData: [],
   productIncludeData: [],
+  productItemDataAll: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,9 +24,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GETALLPRODUCTCAT:
       return updateObject(state, { productCate: action.val })
     case actionTypes.GETALLPRODUCTITEM:
-      return updateObject(state, { productItemData: action.val })
+      return updateObject(state, { productItemDataAll: action.val })
     case actionTypes.GETPRODUCTITEM:
-      return updateObject(state, { productItemData: action.val })
+      return {
+        ...state,
+        productItemData: [...state.productItemData.concat(action.val)],
+      }
     case actionTypes.GETPRODUCTINCLUDE:
       return updateObject(state, { productIncludeData: action.val })
     default:
