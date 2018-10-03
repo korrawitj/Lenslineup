@@ -49,3 +49,7 @@ export {
   updateProductInclude,
   deleteProductInclude,
 } from './productinclude'
+
+export {
+  EditOrderDetail  
+} from './order'

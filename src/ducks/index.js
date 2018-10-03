@@ -9,6 +9,7 @@ import product from '../store/reducers/product'
 import productItem from '../store/reducers/productItem'
 import productPackage from '../store/reducers/productPackage'
 import productInclude from '../store/reducers/productinclude'
+import orderDetail from '../store/reducers/order'
 export default combineReducers({
   routing: routerReducer,
   pendingTasks: pendingTasksReducer,
@@ -20,4 +21,5 @@ export default combineReducers({
   productItemData: productItem,
   productPackage: productPackage,
   productInclude: productInclude,
+  orderDetail: orderDetail,
 })
