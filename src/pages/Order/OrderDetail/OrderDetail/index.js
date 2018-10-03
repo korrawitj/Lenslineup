@@ -17,7 +17,7 @@ import {
   message,
   Tag,
   Divider,
-  TimePicker
+  TimePicker,
 } from 'antd'
 import { connect } from 'react-redux'
 import moment from 'moment'
@@ -29,7 +29,7 @@ const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
 const confirm = Modal.confirm
 const { TextArea } = Input
-const Option = Select.Option;
+const Option = Select.Option
 
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
@@ -37,26 +37,30 @@ const CollectionCreateForm = Form.create()(
       const { form, orderData } = this.props
       const { getFieldDecorator } = form
 
-      const columns = [{
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a href="javascript:;">{text}</a>,
-      }, {
-        title: 'Copy',
-        dataIndex: 'Copy',
-        key: 'Copy',
-      }, {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-          <span>
-            <a href="javascript:;">Delete</a>
-          </span>
-        ),
-      }];
+      const columns = [
+        {
+          title: 'Name',
+          dataIndex: 'name',
+          key: 'name',
+          render: text => <a href="javascript:;">{text}</a>,
+        },
+        {
+          title: 'Copy',
+          dataIndex: 'Copy',
+          key: 'Copy',
+        },
+        {
+          title: 'Action',
+          key: 'action',
+          render: (text, record) => (
+            <span>
+              <a href="javascript:;">Delete</a>
+            </span>
+          ),
+        },
+      ]
 
-      const data = [];
+      const data = []
 
       const summaryFormLayout = {
         labelCol: {
@@ -67,7 +71,7 @@ const CollectionCreateForm = Form.create()(
           xs: { span: 24 },
           sm: { span: 16 },
         },
-      };
+      }
 
       return (
         <div>
@@ -113,42 +117,41 @@ const CollectionCreateForm = Form.create()(
                     <div className="row">
                       <div className="col-md-3">
                         <FormItem label="วันเวลารับ" className="inputcenter">
-                          {getFieldDecorator('orderData.ReceiveDate')
-                            (<DatePicker
-                              format="YYYY-MM-DD"
-                              placeholder="date"
-                            />)
-                          }
+                          {getFieldDecorator('orderData.ReceiveDate')(
+                            <DatePicker format="YYYY-MM-DD" placeholder="date" />,
+                          )}
                         </FormItem>
                       </div>
                       <div className="col-md-3">
                         <FormItem label="เวลา" className="inputcenter">
-                          {getFieldDecorator('orderData.ReceiveDate')
-                            (<TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />)
-                          }
+                          {getFieldDecorator('orderData.ReceiveDate')(
+                            <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />,
+                          )}
                         </FormItem>
                       </div>
                       <div className="col-md-3">
                         <FormItem label="วันเวลาคืน" className="inputcenter">
-                          {getFieldDecorator('orderData.RestoreDate')
-                            (<DatePicker
+                          {getFieldDecorator('orderData.RestoreDate')(
+                            <DatePicker
                               showTime
                               format="YYYY-MM-DD HH:mm:ss"
                               placeholder="Start"
-                            />)
-                          }
+                            />,
+                          )}
                         </FormItem>
                       </div>
                       <div className="col-md-3">
                         <FormItem label="เวลา" className="inputcenter">
-                          {getFieldDecorator('orderData.ReceiveDate')
-                            (<TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />)
-                          }
+                          {getFieldDecorator('orderData.ReceiveDate')(
+                            <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />,
+                          )}
                         </FormItem>
                       </div>
                       <div className="col-md-3">
                         <FormItem label="" className="inputcenter">
-                          <Button type="primary" style={{ marginBottom: 16 }}>ตรวจสอบคิว</Button>
+                          <Button type="primary" style={{ marginBottom: 16 }}>
+                            ตรวจสอบคิว
+                          </Button>
                         </FormItem>
                       </div>
                     </div>
@@ -158,7 +161,7 @@ const CollectionCreateForm = Form.create()(
             </div>
             <div className="col-md-5">
               <div className="row">
-                <div className="col-md-12" >
+                <div className="col-md-12">
                   <div className="card">
                     <div className="card-header">
                       <div className="utils__title">
@@ -183,115 +186,121 @@ const CollectionCreateForm = Form.create()(
                   </div>
                 </div>
                 <hr />
-                <div className="card-body" >
-                  <Form >
-                    <FormItem
-                      {...summaryFormLayout}
-                      label="จำนวนวัน"
-                    >
+                <div className="card-body">
+                  <Form>
+                    <FormItem {...summaryFormLayout} label="จำนวนวัน">
                       {getFieldDecorator('totalDay', {
-                        rules: [{
-                          type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                          required: true, message: 'Please input your E-mail!',
-                        }],
-                      })(
-                        <Input />
-                      )}
+                        rules: [
+                          {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                          },
+                          {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                          },
+                        ],
+                      })(<Input />)}
                     </FormItem>
-                    <FormItem
-                      {...summaryFormLayout}
-                      label="ค่าเช่ารวม"
-                    >
+                    <FormItem {...summaryFormLayout} label="ค่าเช่ารวม">
                       {getFieldDecorator('totalRent', {
-                        rules: [{
-                          type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                          required: true, message: 'Please input your E-mail!',
-                        }],
-                      })(
-                        <Input />
-                      )}
+                        rules: [
+                          {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                          },
+                          {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                          },
+                        ],
+                      })(<Input />)}
                     </FormItem>
-                    <FormItem
-                      {...summaryFormLayout}
-                      label="หลักประกันรวม"
-                    >
+                    <FormItem {...summaryFormLayout} label="หลักประกันรวม">
                       {getFieldDecorator('totalPromise', {
-                        rules: [{
-                          type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                          required: true, message: 'Please input your E-mail!',
-                        }],
-                      })(
-                        <Input />
-                      )}
+                        rules: [
+                          {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                          },
+                          {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                          },
+                        ],
+                      })(<Input />)}
                     </FormItem>
-                    <FormItem
-                      {...summaryFormLayout}
-                      label="สถานที่รับ"
-                    >
+                    <FormItem {...summaryFormLayout} label="สถานที่รับ">
                       {getFieldDecorator('totalPromise', {
-                        rules: [{
-                          type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                          required: true, message: 'Please input your E-mail!',
-                        }],
+                        rules: [
+                          {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                          },
+                          {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                          },
+                        ],
                       })(
                         <Select defaultValue="1">
-                        <Option value="1">Option 1</Option>
-                        <Option value="2">Option 2</Option>
-                        <Option value="3">Option 3</Option>
-                      </Select>
+                          <Option value="1">Option 1</Option>
+                          <Option value="2">Option 2</Option>
+                          <Option value="3">Option 3</Option>
+                        </Select>,
                       )}
                     </FormItem>
-                    <FormItem
-                      {...summaryFormLayout}
-                      label="สถานที่คืน"
-                    >
+                    <FormItem {...summaryFormLayout} label="สถานที่คืน">
                       {getFieldDecorator('totalPromise', {
-                        rules: [{
-                          type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                          required: true, message: 'Please input your E-mail!',
-                        }],
+                        rules: [
+                          {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                          },
+                          {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                          },
+                        ],
                       })(
                         <Select defaultValue="1">
-                        <Option value="1">Option 1</Option>
-                        <Option value="2">Option 2</Option>
-                        <Option value="3">Option 3</Option>
-                      </Select>
+                          <Option value="1">Option 1</Option>
+                          <Option value="2">Option 2</Option>
+                          <Option value="3">Option 3</Option>
+                        </Select>,
                       )}
                     </FormItem>
-                    <FormItem
-                      {...summaryFormLayout}
-                      label="coupon"
-                    >
+                    <FormItem {...summaryFormLayout} label="coupon">
                       {getFieldDecorator('coupon', {
-                        rules: [{
-                          type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                          required: true, message: 'Please input your E-mail!',
-                        }],
-                      })(
-                        <TextArea></TextArea>
-                      )}
+                        rules: [
+                          {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                          },
+                          {
+                            required: true,
+                            message: 'Please input your E-mail!',
+                          },
+                        ],
+                      })(<TextArea />)}
                     </FormItem>
                     <div className="col-md-7">
-                    <Button type="primary" size={"large"}>เพิ่มการจอง</Button>
-                    <Button type="danger" size={"large"}>ยกเลิก</Button></div>
+                      <Button type="primary" size={'large'}>
+                        เพิ่มการจอง
+                      </Button>
+                      <Button type="danger" size={'large'}>
+                        ยกเลิก
+                      </Button>
+                    </div>
                   </Form>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       )
     }
   },
-
-
 )
 
 const defaultPagination = {
@@ -426,7 +435,7 @@ class OrderDetail extends React.Component {
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           orderData={this.state.orderData}
-          controller = {this.props}
+          controller={this.props}
           // productCate={this.props.product.productCate}
           // productItem={this.props.product.productItemData}
           visible={this.state.visible}
@@ -438,15 +447,12 @@ class OrderDetail extends React.Component {
   }
 }
 
-
 const mapStateToProps = state => {
   return {
-    orderDetailData : state.orderDetailData,
+    orderDetailData: state.orderDetailData,
   }
 }
 export default connect(
   mapStateToProps,
   actionCreators,
 )(OrderDetail)
-
- 
