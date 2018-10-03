@@ -165,7 +165,7 @@ const CollectionCreateForm = Form.create()(
                   <div className="card">
                     <div className="card-header">
                       <div className="utils__title">
-                        <strong>เพิ่มรายการจอง</strong>
+                        <strong>ชื่ออุปกรณ์</strong>
                       </div>
                     </div>
                     <hr />
