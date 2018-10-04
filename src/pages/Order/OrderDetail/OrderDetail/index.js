@@ -231,7 +231,7 @@ const CollectionCreateForm = Form.create()(
                       })(<Input />)}
                     </FormItem>
                     <FormItem {...summaryFormLayout} label="สถานที่รับ">
-                      {getFieldDecorator('totalPromise', {
+                      {getFieldDecorator('LocationRecieve', {
                         rules: [
                           {
                             type: 'email',
@@ -251,7 +251,7 @@ const CollectionCreateForm = Form.create()(
                       )}
                     </FormItem>
                     <FormItem {...summaryFormLayout} label="สถานที่คืน">
-                      {getFieldDecorator('totalPromise', {
+                      {getFieldDecorator('LocationRecurring', {
                         rules: [
                           {
                             type: 'email',
@@ -285,12 +285,20 @@ const CollectionCreateForm = Form.create()(
                       })(<TextArea />)}
                     </FormItem>
                     <div className="col-md-7">
-                      <Button type="primary" size={'large'}>
-                        เพิ่มการจอง
+                      <div className="row">
+                        <div className="col-md-6">
+                          <Button type="primary" size={'large'}>
+                            เพิ่มการจอง
                       </Button>
-                      <Button type="danger" size={'large'}>
-                        ยกเลิก
+                        </div>
+                        <div className="col-md-6">
+                          <Button type="danger" size={'large'}>
+                            ยกเลิก
                       </Button>
+                        </div>
+                      </div>
+
+
                     </div>
                   </Form>
                 </div>
@@ -435,7 +443,7 @@ class OrderDetail extends React.Component {
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           orderData={this.state.orderData}
-          controller={this.props}
+          controller={this.props} aX
           // productCate={this.props.product.productCate}
           // productItem={this.props.product.productItemData}
           visible={this.state.visible}
