@@ -111,7 +111,11 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                        <Table visible={false} columns={columns} dataSource={data} bordered />
+                        <Table
+                          visible={false}
+                          columns={columns}
+                          dataSource={data}
+                          bordered />
                       </div>
                     </div>
                     <div className="row">

@@ -1,6 +1,6 @@
 import React from 'react'
 
-class OrderReserve extends React.Component {
+class OrderSummary extends React.Component {
   render() {
     let { pager } = this.state
     return (
@@ -17,4 +17,4 @@ class OrderReserve extends React.Component {
   }
 }
 
-export default OrderReserve
+export default OrderSummary
