@@ -289,16 +289,14 @@ const CollectionCreateForm = Form.create()(
                         <div className="col-md-6">
                           <Button type="primary" size={'large'}>
                             เพิ่มการจอง
-                      </Button>
+                          </Button>
                         </div>
                         <div className="col-md-6">
                           <Button type="danger" size={'large'}>
                             ยกเลิก
-                      </Button>
+                          </Button>
                         </div>
                       </div>
-
-
                     </div>
                   </Form>
                 </div>
@@ -443,7 +441,8 @@ class OrderDetail extends React.Component {
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           orderData={this.state.orderData}
-          controller={this.props} aX
+          controller={this.props}
+          aX
           // productCate={this.props.product.productCate}
           // productItem={this.props.product.productItemData}
           visible={this.state.visible}
