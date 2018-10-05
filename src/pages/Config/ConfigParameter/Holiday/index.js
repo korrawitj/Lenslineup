@@ -132,9 +132,8 @@ class Holiday extends React.Component {
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-       onOk() {
-         parent.deleteHolidayData(record.holidayID)
-      
+      onOk() {
+        parent.deleteHolidayData(record.holidayID)
       },
       onCancel() {
         console.log('Cancel')

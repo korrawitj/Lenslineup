@@ -1,6 +1,6 @@
 import axios from 'axios'
 import * as actionCreators from '../actions/index'
-import { debug } from 'util';
+import { debug } from 'util'
 
 export function getAllDataHoliday() {
   return dispatch => {
@@ -127,10 +127,11 @@ export function getAllDataManage() {
 export function addMasterManageRecurring(data) {
   return async dispatch => {
     try {
-      let result = await axios.post('/api/masterHoliday/addMasterManageRecurring', { manageRecurringData: data })
+      let result = await axios.post('/api/masterHoliday/addMasterManageRecurring', {
+        manageRecurringData: data,
+      })
       return result
-    } 
-    catch (error) {
+    } catch (error) {
       return error
     }
   }
@@ -139,26 +140,25 @@ export function addMasterManageRecurring(data) {
 export function updateMasterManageRecurring(data) {
   return async dispatch => {
     try {
-      let result = await axios.post('/api/masterHoliday/updateMasterManageRecurring', { manageRecurringData: data })
+      let result = await axios.post('/api/masterHoliday/updateMasterManageRecurring', {
+        manageRecurringData: data,
+      })
       return result
-    } 
-    catch (error) {
+    } catch (error) {
       return error
     }
   }
 }
 
-export function deleteMasterManageRecurring(Id) 
-{
-    return async dispatch => {
-      try {
-        let result = await axios.post('/api/masterHoliday/deleteMasterManageRecurring', { Id: Id })
-        return result
-      }
-      catch (error){
-        return error
-      }
+export function deleteMasterManageRecurring(Id) {
+  return async dispatch => {
+    try {
+      let result = await axios.post('/api/masterHoliday/deleteMasterManageRecurring', { Id: Id })
+      return result
+    } catch (error) {
+      return error
     }
+  }
 }
 
 export function getAllDataPickup() {

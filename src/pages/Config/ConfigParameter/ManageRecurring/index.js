@@ -62,7 +62,7 @@ class ManageRecurring extends React.Component {
     const form = this.formRef.props.form
     const manageRecurringData = this.formRef.props.manageRecurringData
 
-    form.validateFields(async(err, values) => {
+    form.validateFields(async (err, values) => {
       if (err) {
         return
       }
@@ -76,12 +76,9 @@ class ManageRecurring extends React.Component {
       manageRecurringData.name = values['manageRecurringData']['name']
       manageRecurringData.manageTypeId = values['manageRecurringData']['manageTypeId']
 
-      if (manageRecurringData.manageID != null) 
-      {
+      if (manageRecurringData.manageID != null) {
         await this.props.updateMasterManageRecurring(manageRecurringData)
-      }
-      else {
-        
+      } else {
         await this.props.addMasterManageRecurring(manageRecurringData)
       }
       this.props.getAllDataManage()
@@ -101,7 +98,6 @@ class ManageRecurring extends React.Component {
         await parent.deleteMasterManageRecurring(record.manageID)
         parent.getAllDataManage()
         //debugger
-        
       },
       onCancel() {
         console.log('Cancel')
