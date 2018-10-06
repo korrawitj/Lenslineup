@@ -163,13 +163,17 @@ const CollectionCreateForm = Form.create()(
                                 onClick={this.handleAdd}
                               >
                                 เพิ่มอุปกรณ์
-                          </Button>
+                              </Button>
                             </FormItem>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-md-12">
-                            <Table columns={columns} dataSource={this.state.productDataGet} bordered />
+                            <Table
+                              columns={columns}
+                              dataSource={this.state.productDataGet}
+                              bordered
+                            />
                           </div>
                         </div>
                         <div className="row">
@@ -205,7 +209,7 @@ const CollectionCreateForm = Form.create()(
                             <FormItem label="" className="inputcenter">
                               <Button type="primary" style={{ marginBottom: 16 }}>
                                 ตรวจสอบคิว
-                          </Button>
+                              </Button>
                             </FormItem>
                           </div>
                         </div>
@@ -326,12 +330,12 @@ const CollectionCreateForm = Form.create()(
                             <div className="col-md-6">
                               <Button type="primary" size={'large'}>
                                 เพิ่มการจอง
-                          </Button>
+                              </Button>
                             </div>
                             <div className="col-md-6">
                               <Button type="danger" size={'large'}>
                                 ยกเลิก
-                          </Button>
+                              </Button>
                             </div>
                           </div>
                         </div>
@@ -343,9 +347,7 @@ const CollectionCreateForm = Form.create()(
             </div>
             <div className="col-md-5">
               <div className="row">
-                <div className="col-md-12">
-
-                </div>
+                <div className="col-md-12" />
               </div>
             </div>
           </div>
