@@ -93,16 +93,13 @@ const CollectionCreateForm = Form.create()(
                           {getFieldDecorator('orderDetailData.Name', {
                             initialValue: orderDetailData.Name,
                           })(
-                            <Select
-                              placeholder="Please select"
-                              style={{ width: '100%' }}
-                            >
+                            <Select placeholder="Please select" style={{ width: '100%' }}>
                               {productData.map(item => (
                                 <Option selected key={item.ProductID} value={item.ProductID}>
                                   {item.Name}
                                 </Option>
                               ))}
-                            </Select>
+                            </Select>,
                           )}
                         </FormItem>
                       </div>
