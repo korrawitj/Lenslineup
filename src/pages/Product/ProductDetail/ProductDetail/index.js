@@ -66,7 +66,7 @@ const CollectionCreateForm = Form.create()(
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Name', {
-                            initialValue: productData.Name
+                            initialValue: productData.Name,
                           })(<Input />)}
                         </FormItem>
                       </div>
@@ -79,17 +79,19 @@ const CollectionCreateForm = Form.create()(
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.BrandName', {
                             initialValue: productData.BrandName,
-                          })(  <Select
-                            placeholder="Please select"
-                            style={{ width: '100%' }}
-                            onChange={this.handleChange}
-                          >
-                            {productBrand.map(item => (
-                              <Option selected key={item.BrandID} value={item.BrandName}>
-                                {item.BrandName}
-                              </Option>
-                            ))}
-                          </Select>)}
+                          })(
+                            <Select
+                              placeholder="Please select"
+                              style={{ width: '100%' }}
+                              onChange={this.handleChange}
+                            >
+                              {productBrand.map(item => (
+                                <Option selected key={item.BrandID} value={item.BrandName}>
+                                  {item.BrandName}
+                                </Option>
+                              ))}
+                            </Select>,
+                          )}
                         </FormItem>
                       </div>
                     </div>
@@ -154,7 +156,7 @@ const CollectionCreateForm = Form.create()(
                           <FormItem className="inputcenter">
                             {getFieldDecorator('productData.RentHalfDay_Fee', {
                               initialValue: productData.RentHalfDay_Fee,
-                            })(<InputNumber className="inputnumber"/>)}
+                            })(<InputNumber className="inputnumber" />)}
                           </FormItem>
                         ) : (
                           <FormItem className="inputcenter">
@@ -362,7 +364,9 @@ const CollectionCreateForm = Form.create()(
                           {getFieldDecorator('productData.Status')(
                             <Radio.Group>
                               <RadioButton value={'พร้อมให้เช่า'}>พร้อมให้เช่า</RadioButton>
-                              <RadioButton value={'ยังไม่พร้อมให้เช่า'}>ยังไม่พร้อมให้เช่า</RadioButton>
+                              <RadioButton value={'ยังไม่พร้อมให้เช่า'}>
+                                ยังไม่พร้อมให้เช่า
+                              </RadioButton>
                             </Radio.Group>,
                           )}
                         </FormItem>
@@ -407,7 +411,7 @@ const CollectionCreateForm = Form.create()(
             <div className="col-md-12">
               <div className="card">
                 <div className="card-body" />
-                <Button onClick={onCreate}>{productData.ItemID==null?'Create':'Edit'}</Button>
+                <Button onClick={onCreate}>{productData.ItemID == null ? 'Create' : 'Edit'}</Button>
               </div>
             </div>
           </div>
@@ -461,17 +465,19 @@ class ProductDetail extends React.Component {
       if (err) {
         return
       }
-      if(productData.ItemID==null){
-      values.productData['Copy']=1
-      values.productData['productIncludeData']=ProductInclude
-      values.productData['productPhoto'] = this.props.product.fileData.productPhoto
-      values.productData['ExpireDate'] = moment(values.productData['ExpireDate']).format('YYYY-MM-DD')
-      values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format('YYYY-MM-DD')
-      // console.log(values)
-      this.props.addProduct(values)
-      }
-      else{
-
+      if (productData.ItemID == null) {
+        values.productData['Copy'] = 1
+        values.productData['productIncludeData'] = ProductInclude
+        values.productData['productPhoto'] = this.props.product.fileData.productPhoto
+        values.productData['ExpireDate'] = moment(values.productData['ExpireDate']).format(
+          'YYYY-MM-DD',
+        )
+        values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
+          'YYYY-MM-DD',
+        )
+        // console.log(values)
+        this.props.addProduct(values)
+      } else {
       }
       form.resetFields()
       this.setState({ visible: false })
