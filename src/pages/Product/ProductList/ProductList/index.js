@@ -175,10 +175,13 @@ class ProductList extends React.Component {
         render: (text, record) => (
           <span>
             <Button type="primary" shape="circle" icon="search" className="palm-btn-primary" />
-            <Link to={{
-              pathname: '/Product/list/detail',
-              state: { id: record.ProductID }
-              }}  className="navbar-item">
+            <Link
+              to={{
+                pathname: '/Product/list/detail',
+                state: { id: record.ProductID },
+              }}
+              className="navbar-item"
+            >
               <Button shape="circle" icon="edit" className="palm-btn-warning" />
             </Link>
             <Button
