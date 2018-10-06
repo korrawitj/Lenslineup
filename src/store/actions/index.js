@@ -16,6 +16,7 @@ export {
   updateproduct,
   deleteproduct,
   uploadImageProduct,
+  getAllProductBrand,
 } from './product'
 
 export {

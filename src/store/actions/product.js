@@ -61,3 +61,10 @@ export const uploadImageProduct = value => {
     val: value,
   }
 }
+
+export const getAllProductBrand = value => {
+  return {
+    type: actionTypes.GETALLPRODUCTBRAND,
+    val: value,
+  }
+}

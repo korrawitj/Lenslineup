@@ -104,3 +104,16 @@ export function deleteProduct(data) {
       })
   }
 }
+
+export function getAllBrand() {
+  return dispatch => {
+    return axios
+      .get('/API/product/getAllbands')
+      .then(response => {
+        dispatch(actionCreators.getAllProductBrand(response.data.bandData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}

@@ -34,7 +34,7 @@ const Option = Select.Option
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
-      const { form, orderData } = this.props
+      const { form, orderDetailData, productData } = this.props
       const { getFieldDecorator } = form
 
       const columns = [
@@ -73,6 +73,7 @@ const CollectionCreateForm = Form.create()(
         },
       }
 
+      console.log(productData)
       return (
         <div>
           <div className="row">
@@ -89,15 +90,26 @@ const CollectionCreateForm = Form.create()(
                     <div className="row">
                       <div className="col-md-6">
                         <FormItem label="อุปกรณ์" className="inputcenter">
-                          {getFieldDecorator('orderData.Name', {
-                            initialValue: orderData.Name,
-                          })(<Input />)}
+                          {getFieldDecorator('orderDetailData.Name', {
+                            initialValue: orderDetailData.Name,
+                          })(
+                            <Select
+                              placeholder="Please select"
+                              style={{ width: '100%' }}
+                            >
+                              {productData.map(item => (
+                                <Option selected key={item.ProductID} value={item.ProductID}>
+                                  {item.Name}
+                                </Option>
+                              ))}
+                            </Select>
+                          )}
                         </FormItem>
                       </div>
                       <div className="col-md-3">
                         <FormItem label="ตัวที่" className="inputcenter">
-                          {getFieldDecorator('orderData.Name', {
-                            initialValue: orderData.Name,
+                          {getFieldDecorator('orderDetailData.Name', {
+                            initialValue: orderDetailData.Name,
                           })(<Input />)}
                         </FormItem>
                       </div>
@@ -117,21 +129,21 @@ const CollectionCreateForm = Form.create()(
                     <div className="row">
                       <div className="col-md-3">
                         <FormItem label="วันเวลารับ" className="inputcenter">
-                          {getFieldDecorator('orderData.ReceiveDate')(
+                          {getFieldDecorator('orderDetailData.ReceiveDate')(
                             <DatePicker format="YYYY-MM-DD" placeholder="date" />,
                           )}
                         </FormItem>
                       </div>
                       <div className="col-md-3">
                         <FormItem label="เวลา" className="inputcenter">
-                          {getFieldDecorator('orderData.ReceiveDate')(
+                          {getFieldDecorator('orderDetailData.ReceiveDate')(
                             <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />,
                           )}
                         </FormItem>
                       </div>
                       <div className="col-md-3">
                         <FormItem label="วันเวลาคืน" className="inputcenter">
-                          {getFieldDecorator('orderData.RestoreDate')(
+                          {getFieldDecorator('orderDetailData.RestoreDate')(
                             <DatePicker
                               showTime
                               format="YYYY-MM-DD HH:mm:ss"
@@ -142,7 +154,7 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-3">
                         <FormItem label="เวลา" className="inputcenter">
-                          {getFieldDecorator('orderData.ReceiveDate')(
+                          {getFieldDecorator('orderDetailData.ReceiveDate')(
                             <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />,
                           )}
                         </FormItem>
@@ -243,7 +255,7 @@ const CollectionCreateForm = Form.create()(
                           },
                         ],
                       })(
-                        <Select defaultValue="1">
+                        <Select>
                           <Option value="1">Option 1</Option>
                           <Option value="2">Option 2</Option>
                           <Option value="3">Option 3</Option>
@@ -263,7 +275,7 @@ const CollectionCreateForm = Form.create()(
                           },
                         ],
                       })(
-                        <Select defaultValue="1">
+                        <Select>
                           <Option value="1">Option 1</Option>
                           <Option value="2">Option 2</Option>
                           <Option value="3">Option 3</Option>
@@ -433,20 +445,23 @@ class OrderDetail extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.getAllProductOrder()
+  }
+
   render() {
-    let xx = this.props
+    console.log(this.props.order.productData)
     return (
       <div>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           orderData={this.state.orderData}
           controller={this.props}
-          aX
-          // productCate={this.props.product.productCate}
-          // productItem={this.props.product.productItemData}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
+          orderDetailData={this.props.order.orderDetailData}
+          productData={this.props.order.productData}
         />
       </div>
     )
@@ -455,7 +470,7 @@ class OrderDetail extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    orderDetailData: state.orderDetailData,
+    order: state.order,
   }
 }
 export default connect(
