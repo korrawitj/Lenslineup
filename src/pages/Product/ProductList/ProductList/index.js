@@ -62,7 +62,7 @@ class ProductList extends React.Component {
     let T = record
     confirm({
       title: 'Are you sure delete this row?',
-      content: <div>Delelte ProductID = {record.id}</div>,
+      content: <div>Delelte ProductID = {record.ProductID}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
@@ -175,7 +175,9 @@ class ProductList extends React.Component {
         render: (text, record) => (
           <span>
             <Button type="primary" shape="circle" icon="search" className="palm-btn-primary" />
-            <Button shape="circle" icon="edit" className="palm-btn-warning" />
+             <Link to="/Product/list/detail" params={{ testvalue: "hello" }} className="navbar-item">
+                <Button shape="circle" icon="edit" className="palm-btn-warning" />
+            </Link>
             <Button
               type="danger"
               shape="circle"

@@ -24,7 +24,7 @@ class ProductImage extends React.Component {
 
   render() {
     let phoductPhoto = this.props.defaultFileList.phoductPhoto
-    console.log(this.props.defaultFileList)
+    // console.log(this.props.defaultFileList)
     if (phoductPhoto == null || undefined) {
       phoductPhoto = []
     }
