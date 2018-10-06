@@ -30,3 +30,16 @@ export function getProductCopy(data) {
       })
   }
 }
+
+export function getProductOne(productCriteria) {
+  return dispatch => {
+    return axios
+      .post('/API/product/getOneProductCopy', productCriteria)
+      .then(response => {
+        dispatch(actionCreators.getproductorderone(response.data.productData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}

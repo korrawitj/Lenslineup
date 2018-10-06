@@ -5,6 +5,7 @@ const initialState = {
   orderDetailData: [],
   productData: [],
   productCopy: [],
+  productDataOne: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +16,8 @@ const reducer = (state = initialState, action) => {
       return updateObject(state, { productData: action.val })
     case actionTypes.GETPRODUCTCOPYORDER:
       return updateObject(state, { productCopy: action.val })
+    case actionTypes.GETPRODUCTORDERONE:
+      return updateObject(state, { productDataOne: action.val })
     default:
       return state
   }

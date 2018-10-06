@@ -52,4 +52,4 @@ export {
   deleteProductInclude,
 } from './productinclude'
 
-export { EditOrderDetail, getproductorderall, getproductcopyorder } from './order'
+export { EditOrderDetail, getproductorderall, getproductcopyorder, getproductorderone, } from './order'
