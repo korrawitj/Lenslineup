@@ -21,12 +21,10 @@ import {
 } from 'antd'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { relative } from 'path'
 import './detail.css'
 
 const FormItem = Form.Item
-const RadioGroup = Radio.Group
-const RadioButton = Radio.Button
+
 const confirm = Modal.confirm
 const { TextArea } = Input
 const Option = Select.Option
@@ -39,6 +37,7 @@ const CollectionCreateForm = Form.create()(
       prodCopy: '',
       prodName: '',
       temp: true,
+      productOrderData:[]
     }
 
     handleChangeSelectProduct = value => {
@@ -53,7 +52,7 @@ const CollectionCreateForm = Form.create()(
       this.setState({ prodCopy: value })
     }
 
-    handleAdd = () => {
+    handleAdd = async() => {
       if (
         !this.state.productDataGet.some(
           item => this.state.prodID === item.productID && this.state.prodCopy === item.prodCopy,
@@ -65,10 +64,22 @@ const CollectionCreateForm = Form.create()(
           productCopy: this.state.prodCopy,
           productName: this.state.prodName,
         })
+        let productCriteria = {}
+        productCriteria.ProductID = this.state.prodID
+        productCriteria.Copy = this.state.prodCopy         
+        const result = await this.props.controller.getProductOrderData(productCriteria)
+        
+        let newArray = this.state.productOrderData.slice();    
+        newArray.push(result);   
+        this.setState({productOrderData:newArray})
         this.setState({ temp: true })
+
+        console.log(this.state.productOrderData)
       }
     }
+    haledDelete = (value) =>{
 
+    }
     render() {
       const { form, orderDetailData, productData, productCopy } = this.props
       const { getFieldDecorator } = form
@@ -132,7 +143,7 @@ const CollectionCreateForm = Form.create()(
                                   <Option
                                     selected
                                     key={item.ProductID}
-                                    value={item.ProductID + '/' + item.Name}
+                                    value={item.ProductID + '/' + item.ProductName}
                                   >
                                     {item.Name}
                                   </Option>
@@ -346,9 +357,113 @@ const CollectionCreateForm = Form.create()(
               </div>
             </div>
             <div className="col-md-5">
-              <div className="row">
-                <div className="col-md-12" />
+            {
+              this.state.productOrderData.map(item => (
+                <div className="row">
+                <div className="col-md-12" >
+                <div className="card">
+                    <div className="card-header">
+                      <div className="utils__title">
+                        <strong>{item.productName }</strong>
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="card-body">
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ค่าเช่า : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {item.RentDay}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6" />
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ประกันแบบ 1 : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {item.DepositType1}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6" />
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>ประกันแบบ 2 : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {item.DepositType2}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6" />
+                    </div>
+                    <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>หลักประกัน : </label>
+                      </div>
+                      <div className="col-md-3 inputcenter">
+                        <FormItem className="inputcenter">
+                          {/* {item.ReservedQueue.Guarantee} */}
+                        </FormItem>
+                      </div>
+                      <div className="col-md-6" />
+                    </div>
+                    <hr/>
+                    <label><strong>คิวจอง</strong> </label>
+                    {item.ReservedQueue.map(queue => (
+                      <div className="col-md-12" >
+                          <div className="row">
+                          <div className="col-md-3 labelcenter">
+                            <label>หมายเลขการจอง : </label>
+                          </div>
+                          <div className="col-md-3 inputcenter">
+                            <FormItem className="inputcenter">
+                              {queue.OrderID}
+                            </FormItem>
+                          </div>
+                          <div className="col-md-6" />
+                        </div>
+                        <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>วันที่รับของ : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {queue.Order.ReceiveDate}
+                        </FormItem>
+                      </div>
+                     
+                    </div>
+
+                     <div className="row">
+                      <div className="col-md-3 labelcenter">
+                        <label>วันที่คืนของ : </label>
+                      </div>
+                      <div className="col-md-9 inputcenter">
+                        <FormItem className="inputcenter">
+                          {queue.Order.RestoreDate}
+                        </FormItem>
+                      </div>
+                      
+                    </div>
+                    
+           
+                      </div>
+                    ))}
+                    
+                    </div>
+                </div>
+                
+                </div>
               </div>
+              ))
+            }
+
             </div>
           </div>
         </div>
@@ -375,21 +490,6 @@ class OrderDetail extends React.Component {
     filtered: false,
     previewVisible: false,
     previewImage: '',
-    visible: false,
-    fileList: [
-      {
-        uid: -1,
-        name: 'xxx.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-    ],
-  }
-
-  handleCancel = () => this.setState({ previewVisible: false, visible: false })
-
-  showModal = () => {
-    this.setState({ visible: true })
   }
 
   handleCreate = () => {
@@ -407,14 +507,6 @@ class OrderDetail extends React.Component {
     this.formRef = formRef
   }
 
-  handlePreview = file => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true,
-    })
-  }
-
-  handleChange = ({ fileList }) => this.setState({ fileList })
 
   showDeleteConfirm(record) {
     let T = record

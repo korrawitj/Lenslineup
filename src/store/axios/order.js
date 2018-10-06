@@ -43,3 +43,14 @@ export function getProductOne(productCriteria) {
       })
   }
 }
+
+export function getProductOrderData(data) {
+  return async dispatch => {
+    try{
+        let result =  await axios.post('/API/order/getproductOrderData',{productCriteria:data})
+        return result.data.productOrderData
+    }
+    catch(e){
+    }
+  }
+}
