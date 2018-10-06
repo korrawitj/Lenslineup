@@ -35,8 +35,8 @@ class ManageRecurring extends React.Component {
   showModal = () => {
     this.setState({ visible: true })
   }
-  componentDidMount() {
-    this.props.getAllDataManage()
+  async componentDidMount() {
+    await this.props.getAllDataManage()
     this.props.getAllMasterType()
   }
   componentDidUpdate(prevProps, prevState) {

@@ -112,11 +112,14 @@ export function updateHolidayShop(data) {
 
 export function getAllDataManage() {
   return async dispatch => {
-    try {
-      return await axios.get('/api/masterHoliday/getAllMasterManageRecurring')
-    } catch (e) {
-      return e
+    try{
+        let result = await axios.get('/api/masterHoliday/getAllMasterManageRecurring')
+        dispatch(actionCreators.managegetdata(result.data.manageRecurringData))
     }
+    catch(e){
+
+    }
+   
   }
 }
 
