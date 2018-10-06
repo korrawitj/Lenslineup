@@ -81,7 +81,7 @@ class ManageRecurring extends React.Component {
       } else {
         await this.props.addMasterManageRecurring(manageRecurringData)
       }
-      this.props.getAllDataManage()
+       await this.props.getAllDataManage()
 
       form.resetFields()
       this.setState({ visible: false })
@@ -96,7 +96,7 @@ class ManageRecurring extends React.Component {
       cancelText: 'No',
       async onOk() {
         await parent.deleteMasterManageRecurring(record.manageID)
-        parent.getAllDataManage()
+        await parent.getAllDataManage()
         //debugger
       },
       onCancel() {

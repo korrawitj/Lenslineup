@@ -29,7 +29,6 @@ export function AddDataHoliday(data) {
 }
 
 export function updateHolidayData(data) {
-  debugger
   return dispatch => {
     return axios
       .post('/api/masterHoliday/updateHoliday', { holidayData: data })
@@ -112,15 +111,14 @@ export function updateHolidayShop(data) {
 }
 
 export function getAllDataManage() {
-  return dispatch => {
-    return axios
-      .get('/api/masterHoliday/getAllMasterManageRecurring')
-      .then(response => {
-        dispatch(actionCreators.managegetdata(response.data.manageRecurringData))
-      })
-      .catch(error => {
-        console.log('Error axios ' + error)
-      })
+  return async dispatch => {
+    try{
+        return  await axios.get('/api/masterHoliday/getAllMasterManageRecurring')
+    }
+    catch(e){
+      return e
+    }
+   
   }
 }
 
