@@ -3,12 +3,15 @@ import { updateObject } from '../utility'
 
 const initialState = {
   orderDetailData: [],
+  productData: [],
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.EDITORDERDETAIL:
       return updateObject(state, { orderDetailData: action.val })
+    case actionTypes.GETPRODUCTORDERALL:
+      return updateObject(state, { productData: action.val })
     default:
       return state
   }

@@ -6,3 +6,10 @@ export const EditOrderDetail = value => {
     val: value,
   }
 }
+
+export const getproductorderall = value => {
+  return {
+    type: actionTypes.GETPRODUCTORDERALL,
+    val: value,
+  }
+}
