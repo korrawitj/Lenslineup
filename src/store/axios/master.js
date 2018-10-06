@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as actionCreators from '../actions/index'
+import { debug } from 'util'
 
 export function getAllDataHoliday() {
   return dispatch => {
@@ -28,7 +29,6 @@ export function AddDataHoliday(data) {
 }
 
 export function updateHolidayData(data) {
-  debugger
   return dispatch => {
     return axios
       .post('/api/masterHoliday/updateHoliday', { holidayData: data })
@@ -111,48 +111,48 @@ export function updateHolidayShop(data) {
 }
 
 export function getAllDataManage() {
-  return dispatch => {
-    return axios
-      .get('/api/masterHoliday/getAllMasterManageRecurring')
-      .then(response => {
-        dispatch(actionCreators.managegetdata(response.data.manageRecurringData))
-      })
-      .catch(error => {
-        console.log('Error axios ' + error)
-      })
+  return async dispatch => {
+    try {
+      let result = await axios.get('/api/masterHoliday/getAllMasterManageRecurring')
+      dispatch(actionCreators.managegetdata(result.data.manageRecurringData))
+    } catch (e) {}
   }
 }
 
 export function addMasterManageRecurring(data) {
-  return dispatch => {
-    return axios
-      .post('/api/masterHoliday/addMasterManageRecurring', { manageRecurringData: data })
-      .then(response => {})
-      .catch(error => {
-        console.log('Error axios ' + error)
+  return async dispatch => {
+    try {
+      let result = await axios.post('/api/masterHoliday/addMasterManageRecurring', {
+        manageRecurringData: data,
       })
+      return result
+    } catch (error) {
+      return error
+    }
   }
 }
 
 export function updateMasterManageRecurring(data) {
-  return dispatch => {
-    return axios
-      .post('/api/masterHoliday/updateMasterManageRecurring', { manageRecurringData: data })
-      .then(response => {})
-      .catch(error => {
-        console.log('Error axios ' + error)
+  return async dispatch => {
+    try {
+      let result = await axios.post('/api/masterHoliday/updateMasterManageRecurring', {
+        manageRecurringData: data,
       })
+      return result
+    } catch (error) {
+      return error
+    }
   }
 }
 
 export function deleteMasterManageRecurring(Id) {
-  return dispatch => {
-    return axios
-      .post('/api/masterHoliday/deleteMasterManageRecurring', { Id: Id })
-      .then(response => {})
-      .catch(error => {
-        console.log('Error axios ' + error)
-      })
+  return async dispatch => {
+    try {
+      let result = await axios.post('/api/masterHoliday/deleteMasterManageRecurring', { Id: Id })
+      return result
+    } catch (error) {
+      return error
+    }
   }
 }
 

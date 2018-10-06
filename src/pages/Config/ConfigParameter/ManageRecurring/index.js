@@ -35,8 +35,8 @@ class ManageRecurring extends React.Component {
   showModal = () => {
     this.setState({ visible: true })
   }
-  componentDidMount() {
-    this.props.getAllDataManage()
+  async componentDidMount() {
+    await this.props.getAllDataManage()
     this.props.getAllMasterType()
   }
   componentDidUpdate(prevProps, prevState) {
@@ -62,7 +62,7 @@ class ManageRecurring extends React.Component {
     const form = this.formRef.props.form
     const manageRecurringData = this.formRef.props.manageRecurringData
 
-    form.validateFields((err, values) => {
+    form.validateFields(async (err, values) => {
       if (err) {
         return
       }
@@ -77,24 +77,27 @@ class ManageRecurring extends React.Component {
       manageRecurringData.manageTypeId = values['manageRecurringData']['manageTypeId']
 
       if (manageRecurringData.manageID != null) {
-        this.props.updateMasterManageRecurring(manageRecurringData)
+        await this.props.updateMasterManageRecurring(manageRecurringData)
       } else {
-        this.props.addMasterManageRecurring(manageRecurringData)
+        await this.props.addMasterManageRecurring(manageRecurringData)
       }
+      await this.props.getAllDataManage()
 
       form.resetFields()
       this.setState({ visible: false })
     })
   }
-  showDeleteConfirmManageRecurring(record, parent) {
+  async showDeleteConfirmManageRecurring(record, parent) {
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte = {record.name}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      onOk() {
-        parent.deleteMasterManageRecurring(record.manageID)
+      async onOk() {
+        await parent.deleteMasterManageRecurring(record.manageID)
+        await parent.getAllDataManage()
+        //debugger
       },
       onCancel() {
         console.log('Cancel')

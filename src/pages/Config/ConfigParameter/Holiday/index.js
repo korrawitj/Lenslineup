@@ -133,9 +133,7 @@ class Holiday extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        //parent();
         parent.deleteHolidayData(record.holidayID)
-        parent.getAllDataHoliday()
       },
       onCancel() {
         console.log('Cancel')
