@@ -77,7 +77,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.BrandID')(<Select />)}
+                          {getFieldDecorator('productData.BrandID', {
+                            initialValue: productData.BrandID,
+                          })(<Select />)}
                         </FormItem>
                       </div>
                     </div>
@@ -86,9 +88,15 @@ const CollectionCreateForm = Form.create()(
                         <label>ประเภท : </label>
                       </div>
                       <div className="col-md-9 inputcenter">
-                        <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.CategoryID')(<TreeSelect />)}
-                        </FormItem>
+                      {getFieldDecorator('productData.CategoryID', { initialValue: productData.CategoryID })(
+                  <TreeSelect
+                    style={{ width: 300 }}
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    treeData={productCate}
+                    placeholder="Please select"
+                    treeDefaultExpandAll
+                  />,
+                )}
                       </div>
                     </div>
                     <div className="row">
@@ -97,7 +105,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.IsDay')(<Checkbox />)}
+                          {getFieldDecorator('productData.IsDay', {
+                            initialValue: productData.IsDay,
+                          })(<Checkbox />)}
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
@@ -122,19 +132,25 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.IsHaftDay')(<Checkbox />)}
+                          {getFieldDecorator('productData.IsHaftDay', {
+                            initialValue: productData.IsHaftDay,
+                          })(<Checkbox />)}
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
                         {form.getFieldValue('productData.IsHaftDay') === true ? (
                           <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentHalfDay_Fee')(
+                            {getFieldDecorator('productData.RentHalfDay_Fee', {
+                            initialValue: productData.RentHalfDay_Fee,
+                          })(
                               <InputNumber className="inputnumber" />,
                             )}
                           </FormItem>
                         ) : (
                           <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentHalfDay_Fee')(
+                            {getFieldDecorator('productData.RentHalfDay_Fee', {
+                            initialValue: productData.RentHalfDay_Fee,
+                          })(
                               <InputNumber className="inputnumber" disabled />,
                             )}
                           </FormItem>
@@ -147,19 +163,25 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.IsHour')(<Checkbox />)}
+                          {getFieldDecorator('productData.IsHour', {
+                            initialValue: productData.IsHour,
+                          })(<Checkbox />)}
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
                         {form.getFieldValue('productData.IsHour') === true ? (
                           <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentHour_Fee')(
+                            {getFieldDecorator('productData.RentHour_Fee', {
+                            initialValue: productData.RentHour_Fee,
+                          })(
                               <InputNumber className="inputnumber" />,
                             )}
                           </FormItem>
                         ) : (
                           <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentHour_Fee')(
+                            {getFieldDecorator('productData.RentHour_Fee', {
+                            initialValue: productData.RentHour_Fee,
+                          })(
                               <InputNumber className="inputnumber" disabled />,
                             )}
                           </FormItem>
@@ -172,7 +194,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-3 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.RentDay')(<InputNumber />)}
+                          {getFieldDecorator('productData.RentDay', {
+                            initialValue: productData.RentDay,
+                          })(<InputNumber />)}
                         </FormItem>
                       </div>
                       <div className="col-md-6" />
@@ -183,7 +207,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-3 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.DepositType1')(<InputNumber />)}
+                          {getFieldDecorator('productData.DepositType1', {
+                            initialValue: productData.DepositType1,
+                          })(<InputNumber />)}
                         </FormItem>
                       </div>
                       <div className="col-md-6" />
@@ -194,7 +220,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-3 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.DepositType2')(<InputNumber />)}
+                          {getFieldDecorator('productData.DepositType2', {
+                            initialValue: productData.DepositType2,
+                          })(<InputNumber />)}
                         </FormItem>
                       </div>
                       <div className="col-md-6" />
@@ -205,7 +233,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-3 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.ContactPrice')(<InputNumber />)}
+                          {getFieldDecorator('productData.ContactPrice', {
+                            initialValue: productData.ContactPrice,
+                          })(<InputNumber />)}
                         </FormItem>
                       </div>
                       <div className="col-md-6" />
@@ -216,7 +246,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-3 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.PurchasePrice')(<InputNumber />)}
+                          {getFieldDecorator('productData.PurchasePrice', {
+                            initialValue: productData.PurchasePrice,
+                          })(<InputNumber />)}
                         </FormItem>
                       </div>
                       <div className="col-md-6" />
@@ -227,7 +259,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.SerialNumber')(<Input />)}
+                          {getFieldDecorator('productData.SerialNumber', {
+                            initialValue: productData.SerialNumber,
+                          })(<Input />)}
                         </FormItem>
                       </div>
                     </div>
@@ -252,7 +286,12 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.ExpireDate')(<DatePicker />)}
+                        {getFieldDecorator('productData.ExpireDate', {
+                            initialValue:
+                              productData.ExpireDate == null
+                                ? null
+                                : moment(productData.ExpireDate),
+                          })(<DatePicker />)}
                         </FormItem>
                       </div>
                     </div>
@@ -262,7 +301,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.Location')(
+                          {getFieldDecorator('productData.Location', {
+                            initialValue: productData.Location,
+                          })(
                             <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                           )}
                         </FormItem>
@@ -275,7 +316,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.Remark')(
+                          {getFieldDecorator('productData.Remark', {
+                            initialValue: productData.Remark,
+                          })(
                             <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                           )}
                         </FormItem>
@@ -288,7 +331,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.Note')(
+                          {getFieldDecorator('productData.Note', {
+                            initialValue: productData.Note,
+                          })(
                             <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                           )}
                         </FormItem>
@@ -337,7 +382,7 @@ const CollectionCreateForm = Form.create()(
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <ProductInclude TTT={productItem} getId={productItemByID} ssss={dataSourceTa} />
+                  <ProductInclude ProductItem={productItem} getId={productItemByID} DataSourceTa={dataSourceTa} />
                 </div>
               </div>
             </div>
@@ -407,13 +452,14 @@ class ProductDetail extends React.Component {
 
   handleCreate = () => {
     const form = this.formRef.props.form
-    const productData = this.formRef.props.productData
+    const productData = this.formRef.props.productData  
+    const ProductInclude = this.formRef.props.dataSourceTa
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-
-      values.productPhoto = this.props.product.fileData.productPhoto
+      console.log(ProductInclude)
+      // values.productPhoto = this.props.product.fileData.productPhoto
       console.log(values)
       form.resetFields()
       this.setState({ visible: false })
@@ -505,6 +551,7 @@ class ProductDetail extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <CollectionCreateForm
