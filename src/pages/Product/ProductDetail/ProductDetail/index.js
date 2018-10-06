@@ -45,6 +45,7 @@ const CollectionCreateForm = Form.create()(
         dataSourceTa,
       } = this.props
       const { getFieldDecorator } = form
+      // console.log(productData)
       return (
         <div>
           <div className="row">
@@ -331,7 +332,7 @@ const CollectionCreateForm = Form.create()(
             <div className="col-md-5">
               <div className="row">
                 <div className="col-md-12">
-                  <ProductImage />
+                  <ProductImage defaultFileList={productData} />
                 </div>
               </div>
               <div className="row">
@@ -359,7 +360,7 @@ const CollectionCreateForm = Form.create()(
             <div className="col-md-12">
               <div className="card">
                 <div className="card-body" />
-                <Button>Create</Button>
+                <Button onClick={onCreate}>Create</Button>
               </div>
             </div>
           </div>
@@ -406,10 +407,14 @@ class ProductDetail extends React.Component {
 
   handleCreate = () => {
     const form = this.formRef.props.form
+    const productData =this.formRef.props.productData
     form.validateFields((err, values) => {
       if (err) {
         return
       }
+
+      values.productPhoto = this.props.product.fileData.productPhoto
+      console.log(values)
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -494,13 +499,12 @@ class ProductDetail extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAllProduct()
+    // this.props.getAllProduct()
     this.props.getAllData()
     this.props.getAllProductItem()
   }
 
   render() {
-    console.log(this.props.product.productItemData)
     return (
       <div>
         <CollectionCreateForm

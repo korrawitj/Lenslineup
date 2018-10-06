@@ -15,6 +15,7 @@ export {
   addproduct,
   updateproduct,
   deleteproduct,
+  uploadImageProduct
 } from './product'
 
 export {

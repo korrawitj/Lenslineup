@@ -7,6 +7,7 @@ const initialState = {
   productItemData: [],
   productIncludeData: [],
   productItemDataAll: [],
+  fileData:[],
 }
 
 const reducer = (state = initialState, action) => {
@@ -32,6 +33,9 @@ const reducer = (state = initialState, action) => {
       }
     case actionTypes.GETPRODUCTINCLUDE:
       return updateObject(state, { productIncludeData: action.val })
+   case actionTypes.UPLOADIMAGEPRODUCT:
+      return updateObject(state, { fileData: action.val })
+
     default:
       return state
   }

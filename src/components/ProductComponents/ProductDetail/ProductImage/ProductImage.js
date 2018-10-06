@@ -1,28 +1,51 @@
 import React from 'react'
-import { Icon, Button, Upload, message } from 'antd'
-
+import { Upload, Icon, Modal } from 'antd'
+import * as actionCreators from '../../../../store/actions/index'
+import { connect } from 'react-redux'
 class ProductImage extends React.Component {
+  state = {
+    previewVisible: false,
+    previewImage: '',
+    fileList: [],
+    datasend: [],
+  }
+
+  handleCancel = () => this.setState({ previewVisible: false })
+  handlePreview = file => {
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+    })
+  }
+  handleChange = data => {
+    this.setState({ fileList: data.fileList })
+    this.props.onUpload({ productPhoto: this.state.fileList })
+  }
+
   render() {
-    const Dragger = Upload.Dragger
-    const dragprop = {
-      name: 'file',
-      multiple: true,
-      action: '//jsonplaceholder.typicode.com/posts/',
-      onChange(info) {
-        const status = info.file.status
-        if (status !== 'uploading') {
-          console.log(info.file, info.fileList)
-        }
-        if (status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully.`)
-        } else if (status === 'error') {
-          message.error(`${info.file.name} file upload failed.`)
-        }
-      },
+    let phoductPhoto = this.props.defaultFileList.phoductPhoto
+    console.log(this.props.defaultFileList)
+    if (phoductPhoto == null || undefined) {
+      phoductPhoto = []
+    }
+    const props2 = {
+      listType: 'picture-card',
+      defaultFileList: [...phoductPhoto],
+      className: 'upload-list-inline',
+      onPreview: this.handlePreview,
+      onChange: this.handleChange,
+      //fileList:fileList
     }
 
+    const { previewVisible, previewImage, fileList } = this.state
+    const uploadButton = (
+      <div>
+        <Icon type="plus" />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    )
     return (
-      <div className="card">
+     <div className="card">
         <div className="card-header">
           <div className="utils__title">
             <strong>จัดการรูป</strong>
@@ -30,31 +53,31 @@ class ProductImage extends React.Component {
         </div>
         <hr />
         <div className="card-body">
-          <div className="row">
-            <div className="col-md-12">
-              <Dragger {...dragprop} className="height-300 d-block mb-3">
-                <p className="ant-upload-drag-icon">
-                  <Icon type="inbox" />
-                </p>
-                <p className="ant-upload-text">คลิกหรือลากไฟล์ วางในพื้นที่นี้เพื่ออับโหลด</p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibit from uploading company data
-                  or other band files
-                </p>
-              </Dragger>
-              <div>
-                <Upload>
-                  <Button>
-                    <Icon type="upload" /> เลือกไฟล์
-                  </Button>
-                </Upload>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="clearfix">
+        <Upload {...props2}>{uploadButton}</Upload>
+        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal>
+      </div>
+      </div>
       </div>
     )
   }
 }
 
-export default ProductImage
+const mapStateToProps = state => {
+  return {
+    productData: state.productData,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onUpload: upload => dispatch(actionCreators.uploadImageProduct(upload)),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProductImage)

@@ -55,3 +55,9 @@ export const deleteproduct = value => {
     val: value,
   }
 }
+export const uploadImageProduct = value => {
+  return {
+    type: actionTypes.UPLOADIMAGEPRODUCT,
+    val: value,
+  }
+}
