@@ -96,7 +96,7 @@ class ProductInclude extends React.Component {
     // console.log(this.state.ProductIncludeData)
     const Test = { Id: this.state.ProductIncludeData }
 
-    if (!this.props.ssss.some(item => Test.Id === item.key)) {
+    if (!this.props.DataSourceTa.some(item => Test.Id === item.key)) {
       const x = await this.props.getId(Test)
     }
     // console.log(this.props.ssss)
@@ -176,7 +176,7 @@ class ProductInclude extends React.Component {
         ),
       },
     ]
-    // console.log(this.props.TTT)
+    console.log(this.props.ProductItem)
     return (
       <div className="card">
         <div className="card-header">
@@ -191,7 +191,7 @@ class ProductInclude extends React.Component {
               style={{ width: '100%' }}
               onChange={this.handleChange}
             >
-              {this.props.TTT.map(item => (
+              {this.props.ProductItem.map(item => (
                 <Option selected key={item.ItemID} value={item.ItemID}>
                   {item.Name}
                 </Option>
@@ -206,7 +206,7 @@ class ProductInclude extends React.Component {
         <div className="card-body" />
         <Table
           columns={columns}
-          dataSource={this.props.ssss}
+          dataSource={this.props.DataSourceTa}
           pagination={pager}
           onChange={this.handleTableChange}
         />
