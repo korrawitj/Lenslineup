@@ -33,35 +33,68 @@ const Option = Select.Option
 
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
-    render() {
-      const { form, orderDetailData, productData } = this.props
-      const { getFieldDecorator } = form
+    state = {
+      productDataGet: [],
+      prodID: '',
+      prodCopy: '',
+      prodName: '',
+      temp: true,
+    }
 
+    handleChangeSelectProduct = value => {
+      const valuearray = value.split('/')
+      const id = valuearray[0]
+      const name = valuearray[1]
+      this.props.getProductCopy({ Id: id })
+      this.setState({ prodID: id, prodName: name })
+    }
+
+    handleChangeSelectCopy = value => {
+      this.setState({ prodCopy: value })
+    }
+
+    handleAdd = () => {
+      if (
+        !this.state.productDataGet.some(
+          item => this.state.prodID === item.productID && this.state.prodCopy === item.prodCopy,
+        )
+      ) {
+        this.state.productDataGet.push({
+          key: this.state.prodID + this.state.prodCopy,
+          productID: this.state.prodID,
+          productCopy: this.state.prodCopy,
+          productName: this.state.prodName,
+        })
+        this.setState({ temp: true })
+      }
+    }
+
+    render() {
+      const { form, orderDetailData, productData, productCopy } = this.props
+      const { getFieldDecorator } = form
       const columns = [
         {
           title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-          render: text => <a href="javascript:;">{text}</a>,
+          dataIndex: 'productName',
+          key: 'productName',
         },
         {
           title: 'Copy',
-          dataIndex: 'Copy',
-          key: 'Copy',
+          dataIndex: 'productCopy',
+          key: 'productCopy',
         },
         {
           title: 'Action',
           key: 'action',
           render: (text, record) => (
             <span>
-              <a href="javascript:;">Delete</a>
+              <Button type="danger" shape="circle" icon="delete" />
             </span>
           ),
         },
       ]
 
       const data = []
-
       const summaryFormLayout = {
         labelCol: {
           xs: { span: 24 },
@@ -72,243 +105,249 @@ const CollectionCreateForm = Form.create()(
           sm: { span: 16 },
         },
       }
-
-      console.log(productData)
       return (
         <div>
           <div className="row">
             <div className="col-md-7">
-              <div className="card">
-                <div className="card-header">
-                  <div className="utils__title">
-                    <strong>เพิ่มรายการจอง</strong>
-                  </div>
-                </div>
-                <hr />
-                <div className="card-body">
-                  <Form>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <FormItem label="อุปกรณ์" className="inputcenter">
-                          {getFieldDecorator('orderDetailData.Name', {
-                            initialValue: orderDetailData.Name,
-                          })(
-                            <Select placeholder="Please select" style={{ width: '100%' }}>
-                              {productData.map(item => (
-                                <Option selected key={item.ProductID} value={item.ProductID}>
-                                  {item.Name}
-                                </Option>
-                              ))}
-                            </Select>,
-                          )}
-                        </FormItem>
-                      </div>
-                      <div className="col-md-3">
-                        <FormItem label="ตัวที่" className="inputcenter">
-                          {getFieldDecorator('orderDetailData.Name', {
-                            initialValue: orderDetailData.Name,
-                          })(<Input />)}
-                        </FormItem>
-                      </div>
-                      <div className="col-md-2">
-                        <FormItem label="เพิ่ม" className="inputcenter">
-                          <Button type="primary" style={{ marginBottom: 16 }}>
-                            เพิ่มอุปกรณ์
-                          </Button>
-                        </FormItem>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-12">
-                        <Table visible={false} columns={columns} dataSource={data} bordered />
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-3">
-                        <FormItem label="วันเวลารับ" className="inputcenter">
-                          {getFieldDecorator('orderDetailData.ReceiveDate')(
-                            <DatePicker format="YYYY-MM-DD" placeholder="date" />,
-                          )}
-                        </FormItem>
-                      </div>
-                      <div className="col-md-3">
-                        <FormItem label="เวลา" className="inputcenter">
-                          {getFieldDecorator('orderDetailData.ReceiveDate')(
-                            <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />,
-                          )}
-                        </FormItem>
-                      </div>
-                      <div className="col-md-3">
-                        <FormItem label="วันเวลาคืน" className="inputcenter">
-                          {getFieldDecorator('orderDetailData.RestoreDate')(
-                            <DatePicker
-                              showTime
-                              format="YYYY-MM-DD HH:mm:ss"
-                              placeholder="Start"
-                            />,
-                          )}
-                        </FormItem>
-                      </div>
-                      <div className="col-md-3">
-                        <FormItem label="เวลา" className="inputcenter">
-                          {getFieldDecorator('orderDetailData.ReceiveDate')(
-                            <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />,
-                          )}
-                        </FormItem>
-                      </div>
-                      <div className="col-md-3">
-                        <FormItem label="" className="inputcenter">
-                          <Button type="primary" style={{ marginBottom: 16 }}>
-                            ตรวจสอบคิว
-                          </Button>
-                        </FormItem>
-                      </div>
-                    </div>
-                  </Form>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-5">
               <div className="row">
                 <div className="col-md-12">
                   <div className="card">
                     <div className="card-header">
                       <div className="utils__title">
-                        <strong>ชื่ออุปกรณ์</strong>
+                        <strong>เพิ่มรายการจอง</strong>
                       </div>
                     </div>
                     <hr />
+                    <div className="card-body">
+                      <Form>
+                        <div className="row">
+                          <div className="col-md-6">
+                            <FormItem label="อุปกรณ์" className="inputcenter">
+                              <Select
+                                placeholder="เลือกอุปกรณ์"
+                                style={{ width: '100%' }}
+                                onChange={this.handleChangeSelectProduct}
+                              >
+                                {productData.map(item => (
+                                  <Option
+                                    selected
+                                    key={item.ProductID}
+                                    value={item.ProductID + '/' + item.Name}
+                                  >
+                                    {item.Name}
+                                  </Option>
+                                ))}
+                              </Select>
+                            </FormItem>
+                          </div>
+                          <div className="col-md-3">
+                            <FormItem label="ตัวที่" className="inputcenter">
+                              <Select
+                                placeholder="เลือกตัวที่"
+                                style={{ width: '100%' }}
+                                onChange={this.handleChangeSelectCopy}
+                              >
+                                {productCopy.map(item => (
+                                  <Option selected key={item.Copy} value={item.Copy}>
+                                    {item.Copy}
+                                  </Option>
+                                ))}
+                              </Select>
+                            </FormItem>
+                          </div>
+                          <div className="col-md-2">
+                            <FormItem label="เพิ่ม" className="inputcenter">
+                              <Button
+                                type="primary"
+                                style={{ marginBottom: 16 }}
+                                onClick={this.handleAdd}
+                              >
+                                เพิ่มอุปกรณ์
+                              </Button>
+                            </FormItem>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-12">
+                            <Table
+                              columns={columns}
+                              dataSource={this.state.productDataGet}
+                              bordered
+                            />
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-3">
+                            <FormItem label="วันรับ" className="inputcenter">
+                              {getFieldDecorator('orderDetailData.ReceiveDate')(
+                                <DatePicker format="YYYY-MM-DD" placeholder="start" />,
+                              )}
+                            </FormItem>
+                          </div>
+                          <div className="col-md-3">
+                            <FormItem label="เวลา" className="inputcenter">
+                              {getFieldDecorator('orderDetailData.ReceiveDate')(
+                                <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />,
+                              )}
+                            </FormItem>
+                          </div>
+                          <div className="col-md-3">
+                            <FormItem label="วันคืน" className="inputcenter">
+                              {getFieldDecorator('orderDetailData.RestoreDate')(
+                                <DatePicker format="YYYY-MM-DD HH:mm:ss" placeholder="end" />,
+                              )}
+                            </FormItem>
+                          </div>
+                          <div className="col-md-3">
+                            <FormItem label="เวลา" className="inputcenter">
+                              {getFieldDecorator('orderDetailData.ReceiveDate')(
+                                <TimePicker defaultOpenValue={moment('00:00:00', 'HH:mm:ss')} />,
+                              )}
+                            </FormItem>
+                          </div>
+                          <div className="col-md-3">
+                            <FormItem label="" className="inputcenter">
+                              <Button type="primary" style={{ marginBottom: 16 }}>
+                                ตรวจสอบคิว
+                              </Button>
+                            </FormItem>
+                          </div>
+                        </div>
+                      </Form>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="row">
-                <div className="col-md-12" />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-7">
-              <div className="card">
-                <div className="card-header">
-                  <div className="utils__title">
-                    <strong>สรุปการจอง</strong>
-                  </div>
-                </div>
-                <hr />
-                <div className="card-body">
-                  <Form>
-                    <FormItem {...summaryFormLayout} label="จำนวนวัน">
-                      {getFieldDecorator('totalDay', {
-                        rules: [
-                          {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                          },
-                          {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                          },
-                        ],
-                      })(<Input />)}
-                    </FormItem>
-                    <FormItem {...summaryFormLayout} label="ค่าเช่ารวม">
-                      {getFieldDecorator('totalRent', {
-                        rules: [
-                          {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                          },
-                          {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                          },
-                        ],
-                      })(<Input />)}
-                    </FormItem>
-                    <FormItem {...summaryFormLayout} label="หลักประกันรวม">
-                      {getFieldDecorator('totalPromise', {
-                        rules: [
-                          {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                          },
-                          {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                          },
-                        ],
-                      })(<Input />)}
-                    </FormItem>
-                    <FormItem {...summaryFormLayout} label="สถานที่รับ">
-                      {getFieldDecorator('LocationRecieve', {
-                        rules: [
-                          {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                          },
-                          {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                          },
-                        ],
-                      })(
-                        <Select>
-                          <Option value="1">Option 1</Option>
-                          <Option value="2">Option 2</Option>
-                          <Option value="3">Option 3</Option>
-                        </Select>,
-                      )}
-                    </FormItem>
-                    <FormItem {...summaryFormLayout} label="สถานที่คืน">
-                      {getFieldDecorator('LocationRecurring', {
-                        rules: [
-                          {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                          },
-                          {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                          },
-                        ],
-                      })(
-                        <Select>
-                          <Option value="1">Option 1</Option>
-                          <Option value="2">Option 2</Option>
-                          <Option value="3">Option 3</Option>
-                        </Select>,
-                      )}
-                    </FormItem>
-                    <FormItem {...summaryFormLayout} label="coupon">
-                      {getFieldDecorator('coupon', {
-                        rules: [
-                          {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                          },
-                          {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                          },
-                        ],
-                      })(<TextArea />)}
-                    </FormItem>
-                    <div className="col-md-7">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <Button type="primary" size={'large'}>
-                            เพิ่มการจอง
-                          </Button>
-                        </div>
-                        <div className="col-md-6">
-                          <Button type="danger" size={'large'}>
-                            ยกเลิก
-                          </Button>
-                        </div>
+                <div className="col-md-12">
+                  <div className="card">
+                    <div className="card-header">
+                      <div className="utils__title">
+                        <strong>สรุปการจอง</strong>
                       </div>
                     </div>
-                  </Form>
+                    <hr />
+                    <div className="card-body">
+                      <Form>
+                        <FormItem {...summaryFormLayout} label="จำนวนวัน">
+                          {getFieldDecorator('totalDay', {
+                            rules: [
+                              {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                              },
+                              {
+                                required: true,
+                                message: 'Please input your E-mail!',
+                              },
+                            ],
+                          })(<Input />)}
+                        </FormItem>
+                        <FormItem {...summaryFormLayout} label="ค่าเช่ารวม">
+                          {getFieldDecorator('totalRent', {
+                            rules: [
+                              {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                              },
+                              {
+                                required: true,
+                                message: 'Please input your E-mail!',
+                              },
+                            ],
+                          })(<Input />)}
+                        </FormItem>
+                        <FormItem {...summaryFormLayout} label="หลักประกันรวม">
+                          {getFieldDecorator('totalPromise', {
+                            rules: [
+                              {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                              },
+                              {
+                                required: true,
+                                message: 'Please input your E-mail!',
+                              },
+                            ],
+                          })(<Input />)}
+                        </FormItem>
+                        <FormItem {...summaryFormLayout} label="สถานที่รับ">
+                          {getFieldDecorator('LocationRecieve', {
+                            rules: [
+                              {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                              },
+                              {
+                                required: true,
+                                message: 'Please input your E-mail!',
+                              },
+                            ],
+                          })(
+                            <Select>
+                              <Option value="1">Option 1</Option>
+                              <Option value="2">Option 2</Option>
+                              <Option value="3">Option 3</Option>
+                            </Select>,
+                          )}
+                        </FormItem>
+                        <FormItem {...summaryFormLayout} label="สถานที่คืน">
+                          {getFieldDecorator('LocationRecurring', {
+                            rules: [
+                              {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                              },
+                              {
+                                required: true,
+                                message: 'Please input your E-mail!',
+                              },
+                            ],
+                          })(
+                            <Select>
+                              <Option value="1">Option 1</Option>
+                              <Option value="2">Option 2</Option>
+                              <Option value="3">Option 3</Option>
+                            </Select>,
+                          )}
+                        </FormItem>
+                        <FormItem {...summaryFormLayout} label="coupon">
+                          {getFieldDecorator('coupon', {
+                            rules: [
+                              {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                              },
+                              {
+                                required: true,
+                                message: 'Please input your E-mail!',
+                              },
+                            ],
+                          })(<TextArea />)}
+                        </FormItem>
+                        <div className="col-md-7">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <Button type="primary" size={'large'}>
+                                เพิ่มการจอง
+                              </Button>
+                            </div>
+                            <div className="col-md-6">
+                              <Button type="danger" size={'large'}>
+                                ยกเลิก
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </Form>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+            <div className="col-md-5">
+              <div className="row">
+                <div className="col-md-12" />
               </div>
             </div>
           </div>
@@ -447,7 +486,6 @@ class OrderDetail extends React.Component {
   }
 
   render() {
-    console.log(this.props.order.productData)
     return (
       <div>
         <CollectionCreateForm
@@ -459,6 +497,8 @@ class OrderDetail extends React.Component {
           onCreate={this.handleCreate}
           orderDetailData={this.props.order.orderDetailData}
           productData={this.props.order.productData}
+          getProductCopy={this.props.getProductCopy}
+          productCopy={this.props.order.productCopy}
         />
       </div>
     )
