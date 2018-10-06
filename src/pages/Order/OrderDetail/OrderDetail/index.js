@@ -38,32 +38,34 @@ const CollectionCreateForm = Form.create()(
       prodID: '',
       prodCopy: '',
       prodName: '',
-      temp: true
+      temp: true,
     }
 
     handleChangeSelectProduct = value => {
-      const valuearray = value.split('/');
-      const id = valuearray[0];
-      const name = valuearray[1];
-      this.props.getProductCopy({ Id: id });
-      this.setState({ prodID: id, prodName: name });
+      const valuearray = value.split('/')
+      const id = valuearray[0]
+      const name = valuearray[1]
+      this.props.getProductCopy({ Id: id })
+      this.setState({ prodID: id, prodName: name })
     }
 
     handleChangeSelectCopy = value => {
-      this.setState({ prodCopy: value });
+      this.setState({ prodCopy: value })
     }
 
     handleAdd = () => {
-      if (!this.state.productDataGet.some(item => this.state.prodID === item.productID && this.state.prodCopy === item.prodCopy)) {
-        this.state.productDataGet.push(
-          {
-            key: this.state.prodID + this.state.prodCopy,
-            productID: this.state.prodID,
-            productCopy: this.state.prodCopy,
-            productName: this.state.prodName,
-          },
+      if (
+        !this.state.productDataGet.some(
+          item => this.state.prodID === item.productID && this.state.prodCopy === item.prodCopy,
         )
-        this.setState({temp : true});
+      ) {
+        this.state.productDataGet.push({
+          key: this.state.prodID + this.state.prodCopy,
+          productID: this.state.prodID,
+          productCopy: this.state.prodCopy,
+          productName: this.state.prodName,
+        })
+        this.setState({ temp: true })
       }
     }
 
@@ -86,11 +88,7 @@ const CollectionCreateForm = Form.create()(
           key: 'action',
           render: (text, record) => (
             <span>
-              <Button
-                type="danger"
-                shape="circle"
-                icon="delete"
-              />
+              <Button type="danger" shape="circle" icon="delete" />
             </span>
           ),
         },
@@ -126,9 +124,14 @@ const CollectionCreateForm = Form.create()(
                           <Select
                             placeholder="เลือกอุปกรณ์"
                             style={{ width: '100%' }}
-                            onChange={this.handleChangeSelectProduct}>
+                            onChange={this.handleChangeSelectProduct}
+                          >
                             {productData.map(item => (
-                              <Option selected key={item.ProductID} value={item.ProductID + '/' + item.Name}>
+                              <Option
+                                selected
+                                key={item.ProductID}
+                                value={item.ProductID + '/' + item.Name}
+                              >
                                 {item.Name}
                               </Option>
                             ))}
@@ -140,7 +143,8 @@ const CollectionCreateForm = Form.create()(
                           <Select
                             placeholder="เลือกตัวที่"
                             style={{ width: '100%' }}
-                            onChange={this.handleChangeSelectCopy}>
+                            onChange={this.handleChangeSelectCopy}
+                          >
                             {productCopy.map(item => (
                               <Option selected key={item.Copy} value={item.Copy}>
                                 {item.Copy}
@@ -154,7 +158,8 @@ const CollectionCreateForm = Form.create()(
                           <Button
                             type="primary"
                             style={{ marginBottom: 16 }}
-                            onClick={this.handleAdd}>
+                            onClick={this.handleAdd}
+                          >
                             เพิ่มอุปกรณ์
                           </Button>
                         </FormItem>
@@ -162,10 +167,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                        <Table
-                          columns={columns}
-                          dataSource={this.state.productDataGet}
-                          bordered />
+                        <Table columns={columns} dataSource={this.state.productDataGet} bordered />
                       </div>
                     </div>
                     <div className="row">
@@ -186,10 +188,7 @@ const CollectionCreateForm = Form.create()(
                       <div className="col-md-3">
                         <FormItem label="วันคืน" className="inputcenter">
                           {getFieldDecorator('orderDetailData.RestoreDate')(
-                            <DatePicker
-                              format="YYYY-MM-DD HH:mm:ss"
-                              placeholder="end"
-                            />,
+                            <DatePicker format="YYYY-MM-DD HH:mm:ss" placeholder="end" />,
                           )}
                         </FormItem>
                       </div>
