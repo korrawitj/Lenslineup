@@ -5,15 +5,7 @@ import {
   Input,
   Button,
   Modal,
-  Upload,
-  DatePicker,
-  Radio,
-  Form,
-  Checkbox,
-  Select,
-  TreeSelect,
 } from 'antd'
-import tableData from './data.json'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -188,12 +180,16 @@ class ProductList extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <Button type="primary" shape="circle" icon="search" onClick={this.onSearch} />
+            <Button 
+              type="primary"
+              shape="circle"
+              icon="search"
+              className="palm-btn-primary"
+            />
             <Button
               shape="circle"
               icon="edit"
-              onClick={this.onSearch}
-              style={{ backgroundColor: '#c49f47' }}
+              className="palm-btn-warning"
             />
             <Button
               type="danger"

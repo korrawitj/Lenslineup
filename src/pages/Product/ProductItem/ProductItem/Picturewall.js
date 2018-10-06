@@ -19,8 +19,6 @@ class PicturesWall extends React.Component {
   }
   handleChange = data => {
     this.setState({ fileList: data.fileList })
-    let propsData = this.props
-    debugger
     this.props.onUpload({ productPhoto: this.state.fileList })
   }
 
@@ -38,8 +36,7 @@ class PicturesWall extends React.Component {
       //fileList:fileList
     }
 
-    const { previewVisible, previewImage, fileList } = this.state
-    debugger
+    const { previewVisible, previewImage } = this.state
     const uploadButton = (
       <div>
         <Icon type="plus" />

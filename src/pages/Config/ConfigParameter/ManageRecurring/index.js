@@ -32,32 +32,34 @@ class ManageRecurring extends React.Component {
     filtered: false,
     visible: false,
   }
+
   showModal = () => {
     this.setState({ visible: true })
   }
+
   async componentDidMount() {
     await this.props.getAllDataManage()
     this.props.getAllMasterType()
   }
-  componentDidUpdate(prevProps, prevState) {
-    // if(this.state.visible===false){
-    //     this.props.getAllDataManage();
-    // }
-  }
+
   saveFormRef = formRef => {
     this.formRef = formRef
   }
+
   onAdd = () => {
     this.setState({ manageRecurringData: {}, masterType: this.props.master.masterTypeData })
     this.showModal()
   }
+
   onEdit(record) {
     this.setState({ manageRecurringData: record })
     this.showModal()
   }
+
   onCancle = () => {
     this.setState({ previewVisible: false, visible: false })
   }
+
   onSubmitData = () => {
     const form = this.formRef.props.form
     const manageRecurringData = this.formRef.props.manageRecurringData
@@ -87,6 +89,7 @@ class ManageRecurring extends React.Component {
       this.setState({ visible: false })
     })
   }
+  
   async showDeleteConfirmManageRecurring(record, parent) {
     Modal.confirm({
       title: 'Are you sure delete this row?',
