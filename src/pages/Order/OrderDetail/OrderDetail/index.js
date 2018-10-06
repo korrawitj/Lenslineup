@@ -435,7 +435,6 @@ class OrderDetail extends React.Component {
 
   render() {
     let xx = this.props
-    debugger
     return (
       <div>
         <CollectionCreateForm

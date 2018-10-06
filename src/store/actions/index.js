@@ -51,4 +51,7 @@ export {
   deleteProductInclude,
 } from './productinclude'
 
-export { EditOrderDetail } from './order'
+export { 
+  EditOrderDetail,
+  getproductorderall,
+} from './order'
