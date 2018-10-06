@@ -89,7 +89,7 @@ class ManageRecurring extends React.Component {
       this.setState({ visible: false })
     })
   }
-  
+
   async showDeleteConfirmManageRecurring(record, parent) {
     Modal.confirm({
       title: 'Are you sure delete this row?',

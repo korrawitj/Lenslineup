@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  Table,
-  Icon,
-  Input,
-  Button,
-  Modal,
-} from 'antd'
+import { Table, Icon, Input, Button, Modal } from 'antd'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -180,17 +174,8 @@ class ProductList extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <Button 
-              type="primary"
-              shape="circle"
-              icon="search"
-              className="palm-btn-primary"
-            />
-            <Button
-              shape="circle"
-              icon="edit"
-              className="palm-btn-warning"
-            />
+            <Button type="primary" shape="circle" icon="search" className="palm-btn-primary" />
+            <Button shape="circle" icon="edit" className="palm-btn-warning" />
             <Button
               type="danger"
               shape="circle"
