@@ -13,3 +13,10 @@ export const getproductorderall = value => {
     val: value,
   }
 }
+
+export const getproductcopyorder = value => {
+  return {
+    type: actionTypes.GETPRODUCTCOPYORDER,
+    val: value,
+  }
+}

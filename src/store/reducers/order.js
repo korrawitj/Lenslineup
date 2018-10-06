@@ -4,6 +4,7 @@ import { updateObject } from '../utility'
 const initialState = {
   orderDetailData: [],
   productData: [],
+  productCopy: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +13,8 @@ const reducer = (state = initialState, action) => {
       return updateObject(state, { orderDetailData: action.val })
     case actionTypes.GETPRODUCTORDERALL:
       return updateObject(state, { productData: action.val })
+    case actionTypes.GETPRODUCTCOPYORDER:
+      return updateObject(state, { productCopy: action.val })
     default:
       return state
   }

@@ -17,3 +17,16 @@ export function getAllProductOrder() {
       })
   }
 }
+
+export function getProductCopy(data) {
+  return dispatch => {
+    return axios
+      .post('/API/product/getProductCopy', data)
+      .then(response => {
+        dispatch(actionCreators.getproductcopyorder(response.data.ProductCopyData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}

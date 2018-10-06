@@ -33,35 +33,70 @@ const Option = Select.Option
 
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
-    render() {
-      const { form, orderDetailData, productData } = this.props
-      const { getFieldDecorator } = form
+    state = {
+      productDataGet: [],
+      prodID: '',
+      prodCopy: '',
+      prodName: '',
+      temp: true
+    }
 
+    handleChangeSelectProduct = value => {
+      const valuearray = value.split('/');
+      const id = valuearray[0];
+      const name = valuearray[1];
+      this.props.getProductCopy({ Id: id });
+      this.setState({ prodID: id, prodName: name });
+    }
+
+    handleChangeSelectCopy = value => {
+      this.setState({ prodCopy: value });
+    }
+
+    handleAdd = () => {
+      if (!this.state.productDataGet.some(item => this.state.prodID === item.productID && this.state.prodCopy === item.prodCopy)) {
+        this.state.productDataGet.push(
+          {
+            key: this.state.prodID + this.state.prodCopy,
+            productID: this.state.prodID,
+            productCopy: this.state.prodCopy,
+            productName: this.state.prodName,
+          },
+        )
+        this.setState({temp : true});
+      }
+    }
+
+    render() {
+      const { form, orderDetailData, productData, productCopy } = this.props
+      const { getFieldDecorator } = form
       const columns = [
         {
           title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-          render: text => <a href="javascript:;">{text}</a>,
+          dataIndex: 'productName',
+          key: 'productName',
         },
         {
           title: 'Copy',
-          dataIndex: 'Copy',
-          key: 'Copy',
+          dataIndex: 'productCopy',
+          key: 'productCopy',
         },
         {
           title: 'Action',
           key: 'action',
           render: (text, record) => (
             <span>
-              <a href="javascript:;">Delete</a>
+              <Button
+                type="danger"
+                shape="circle"
+                icon="delete"
+              />
             </span>
           ),
         },
       ]
 
       const data = []
-
       const summaryFormLayout = {
         labelCol: {
           xs: { span: 24 },
@@ -72,8 +107,6 @@ const CollectionCreateForm = Form.create()(
           sm: { span: 16 },
         },
       }
-
-      console.log(productData)
       return (
         <div>
           <div className="row">
@@ -90,29 +123,38 @@ const CollectionCreateForm = Form.create()(
                     <div className="row">
                       <div className="col-md-6">
                         <FormItem label="อุปกรณ์" className="inputcenter">
-                          {getFieldDecorator('orderDetailData.Name', {
-                            initialValue: orderDetailData.Name,
-                          })(
-                            <Select placeholder="Please select" style={{ width: '100%' }}>
-                              {productData.map(item => (
-                                <Option selected key={item.ProductID} value={item.ProductID}>
-                                  {item.Name}
-                                </Option>
-                              ))}
-                            </Select>,
-                          )}
+                          <Select
+                            placeholder="เลือกอุปกรณ์"
+                            style={{ width: '100%' }}
+                            onChange={this.handleChangeSelectProduct}>
+                            {productData.map(item => (
+                              <Option selected key={item.ProductID} value={item.ProductID + '/' + item.Name}>
+                                {item.Name}
+                              </Option>
+                            ))}
+                          </Select>
                         </FormItem>
                       </div>
                       <div className="col-md-3">
                         <FormItem label="ตัวที่" className="inputcenter">
-                          {getFieldDecorator('orderDetailData.Name', {
-                            initialValue: orderDetailData.Name,
-                          })(<Input />)}
+                          <Select
+                            placeholder="เลือกตัวที่"
+                            style={{ width: '100%' }}
+                            onChange={this.handleChangeSelectCopy}>
+                            {productCopy.map(item => (
+                              <Option selected key={item.Copy} value={item.Copy}>
+                                {item.Copy}
+                              </Option>
+                            ))}
+                          </Select>
                         </FormItem>
                       </div>
                       <div className="col-md-2">
                         <FormItem label="เพิ่ม" className="inputcenter">
-                          <Button type="primary" style={{ marginBottom: 16 }}>
+                          <Button
+                            type="primary"
+                            style={{ marginBottom: 16 }}
+                            onClick={this.handleAdd}>
                             เพิ่มอุปกรณ์
                           </Button>
                         </FormItem>
@@ -120,14 +162,17 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-12">
-                        <Table visible={false} columns={columns} dataSource={data} bordered />
+                        <Table
+                          columns={columns}
+                          dataSource={this.state.productDataGet}
+                          bordered />
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-3">
-                        <FormItem label="วันเวลารับ" className="inputcenter">
+                        <FormItem label="วันรับ" className="inputcenter">
                           {getFieldDecorator('orderDetailData.ReceiveDate')(
-                            <DatePicker format="YYYY-MM-DD" placeholder="date" />,
+                            <DatePicker format="YYYY-MM-DD" placeholder="start" />,
                           )}
                         </FormItem>
                       </div>
@@ -139,12 +184,11 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                       </div>
                       <div className="col-md-3">
-                        <FormItem label="วันเวลาคืน" className="inputcenter">
+                        <FormItem label="วันคืน" className="inputcenter">
                           {getFieldDecorator('orderDetailData.RestoreDate')(
                             <DatePicker
-                              showTime
                               format="YYYY-MM-DD HH:mm:ss"
-                              placeholder="Start"
+                              placeholder="end"
                             />,
                           )}
                         </FormItem>
@@ -447,7 +491,6 @@ class OrderDetail extends React.Component {
   }
 
   render() {
-    console.log(this.props.order.productData)
     return (
       <div>
         <CollectionCreateForm
@@ -459,6 +502,8 @@ class OrderDetail extends React.Component {
           onCreate={this.handleCreate}
           orderDetailData={this.props.order.orderDetailData}
           productData={this.props.order.productData}
+          getProductCopy={this.props.getProductCopy}
+          productCopy={this.props.order.productCopy}
         />
       </div>
     )
