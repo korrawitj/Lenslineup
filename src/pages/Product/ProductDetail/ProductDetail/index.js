@@ -88,15 +88,17 @@ const CollectionCreateForm = Form.create()(
                         <label>ประเภท : </label>
                       </div>
                       <div className="col-md-9 inputcenter">
-                      {getFieldDecorator('productData.CategoryID', { initialValue: productData.CategoryID })(
-                  <TreeSelect
-                    style={{ width: 300 }}
-                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                    treeData={productCate}
-                    placeholder="Please select"
-                    treeDefaultExpandAll
-                  />,
-                )}
+                        {getFieldDecorator('productData.CategoryID', {
+                          initialValue: productData.CategoryID,
+                        })(
+                          <TreeSelect
+                            style={{ width: 300 }}
+                            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                            treeData={productCate}
+                            placeholder="Please select"
+                            treeDefaultExpandAll
+                          />,
+                        )}
                       </div>
                     </div>
                     <div className="row">
@@ -141,18 +143,14 @@ const CollectionCreateForm = Form.create()(
                         {form.getFieldValue('productData.IsHaftDay') === true ? (
                           <FormItem className="inputcenter">
                             {getFieldDecorator('productData.RentHalfDay_Fee', {
-                            initialValue: productData.RentHalfDay_Fee,
-                          })(
-                              <InputNumber className="inputnumber" />,
-                            )}
+                              initialValue: productData.RentHalfDay_Fee,
+                            })(<InputNumber className="inputnumber" />)}
                           </FormItem>
                         ) : (
                           <FormItem className="inputcenter">
                             {getFieldDecorator('productData.RentHalfDay_Fee', {
-                            initialValue: productData.RentHalfDay_Fee,
-                          })(
-                              <InputNumber className="inputnumber" disabled />,
-                            )}
+                              initialValue: productData.RentHalfDay_Fee,
+                            })(<InputNumber className="inputnumber" disabled />)}
                           </FormItem>
                         )}
                       </div>
@@ -172,18 +170,14 @@ const CollectionCreateForm = Form.create()(
                         {form.getFieldValue('productData.IsHour') === true ? (
                           <FormItem className="inputcenter">
                             {getFieldDecorator('productData.RentHour_Fee', {
-                            initialValue: productData.RentHour_Fee,
-                          })(
-                              <InputNumber className="inputnumber" />,
-                            )}
+                              initialValue: productData.RentHour_Fee,
+                            })(<InputNumber className="inputnumber" />)}
                           </FormItem>
                         ) : (
                           <FormItem className="inputcenter">
                             {getFieldDecorator('productData.RentHour_Fee', {
-                            initialValue: productData.RentHour_Fee,
-                          })(
-                              <InputNumber className="inputnumber" disabled />,
-                            )}
+                              initialValue: productData.RentHour_Fee,
+                            })(<InputNumber className="inputnumber" disabled />)}
                           </FormItem>
                         )}
                       </div>
@@ -286,7 +280,7 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                        {getFieldDecorator('productData.ExpireDate', {
+                          {getFieldDecorator('productData.ExpireDate', {
                             initialValue:
                               productData.ExpireDate == null
                                 ? null
@@ -303,9 +297,7 @@ const CollectionCreateForm = Form.create()(
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Location', {
                             initialValue: productData.Location,
-                          })(
-                            <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                          )}
+                          })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
                         </FormItem>
                       </div>
                     </div>
@@ -318,9 +310,7 @@ const CollectionCreateForm = Form.create()(
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Remark', {
                             initialValue: productData.Remark,
-                          })(
-                            <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                          )}
+                          })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
                         </FormItem>
                       </div>
                     </div>
@@ -333,9 +323,7 @@ const CollectionCreateForm = Form.create()(
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Note', {
                             initialValue: productData.Note,
-                          })(
-                            <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
-                          )}
+                          })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
                         </FormItem>
                       </div>
                     </div>
@@ -382,7 +370,11 @@ const CollectionCreateForm = Form.create()(
               </div>
               <div className="row">
                 <div className="col-md-12">
-                  <ProductInclude ProductItem={productItem} getId={productItemByID} DataSourceTa={dataSourceTa} />
+                  <ProductInclude
+                    ProductItem={productItem}
+                    getId={productItemByID}
+                    DataSourceTa={dataSourceTa}
+                  />
                 </div>
               </div>
             </div>
@@ -452,7 +444,7 @@ class ProductDetail extends React.Component {
 
   handleCreate = () => {
     const form = this.formRef.props.form
-    const productData = this.formRef.props.productData  
+    const productData = this.formRef.props.productData
     const ProductInclude = this.formRef.props.dataSourceTa
     form.validateFields((err, values) => {
       if (err) {
