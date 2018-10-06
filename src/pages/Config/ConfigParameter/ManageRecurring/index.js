@@ -81,7 +81,7 @@ class ManageRecurring extends React.Component {
       } else {
         await this.props.addMasterManageRecurring(manageRecurringData)
       }
-       await this.props.getAllDataManage()
+      await this.props.getAllDataManage()
 
       form.resetFields()
       this.setState({ visible: false })
