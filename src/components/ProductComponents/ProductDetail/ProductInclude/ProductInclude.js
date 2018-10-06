@@ -94,6 +94,7 @@ class ProductInclude extends React.Component {
   handleAdd = async () => {
     // console.log(this.state.ProductIncludeData)
     // console.log(this.state.ProductIncludeData)
+    debugger
     const Test = { Id: this.state.ProductIncludeData }
 
     if (!this.props.DataSourceTa.some(item => Test.Id === item.key)) {
@@ -176,7 +177,7 @@ class ProductInclude extends React.Component {
         ),
       },
     ]
-    console.log(this.props.ProductItem)
+    // console.log(this.props.ProductItem)
     return (
       <div className="card">
         <div className="card-header">

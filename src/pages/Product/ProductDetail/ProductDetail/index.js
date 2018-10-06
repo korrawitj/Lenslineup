@@ -23,7 +23,7 @@ import ProductImage from '../../../../components/ProductComponents/ProductDetail
 import ProductInclude from '../../../../components/ProductComponents/ProductDetail/ProductInclude/ProductInclude'
 import ProductCopy from '../../../../components/ProductComponents/ProductDetail/ProductCopy/ProductCopy'
 import './detail.css'
-
+const Option = Select.Option
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
 const RadioButton = Radio.Button
@@ -43,9 +43,9 @@ const CollectionCreateForm = Form.create()(
         productItem,
         productItemByID,
         dataSourceTa,
+        productBrand,
       } = this.props
       const { getFieldDecorator } = form
-      // console.log(productData)
       return (
         <div>
           <div className="row">
@@ -77,9 +77,21 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.BrandID', {
-                            initialValue: productData.BrandID,
-                          })(<Select />)}
+                          {getFieldDecorator('productData.BrandName', {
+                            initialValue: productData.BrandName,
+                          })(
+                            <Select
+                              placeholder="Please select"
+                              style={{ width: '100%' }}
+                              onChange={this.handleChange}
+                            >
+                              {productBrand.map(item => (
+                                <Option selected key={item.BrandID} value={item.BrandName}>
+                                  {item.BrandName}
+                                </Option>
+                              ))}
+                            </Select>,
+                          )}
                         </FormItem>
                       </div>
                     </div>
@@ -336,8 +348,8 @@ const CollectionCreateForm = Form.create()(
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.isShow')(
                             <Radio.Group>
-                              <RadioButton value={true}>แสดง</RadioButton>
-                              <RadioButton value={false}>ไม่แสดง</RadioButton>
+                              <RadioButton value={'แสดง'}>แสดง</RadioButton>
+                              <RadioButton value={'ไม่แสดง'}>ไม่แสดง</RadioButton>
                             </Radio.Group>,
                           )}
                         </FormItem>
@@ -351,8 +363,10 @@ const CollectionCreateForm = Form.create()(
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Status')(
                             <Radio.Group>
-                              <RadioButton value={true}>พร้อมให้เช่า</RadioButton>
-                              <RadioButton value={false}>ยังไม่พร้อมให้เช่า</RadioButton>
+                              <RadioButton value={'พร้อมให้เช่า'}>พร้อมให้เช่า</RadioButton>
+                              <RadioButton value={'ยังไม่พร้อมให้เช่า'}>
+                                ยังไม่พร้อมให้เช่า
+                              </RadioButton>
                             </Radio.Group>,
                           )}
                         </FormItem>
@@ -397,7 +411,7 @@ const CollectionCreateForm = Form.create()(
             <div className="col-md-12">
               <div className="card">
                 <div className="card-body" />
-                <Button onClick={onCreate}>Create</Button>
+                <Button onClick={onCreate}>{productData.ItemID == null ? 'Create' : 'Edit'}</Button>
               </div>
             </div>
           </div>
@@ -446,13 +460,25 @@ class ProductDetail extends React.Component {
     const form = this.formRef.props.form
     const productData = this.formRef.props.productData
     const ProductInclude = this.formRef.props.dataSourceTa
+    const IsEdit = this.formRef.props.IsEdit
     form.validateFields((err, values) => {
       if (err) {
         return
       }
-      console.log(ProductInclude)
-      // values.productPhoto = this.props.product.fileData.productPhoto
-      console.log(values)
+      if (productData.ItemID == null) {
+        values.productData['Copy'] = 1
+        values.productData['productIncludeData'] = ProductInclude
+        values.productData['productPhoto'] = this.props.product.fileData.productPhoto
+        values.productData['ExpireDate'] = moment(values.productData['ExpireDate']).format(
+          'YYYY-MM-DD',
+        )
+        values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
+          'YYYY-MM-DD',
+        )
+        // console.log(values)
+        this.props.addProduct(values)
+      } else {
+      }
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -540,6 +566,7 @@ class ProductDetail extends React.Component {
     // this.props.getAllProduct()
     this.props.getAllData()
     this.props.getAllProductItem()
+    this.props.getAllBrand()
   }
 
   render() {
@@ -548,13 +575,15 @@ class ProductDetail extends React.Component {
       <div>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
-          productData={this.props.product.productData}
+          productData={this.state.productData}
           productCate={this.props.product.productCate}
           productItem={this.props.product.productItemDataAll}
           dataSourceTa={this.props.product.productItemData}
+          productBrand={this.props.product.productBrand}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
+          IsEdit={this.props.IsEdit}
           productItemByID={this.props.getProductItem}
         />
 
