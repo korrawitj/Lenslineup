@@ -45,7 +45,7 @@ class ProductImage extends React.Component {
       </div>
     )
     return (
-     <div className="card">
+      <div className="card">
         <div className="card-header">
           <div className="utils__title">
             <strong>จัดการรูป</strong>
@@ -53,13 +53,13 @@ class ProductImage extends React.Component {
         </div>
         <hr />
         <div className="card-body">
-      <div className="clearfix">
-        <Upload {...props2}>{uploadButton}</Upload>
-        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-          <img alt="example" style={{ width: '100%' }} src={previewImage} />
-        </Modal>
-      </div>
-      </div>
+          <div className="clearfix">
+            <Upload {...props2}>{uploadButton}</Upload>
+            <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+              <img alt="example" style={{ width: '100%' }} src={previewImage} />
+            </Modal>
+          </div>
+        </div>
       </div>
     )
   }

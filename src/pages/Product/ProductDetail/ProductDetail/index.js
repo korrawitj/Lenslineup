@@ -407,7 +407,7 @@ class ProductDetail extends React.Component {
 
   handleCreate = () => {
     const form = this.formRef.props.form
-    const productData =this.formRef.props.productData
+    const productData = this.formRef.props.productData
     form.validateFields((err, values) => {
       if (err) {
         return
