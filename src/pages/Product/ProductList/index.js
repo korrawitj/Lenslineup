@@ -11,7 +11,6 @@ class ProductPage extends React.Component {
 
   render() {
     const props = this.props
-    console.log(props)
     return (
       <Page {...props}>
         <Helmet title="อุปกรณ์" />

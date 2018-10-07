@@ -178,7 +178,7 @@ class ProductList extends React.Component {
             <Link
               to={{
                 pathname: '/Product/list/detail',
-                state: { id: record.ProductID },
+                state: { productData: record },
               }}
               className="navbar-item"
             >
