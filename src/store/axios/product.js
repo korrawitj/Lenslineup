@@ -14,6 +14,19 @@ export function getAllProduct() {
   }
 }
 
+export function getProduct(id) {
+  return dispatch => {
+    return axios
+      .post('/API/product/get', id)
+      .then(response => {
+        dispatch(actionCreators.getProductByID(response.data.productData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
+
 export function getAllData() {
   return dispatch => {
     return axios

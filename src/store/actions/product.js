@@ -68,3 +68,10 @@ export const getAllProductBrand = value => {
     val: value,
   }
 }
+
+export const getProductByID = value => {
+  return {
+    type: actionTypes.GETPRODUCT,
+    val: value,
+  }
+}
