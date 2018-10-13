@@ -206,7 +206,6 @@ class ProductSet extends React.Component {
               เพิ่มอุปกรณ์จัดชุด
             </Button>
           </Link>
-
         </div>
         <div className="card-body">
           <Table
