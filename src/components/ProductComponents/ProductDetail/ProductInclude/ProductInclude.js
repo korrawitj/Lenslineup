@@ -18,7 +18,7 @@ class ProductInclude extends React.Component {
     filtered: false,
     previewVisible: false,
     arrayvar: [],
-    refresh:false,
+    refresh: false,
   }
   showDeleteConfirm(record, props) {
     // const { refresh} = this.state
@@ -28,13 +28,13 @@ class ProductInclude extends React.Component {
       content: <div>Delelte Product Item = {record.ItemID}</div>,
       okText: 'Yes',
       okType: 'danger',
-       cancelText: 'No',
-       onOk:()=>{  
+      cancelText: 'No',
+      onOk: () => {
         var ProductItem = props.DataSourceTa
         var removeItem = record.ItemID
         var index = ProductItem.indexOf(removeItem)
         ProductItem.splice(index, 1)
-        _this.setState({ refresh:true})
+        _this.setState({ refresh: true })
       },
       onCancel() {
         console.log('Cancel')
@@ -159,7 +159,9 @@ class ProductInclude extends React.Component {
               </Select>
             </div>
             <div className="col-md-3">
-              <Button onClick={this.handleAdd} type="primary">Add</Button>
+              <Button onClick={this.handleAdd} type="primary">
+                Add
+              </Button>
             </div>
           </div>
           <br />

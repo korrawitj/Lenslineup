@@ -105,7 +105,7 @@ class ProductCopy extends React.Component {
           <a className="utils__link--underlined" href="javascript: void(0);">
             {text}
           </a>
-        )
+        ),
       },
       {
         title: 'Serail Number',
