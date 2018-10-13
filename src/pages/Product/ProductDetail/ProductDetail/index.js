@@ -438,7 +438,7 @@ const CollectionCreateForm = Form.create()(
   </div>
 </div>
 </div> */}
-<ProductHtml form={form}/>
+          <ProductHtml form={form} />
           <div className="row">
             <div className="col-md-12">
               <div className="card">
@@ -451,7 +451,6 @@ const CollectionCreateForm = Form.create()(
               </div>
             </div>
           </div>
-
         </div>
       )
     }
