@@ -1,5 +1,5 @@
 import React from 'react'
-// import * as actionCreators from '../../../../store/axios/order'
+import * as actionCreators from '../../../../store/axios/productPackage'
 import {
   Table,
   Icon,
@@ -26,10 +26,36 @@ import './detail.css'
 const FormItem = Form.Item
 
 const confirm = Modal.confirm
+const { TextArea } = Input
+const Option = Select.Option
 
 const CollectionCreateForm = Form.create()(
   class extends React.Component {
     render() {
+      const { form, productData } = this.props
+      const { getFieldDecorator } = form
+      const columns = [
+        {
+          title: 'Name',
+          dataIndex: 'productName',
+          key: 'productName',
+        },
+        {
+          title: 'Copy',
+          dataIndex: 'productCopy',
+          key: 'productCopy',
+        },
+        {
+          title: 'Action',
+          key: 'action',
+          render: (text, record) => (
+            <span>
+              <Button type="danger" shape="circle" icon="delete" />
+            </span>
+          ),
+        },
+      ]
+
       return (
         <div>
           <div className="row">
@@ -43,7 +69,42 @@ const CollectionCreateForm = Form.create()(
                       </div>
                     </div>
                     <hr />
-                    <div className="card-body" />
+                    <div className="card-body" >
+                      <Form>
+                      <div className="row">
+                          <div className="col-md-10">
+                            <FormItem label="อุปกรณ์" className="inputcenter">
+                              <Select
+                                placeholder="เลือกอุปกรณ์"
+                                style={{ width: '100%' }}
+                                onChange={this.handleChangeSelectProduct}
+                              >
+                                {productData.map(item => (
+                                  <Option
+                                    selected
+                                    key={item.ProductID}
+                                    value={item.ProductID + '/' + item.ProductName}
+                                  >
+                                    {item.Name}
+                                  </Option>
+                                ))}
+                              </Select>
+                            </FormItem>
+                          </div>
+                          <div className="col-md-2">
+                            <FormItem label="เพิ่ม" className="inputcenter">
+                              <Button
+                                type="primary"
+                                style={{ marginBottom: 16 }}
+                                // onClick={this.handleAdd}
+                              >
+                                เพิ่มอุปกรณ์
+                              </Button>
+                            </FormItem>
+                          </div>
+                        </div>
+                      </Form>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -155,29 +216,33 @@ class ProductSetDetail extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //     this.props.getAllProductOrder()
-  // }
+  componentDidMount() {
+    this.props.getAllProduct()
+  }
 
   render() {
+    console.log(this.props.productPackage.productData)
     return (
       <div>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
-          orderData={this.state.orderData}
           controller={this.props}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
+          productData={this.props.productPackage.productData}
         />
       </div>
     )
   }
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         order: state.order,
-//     }
-// }
-export default ProductSetDetail
+const mapStateToProps = state => {
+  return {
+    productPackage: state.productPackage,
+  }
+}
+export default connect(
+  mapStateToProps,
+  actionCreators,
+)(ProductSetDetail)

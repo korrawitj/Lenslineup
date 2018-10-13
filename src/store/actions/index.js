@@ -44,6 +44,7 @@ export {
   getProductPackage,
   addProductPackage,
   updateProductPackage,
+  getAllOfProductPackage,
 } from './productPackage'
 
 export {

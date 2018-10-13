@@ -13,3 +13,16 @@ export function getAllProductPackage() {
       })
   }
 }
+
+export function getAllProduct() {
+  return dispatch => {
+    return axios
+      .get('/API/product/getAll')
+      .then(response => {
+        dispatch(actionCreators.getAllOfProductPackage(response.data.productData))
+      })
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}

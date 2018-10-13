@@ -7,6 +7,13 @@ export const getAllProductPackage = value => {
   }
 }
 
+export const getAllOfProductPackage = value => {
+  return {
+    type: actionTypes.GETALLPRODUCTOFPACKEAGE,
+    val: value,
+  }
+}
+
 // export const getProductPackage = value => {
 //   return {
 //     type: actionTypes.GETPRODUCTPACKEAGE,
