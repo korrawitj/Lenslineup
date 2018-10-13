@@ -32,8 +32,8 @@ class ProductInclude extends React.Component {
       cancelText: 'No',
       onOk: () => {
         console.log(props)
-        if(props.productID!==null && props.DataSourceTa!==[]){
-            props.deleteProductInclude(props.productID,record.ItemID)
+        if (props.productID !== null && props.DataSourceTa !== []) {
+          props.deleteProductInclude(props.productID, record.ItemID)
         }
         var ProductItem = props.DataSourceTa
         var removeItem = record.ItemID

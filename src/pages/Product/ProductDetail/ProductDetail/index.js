@@ -390,7 +390,11 @@ const CollectionCreateForm = Form.create()(
                     ProductItem={productItem}
                     getId={productItemByID}
                     DataSourceTa={dataSourceTa}
-                    productID={productData.ProductID === null || productData.ProductID === undefined ?null:productData.ProductID}
+                    productID={
+                      productData.ProductID === null || productData.ProductID === undefined
+                        ? null
+                        : productData.ProductID
+                    }
                     deleteProductInclude={deleteProductInclude}
                   />
                 </div>
@@ -610,7 +614,6 @@ class ProductDetail extends React.Component {
       productData['productID'] = this.props.productID
       this.props.getProduct(productData)
     }
-
   }
 
   render() {
@@ -627,8 +630,11 @@ class ProductDetail extends React.Component {
           }
           productCate={this.props.product.productCate}
           productItem={this.props.product.productItemDataAll}
-          dataSourceTa={ this.props.productID !== null && this.props.productID !== undefined
-            ?this.props.product.productDataID["productIncludeData"]:this.props.product.productItemData}
+          dataSourceTa={
+            this.props.productID !== null && this.props.productID !== undefined
+              ? this.props.product.productDataID['productIncludeData']
+              : this.props.product.productItemData
+          }
           productBrand={this.props.product.productBrand}
           visible={this.state.visible}
           onCancel={this.handleCancel}
