@@ -134,11 +134,11 @@ class ProductCopy extends React.Component {
         },
       },
       {
-        title: 'Serail',
-        dataIndex: 'Serail',
-        key: 'Serail',
+        title: 'Serail Number',
+        dataIndex: 'SerailNumber',
+        key: 'SerailNumber',
         render: text => <span>{text}</span>,
-        sorter: (a, b) => a.Serail - b.Serail,
+        sorter: (a, b) => a.SerailNumber - b.SerailNumber,
       },
       {
         title: 'ราคาที่ซื้อ',

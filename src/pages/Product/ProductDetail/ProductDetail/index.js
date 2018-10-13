@@ -22,6 +22,7 @@ import { relative } from 'path'
 import ProductImage from '../../../../components/ProductComponents/ProductDetail/ProductImage/ProductImage'
 import ProductInclude from '../../../../components/ProductComponents/ProductDetail/ProductInclude/ProductInclude'
 import ProductCopy from '../../../../components/ProductComponents/ProductDetail/ProductCopy/ProductCopy'
+import ProductHtml from '../../../../components/ProductComponents/ProductDetail/ProductHtml/ProductHtml'
 import './detail.css'
 const Option = Select.Option
 const FormItem = Form.Item
@@ -411,6 +412,33 @@ const CollectionCreateForm = Form.create()(
               </div>
             </div>
           )}
+          {/* <div className="row">
+<div className="col-md-7">
+  <div className="card">
+    <div className="card-header">
+      <div className="utils__title">
+        <strong>ส่วนแก้ไขข้อมูลหน้า Front END ทุกอย่าง</strong>
+      </div>
+    </div>
+    <hr />
+    <div className="card-body">
+        <div className="row">
+          <div className="col-md-3 labelcenter">
+            <label>Display Name : </label>
+          </div>
+          <div className="col-md-9 inputcenter">
+            <FormItem className="inputcenter">
+              {getFieldDecorator('productData.Name', {
+                initialValue: productData.Name,
+              })(<Input />)}
+            </FormItem>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</div> */}
+<ProductHtml form={form}/>
           <div className="row">
             <div className="col-md-12">
               <div className="card">
@@ -423,6 +451,7 @@ const CollectionCreateForm = Form.create()(
               </div>
             </div>
           </div>
+
         </div>
       )
     }
@@ -483,8 +512,8 @@ class ProductDetail extends React.Component {
         values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
           'YYYY-MM-DD',
         )
-        // console.log(values)
-        this.props.addProduct(values)
+        console.log(values)
+        // this.props.addProduct(values)
       } else {
         console.log(productData)
       }
