@@ -127,8 +127,8 @@ class MenuLeft extends React.Component {
           onClick={
             this.props.isMobile
               ? () => {
-                dispatch(setLayoutState({ menuCollapsed: false }))
-              }
+                  dispatch(setLayoutState({ menuCollapsed: false }))
+                }
               : undefined
           }
         >
@@ -137,11 +137,11 @@ class MenuLeft extends React.Component {
         </Link>
       </Menu.Item>
     ) : (
-          <Menu.Item key={key} disabled={disabled}>
-            <span className="menuLeft__item-title">{title}</span>
-            {icon && <span className={icon + ' menuLeft__icon'} />}
-          </Menu.Item>
-        )
+      <Menu.Item key={key} disabled={disabled}>
+        <span className="menuLeft__item-title">{title}</span>
+        {icon && <span className={icon + ' menuLeft__icon'} />}
+      </Menu.Item>
+    )
   }
 
   onCollapse = (value, type) => {
@@ -199,10 +199,10 @@ class MenuLeft extends React.Component {
               <img src={logo} alt="" width="100%" />
             </div>
           ) : (
-              <div className="menuLeft__logoContainer" style={{ textAlign: 'center' }}>
-                <img src={logo} alt="" />
-              </div>
-            )}
+            <div className="menuLeft__logoContainer" style={{ textAlign: 'center' }}>
+              <img src={logo} alt="" />
+            </div>
+          )}
         </div>
         <Scrollbars
           autoHide
