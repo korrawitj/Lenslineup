@@ -49,7 +49,7 @@ class AppFooter extends React.Component {
                 />
                 <span>
                   © 2018{' '}
-                  <a href="http://mediatec.org/" target="_blank" rel="noopener noreferrer">
+                  <a href="" target="_blank" rel="noopener noreferrer">
                     Lenslineup
                   </a>
                   <br />
