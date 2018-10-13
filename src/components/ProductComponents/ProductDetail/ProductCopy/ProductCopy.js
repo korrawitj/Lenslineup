@@ -207,8 +207,8 @@ class ProductCopy extends React.Component {
                 <strong>อุปกรณ์ (Copy)</strong>
               </div>
               <Button icon="plus" type="primary" style={{ float: 'right' }}>
-              เพิ่มอุปกรณ์ Copy
-            </Button>
+                เพิ่มอุปกรณ์ Copy
+              </Button>
             </div>
             <div className="card-body" />
             <Table
