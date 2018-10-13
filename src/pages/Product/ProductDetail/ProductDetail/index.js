@@ -397,7 +397,7 @@ const CollectionCreateForm = Form.create()(
           {productData.ProductID === null || productData.ProductID === undefined ? (
             ''
           ) : (
-          <ProductCopy/>
+            <ProductCopy />
           )}
           {/* <div className="row">
 <div className="col-md-7">
