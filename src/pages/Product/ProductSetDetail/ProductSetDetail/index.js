@@ -69,9 +69,9 @@ const CollectionCreateForm = Form.create()(
                       </div>
                     </div>
                     <hr />
-                    <div className="card-body" >
+                    <div className="card-body">
                       <Form>
-                      <div className="row">
+                        <div className="row">
                           <div className="col-md-10">
                             <FormItem label="อุปกรณ์" className="inputcenter">
                               <Select
