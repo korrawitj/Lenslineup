@@ -218,7 +218,7 @@ class MenuLeft extends React.Component {
             className="menuLeft__navigation"
           >
             <Menu.Item key={'settings'}>
-              <span className="menuLeft__item-title">Theme Settings</span>
+              <span className="menuLeft__item-title">ปรับแต่งธีม</span>
               <span
                 className={'icmn icmn-cog menuLeft__icon utils__spin-delayed--pseudo-selector'}
               />

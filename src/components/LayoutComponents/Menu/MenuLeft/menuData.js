@@ -1,6 +1,6 @@
 export default [
   {
-    title: 'Dashboard',
+    title: 'แผงควบคุม',
     key: 'dashboard',
     url: '/dashboard',
     icon: 'icmn icmn-stack',
