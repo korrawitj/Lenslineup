@@ -105,33 +105,7 @@ class ProductCopy extends React.Component {
           <a className="utils__link--underlined" href="javascript: void(0);">
             {text}
           </a>
-        ),
-        filterDropdown: (
-          <div className="custom-filter-dropdown">
-            <Input
-              ref={ele => (this.searchInput = ele)}
-              placeholder="Search name"
-              value={this.state.searchText}
-              onChange={this.onInputChange}
-              onPressEnter={this.onSearch}
-            />
-            <Button type="primary" onClick={this.onSearch}>
-              Search
-            </Button>
-          </div>
-        ),
-        filterIcon: (
-          <Icon type="search" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />
-        ),
-        filterDropdownVisible: this.state.filterDropdownVisible,
-        onFilterDropdownVisibleChange: visible => {
-          this.setState(
-            {
-              filterDropdownVisible: visible,
-            },
-            () => this.searchInput && this.searchInput.focus(),
-          )
-        },
+        )
       },
       {
         title: 'Serail Number',
