@@ -210,13 +210,14 @@ class ProductCopy extends React.Component {
                 เพิ่มอุปกรณ์ Copy
               </Button>
             </div>
-            <div className="card-body" />
+            <div className="card-body">
             <Table
               columns={columns}
               // dataSource={this.props.productItemData.productItemData}
               pagination={pager}
               onChange={this.handleTableChange}
-            />
+            />          
+            </div>           
           </div>
         </div>
       </div>

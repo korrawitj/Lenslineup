@@ -60,14 +60,16 @@ class ProductList extends React.Component {
   handleChange = ({ fileList }) => this.setState({ fileList })
   showDeleteConfirm(record) {
     let T = record
+    console.log(T)
     confirm({
       title: 'Are you sure delete this row?',
-      content: <div>Delelte ProductID = {record.ProductID}</div>,
+      content: <div>Delelte Product = {record.Name}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
       onOk() {
         console.log('OK')
+        // this.props.deleteProduct(record.ProductID)
       },
       onCancel() {
         console.log('Cancel')
