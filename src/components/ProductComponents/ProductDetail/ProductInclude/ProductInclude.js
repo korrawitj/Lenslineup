@@ -185,6 +185,7 @@ class ProductInclude extends React.Component {
             <strong>อุปกรณ์ที่ติดไปด้วย</strong>
           </div>
         </div>
+        <div className="card-body" >
         <div className="row">
           <div className="col-md-6">
             <Select
@@ -199,18 +200,18 @@ class ProductInclude extends React.Component {
               ))}
             </Select>
           </div>
-          <div className="col-md-2">
-            <Button onClick={this.handleAdd}>Add</Button>
+          <div className="col-md-3">
+          <Button onClick={this.handleAdd}>Add</Button>
           </div>
         </div>
-        <hr />
-        <div className="card-body" />
+        <br/>
         <Table
           columns={columns}
           dataSource={this.props.DataSourceTa}
           pagination={pager}
           onChange={this.handleTableChange}
         />
+        </div>
       </div>
     )
   }
