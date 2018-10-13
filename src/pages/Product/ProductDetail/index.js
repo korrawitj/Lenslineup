@@ -16,7 +16,7 @@ class ProductPage extends React.Component {
       <Page {...props}>
         <Helmet title="จัดการอุปกรณ์" />
         <ProductDetail
-          productID={this.props.location.state === undefined ? null : this.props.location.state.id}
+          productID={this.props.location.state === undefined ? null : this.props.location.state.productData["ProductID"]}
         />
       </Page>
     )

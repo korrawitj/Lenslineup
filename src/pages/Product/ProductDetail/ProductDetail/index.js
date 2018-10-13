@@ -563,7 +563,6 @@ class ProductDetail extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     // this.props.getAllProduct()
     this.props.getAllData()
     this.props.getAllProductItem()
@@ -571,6 +570,7 @@ class ProductDetail extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <CollectionCreateForm
