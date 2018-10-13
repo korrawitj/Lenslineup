@@ -70,30 +70,30 @@ class SettingsSider extends React.Component {
         <Scrollbars style={{ height: '100vh' }}>
           <div className="settingsSider__container">
             <div className="settingsSider__title">
-              Theme Settings
+              ปรับแต่งธีม
               <span className="fa fa-times" onClick={this.closeSettings} />
             </div>
-            <div className="settingsSider__description">
+            {/* <div className="settingsSider__description">
               This component "SettingsSider" gives possibility to construct custom blocks with any
               widgets, components and elements inside, like this theme settings
-            </div>
-            <div className="settingsSider__item">
+            </div> */}
+            {/* <div className="settingsSider__item">
               <Switch checked={layoutState.isMenuTop} onChange={this.setIsMenuTop} />
               <span className="settingsSider__itemLabel">Menu Top (Horizontal)</span>
             </div>
             <div className="settingsSider__item">
               <Switch checked={layoutState.menuCollapsed} onChange={this.setMenuCollapsed} />
               <span className="settingsSider__itemLabel">Collapsed Menu</span>
-            </div>
-            <div className="settingsSider__item">
+            </div> */}
+            {/* <div className="settingsSider__item">
               <Switch checked={layoutState.menuShadow} onChange={this.setMenuShadow} />
               <span className="settingsSider__itemLabel">Menu Shadow</span>
-            </div>
+            </div> */}
             <div className="settingsSider__item">
               <Switch checked={layoutState.themeLight} onChange={this.setThemeLight} />
               <span className="settingsSider__itemLabel">Light Theme</span>
             </div>
-            <div className="settingsSider__item">
+            {/* <div className="settingsSider__item">
               <Switch checked={layoutState.borderLess} onChange={this.setBorderLess} />
               <span className="settingsSider__itemLabel">Borderless Cards</span>
             </div>
@@ -104,7 +104,7 @@ class SettingsSider extends React.Component {
             <div className="settingsSider__item">
               <Switch checked={layoutState.fixedWidth} onChange={this.setFixedWidth} />
               <span className="settingsSider__itemLabel">Fixed Width</span>
-            </div>
+            </div> */}
           </div>
         </Scrollbars>
       </div>
