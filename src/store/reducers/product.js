@@ -9,6 +9,7 @@ const initialState = {
   productItemDataAll: [],
   fileData: [],
   productBrand: [],
+  productDataID: [],
 }
 
 const reducer = (state = initialState, action) => {
@@ -16,7 +17,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GETALLPRODUCT:
       return updateObject(state, { productData: action.val })
     case actionTypes.GETPRODUCT:
-      return updateObject(state, { productData: action.val })
+      return updateObject(state, { productDataID: action.val })
     case actionTypes.ADDPRODUCT:
       return updateObject(state, { productData: action.val })
     case actionTypes.UPDATEPRODUCT:
