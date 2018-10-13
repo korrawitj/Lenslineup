@@ -393,23 +393,24 @@ const CollectionCreateForm = Form.create()(
               </div>
             </div>
           </div>
-          {productData.ProductID === null || productData.ProductID === undefined?
-                "":
-          <div className="row">
-            <div className="col-md-12">
-              <div className="card">
-                <div className="card-header">
-                  <div className="utils__title">
-                    <strong>อุปกรณ์ (Copy)</strong>
+          {productData.ProductID === null || productData.ProductID === undefined ? (
+            ''
+          ) : (
+            <div className="row">
+              <div className="col-md-12">
+                <div className="card">
+                  <div className="card-header">
+                    <div className="utils__title">
+                      <strong>อุปกรณ์ (Copy)</strong>
+                    </div>
                   </div>
+                  <hr />
+                  <div className="card-body" />
+                  <ProductCopy />
                 </div>
-                <hr />
-                <div className="card-body" />
-                <ProductCopy />
-              </div>    
+              </div>
             </div>
-          </div>
-          }
+          )}
           <div className="row">
             <div className="col-md-12">
               <div className="card">
@@ -576,11 +577,10 @@ class ProductDetail extends React.Component {
     this.props.getAllProductItem()
     this.props.getAllBrand()
     let productData = {}
-    if(this.props.productID!==null&&this.props.productID!==undefined){
-    productData['productID'] = this.props.productID
-    this.props.getProduct(productData)
+    if (this.props.productID !== null && this.props.productID !== undefined) {
+      productData['productID'] = this.props.productID
+      this.props.getProduct(productData)
     }
-
   }
 
   render() {
