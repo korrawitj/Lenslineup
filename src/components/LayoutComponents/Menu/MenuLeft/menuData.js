@@ -45,7 +45,18 @@ export default [
       {
         key: 'อุปกรณ์จัดชุด',
         title: 'อุปกรณ์จัดชุด',
-        url: '/Product/Set',
+        children: [
+          {
+            key: 'อุปกรณ์จัดชุดทั้งหมด',
+            title: 'อุปกรณ์จัดชุดทั้งหมด',
+            url: '/Product/Set',
+          },
+          {
+            key: 'เพิ่มอุปกรณ์จัดชุด',
+            title: 'เพิ่มอุปกรณ์จัดชุด',
+            url: '/product/set/detail',
+          },
+        ],
       },
     ],
   },

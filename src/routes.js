@@ -43,6 +43,10 @@ const loadableRoutes = {
     component: loadable(() => import('pages/Product/ProductSet')),
   },
 
+  '/product/set/detail': {
+    component: loadable(() => import('pages/Product/ProductSetDetail')),
+  },
+
   '/product/Category': {
     component: loadable(() => import('pages/Product/ProductCategory')),
   },
