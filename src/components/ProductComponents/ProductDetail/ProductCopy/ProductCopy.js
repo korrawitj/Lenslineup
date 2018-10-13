@@ -211,13 +211,13 @@ class ProductCopy extends React.Component {
               </Button>
             </div>
             <div className="card-body">
-            <Table
-              columns={columns}
-              // dataSource={this.props.productItemData.productItemData}
-              pagination={pager}
-              onChange={this.handleTableChange}
-            />          
-            </div>           
+              <Table
+                columns={columns}
+                // dataSource={this.props.productItemData.productItemData}
+                pagination={pager}
+                onChange={this.handleTableChange}
+              />
+            </div>
           </div>
         </div>
       </div>
