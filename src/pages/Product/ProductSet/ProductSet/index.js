@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Icon, Input, Button, Modal, Radio, Form, Upload } from 'antd'
 import * as actionCreators from '../../../../store/axios/productPackage'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const FormItem = Form.Item
 const defaultPagination = {
@@ -200,9 +201,12 @@ class ProductSet extends React.Component {
           <div className="utils__title">
             <strong>อุปกรณ์จัดชุด</strong>
           </div>
-          <Button type="primary" icon="plus" onClick={this.onCreateProductPackage}>
-            เพิ่มอุปกรณ์จัดชุด
-          </Button>
+          <Link to="/product/set/detail" className="navbar-item">
+            <Button type="primary" icon="plus">
+              เพิ่มอุปกรณ์จัดชุด
+            </Button>
+          </Link>
+
         </div>
         <div className="card-body">
           <Table
