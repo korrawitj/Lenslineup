@@ -199,12 +199,27 @@ class ProductCopy extends React.Component {
     ]
 
     return (
-      <Table
+      <div className="row">
+      <div className="col-md-12">
+        <div className="card">
+          <div className="card-header">
+            <div className="utils__title">
+              <strong>อุปกรณ์ (Copy)</strong>
+            </div>
+          </div>
+          <div className="card-body" />
+          <Button icon="plus" type="primary" style={{float:"right"}}>
+              เพิ่มอุปกรณ์ Copy
+            </Button>
+          <Table
         columns={columns}
         // dataSource={this.props.productItemData.productItemData}
         pagination={pager}
         onChange={this.handleTableChange}
       />
+        </div>
+      </div>
+    </div>
     )
   }
 }

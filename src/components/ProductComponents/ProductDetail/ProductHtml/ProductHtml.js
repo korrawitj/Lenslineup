@@ -50,7 +50,7 @@ class ProductHtml extends React.Component {
                 </div>
                 <div className="col-md-9 inputcenter">
                   <FormItem className="inputcenter">
-                    {getFieldDecorator('productData.MetaTitle', {
+                    {getFieldDecorator('productData.MetaDescription', {
                       initialValue: productData.MetaDescription,
                     })(<TextArea autosize={{ minRows: 2, maxRows: 6 }} />)}
                   </FormItem>

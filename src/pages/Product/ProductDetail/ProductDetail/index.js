@@ -397,20 +397,7 @@ const CollectionCreateForm = Form.create()(
           {productData.ProductID === null || productData.ProductID === undefined ? (
             ''
           ) : (
-            <div className="row">
-              <div className="col-md-12">
-                <div className="card">
-                  <div className="card-header">
-                    <div className="utils__title">
-                      <strong>อุปกรณ์ (Copy)</strong>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="card-body" />
-                  <ProductCopy />
-                </div>
-              </div>
-            </div>
+          <ProductCopy/>
           )}
           {/* <div className="row">
 <div className="col-md-7">
@@ -514,7 +501,16 @@ class ProductDetail extends React.Component {
         console.log(values)
         // this.props.addProduct(values)
       } else {
-        console.log(productData)
+        values.productData['productIncludeData'] = ProductInclude
+        values.productData['productPhoto'] = this.props.product.fileData.productPhoto
+        values.productData['ExpireDate'] = moment(values.productData['ExpireDate']).format(
+          'YYYY-MM-DD',
+        )
+        values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
+          'YYYY-MM-DD',
+        )
+        console.log(values)
+        // this.props.updateProduct(values)
       }
       form.resetFields()
       this.setState({ visible: false })
