@@ -393,6 +393,8 @@ const CollectionCreateForm = Form.create()(
               </div>
             </div>
           </div>
+          {productData.ProductID === null || productData.ProductID === undefined?
+                "":
           <div className="row">
             <div className="col-md-12">
               <div className="card">
@@ -404,9 +406,10 @@ const CollectionCreateForm = Form.create()(
                 <hr />
                 <div className="card-body" />
                 <ProductCopy />
-              </div>
+              </div>    
             </div>
           </div>
+          }
           <div className="row">
             <div className="col-md-12">
               <div className="card">
@@ -469,7 +472,7 @@ class ProductDetail extends React.Component {
       if (err) {
         return
       }
-      if (productData.ItemID == null) {
+      if (productData.ProductID == null) {
         values.productData['Copy'] = 1
         values.productData['productIncludeData'] = ProductInclude
         values.productData['productPhoto'] = this.props.product.fileData.productPhoto
@@ -482,6 +485,7 @@ class ProductDetail extends React.Component {
         // console.log(values)
         this.props.addProduct(values)
       } else {
+        console.log(productData)
       }
       form.resetFields()
       this.setState({ visible: false })
@@ -572,8 +576,11 @@ class ProductDetail extends React.Component {
     this.props.getAllProductItem()
     this.props.getAllBrand()
     let productData = {}
+    if(this.props.productID!==null&&this.props.productID!==undefined){
     productData['productID'] = this.props.productID
     this.props.getProduct(productData)
+    }
+
   }
 
   render() {
@@ -583,8 +590,8 @@ class ProductDetail extends React.Component {
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
           productData={
-            this.props.productID !== null || this.props.productID !== undefined
-              ? this.props.product.productData
+            this.props.productID !== null && this.props.productID !== undefined
+              ? this.props.product.productDataID
               : this.state.productData
           }
           productCate={this.props.product.productCate}
