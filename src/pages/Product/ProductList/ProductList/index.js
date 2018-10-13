@@ -104,7 +104,7 @@ class ProductList extends React.Component {
         title: 'อุปกรณ์',
         dataIndex: 'Name',
         key: 'Name',
-        sorter: (a, b) => a.ProductName.length - b.ProductName.length,
+        sorter: (a, b) => a.ProductName - b.ProductName,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
             {text}
