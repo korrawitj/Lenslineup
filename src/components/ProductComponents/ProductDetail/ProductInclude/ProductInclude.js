@@ -185,32 +185,32 @@ class ProductInclude extends React.Component {
             <strong>อุปกรณ์ที่ติดไปด้วย</strong>
           </div>
         </div>
-        <div className="card-body" >
-        <div className="row">
-          <div className="col-md-6">
-            <Select
-              placeholder="Please select"
-              style={{ width: '100%' }}
-              onChange={this.handleChange}
-            >
-              {this.props.ProductItem.map(item => (
-                <Option selected key={item.ItemID} value={item.ItemID}>
-                  {item.Name}
-                </Option>
-              ))}
-            </Select>
+        <div className="card-body">
+          <div className="row">
+            <div className="col-md-6">
+              <Select
+                placeholder="Please select"
+                style={{ width: '100%' }}
+                onChange={this.handleChange}
+              >
+                {this.props.ProductItem.map(item => (
+                  <Option selected key={item.ItemID} value={item.ItemID}>
+                    {item.Name}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+            <div className="col-md-3">
+              <Button onClick={this.handleAdd}>Add</Button>
+            </div>
           </div>
-          <div className="col-md-3">
-          <Button onClick={this.handleAdd}>Add</Button>
-          </div>
-        </div>
-        <br/>
-        <Table
-          columns={columns}
-          dataSource={this.props.DataSourceTa}
-          pagination={pager}
-          onChange={this.handleTableChange}
-        />
+          <br />
+          <Table
+            columns={columns}
+            dataSource={this.props.DataSourceTa}
+            pagination={pager}
+            onChange={this.handleTableChange}
+          />
         </div>
       </div>
     )
