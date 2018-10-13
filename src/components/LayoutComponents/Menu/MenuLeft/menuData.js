@@ -49,7 +49,7 @@ export default [
           {
             key: 'อุปกรณ์จัดชุดทั้งหมด',
             title: 'อุปกรณ์จัดชุดทั้งหมด',
-            url: '/Product/Set',
+            url: '/product/set',
           },
           {
             key: 'เพิ่มอุปกรณ์จัดชุด',
