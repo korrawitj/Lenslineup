@@ -60,14 +60,16 @@ class ProductList extends React.Component {
   handleChange = ({ fileList }) => this.setState({ fileList })
   showDeleteConfirm(record) {
     let T = record
+    console.log(T)
     confirm({
       title: 'Are you sure delete this row?',
-      content: <div>Delelte ProductID = {record.ProductID}</div>,
+      content: <div>Delelte Product = {record.Name}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
       onOk() {
         console.log('OK')
+        // this.props.deleteProduct(record.ProductID)
       },
       onCancel() {
         console.log('Cancel')
@@ -101,73 +103,36 @@ class ProductList extends React.Component {
     let { pager, data } = this.state
     const columns = [
       {
-        title: 'ProductID',
-        dataIndex: 'ProductID',
-        key: 'ProductID',
-        render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {text}
-          </a>
-        ),
-        sorter: (a, b) => a.id - b.id,
-      },
-      {
         title: 'อุปกรณ์',
         dataIndex: 'Name',
         key: 'Name',
-        sorter: (a, b) => a.ProductName.length - b.ProductName.length,
+        sorter: (a, b) => a.ProductName - b.ProductName,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
             {text}
           </a>
         ),
-        filterDropdown: (
-          <div className="custom-filter-dropdown">
-            <Input
-              ref={ele => (this.searchInput = ele)}
-              placeholder="Search name"
-              value={this.state.searchText}
-              onChange={this.onInputChange}
-              onPressEnter={this.onSearch}
-            />
-            <Button type="primary" onClick={this.onSearch}>
-              Search
-            </Button>
-          </div>
-        ),
-        filterIcon: (
-          <Icon type="search" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />
-        ),
-        filterDropdownVisible: this.state.filterDropdownVisible,
-        onFilterDropdownVisibleChange: visible => {
-          this.setState(
-            {
-              filterDropdownVisible: visible,
-            },
-            () => this.searchInput && this.searchInput.focus(),
-          )
-        },
       },
       {
         title: 'ราคาเช่า',
-        dataIndex: 'RentHourFee',
-        key: 'RentHourFee',
+        dataIndex: 'RentDay_Fee',
+        key: 'RentDay_Fee',
         render: text => <span>{text == null ? '' : text}</span>,
-        sorter: (a, b) => a.RentPrice - b.RentPrice,
+        sorter: (a, b) => a.RentDay_Fee - b.RentDay_Fee,
       },
       {
         title: 'หลักประกัน1',
         dataIndex: 'DepositType1',
         key: 'DepositType1',
         render: text => <span>{text == null ? '' : text}</span>,
-        sorter: (a, b) => a.GuaranteePrice - b.GuaranteePrice,
+        sorter: (a, b) => a.DepositType1 - b.DepositType1,
       },
       {
         title: 'หลักประกัน2',
         dataIndex: 'DepositType2',
         key: 'DepositType2',
         render: text => <span>{text == null ? '' : text}</span>,
-        sorter: (a, b) => a.GuaranteePrice2 - b.GuaranteePrice2,
+        sorter: (a, b) => a.DepositType2 - b.DepositType2,
       },
       {
         title: 'Action',

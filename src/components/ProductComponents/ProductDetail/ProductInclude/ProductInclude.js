@@ -18,44 +18,23 @@ class ProductInclude extends React.Component {
     filtered: false,
     previewVisible: false,
     arrayvar: [],
-  }
-  onSearch = () => {
-    const { searchText, tableData } = this.state
-    let reg = new RegExp(searchText, 'gi')
-    this.setState({
-      filterDropdownVisible: false,
-      filtered: !!searchText,
-      data: tableData
-        .map(record => {
-          let match = record.ProductName.match(reg)
-          if (!match) {
-            return null
-          }
-          return {
-            ...record,
-            name: (
-              <span>
-                {record.ProductName.split(reg).map(
-                  (text, i) =>
-                    i > 0 ? [<span className="highlight">{match[0]}</span>, text] : text,
-                )}
-              </span>
-            ),
-          }
-        })
-        .filter(record => !!record),
-    })
+    refresh: false,
   }
   showDeleteConfirm(record, props) {
-    let T = record
+    // const { refresh} = this.state
+    var _this = this
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte Product Item = {record.ItemID}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      onOk() {
-        props.deleteProductItem(record.ItemID)
+      onOk: () => {
+        var ProductItem = props.DataSourceTa
+        var removeItem = record.ItemID
+        var index = ProductItem.indexOf(removeItem)
+        ProductItem.splice(index, 1)
+        _this.setState({ refresh: true })
       },
       onCancel() {
         console.log('Cancel')
@@ -89,23 +68,13 @@ class ProductInclude extends React.Component {
   }
   handleChange = value => {
     this.setState({ ProductIncludeData: value })
-    // console.log(this.state.ProductIncludeData)
   }
   handleAdd = async () => {
-    // console.log(this.state.ProductIncludeData)
-    // console.log(this.state.ProductIncludeData)
-    debugger
     const Test = { Id: this.state.ProductIncludeData }
 
     if (!this.props.DataSourceTa.some(item => Test.Id === item.key)) {
       const x = await this.props.getId(Test)
     }
-    // console.log(this.props.ssss)
-    // this.setState({
-    //   arrayvar: [...this.state.arrayvar, x]
-    // })
-    // console.log(this.state.arrayvar)
-    // console.log(x)
   }
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -126,17 +95,6 @@ class ProductInclude extends React.Component {
   render() {
     let { pager, data } = this.state
     const columns = [
-      // {
-      //   title: 'ItemID',
-      //   dataIndex: 'ItemID',
-      //   key: 'ItemID',
-      //   render: text => (
-      //     <a className="utils__link--underlined" href="javascript: void(0);">
-      //       {'#' + text}
-      //     </a>
-      //   ),
-      //   sorter: (a, b) => a.ItemID - b.ItemID,
-      // },
       {
         title: 'อุปกรณ์',
         dataIndex: 'Name',
@@ -185,32 +143,35 @@ class ProductInclude extends React.Component {
             <strong>อุปกรณ์ที่ติดไปด้วย</strong>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-6">
-            <Select
-              placeholder="Please select"
-              style={{ width: '100%' }}
-              onChange={this.handleChange}
-            >
-              {this.props.ProductItem.map(item => (
-                <Option selected key={item.ItemID} value={item.ItemID}>
-                  {item.Name}
-                </Option>
-              ))}
-            </Select>
+        <div className="card-body">
+          <div className="row">
+            <div className="col-md-6">
+              <Select
+                placeholder="Please select"
+                style={{ width: '100%' }}
+                onChange={this.handleChange}
+              >
+                {this.props.ProductItem.map(item => (
+                  <Option selected key={item.ItemID} value={item.ItemID}>
+                    {item.Name}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+            <div className="col-md-3">
+              <Button onClick={this.handleAdd} type="primary">
+                Add
+              </Button>
+            </div>
           </div>
-          <div className="col-md-2">
-            <Button onClick={this.handleAdd}>Add</Button>
-          </div>
+          <br />
+          <Table
+            columns={columns}
+            dataSource={this.props.DataSourceTa}
+            pagination={pager}
+            onChange={this.handleTableChange}
+          />
         </div>
-        <hr />
-        <div className="card-body" />
-        <Table
-          columns={columns}
-          dataSource={this.props.DataSourceTa}
-          pagination={pager}
-          onChange={this.handleTableChange}
-        />
       </div>
     )
   }

@@ -106,32 +106,6 @@ class ProductCopy extends React.Component {
             {text}
           </a>
         ),
-        filterDropdown: (
-          <div className="custom-filter-dropdown">
-            <Input
-              ref={ele => (this.searchInput = ele)}
-              placeholder="Search name"
-              value={this.state.searchText}
-              onChange={this.onInputChange}
-              onPressEnter={this.onSearch}
-            />
-            <Button type="primary" onClick={this.onSearch}>
-              Search
-            </Button>
-          </div>
-        ),
-        filterIcon: (
-          <Icon type="search" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />
-        ),
-        filterDropdownVisible: this.state.filterDropdownVisible,
-        onFilterDropdownVisibleChange: visible => {
-          this.setState(
-            {
-              filterDropdownVisible: visible,
-            },
-            () => this.searchInput && this.searchInput.focus(),
-          )
-        },
       },
       {
         title: 'Serail Number',
@@ -200,23 +174,24 @@ class ProductCopy extends React.Component {
 
     return (
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-7">
           <div className="card">
             <div className="card-header">
               <div className="utils__title">
                 <strong>อุปกรณ์ (Copy)</strong>
               </div>
+              <Button icon="plus" type="primary" style={{ float: 'right' }}>
+                เพิ่มอุปกรณ์ Copy
+              </Button>
             </div>
-            <div className="card-body" />
-            <Button icon="plus" type="primary" style={{ float: 'right' }}>
-              เพิ่มอุปกรณ์ Copy
-            </Button>
-            <Table
-              columns={columns}
-              // dataSource={this.props.productItemData.productItemData}
-              pagination={pager}
-              onChange={this.handleTableChange}
-            />
+            <div className="card-body">
+              <Table
+                columns={columns}
+                // dataSource={this.props.productItemData.productItemData}
+                pagination={pager}
+                onChange={this.handleTableChange}
+              />
+            </div>
           </div>
         </div>
       </div>
