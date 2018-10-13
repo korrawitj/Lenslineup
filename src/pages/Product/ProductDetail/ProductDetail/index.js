@@ -45,6 +45,7 @@ const CollectionCreateForm = Form.create()(
         productItemByID,
         dataSourceTa,
         productBrand,
+        deleteProductInclude,
       } = this.props
       const { getFieldDecorator } = form
       return (
@@ -389,6 +390,8 @@ const CollectionCreateForm = Form.create()(
                     ProductItem={productItem}
                     getId={productItemByID}
                     DataSourceTa={dataSourceTa}
+                    productID={productData.ProductID === null || productData.ProductID === undefined ?null:productData.ProductID}
+                    deleteProductInclude={deleteProductInclude}
                   />
                 </div>
               </div>
@@ -501,7 +504,7 @@ class ProductDetail extends React.Component {
           'YYYY-MM-DD',
         )
         console.log(values)
-        // this.props.addProduct(values)
+        this.props.addProduct(values)
       } else {
         values.productData['productIncludeData'] = ProductInclude
         values.productData['productPhoto'] = this.props.product.fileData.productPhoto
@@ -607,10 +610,12 @@ class ProductDetail extends React.Component {
       productData['productID'] = this.props.productID
       this.props.getProduct(productData)
     }
+
   }
 
   render() {
     // this.setState(this.state.ProductData:this.props.productData)
+    console.log(this.props.product)
     return (
       <div>
         <CollectionCreateForm
@@ -622,13 +627,15 @@ class ProductDetail extends React.Component {
           }
           productCate={this.props.product.productCate}
           productItem={this.props.product.productItemDataAll}
-          dataSourceTa={this.props.product.productItemData}
+          dataSourceTa={ this.props.productID !== null && this.props.productID !== undefined
+            ?this.props.product.productDataID["productIncludeData"]:this.props.product.productItemData}
           productBrand={this.props.product.productBrand}
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleCreate}
           IsEdit={this.props.IsEdit}
           productItemByID={this.props.getProductItem}
+          deleteProductInclude={this.props.deleteProductInclude}
         />
 
         {/* 

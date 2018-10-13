@@ -22,6 +22,7 @@ class ProductInclude extends React.Component {
   }
   showDeleteConfirm(record, props) {
     // const { refresh} = this.state
+    console.log(props)
     var _this = this
     Modal.confirm({
       title: 'Are you sure delete this row?',
@@ -30,6 +31,10 @@ class ProductInclude extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk: () => {
+        console.log(props)
+        if(props.productID!==null && props.DataSourceTa!==[]){
+            props.deleteProductInclude(props.productID,record.ItemID)
+        }
         var ProductItem = props.DataSourceTa
         var removeItem = record.ItemID
         var index = ProductItem.indexOf(removeItem)
