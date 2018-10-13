@@ -83,7 +83,8 @@ const CollectionCreateForm = Form.create()(
                                   <Option
                                     selected
                                     key={item.ProductID}
-                                    value={item.ProductID + '/' + item.ProductName} >
+                                    value={item.ProductID + '/' + item.ProductName}
+                                  >
                                     {item.Name}
                                   </Option>
                                 ))}
@@ -95,7 +96,7 @@ const CollectionCreateForm = Form.create()(
                               <Button
                                 type="primary"
                                 style={{ marginBottom: 16 }}
-                              // onClick={this.handleAdd}
+                                // onClick={this.handleAdd}
                               >
                                 เพิ่มอุปกรณ์
                               </Button>
