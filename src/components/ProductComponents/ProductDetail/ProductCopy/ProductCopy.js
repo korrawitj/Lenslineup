@@ -200,17 +200,17 @@ class ProductCopy extends React.Component {
 
     return (
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-7">
           <div className="card">
             <div className="card-header">
               <div className="utils__title">
                 <strong>อุปกรณ์ (Copy)</strong>
               </div>
-            </div>
-            <div className="card-body" />
-            <Button icon="plus" type="primary" style={{ float: 'right' }}>
+              <Button icon="plus" type="primary" style={{ float: 'right' }}>
               เพิ่มอุปกรณ์ Copy
             </Button>
+            </div>
+            <div className="card-body" />
             <Table
               columns={columns}
               // dataSource={this.props.productItemData.productItemData}

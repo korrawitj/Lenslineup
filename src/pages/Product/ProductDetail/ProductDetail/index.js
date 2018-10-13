@@ -429,12 +429,17 @@ const CollectionCreateForm = Form.create()(
           <div className="row">
             <div className="col-md-12">
               <div className="card">
-                <div className="card-body" />
-                <Button onClick={onCreate}>
+                <div className="card-body">
+                <Button onClick={onCreate} type="primary">
                   {productData.ProductID === null || productData.ProductID === undefined
                     ? 'Create'
                     : 'Edit'}
                 </Button>
+                <Button>
+                Cancel
+                </Button>
+                </div>
+                
               </div>
             </div>
           </div>
