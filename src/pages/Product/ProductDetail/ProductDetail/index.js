@@ -78,7 +78,7 @@ const CollectionCreateForm = Form.create()(
                       <div className="col-md-9 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.BrandName', {
-                            initialValue: productData.BrandName,
+                            initialValue:productData.BrandName,
                           })(
                             <Select
                               placeholder="Please select"
@@ -411,7 +411,7 @@ const CollectionCreateForm = Form.create()(
             <div className="col-md-12">
               <div className="card">
                 <div className="card-body" />
-                <Button onClick={onCreate}>{productData.ItemID == null ? 'Create' : 'Edit'}</Button>
+                <Button onClick={onCreate}>{productData.ProductID === null||productData.ProductID=== undefined ? 'Create' : 'Edit'}</Button>
               </div>
             </div>
           </div>
@@ -567,15 +567,19 @@ class ProductDetail extends React.Component {
     this.props.getAllData()
     this.props.getAllProductItem()
     this.props.getAllBrand()
+    let productData = {}
+    productData["productID"]=this.props.productID
+    this.props.getProduct(productData)
+  
   }
 
   render() {
-    console.log(this.props)
+    // this.setState(this.state.ProductData:this.props.productData)
     return (
       <div>
         <CollectionCreateForm
           wrappedComponentRef={this.saveFormRef}
-          productData={this.state.productData}
+          productData={this.props.productID!==null||this.props.productID!==undefined?this.props.product.productData:this.state.productData}
           productCate={this.props.product.productCate}
           productItem={this.props.product.productItemDataAll}
           dataSourceTa={this.props.product.productItemData}
