@@ -130,3 +130,14 @@ export function getAllBrand() {
       })
   }
 }
+
+export function deleteProductInclude(ProductID, ItemID) {
+  return dispatch => {
+    return axios
+      .post('/API/product/productInclude/delete', { ProductID: ProductID, ItemID: ItemID })
+      .then(response => {})
+      .catch(error => {
+        console.log('Error axios ' + error)
+      })
+  }
+}
