@@ -80,8 +80,8 @@ class HolidayShop extends React.Component {
     })
   }
   onCancle = () => {
-    const form = this.formRef.props.form;
-    form.resetFields();
+    const form = this.formRef.props.form
+    form.resetFields()
     this.setState({ previewVisible: false, visible: false })
   }
   saveFormRef = formRef => {
@@ -200,7 +200,7 @@ class HolidayShop extends React.Component {
           <div className="utils__title">
             <strong>วันหยุดร้าน</strong>
           </div>
-          <Button type="primary" onClick={this.onAdd} style={{float:'right'}}>
+          <Button type="primary" onClick={this.onAdd} style={{ float: 'right' }}>
             เพิ่มวันหยุดประจำ
           </Button>
         </div>
@@ -211,7 +211,6 @@ class HolidayShop extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-
         </div>
         <HolidayModal
           wrappedComponentRef={this.saveFormRef}

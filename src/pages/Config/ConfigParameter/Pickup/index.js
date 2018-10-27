@@ -28,20 +28,20 @@ const CollectionCreateForm = Form.create()(
               <FormItem label="ชื่อ">
                 {getFieldDecorator('masterPickupData.name', {
                   initialValue: masterPickupData.name,
-                  rules: [{ required: true, message: 'กรุณากรอก ชื่อ !' }]
+                  rules: [{ required: true, message: 'กรุณากรอก ชื่อ !' }],
                 })(<Input />)}
               </FormItem>
               <FormItem label="ประเภท">
                 {getFieldDecorator('masterPickupData.pickuptype', {
                   initialValue: masterPickupData.pickuptype,
-                  rules: [{ required: true, message: 'กรุณาเลือก ประเภท !' }]
+                  rules: [{ required: true, message: 'กรุณาเลือก ประเภท !' }],
                 })(<CheckboxGroup options={options} />)}
               </FormItem>
               <FormItem label="ค่าส่ง">
                 {getFieldDecorator('masterPickupData.deliveryCharge', {
                   initialValue:
                     masterPickupData.deliveryCharge == null ? 0 : masterPickupData.deliveryCharge,
-                    rules: [{ required: true, message: 'กรุณากรอก ค่าส่ง !' }]
+                  rules: [{ required: true, message: 'กรุณากรอก ค่าส่ง !' }],
                 })(<Input />)}
               </FormItem>
             </Form>
@@ -111,11 +111,11 @@ class PickUp extends React.Component {
     this.formRef = formRef
   }
 
-  handleCancel = () => { 
-    const form = this.formRef.props.form;
-    form.resetFields();
+  handleCancel = () => {
+    const form = this.formRef.props.form
+    form.resetFields()
     this.setState({ previewVisible: false, visible: false })
-  };
+  }
   showDeleteConfirmMasterPickup(record, parent) {
     let T = record
     Modal.confirm({
@@ -204,7 +204,7 @@ class PickUp extends React.Component {
           <div className="utils__title">
             <strong>จุดรับของ</strong>
           </div>
-          <Button type="primary" onClick={this.showModal} style={{float:'right'}}>
+          <Button type="primary" onClick={this.showModal} style={{ float: 'right' }}>
             เพิ่มจุดรับของ
           </Button>
         </div>

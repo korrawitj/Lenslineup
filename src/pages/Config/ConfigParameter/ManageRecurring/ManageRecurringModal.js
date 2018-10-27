@@ -30,9 +30,9 @@ const ManageRecurringModal = Form.create()(
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('manageRecurringData.name',{
+                {getFieldDecorator('manageRecurringData.name', {
                   initialValue: manageRecurringData.name,
-                  rules: [{ required: true, message: 'กรุณากรอก ชื่อ !' }]
+                  rules: [{ required: true, message: 'กรุณากรอก ชื่อ !' }],
                 })(<Input placeholder="ชื่อ" />)}
               </FormItem>
               <FormItem {...formItemLayout} layout="inline">
@@ -42,16 +42,18 @@ const ManageRecurringModal = Form.create()(
                       manageRecurringData.startTime != null
                         ? moment(manageRecurringData.startTime, 'HH:mm:ss')
                         : moment('00:00:00', 'HH:mm:ss'),
-                  rules: [{ type: 'object', required: true, message: 'กรุณาเลือก เวลาเริ่ม !' }]
+                    rules: [{ type: 'object', required: true, message: 'กรุณาเลือก เวลาเริ่ม !' }],
                   })(<TimePicker />)}
                 </FormItem>
 
                 <FormItem {...formItemLayout} label="เวลาสิ้นสุด">
-                  {getFieldDecorator('manageRecurringData.endTime',  {
+                  {getFieldDecorator('manageRecurringData.endTime', {
                     initialValue: manageRecurringData.endTime
                       ? moment(manageRecurringData.endTime, 'HH:mm:ss')
                       : moment('00:00:00', 'HH:mm:ss'),
-                      rules: [{ type: 'object', required: true, message: 'กรุณาเลือก เวลาสิ้นสุด !' }]
+                    rules: [
+                      { type: 'object', required: true, message: 'กรุณาเลือก เวลาสิ้นสุด !' },
+                    ],
                   })(<TimePicker />)}
                 </FormItem>
 
@@ -59,14 +61,14 @@ const ManageRecurringModal = Form.create()(
                   {getFieldDecorator('manageRecurringData.offset', {
                     initialValue:
                       manageRecurringData.offset == null ? 0 : manageRecurringData.offset,
-                      rules: [{ required: true, message: 'กรุณากรอก offset !' }]
+                    rules: [{ required: true, message: 'กรุณากรอก offset !' }],
                   })(<InputNumber min={0} max={10} />)}
                 </FormItem>
               </FormItem>
               <FormItem label="ประเภท">
-                {getFieldDecorator('manageRecurringData.manageTypeId',  {
+                {getFieldDecorator('manageRecurringData.manageTypeId', {
                   initialValue: manageRecurringData.manageTypeId,
-                  rules: [{ required: true, message: 'กรุณากรอก เลือกประเภท !' }]
+                  rules: [{ required: true, message: 'กรุณากรอก เลือกประเภท !' }],
                 })(
                   <Select placeholder="Please select" style={{ width: '30%' }}>
                     {masterType.map(item => (

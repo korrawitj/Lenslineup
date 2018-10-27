@@ -25,24 +25,22 @@ const CollectionCreateForm = Form.create()(
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="วันที่">
-                {getFieldDecorator('holidayData.date', { 
-                  initialValue: moment(holiDaydata.date)
-                  ,rules: [{ type: 'object', required: true, message: 'กรุณาเลือก วันที่ !' }] } )(
-                  <DatePicker/>,
-                )}
+                {getFieldDecorator('holidayData.date', {
+                  initialValue: moment(holiDaydata.date),
+                  rules: [{ type: 'object', required: true, message: 'กรุณาเลือก วันที่ !' }],
+                })(<DatePicker />)}
               </FormItem>
               <FormItem label="ข้อความ">
-                {getFieldDecorator('holidayData.message', { 
-                  initialValue: holiDaydata.message
-                ,rules: [{ required: true, message: 'กรุณากรอก ข้อความ !' }],
-                 })(
-                  <TextArea />,
-                )}
+                {getFieldDecorator('holidayData.message', {
+                  initialValue: holiDaydata.message,
+                  rules: [{ required: true, message: 'กรุณากรอก ข้อความ !' }],
+                })(<TextArea />)}
               </FormItem>
               <FormItem label="การรับ">
-                {getFieldDecorator('holidayData.receive', { 
-                  initialValue: holiDaydata.receive 
-                ,rules: [{ required: true, message: 'กรุณาเลือก การรับ !' }]})(
+                {getFieldDecorator('holidayData.receive', {
+                  initialValue: holiDaydata.receive,
+                  rules: [{ required: true, message: 'กรุณาเลือก การรับ !' }],
+                })(
                   <RadioGroup name="radiogroup">
                     <Radio value={true}>Yes</Radio>
                     <Radio value={false}>No</Radio>
@@ -51,8 +49,8 @@ const CollectionCreateForm = Form.create()(
               </FormItem>
               <FormItem label="การคืน">
                 {getFieldDecorator('holidayData.recurring', {
-                  initialValue: holiDaydata.recurring
-                  , rules: [{ required: true, message: 'กรุณาเลือก การคืน !' }]
+                  initialValue: holiDaydata.recurring,
+                  rules: [{ required: true, message: 'กรุณาเลือก การคืน !' }],
                 })(
                   <RadioGroup name="radiogroup1">
                     <Radio value={true}>Yes</Radio>
@@ -84,7 +82,7 @@ class Holiday extends React.Component {
     searchText: '',
     filtered: false,
     visible: false,
-    refresh:''
+    refresh: '',
   }
   componentDidMount() {
     this.props.getAllDataHoliday()
@@ -106,11 +104,11 @@ class Holiday extends React.Component {
         holiDaydata.message = values['holidayData']['message']
         holiDaydata.receive = values['holidayData']['receive']
         holiDaydata.recurring = values['holidayData']['recurring']
-        this.props.updateHolidayData(holiDaydata);
+        this.props.updateHolidayData(holiDaydata)
       } else {
-        this.props.AddDataHoliday(values);
+        this.props.AddDataHoliday(values)
       }
-      form.resetFields();
+      form.resetFields()
       this.setState({ visible: false })
     })
   }
@@ -119,8 +117,8 @@ class Holiday extends React.Component {
   }
 
   handleCancel = () => {
-    const form = this.formRef.props.form;
-    form.resetFields();
+    const form = this.formRef.props.form
+    form.resetFields()
     this.setState({ previewVisible: false, visible: false })
   }
 
@@ -246,7 +244,7 @@ class Holiday extends React.Component {
           <div className="utils__title">
             <strong>วันหยุด</strong>
           </div>
-          <Button type="primary" onClick={this.onCreateHoliday} style={{ float: "right" }}>
+          <Button type="primary" onClick={this.onCreateHoliday} style={{ float: 'right' }}>
             เพิ่มวันหยุด
           </Button>
         </div>

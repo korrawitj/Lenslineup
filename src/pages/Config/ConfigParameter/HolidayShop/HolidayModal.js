@@ -24,19 +24,19 @@ const HolidayModal = Form.create()(
               <FormItem label="วันที่">
                 {getFieldDecorator('holidayShopData.date', {
                   initialValue: moment(holidayShopData.date),
-                  rules: [{ type: 'object', required: true, message: 'กรุณาเลือก วันที่ !' }]
+                  rules: [{ type: 'object', required: true, message: 'กรุณาเลือก วันที่ !' }],
                 })(<DatePicker />)}
               </FormItem>
               <FormItem label="ข้อความ">
                 {getFieldDecorator('holidayShopData.message', {
                   initialValue: holidayShopData.message,
-                  rules: [{ required: true, message: 'กรุณากรอก ข้อความ !' }]
+                  rules: [{ required: true, message: 'กรุณากรอก ข้อความ !' }],
                 })(<TextArea />)}
               </FormItem>
               <FormItem label="การรับ">
                 {getFieldDecorator('holidayShopData.receive', {
                   initialValue: holidayShopData.receive,
-                  rules: [{ required: true, message: 'กรุณาเลือก การรับ !' }]
+                  rules: [{ required: true, message: 'กรุณาเลือก การรับ !' }],
                 })(
                   <RadioGroup name="radiogroup">
                     <Radio value={true}>Yes</Radio>
@@ -47,7 +47,7 @@ const HolidayModal = Form.create()(
               <FormItem label="การคืน">
                 {getFieldDecorator('holidayShopData.recurring', {
                   initialValue: holidayShopData.recurring,
-                  rules: [{ required: true, message: 'กรุณาเลือก การคืน !' }]
+                  rules: [{ required: true, message: 'กรุณาเลือก การคืน !' }],
                 })(
                   <RadioGroup name="radiogroup1">
                     <Radio value={true}>Yes</Radio>
