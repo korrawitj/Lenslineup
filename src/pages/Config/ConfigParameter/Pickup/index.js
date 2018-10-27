@@ -28,17 +28,20 @@ const CollectionCreateForm = Form.create()(
               <FormItem label="ชื่อ">
                 {getFieldDecorator('masterPickupData.name', {
                   initialValue: masterPickupData.name,
+                  rules: [{ required: true, message: 'กรุณากรอก ชื่อ !' }]
                 })(<Input />)}
               </FormItem>
               <FormItem label="ประเภท">
                 {getFieldDecorator('masterPickupData.pickuptype', {
                   initialValue: masterPickupData.pickuptype,
+                  rules: [{ required: true, message: 'กรุณาเลือก ประเภท !' }]
                 })(<CheckboxGroup options={options} />)}
               </FormItem>
               <FormItem label="ค่าส่ง">
                 {getFieldDecorator('masterPickupData.deliveryCharge', {
                   initialValue:
                     masterPickupData.deliveryCharge == null ? 0 : masterPickupData.deliveryCharge,
+                    rules: [{ required: true, message: 'กรุณากรอก ค่าส่ง !' }]
                 })(<Input />)}
               </FormItem>
             </Form>
@@ -82,7 +85,6 @@ class PickUp extends React.Component {
   }
   onEdit(record) {
     this.setState({ masterPickupData: record })
-    console.log(record)
     this.showModal()
   }
   handleCreate = () => {
@@ -109,7 +111,11 @@ class PickUp extends React.Component {
     this.formRef = formRef
   }
 
-  handleCancel = () => this.setState({ previewVisible: false, visible: false })
+  handleCancel = () => { 
+    const form = this.formRef.props.form;
+    form.resetFields();
+    this.setState({ previewVisible: false, visible: false })
+  };
   showDeleteConfirmMasterPickup(record, parent) {
     let T = record
     Modal.confirm({
@@ -198,6 +204,9 @@ class PickUp extends React.Component {
           <div className="utils__title">
             <strong>จุดรับของ</strong>
           </div>
+          <Button type="primary" onClick={this.showModal} style={{float:'right'}}>
+            เพิ่มจุดรับของ
+          </Button>
         </div>
         <div className="card-body">
           <Table
@@ -206,9 +215,7 @@ class PickUp extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary" icon="plus" onClick={this.showModal}>
-            เพิ่มจุดรับของ
-          </Button>
+
           <CollectionCreateForm
             wrappedComponentRef={this.saveFormRef}
             masterPickupData={this.state.masterPickupData}

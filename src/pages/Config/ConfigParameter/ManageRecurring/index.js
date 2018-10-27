@@ -57,6 +57,8 @@ class ManageRecurring extends React.Component {
   }
 
   onCancle = () => {
+    const form = this.formRef.props.form;
+    form.resetFields();
     this.setState({ previewVisible: false, visible: false })
   }
 
@@ -201,6 +203,9 @@ class ManageRecurring extends React.Component {
           <div className="utils__title">
             <strong>จัดการรอบรับคืน</strong>
           </div>
+          <Button type="primary" onClick={this.onAdd} style={{float:'right'}}>
+            เพิ่มรอบรับคืน
+          </Button>
         </div>
         <div className="card-body">
           <Table
@@ -209,9 +214,7 @@ class ManageRecurring extends React.Component {
             pagination={pager}
             onChange={this.handleTableChange}
           />
-          <Button type="primary" icon="plus" onClick={this.onAdd}>
-            เพิ่มรอบรับคืน
-          </Button>
+
         </div>
         <ManageRecurringModal
           wrappedComponentRef={this.saveFormRef}
