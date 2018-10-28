@@ -82,7 +82,7 @@ class Holiday extends React.Component {
     searchText: '',
     filtered: false,
     visible: false,
-    refresh: '',
+    refresh: false,
   }
   componentDidMount() {
     this.props.getAllDataHoliday()
@@ -91,10 +91,10 @@ class Holiday extends React.Component {
   showModal = () => {
     this.setState({ visible: true })
   }
-  handleCreate = () => {
+  handleCreate =  ()  => {
     const form = this.formRef.props.form
     const holiDaydata = this.formRef.props.holiDaydata
-    form.validateFields((err, values) => {
+    form.validateFields(async(err, values) => {
       if (err) {
         return
       }
@@ -104,11 +104,12 @@ class Holiday extends React.Component {
         holiDaydata.message = values['holidayData']['message']
         holiDaydata.receive = values['holidayData']['receive']
         holiDaydata.recurring = values['holidayData']['recurring']
-        this.props.updateHolidayData(holiDaydata)
+        await this.props.updateHolidayData(holiDaydata)
       } else {
-        this.props.AddDataHoliday(values)
+         await this.props.AddDataHoliday(values)
       }
       form.resetFields()
+      this.props.getAllDataHoliday()
       this.setState({ visible: false })
     })
   }
@@ -133,7 +134,8 @@ class Holiday extends React.Component {
     this.setState({ holidayData: record })
     this.showModal()
   }
-  showDeleteConfirmHoliday(record, parent) {
+  showDeleteConfirmHoliday(record, props) {
+    var _this = this
     Modal.confirm({
       title: 'Are you sure delete this row?',
       content: <div>Delelte Holiday Date = {record.date}</div>,
@@ -141,7 +143,12 @@ class Holiday extends React.Component {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        parent.deleteHolidayData(record.holidayID)
+        var Item = props.master.holidayData
+        var removeItem = record.holidayID
+        var index = Item.indexOf(removeItem)
+        Item.splice(index, 1)
+        _this.setState({ refresh: true })
+        props.deleteHolidayData(record.holidayID)
       },
       onCancel() {
         console.log('Cancel')
