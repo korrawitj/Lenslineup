@@ -91,10 +91,10 @@ class Holiday extends React.Component {
   showModal = () => {
     this.setState({ visible: true })
   }
-  handleCreate =  ()  => {
+  handleCreate = () => {
     const form = this.formRef.props.form
     const holiDaydata = this.formRef.props.holiDaydata
-    form.validateFields(async(err, values) => {
+    form.validateFields(async (err, values) => {
       if (err) {
         return
       }
@@ -106,7 +106,7 @@ class Holiday extends React.Component {
         holiDaydata.recurring = values['holidayData']['recurring']
         await this.props.updateHolidayData(holiDaydata)
       } else {
-         await this.props.AddDataHoliday(values)
+        await this.props.AddDataHoliday(values)
       }
       form.resetFields()
       this.props.getAllDataHoliday()
