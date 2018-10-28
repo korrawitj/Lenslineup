@@ -34,7 +34,7 @@ class HolidayShop extends React.Component {
   onSubmitData = () => {
     const form = this.formRef.props.form
     const holidayShopData = this.formRef.props.holidayShopData
-    form.validateFields(async(err, values) => {
+    form.validateFields(async (err, values) => {
       if (err) {
         return
       }

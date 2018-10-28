@@ -90,7 +90,7 @@ class PickUp extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const masterPickupData = this.formRef.props.masterPickupData
-    form.validateFields(async(err, values) => {
+    form.validateFields(async (err, values) => {
       if (err) {
         return
       }
