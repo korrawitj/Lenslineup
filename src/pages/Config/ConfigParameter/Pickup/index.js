@@ -90,7 +90,7 @@ class PickUp extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const masterPickupData = this.formRef.props.masterPickupData
-    form.validateFields((err, values) => {
+    form.validateFields(async(err, values) => {
       if (err) {
         return
       }
@@ -98,12 +98,13 @@ class PickUp extends React.Component {
       if (masterPickupData.pickupID != null) {
         values.masterPickupData['key'] = masterPickupData['key']
         values.masterPickupData['pickupID'] = masterPickupData['pickupID']
-        this.props.updateDataPickup(values.masterPickupData)
+        await this.props.updateDataPickup(values.masterPickupData)
       } else {
         values.masterPickupData['pickuptype'] = values.masterPickupData['pickuptype'].join(',')
-        this.props.AddDataPickup(values.masterPickupData)
+        await this.props.AddDataPickup(values.masterPickupData)
       }
       form.resetFields()
+      this.props.getAllDataPickup()
       this.setState({ visible: false })
     })
   }
@@ -124,8 +125,9 @@ class PickUp extends React.Component {
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      onOk() {
-        parent.deleteDataPickup(record.pickupID)
+      async onOk() {
+        await parent.deleteDataPickup(record.pickupID)
+        parent.getAllDataPickup()
       },
       onCancel() {
         console.log('Cancel')

@@ -34,7 +34,7 @@ class HolidayShop extends React.Component {
   onSubmitData = () => {
     const form = this.formRef.props.form
     const holidayShopData = this.formRef.props.holidayShopData
-    form.validateFields((err, values) => {
+    form.validateFields(async(err, values) => {
       if (err) {
         return
       }
@@ -46,12 +46,13 @@ class HolidayShop extends React.Component {
         holidayShopData.message = values['holidayShopData']['message']
         holidayShopData.receive = values['holidayShopData']['receive']
         holidayShopData.recurring = values['holidayShopData']['recurring']
-        this.props.updateHolidayShop(holidayShopData)
+        await this.props.updateHolidayShop(holidayShopData)
       } else {
-        this.props.addHolidayShop(values)
+        await this.props.addHolidayShop(values)
       }
 
       form.resetFields()
+      this.props.getAllDataHolidayShop()
       this.setState({ visible: false })
     })
   }
@@ -70,9 +71,9 @@ class HolidayShop extends React.Component {
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      onOk() {
-        parent.deleteHolidayShop(record.shopID)
-        console.log('OK')
+      async onOk() {
+        await parent.deleteHolidayShop(record.shopID)
+        parent.getAllDataHolidayShop()
       },
       onCancel() {
         console.log('Cancel')

@@ -142,13 +142,14 @@ class Holiday extends React.Component {
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      onOk() {
-        var Item = props.master.holidayData
-        var removeItem = record.holidayID
-        var index = Item.indexOf(removeItem)
-        Item.splice(index, 1)
-        _this.setState({ refresh: true })
-        props.deleteHolidayData(record.holidayID)
+      async onOk() {
+        // var Item = props.master.holidayData
+        // var removeItem = record.holidayID
+        // var index = Item.indexOf(removeItem)
+        // Item.splice(index, 1)
+        // _this.setState({ refresh: true })
+        await props.deleteHolidayData(record.holidayID)
+        props.getAllDataHoliday()
       },
       onCancel() {
         console.log('Cancel')
