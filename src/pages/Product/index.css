@@ -37,3 +37,6 @@
     color: #29a9ff;
     border-color: #29a9ff;
 }
+.ant-modal-confirm-warning .ant-modal-confirm-body > .anticon, .ant-modal-confirm-confirm .ant-modal-confirm-body > .anticon {
+    color: #fb434a;
+}

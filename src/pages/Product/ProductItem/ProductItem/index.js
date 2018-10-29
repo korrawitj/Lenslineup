@@ -24,34 +24,38 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title={productItemData.ItemID != null ? 'Update Product Item' : 'Add Product Item'}
-          okText={productItemData.ItemID != null ? 'Update' : 'Create'}
+          title={productItemData.ItemID != null ? 'แก้ไขอุปกรณ์ที่ให้ไประหว่างเช่า' : 'เพิ่มอุปกรณ์ที่ให้ไประหว่างเช่า'}
+          okText={productItemData.ItemID != null ? 'แก้ไข' : 'สร้าง'}
           onCancel={onCancel}
+          cancelText={"ยกเลิก"}
           onOk={onCreate}
         >
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name })(
+                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name ,
+                  rules: [{ required: true, message: 'กรุณาระบุ ชื่อ !' }],})(
                   <Input />,
                 )}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
                 {getFieldDecorator('productItemData.ContractPrice', {
                   initialValue: productItemData.ContractPrice,
+                  rules: [{ required: true, message: 'กรุณาระบุ ราคาในสัญญา !' }],
                 })(<Input />)}
               </FormItem>
               <FormItem label="จำนวน">
                 {getFieldDecorator('productItemData.Quantity', {
                   initialValue: productItemData.Quantity,
+                  rules: [{ required: true, message: 'กรุณาระบุ จำนวน !' }],
                 })(<Input />)}
               </FormItem>
-              <FormItem label="Note">
+              <FormItem label="โน้ต">
                 {getFieldDecorator('productItemData.Note', { initialValue: productItemData.Note })(
                   <TextArea autosize={{ minRows: 2, maxRows: 6 }} />,
                 )}
               </FormItem>
-              <FormItem label="Upload">
+              <FormItem label="รูปภาพ">
                 <Picturewall defaultFileList={productItemData} />
               </FormItem>
             </Form>
@@ -81,7 +85,7 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
-    form.validateFields((err, values) => {
+    form.validateFields(async(err, values) => {
       if (err) {
         return
       }
@@ -97,7 +101,7 @@ class ProductItem extends React.Component {
         console.log(values)
         // values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
 
-        this.props.updateProductItem(values)
+       await this.props.updateProductItem(values)
       } else {
         productItemData.Name = values.productItemData['Name']
         productItemData.ContractPrice = values.productItemData['ContractPrice']
@@ -108,10 +112,11 @@ class ProductItem extends React.Component {
         // productItemData['phoductPhoto']= productItemData.fileData.productPhoto
         // values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
         // console.log(values)
-        this.props.addProductItem(productItemData)
+       await this.props.addProductItem(productItemData)
       }
 
       form.resetFields()
+      this.props.getAllProductItem()
       this.setState({ visible: false })
     })
   }
@@ -159,13 +164,16 @@ class ProductItem extends React.Component {
   showDeleteConfirm(record, props) {
     let T = record
     Modal.confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte Product Item = {record.ItemID}</div>,
+      title: 'คุณแน่ใจหรือไม่ที่จะลบ อุปกรณ์ที่ให้ไประหว่างเช่า?',
+      content: <div> {record.ItemID.slice(0,8)}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      onOk() {
-        props.deleteProductItem(record.ItemID)
+      iconType:'close-circle',
+      centered:true,
+      async onOk() {
+       await props.deleteProductItem(record.ItemID)
+       props.getAllProductItem()
       },
       onCancel() {
         console.log('Cancel')
@@ -174,11 +182,9 @@ class ProductItem extends React.Component {
   }
 
   showData(record) {
-    let T = record
     Modal.info({
-      title: <div>อุปกรณ์จัดชุด {record.ItemID}</div>,
+      title: <div>อุปกรณ์จัดชุด {record.ItemID.slice(0,8)}</div>,
       width: 1000,
-
       content: (
         <div className="row">
           <div className="col-md-4">
@@ -188,7 +194,7 @@ class ProductItem extends React.Component {
           <div className="col-md-4">
             <label>ราคาในสัญญา</label>
           </div>
-          <div className="col-md-6">{record.ContractPrice}</div>
+          <div className="col-md-6">{parseFloat(record.ContractPrice).toFixed(2)}</div>
           <div className="col-md-4">
             <label>จำนวน</label>
           </div>
@@ -232,9 +238,7 @@ class ProductItem extends React.Component {
         dataIndex: 'ItemID',
         key: 'ItemID',
         render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {'#' + text}
-          </a>
+          <span>{text.slice(0,8)}</span>
         ),
         sorter: (a, b) => a.ProductID - b.ProductID,
       },
@@ -242,45 +246,17 @@ class ProductItem extends React.Component {
         title: 'อุปกรณ์',
         dataIndex: 'Name',
         key: 'Name',
-        sorter: (a, b) => a.Copy.length - b.Copy.length,
+        sorter: (a, b) => a.Name - b.Name,
         render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            {text}
-          </a>
-        ),
-        filterDropdown: (
-          <div className="custom-filter-dropdown">
-            <Input
-              ref={ele => (this.searchInput = ele)}
-              placeholder="Search name"
-              value={this.state.searchText}
-              onChange={this.onInputChange}
-              onPressEnter={this.onSearch}
-            />
-            <Button type="primary" onClick={this.onSearch}>
-              Search
-            </Button>
-          </div>
-        ),
-        filterIcon: (
-          <Icon type="search" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />
-        ),
-        filterDropdownVisible: this.state.filterDropdownVisible,
-        onFilterDropdownVisibleChange: visible => {
-          this.setState(
-            {
-              filterDropdownVisible: visible,
-            },
-            () => this.searchInput && this.searchInput.focus(),
-          )
-        },
+            text
+        )
       },
       {
         title: 'ราคาในสัญญา',
         dataIndex: 'ContractPrice',
         key: 'ContractPrice',
-        render: text => <span>{text}</span>,
-        sorter: (a, b) => a.PromisePrice - b.PromisePrice,
+        render: text => <span>{parseFloat(text).toFixed(2)}</span>,
+        sorter: (a, b) => a.ContractPrice - b.ContractPrice,
       },
       {
         title: 'จำนวน',
@@ -317,7 +293,7 @@ class ProductItem extends React.Component {
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.showDeleteConfirm(record, this.props)}
+              onClick={() =>  this.showDeleteConfirm(record, this.props)}
             />
           </span>
         ),
@@ -329,7 +305,7 @@ class ProductItem extends React.Component {
           <div className="utils__title">
             <strong>อุปกรณ์ที่ให้ไประหว่างเช่า</strong>
           </div>
-          <Button type="primary" icon="plus" onClick={this.onCreateProductItem}>
+          <Button type="primary" onClick={this.onCreateProductItem} style={{float:'right'}}>
             เพิ่มอุปกรณ์ที่ให้ไประหว่างเช่า
           </Button>
           <CollectionCreateForm
