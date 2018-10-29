@@ -20,7 +20,7 @@ const CollectionCreateForm = Form.create()(
           title={holiDaydata.holidayID != null ? 'แก้ไขวันหยุด' : 'เพิ่มวันหยุด'}
           okText={holiDaydata.holidayID != null ? 'แก้ไข' : 'สร้าง'}
           onCancel={onCancel}
-          cancelText={"ยกเลิก"}
+          cancelText={'ยกเลิก'}
           onOk={onCreate}
         >
           <div className="card-body">

@@ -11,7 +11,7 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, masterPickupData } = this.props
       const { getFieldDecorator } = form
-      const options = ['รับของ','คืนของ']
+      const options = ['รับของ', 'คืนของ']
       return (
         <Modal
           width={1000}
@@ -32,9 +32,12 @@ const CollectionCreateForm = Form.create()(
               </FormItem>
               <FormItem label="ประเภท">
                 {getFieldDecorator('masterPickupData.pickuptype', {
-                  initialValue: masterPickupData.pickuptype!==undefined?masterPickupData.pickuptype.split(','):masterPickupData.pickuptype,
+                  initialValue:
+                    masterPickupData.pickuptype !== undefined
+                      ? masterPickupData.pickuptype.split(',')
+                      : masterPickupData.pickuptype,
                   rules: [{ required: true, message: 'กรุณาเลือก ประเภท !' }],
-                })(<CheckboxGroup  options={options} />)}
+                })(<CheckboxGroup options={options} />)}
               </FormItem>
               <FormItem label="ค่าส่ง">
                 {getFieldDecorator('masterPickupData.deliveryCharge', {

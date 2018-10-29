@@ -17,7 +17,7 @@ const HolidayModal = Form.create()(
           visible={visible}
           okText={holidayShopData.shopID != null ? 'แก้ไข' : 'สร้าง'}
           onCancel={onCancel}
-          cancelText={"ยกเลิก"}
+          cancelText={'ยกเลิก'}
           onOk={onSubmitData}
         >
           <div className="card-body">
