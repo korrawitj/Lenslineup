@@ -94,11 +94,12 @@ class ManageRecurring extends React.Component {
 
   async showDeleteConfirmManageRecurring(record, parent) {
     Modal.confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte = {record.name}</div>,
-      okText: 'Yes',
+      title: 'คุณแน่ใจหรือไม่ที่จะลบ จัดการรอบรับคืน?',
+      content: <div>ชื่อ = {record.name}</div>,
+      okText: 'ตกลง',
       okType: 'danger',
-      cancelText: 'No',
+      cancelText: 'ยกเลิก',
+      centered: true,
       async onOk() {
         await parent.deleteMasterManageRecurring(record.manageID)
         await parent.getAllDataManage()

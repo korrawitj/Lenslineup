@@ -170,9 +170,9 @@ class ProductItem extends React.Component {
     Modal.confirm({
       title: 'คุณแน่ใจหรือไม่ที่จะลบ อุปกรณ์ที่ให้ไประหว่างเช่า?',
       content: <div> {record.ItemID.slice(0, 8)}</div>,
-      okText: 'Yes',
+      okText: 'ตกลง',
       okType: 'danger',
-      cancelText: 'No',
+      cancelText: 'ยกเลิก',
       iconType: 'close-circle',
       centered: true,
       async onOk() {

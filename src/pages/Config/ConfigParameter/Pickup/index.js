@@ -11,14 +11,13 @@ const CollectionCreateForm = Form.create()(
     render() {
       const { visible, onCancel, onCreate, form, masterPickupData } = this.props
       const { getFieldDecorator } = form
-      const options = [{ label: 'รับของ', value: 'รับของ' }, { label: 'คืนของ', value: 'คืนของ' }]
-
+      const options = ['รับของ','คืนของ']
       return (
         <Modal
           width={1000}
           visible={visible}
-          title="เพิ่มจุดรับของ"
-          okText={masterPickupData.pickupID != null ? 'Update' : 'Create'}
+          title={masterPickupData.pickupID != null ? 'แก้ไขจุดรับของ' : 'เพิ่มจุดรับของ'}
+          okText={masterPickupData.pickupID != null ? 'แก้ไข' : 'สร้าง'}
           cancelText="ยกเลิก"
           onCancel={onCancel}
           onOk={onCreate}
@@ -33,9 +32,9 @@ const CollectionCreateForm = Form.create()(
               </FormItem>
               <FormItem label="ประเภท">
                 {getFieldDecorator('masterPickupData.pickuptype', {
-                  initialValue: masterPickupData.pickuptype,
+                  initialValue: masterPickupData.pickuptype!==undefined?masterPickupData.pickuptype.split(','):masterPickupData.pickuptype,
                   rules: [{ required: true, message: 'กรุณาเลือก ประเภท !' }],
-                })(<CheckboxGroup options={options} />)}
+                })(<CheckboxGroup  options={options} />)}
               </FormItem>
               <FormItem label="ค่าส่ง">
                 {getFieldDecorator('masterPickupData.deliveryCharge', {
@@ -120,11 +119,12 @@ class PickUp extends React.Component {
   showDeleteConfirmMasterPickup(record, parent) {
     let T = record
     Modal.confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte = {record.name}</div>,
-      okText: 'Yes',
+      title: 'คุณแน่ใจหรือไม่ที่จะลบ จุดรับของ?',
+      content: <div>ชื่อ = {record.name}</div>,
+      okText: 'ตกลง',
       okType: 'danger',
-      cancelText: 'No',
+      cancelText: 'ยกเลิก',
+      centered: true,
       async onOk() {
         await parent.deleteDataPickup(record.pickupID)
         parent.getAllDataPickup()

@@ -66,11 +66,12 @@ class HolidayShop extends React.Component {
   }
   onDelete = (record, parent) => {
     Modal.confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte Holiday Shop Date= {record.date}</div>,
-      okText: 'Yes',
+      title: 'คุณแน่ใจหรือไม่ที่จะลบ วันหยุดร้าน?',
+      content: <div>วันหยุดร้าน = {record.date}</div>,
+      okText: 'ตกลง',
       okType: 'danger',
-      cancelText: 'No',
+      cancelText: 'ยกเลิก',
+      centered: true,
       async onOk() {
         await parent.deleteHolidayShop(record.shopID)
         parent.getAllDataHolidayShop()
@@ -87,23 +88,6 @@ class HolidayShop extends React.Component {
   }
   saveFormRef = formRef => {
     this.formRef = formRef
-  }
-
-  showDeleteConfirmHolidayShop(record) {
-    let T = record
-    Modal.confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte Holiday Shop Date= {record.date}</div>,
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log('OK')
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
-    })
   }
   onInputChange = e => {
     this.setState({ searchText: e.target.value })
@@ -202,7 +186,7 @@ class HolidayShop extends React.Component {
             <strong>วันหยุดร้าน</strong>
           </div>
           <Button type="primary" onClick={this.onAdd} style={{ float: 'right' }}>
-            เพิ่มวันหยุดประจำ
+            เพิ่มวันหยุดร้าน
           </Button>
         </div>
         <div className="card-body">

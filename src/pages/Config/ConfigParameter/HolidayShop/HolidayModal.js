@@ -12,11 +12,12 @@ const HolidayModal = Form.create()(
       const { getFieldDecorator } = form
       return (
         <Modal
-          title="Add Holiday Shop"
+          title={holidayShopData.shopID != null ? 'แก้ไขวันหยุดร้าน' : 'เพิ่มวันหยุดร้าน'}
           width={1000}
           visible={visible}
-          okText={holidayShopData.shopID != null ? 'Update' : 'Create'}
+          okText={holidayShopData.shopID != null ? 'แก้ไข' : 'สร้าง'}
           onCancel={onCancel}
+          cancelText={"ยกเลิก"}
           onOk={onSubmitData}
         >
           <div className="card-body">

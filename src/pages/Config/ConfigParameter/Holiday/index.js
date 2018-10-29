@@ -17,9 +17,10 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title="Add Holiday Date"
-          okText={holiDaydata.holidayID != null ? 'Update' : 'Create'}
+          title={holiDaydata.holidayID != null ? 'แก้ไขวันหยุด' : 'เพิ่มวันหยุด'}
+          okText={holiDaydata.holidayID != null ? 'แก้ไข' : 'สร้าง'}
           onCancel={onCancel}
+          cancelText={"ยกเลิก"}
           onOk={onCreate}
         >
           <div className="card-body">
@@ -137,11 +138,12 @@ class Holiday extends React.Component {
   showDeleteConfirmHoliday(record, props) {
     var _this = this
     Modal.confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte Holiday Date = {record.date}</div>,
-      okText: 'Yes',
+      title: 'คุณแน่ใจหรือไม่ที่จะลบ วันหยุด?',
+      content: <div>วันหยุด = {record.date}</div>,
+      okText: 'ตกลง',
       okType: 'danger',
-      cancelText: 'No',
+      cancelText: 'ยกเลิก',
+      centered: true,
       async onOk() {
         // var Item = props.master.holidayData
         // var removeItem = record.holidayID
@@ -178,7 +180,7 @@ class Holiday extends React.Component {
 
     const columnsholiday = [
       {
-        title: 'วันหยุดร้าน',
+        title: 'วันหยุด',
         dataIndex: 'date',
         key: 'date',
         render: text => <span>{text}</span>,

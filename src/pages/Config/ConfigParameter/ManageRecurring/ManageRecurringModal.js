@@ -20,11 +20,12 @@ const ManageRecurringModal = Form.create()(
       const { getFieldDecorator } = form
       return (
         <Modal
-          title="เพิ่มรอบรับคืน"
+          title={manageRecurringData.manageID != null ? 'แก้ไขรอบรับคืน' : 'เพิ่มรอบรับคืน'}
           width={1000}
           visible={visible}
-          okText={manageRecurringData.manageID != null ? 'Update' : 'Create'}
+          okText={manageRecurringData.manageID != null ? 'แก้ไข' : 'สร้าง'}
           onCancel={onCancel}
+          cancelText={"ยกเลิก"}
           onOk={onSubmitData}
         >
           <div className="card-body">
