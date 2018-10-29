@@ -24,19 +24,23 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title={productItemData.ItemID != null ? 'แก้ไขอุปกรณ์ที่ให้ไประหว่างเช่า' : 'เพิ่มอุปกรณ์ที่ให้ไประหว่างเช่า'}
+          title={
+            productItemData.ItemID != null
+              ? 'แก้ไขอุปกรณ์ที่ให้ไประหว่างเช่า'
+              : 'เพิ่มอุปกรณ์ที่ให้ไประหว่างเช่า'
+          }
           okText={productItemData.ItemID != null ? 'แก้ไข' : 'สร้าง'}
           onCancel={onCancel}
-          cancelText={"ยกเลิก"}
+          cancelText={'ยกเลิก'}
           onOk={onCreate}
         >
           <div className="card-body">
             <Form layout="vertical">
               <FormItem label="ชื่อ">
-                {getFieldDecorator('productItemData.Name', { initialValue: productItemData.Name ,
-                  rules: [{ required: true, message: 'กรุณาระบุ ชื่อ !' }],})(
-                  <Input />,
-                )}
+                {getFieldDecorator('productItemData.Name', {
+                  initialValue: productItemData.Name,
+                  rules: [{ required: true, message: 'กรุณาระบุ ชื่อ !' }],
+                })(<Input />)}
               </FormItem>
               <FormItem label="ราคาในสัญญา">
                 {getFieldDecorator('productItemData.ContractPrice', {
@@ -85,7 +89,7 @@ class ProductItem extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const productItemData = this.formRef.props.productItemData
-    form.validateFields(async(err, values) => {
+    form.validateFields(async (err, values) => {
       if (err) {
         return
       }
@@ -101,7 +105,7 @@ class ProductItem extends React.Component {
         console.log(values)
         // values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
 
-       await this.props.updateProductItem(values)
+        await this.props.updateProductItem(values)
       } else {
         productItemData.Name = values.productItemData['Name']
         productItemData.ContractPrice = values.productItemData['ContractPrice']
@@ -112,7 +116,7 @@ class ProductItem extends React.Component {
         // productItemData['phoductPhoto']= productItemData.fileData.productPhoto
         // values.productItemData['phoductPhoto'] = productItemData.fileData.productPhoto
         // console.log(values)
-       await this.props.addProductItem(productItemData)
+        await this.props.addProductItem(productItemData)
       }
 
       form.resetFields()
@@ -165,15 +169,15 @@ class ProductItem extends React.Component {
     let T = record
     Modal.confirm({
       title: 'คุณแน่ใจหรือไม่ที่จะลบ อุปกรณ์ที่ให้ไประหว่างเช่า?',
-      content: <div> {record.ItemID.slice(0,8)}</div>,
+      content: <div> {record.ItemID.slice(0, 8)}</div>,
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      iconType:'close-circle',
-      centered:true,
+      iconType: 'close-circle',
+      centered: true,
       async onOk() {
-       await props.deleteProductItem(record.ItemID)
-       props.getAllProductItem()
+        await props.deleteProductItem(record.ItemID)
+        props.getAllProductItem()
       },
       onCancel() {
         console.log('Cancel')
@@ -183,7 +187,7 @@ class ProductItem extends React.Component {
 
   showData(record) {
     Modal.info({
-      title: <div>อุปกรณ์จัดชุด {record.ItemID.slice(0,8)}</div>,
+      title: <div>อุปกรณ์จัดชุด {record.ItemID.slice(0, 8)}</div>,
       width: 1000,
       content: (
         <div className="row">
@@ -237,9 +241,7 @@ class ProductItem extends React.Component {
         title: 'ItemID',
         dataIndex: 'ItemID',
         key: 'ItemID',
-        render: text => (
-          <span>{text.slice(0,8)}</span>
-        ),
+        render: text => <span>{text.slice(0, 8)}</span>,
         sorter: (a, b) => a.ProductID - b.ProductID,
       },
       {
@@ -247,9 +249,7 @@ class ProductItem extends React.Component {
         dataIndex: 'Name',
         key: 'Name',
         sorter: (a, b) => a.Name - b.Name,
-        render: text => (
-            text
-        )
+        render: text => text,
       },
       {
         title: 'ราคาในสัญญา',
@@ -293,7 +293,7 @@ class ProductItem extends React.Component {
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() =>  this.showDeleteConfirm(record, this.props)}
+              onClick={() => this.showDeleteConfirm(record, this.props)}
             />
           </span>
         ),
@@ -305,7 +305,7 @@ class ProductItem extends React.Component {
           <div className="utils__title">
             <strong>อุปกรณ์ที่ให้ไประหว่างเช่า</strong>
           </div>
-          <Button type="primary" onClick={this.onCreateProductItem} style={{float:'right'}}>
+          <Button type="primary" onClick={this.onCreateProductItem} style={{ float: 'right' }}>
             เพิ่มอุปกรณ์ที่ให้ไประหว่างเช่า
           </Button>
           <CollectionCreateForm
