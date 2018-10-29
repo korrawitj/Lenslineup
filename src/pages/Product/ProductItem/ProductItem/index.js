@@ -203,6 +203,12 @@ class ProductItem extends React.Component {
             <label>จำนวน</label>
           </div>
           <div className="col-md-6">{record.Quantity}</div>
+          <div className="col-md-4">
+            <label>รูปภาพ</label>
+          </div>
+          <div className="col-md-6">
+          <img alt="example" style={{ width: '20%' }} src={record.phoductPhoto[0].url} />
+        </div>
         </div>
       ),
       onOk() {},
