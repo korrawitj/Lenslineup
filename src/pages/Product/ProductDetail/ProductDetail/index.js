@@ -497,7 +497,7 @@ class ProductDetail extends React.Component {
     const productData = this.formRef.props.productData
     const ProductInclude = this.formRef.props.dataSourceTa
     const IsEdit = this.formRef.props.IsEdit
-    form.validateFields((err, values) => {
+    form.validateFields(async(err, values) => {
       if (err) {
         return
       }
@@ -511,9 +511,9 @@ class ProductDetail extends React.Component {
         values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
           'YYYY-MM-DD',
         )
-        console.log(values)
-        this.props.addProduct(values)
+       await this.props.addProduct(values)
       } else {
+        values.productData['ProductID']=productData.ProductID;
         values.productData['productIncludeData'] = ProductInclude
         values.productData['productPhoto'] = this.props.product.fileData.productPhoto
         values.productData['ExpireDate'] = moment(values.productData['ExpireDate']).format(
@@ -522,8 +522,7 @@ class ProductDetail extends React.Component {
         values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
           'YYYY-MM-DD',
         )
-        console.log(values)
-        // this.props.updateProduct(values)
+        // await this.props.updateProduct(values)
       }
       form.resetFields()
       this.setState({ visible: false })
@@ -605,7 +604,6 @@ class ProductDetail extends React.Component {
 
   render() {
     // this.setState(this.state.ProductData:this.props.productData)
-    console.log(this.props.product)
     return (
       <div>
         <CollectionCreateForm

@@ -180,7 +180,7 @@ class ProductCopy extends React.Component {
               <div className="utils__title">
                 <strong>อุปกรณ์ (Copy)</strong>
               </div>
-              <Button icon="plus" type="primary" style={{ float: 'right' }}>
+              <Button type="primary" style={{ float: 'right' }}>
                 เพิ่มอุปกรณ์ Copy
               </Button>
             </div>
