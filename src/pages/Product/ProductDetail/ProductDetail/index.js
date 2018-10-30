@@ -291,11 +291,11 @@ const CollectionCreateForm = Form.create()(
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
-                          {getFieldDecorator('productData.ExpireDate', {
+                          {getFieldDecorator('productData.ExpireDateWarranty', {
                             initialValue:
-                              productData.ExpireDate == null
+                              productData.ExpireDateWarranty == null
                                 ? null
-                                : moment(productData.ExpireDate),
+                                : moment(productData.ExpireDateWarranty),
                             rules: [
                               {
                                 type: 'object',
@@ -505,7 +505,7 @@ class ProductDetail extends React.Component {
         values.productData['Copy'] = 1
         values.productData['productIncludeData'] = ProductInclude
         values.productData['productPhoto'] = this.props.product.fileData.productPhoto
-        values.productData['ExpireDate'] = moment(values.productData['ExpireDate']).format(
+        values.productData['ExpireDateWarranty'] = moment(values.productData['ExpireDateWarranty']).format(
           'YYYY-MM-DD',
         )
         values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
@@ -516,13 +516,15 @@ class ProductDetail extends React.Component {
         values.productData['ProductID'] = productData.ProductID
         values.productData['productIncludeData'] = ProductInclude
         values.productData['productPhoto'] = this.props.product.fileData.productPhoto
-        values.productData['ExpireDate'] = moment(values.productData['ExpireDate']).format(
+        values.productData['ExpireDateWarranty'] = moment(values.productData['ExpireDateWarranty']).format(
           'YYYY-MM-DD',
         )
         values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
           'YYYY-MM-DD',
         )
-        // await this.props.updateProduct(values)
+        values.productData['Copy']=0
+        console.log(values)
+        await this.props.updateProduct(values)
       }
       form.resetFields()
       this.setState({ visible: false })

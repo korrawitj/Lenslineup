@@ -100,6 +100,7 @@ class PickUp extends React.Component {
       if (masterPickupData.pickupID != null) {
         values.masterPickupData['key'] = masterPickupData['key']
         values.masterPickupData['pickupID'] = masterPickupData['pickupID']
+        values.masterPickupData['pickuptype'] = values.masterPickupData['pickuptype'].join(',')
         await this.props.updateDataPickup(values.masterPickupData)
       } else {
         values.masterPickupData['pickuptype'] = values.masterPickupData['pickuptype'].join(',')
