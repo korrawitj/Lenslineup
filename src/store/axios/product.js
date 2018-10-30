@@ -108,7 +108,7 @@ export function updateProduct(data) {
 export function deleteProduct(data) {
   return dispatch => {
     return axios
-      .post('/API/product/delete', data)
+      .post('/API/product/delete',  {ProductID:data})
       .then(response => {
         dispatch(actionCreators.deleteproduct(response.data.productData))
       })

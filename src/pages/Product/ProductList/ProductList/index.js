@@ -3,6 +3,7 @@ import { Table, Icon, Input, Button, Modal } from 'antd'
 import * as actionCreators from '../../../../store/axios/product'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import '../../index.css'
 const confirm = Modal.confirm
 
 const defaultPagination = {
@@ -58,18 +59,19 @@ class ProductList extends React.Component {
   }
 
   handleChange = ({ fileList }) => this.setState({ fileList })
-  showDeleteConfirm(record) {
+  showDeleteConfirm(record,props) {
     let T = record
-    console.log(T)
     confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte Product = {record.Name}</div>,
-      okText: 'Yes',
+      title: 'คุณแน่ใจหรือไม่ที่จะลบ อุปกรณ์?',
+      content: <div> อุปกรณ์ = {record.Name}</div>,
+      okText: 'ตกลง',
       okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log('OK')
-        // this.props.deleteProduct(record.ProductID)
+      cancelText: 'ยกเลิก',
+      iconType: 'close-circle',
+      centered: true,
+      async onOk() {
+        await props.deleteProduct(record.ProductID)
+        props.getAllProduct()
       },
       onCancel() {
         console.log('Cancel')
@@ -117,21 +119,21 @@ class ProductList extends React.Component {
         title: 'ราคาเช่า',
         dataIndex: 'RentDay_Fee',
         key: 'RentDay_Fee',
-        render: text => <span>{text == null ? '' : text}</span>,
+        render: text => <span>{text == null ? '' : parseFloat(text).toFixed(2)}</span>,
         sorter: (a, b) => a.RentDay_Fee - b.RentDay_Fee,
       },
       {
         title: 'หลักประกัน1',
         dataIndex: 'DepositType1',
         key: 'DepositType1',
-        render: text => <span>{text == null ? '' : text}</span>,
+        render: text => <span>{text == null ? '' : parseFloat(text).toFixed(2)}</span>,
         sorter: (a, b) => a.DepositType1 - b.DepositType1,
       },
       {
         title: 'หลักประกัน2',
         dataIndex: 'DepositType2',
         key: 'DepositType2',
-        render: text => <span>{text == null ? '' : text}</span>,
+        render: text => <span>{text == null ? '' : parseFloat(text).toFixed(2)}</span>,
         sorter: (a, b) => a.DepositType2 - b.DepositType2,
       },
       {
@@ -153,7 +155,7 @@ class ProductList extends React.Component {
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={() => this.showDeleteConfirm(record)}
+              onClick={() => this.showDeleteConfirm(record, this.props)}
             />
           </span>
         ),
@@ -166,7 +168,7 @@ class ProductList extends React.Component {
             <strong>อุปกรณ์ทั้งหมด</strong>
           </div>
           <Link to="/Product/list/detail" className="navbar-item">
-            <Button icon="plus" type="primary">
+            <Button type="primary" style={{float:'right'}}>
               เพิ่มอุปกรณ์
             </Button>
           </Link>
