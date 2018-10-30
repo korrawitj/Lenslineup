@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, TreeSelect, Button, Icon, Table, Modal, Form, Upload, message } from 'antd'
+import { Input, TreeSelect, Button, Icon, Table, Modal, Form, Upload, message ,InputNumber} from 'antd'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../../../store/axios/productcategory'
 const FormItem = Form.Item
@@ -13,32 +13,32 @@ const CollectionCreateForm = Form.create()(
         <Modal
           width={1000}
           visible={visible}
-          title="Add Product Category"
-          okText={categoryData.CategoryID != null ? 'Update' : 'Create'}
+          title={categoryData.CategoryID != null ? 'แก้ไขประเภทอุปกรณ์' : 'เพิ่มประเภทอุปกรณ์'}
+          okText={categoryData.CategoryID != null ? 'แก้ไข' : 'สร้าง'}
           onCancel={onCancel}
           onOk={onCreate}
         >
           <div className="card-body">
             <Form layout="vertical">
-              <FormItem label="FullName">
+              <FormItem label="ชื่อเต็ม">
                 {getFieldDecorator('categoryData.Fullname', {
-                  rules: [{ required: true, message: 'Please input the title of collection!' }],
+                  rules: [{ required: true, message: 'กรุณากรอก ชื่อเต็ม!' }],
                   initialValue: Fullname,
                 })(<Input type="text" />)}
               </FormItem>
-              <FormItem label="ShortName">
+              <FormItem label="ชื่อย่อ">
                 {getFieldDecorator('categoryData.Shortname', {
                   initialValue: Shortname,
-                  rules: [{ required: true, message: 'Please input the title of collection!' }],
+                  rules: [{ required: true, message:  'กรุณากรอก ชื่อย่อ!' }],
                 })(<Input type="text" />)}
               </FormItem>
-              <FormItem label="Order">
-                {getFieldDecorator('categoryData.Order', { initialValue: categoryData.Order })(
-                  <Input type="textarea" />,
+              <FormItem label="ลำดับ">
+                {getFieldDecorator('categoryData.Order', { initialValue: categoryData.Order ,rules: [{ required: true, message:  'กรุณากรอก ลำดับ!' }],})(
+                  <InputNumber className="form-control"/>,
                 )}
               </FormItem>
-              <FormItem label="Parentcategory">
-                {getFieldDecorator('categoryData.Parentcategory', { initialValue: Parentcategory })(
+              <FormItem label="หมวดหมุ่-ประเภท">
+                {getFieldDecorator('categoryData.Parentcategory', { initialValue: Parentcategory ,rules: [{ required: true, message:  'กรุณาเลือก หมวดหมุ่-ประเภท!' }],})(
                   <TreeSelect
                     style={{ width: 300 }}
                     dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
@@ -93,13 +93,15 @@ class ProductCate extends React.Component {
   }
   onDelete = (record, propsParam) => {
     Modal.confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delete {record.Fullname}</div>,
-      okText: 'Yes',
+      title: 'คุณแน่ใจหรือไม่ที่จะลบ ปรเภทอุปกรณ์?',
+      content: <div>ชื่อเต็มประเภทอุปกรณ์ =  {record.Fullname}</div>,
+      okText: 'ตกลง',
       okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        propsParam.DeleteCategory(record.CategoryID)
+      cancelText: 'ยกเลิก',
+      centered: true,
+      async onOk() {
+       await propsParam.DeleteCategory(record.CategoryID)
+       propsParam.getAllData()
       },
       onCancel() {
         console.log('Cancel')
@@ -109,18 +111,18 @@ class ProductCate extends React.Component {
   handleCreate = () => {
     const form = this.formRef.props.form
     const CatData = this.formRef.props.categoryData
-    form.validateFields((err, values) => {
+    form.validateFields(async(err, values) => {
       if (err) {
         return
       }
 
       if (CatData.CategoryID != null) {
         values.categoryData.CategoryID = CatData.CategoryID
-        this.props.updateCategory(values)
+        await this.props.updateCategory(values)
       } else {
-        this.props.addCategory(values)
+        await this.props.addCategory(values)
       }
-
+      this.props.getAllData()
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -155,18 +157,18 @@ class ProductCate extends React.Component {
     }
     const columns = [
       {
-        title: 'Fullname',
+        title: 'ชื่อเต็ม',
         dataIndex: 'Fullname',
         width: '30%',
       },
       {
-        title: 'Shortname',
+        title: 'ชื่อย่อ',
         dataIndex: 'Shortname',
         width: '30%',
         sorter: (a, b) => a.Shortname.length - b.Shortname.length,
       },
       {
-        title: 'Order',
+        title: 'ลำดับ',
         dataIndex: 'Order',
         width: '30%',
         sorter: (a, b) => a.Order.length - b.Order.length,
@@ -196,9 +198,9 @@ class ProductCate extends React.Component {
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
-            <strong>Product Category</strong>
+            <strong>ประเภท อุปกรณ์</strong>
           </div>
-          <Button type="primary" onClick={this.onAdd}>
+          <Button type="primary" onClick={this.onAdd} style={{float:'right'}}>
             เพิ่มประเภท
           </Button>
           {/* <div>
