@@ -505,9 +505,9 @@ class ProductDetail extends React.Component {
         values.productData['Copy'] = 1
         values.productData['productIncludeData'] = ProductInclude
         values.productData['productPhoto'] = this.props.product.fileData.productPhoto
-        values.productData['ExpireDateWarranty'] = moment(values.productData['ExpireDateWarranty']).format(
-          'YYYY-MM-DD',
-        )
+        values.productData['ExpireDateWarranty'] = moment(
+          values.productData['ExpireDateWarranty'],
+        ).format('YYYY-MM-DD')
         values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
           'YYYY-MM-DD',
         )
@@ -516,13 +516,13 @@ class ProductDetail extends React.Component {
         values.productData['ProductID'] = productData.ProductID
         values.productData['productIncludeData'] = ProductInclude
         values.productData['productPhoto'] = this.props.product.fileData.productPhoto
-        values.productData['ExpireDateWarranty'] = moment(values.productData['ExpireDateWarranty']).format(
-          'YYYY-MM-DD',
-        )
+        values.productData['ExpireDateWarranty'] = moment(
+          values.productData['ExpireDateWarranty'],
+        ).format('YYYY-MM-DD')
         values.productData['PurchaseDate'] = moment(values.productData['PurchaseDate']).format(
           'YYYY-MM-DD',
         )
-        values.productData['Copy']=0
+        values.productData['Copy'] = 0
         console.log(values)
         await this.props.updateProduct(values)
       }
