@@ -63,7 +63,7 @@ const CollectionCreateForm = Form.create()(
                   <Form>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>ชื่ออุปกรณ์  </label>
+                        <label>ชื่ออุปกรณ์ </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -76,7 +76,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>ยี่ห้อ  </label>
+                        <label>ยี่ห้อ </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -100,7 +100,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>ประเภท  </label>
+                        <label>ประเภท </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         {getFieldDecorator('productData.CategoryID', {
@@ -118,7 +118,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
-                        <label>ราคาเช่าหนึ่งวัน  </label>
+                        <label>ราคาเช่าหนึ่งวัน </label>
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
@@ -128,16 +128,21 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentDay_Fee', {
-                              initialValue: productData.RentDay_Fee,
-                            })(<InputNumber className="inputnumber" disabled={!form.getFieldValue('productData.IsDay')}/>)}
-                          </FormItem>        
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productData.RentDay_Fee', {
+                            initialValue: productData.RentDay_Fee,
+                          })(
+                            <InputNumber
+                              className="inputnumber"
+                              disabled={!form.getFieldValue('productData.IsDay')}
+                            />,
+                          )}
+                        </FormItem>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
-                        <label>ราคาเช่าครึ่งวัน  </label>
+                        <label>ราคาเช่าครึ่งวัน </label>
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
@@ -146,17 +151,22 @@ const CollectionCreateForm = Form.create()(
                           })(<Checkbox />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-8 inputcenter">                    
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentHalfDay_Fee', {
-                              initialValue: productData.RentHalfDay_Fee,
-                            })(<InputNumber className="inputnumber" disabled={!form.getFieldValue('productData.IsHaftDay')}/>)}
-                          </FormItem>               
+                      <div className="col-md-8 inputcenter">
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productData.RentHalfDay_Fee', {
+                            initialValue: productData.RentHalfDay_Fee,
+                          })(
+                            <InputNumber
+                              className="inputnumber"
+                              disabled={!form.getFieldValue('productData.IsHaftDay')}
+                            />,
+                          )}
+                        </FormItem>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
-                        <label>ราคาเช่าหนึ่งชั่วโมง  </label>
+                        <label>ราคาเช่าหนึ่งชั่วโมง </label>
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
@@ -166,16 +176,21 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentHour_Fee', {
-                              initialValue: productData.RentHour_Fee,
-                            })(<InputNumber className="inputnumber" disabled={form.getFieldValue('productData.IsHour')}/>)}
-                          </FormItem>                  
+                        <FormItem className="inputcenter">
+                          {getFieldDecorator('productData.RentHour_Fee', {
+                            initialValue: productData.RentHour_Fee,
+                          })(
+                            <InputNumber
+                              className="inputnumber"
+                              disabled={form.getFieldValue('productData.IsHour')}
+                            />,
+                          )}
+                        </FormItem>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>จำนวนวันขั้นต่ำที่ให้เช่า  </label>
+                        <label>จำนวนวันขั้นต่ำที่ให้เช่า </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -187,7 +202,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>แบบที่ 1  </label>
+                        <label>แบบที่ 1 </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -199,7 +214,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>แบบที่ 2  </label>
+                        <label>แบบที่ 2 </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -211,7 +226,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>ราคาในสัญญา  </label>
+                        <label>ราคาในสัญญา </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -224,7 +239,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>ราคาที่ซื้อ  </label>
+                        <label>ราคาที่ซื้อ </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -237,7 +252,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>Serial Number  </label>
+                        <label>Serial Number </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -250,7 +265,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>วันที่ซื้อ  </label>
+                        <label>วันที่ซื้อ </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -259,14 +274,20 @@ const CollectionCreateForm = Form.create()(
                               productData.PurchaseDate == null
                                 ? null
                                 : moment(productData.PurchaseDate),
-                            rules: [{ type: 'object',required: true, message: 'กรุณาเลือก วันที่ซื้อ !' }],
+                            rules: [
+                              {
+                                type: 'object',
+                                required: true,
+                                message: 'กรุณาเลือก วันที่ซื้อ !',
+                              },
+                            ],
                           })(<DatePicker />)}
                         </FormItem>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>วันที่หมดประกัน  </label>
+                        <label>วันที่หมดประกัน </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -275,14 +296,20 @@ const CollectionCreateForm = Form.create()(
                               productData.ExpireDate == null
                                 ? null
                                 : moment(productData.ExpireDate),
-                                rules: [{ type: 'object',required: true, message: 'กรุณาเลือก วันที่หมดประกัน !' }],
+                            rules: [
+                              {
+                                type: 'object',
+                                required: true,
+                                message: 'กรุณาเลือก วันที่หมดประกัน !',
+                              },
+                            ],
                           })(<DatePicker />)}
                         </FormItem>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>สถานที่ซื้อ/ประกัน  </label>
+                        <label>สถานที่ซื้อ/ประกัน </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -295,7 +322,7 @@ const CollectionCreateForm = Form.create()(
                     <br />
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>Remark (สภาพตำหนิ)  </label>
+                        <label>Remark (สภาพตำหนิ) </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -308,7 +335,7 @@ const CollectionCreateForm = Form.create()(
                     <br />
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>Note  </label>
+                        <label>Note </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -321,7 +348,7 @@ const CollectionCreateForm = Form.create()(
                     <br />
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>สถานะหน้าเว็บ  </label>
+                        <label>สถานะหน้าเว็บ </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
@@ -336,7 +363,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-4 labelcenter">
-                        <label>สถานะอุปกรณ์  </label>
+                        <label>สถานะอุปกรณ์ </label>
                       </div>
                       <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">

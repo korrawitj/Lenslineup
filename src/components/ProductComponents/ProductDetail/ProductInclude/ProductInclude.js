@@ -141,10 +141,10 @@ class ProductInclude extends React.Component {
               </Select>
             </div>
             <div className="col-sm-3">
-            <Button onClick={this.handleAdd} type="primary" style={{float:'right'}}>
+              <Button onClick={this.handleAdd} type="primary" style={{ float: 'right' }}>
                 เพิ่ม
               </Button>
-              </div>
+            </div>
           </div>
           <br />
           <Table
