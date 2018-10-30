@@ -182,7 +182,7 @@ const CollectionCreateForm = Form.create()(
                           })(
                             <InputNumber
                               className="inputnumber"
-                              disabled={form.getFieldValue('productData.IsHour')}
+                              disabled={!form.getFieldValue('productData.IsHour')}
                             />,
                           )}
                         </FormItem>
