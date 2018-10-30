@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Form, message } from 'antd'
+import { Table, Icon, Input, Button, Modal, Form, message,InputNumber } from 'antd'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
 import '../../index.css'
@@ -46,13 +46,13 @@ const CollectionCreateForm = Form.create()(
                 {getFieldDecorator('productItemData.ContractPrice', {
                   initialValue: productItemData.ContractPrice,
                   rules: [{ required: true, message: 'กรุณาระบุ ราคาในสัญญา !' }],
-                })(<Input />)}
+                })(<InputNumber />)}
               </FormItem>
               <FormItem label="จำนวน">
                 {getFieldDecorator('productItemData.Quantity', {
                   initialValue: productItemData.Quantity,
                   rules: [{ required: true, message: 'กรุณาระบุ จำนวน !' }],
-                })(<Input />)}
+                })(<InputNumber />)}
               </FormItem>
               <FormItem label="โน้ต">
                 {getFieldDecorator('productItemData.Note', { initialValue: productItemData.Note })(
@@ -230,7 +230,7 @@ class ProductItem extends React.Component {
     }
   }
   onCreateProductItem = () => {
-    this.setState({ productItemData: {} })
+    this.setState({ productItemData: {}})
     this.showModal()
   }
   componentDidMount() {
