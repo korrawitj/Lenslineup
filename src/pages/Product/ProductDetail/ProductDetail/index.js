@@ -62,22 +62,23 @@ const CollectionCreateForm = Form.create()(
                 <div className="card-body">
                   <Form>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>ชื่ออุปกรณ์ : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>ชื่ออุปกรณ์  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Name', {
                             initialValue: productData.Name,
+                            rules: [{ required: true, message: 'กรุณาระบุ ชื่ออุปกรณ์ !' }],
                           })(<Input />)}
                         </FormItem>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>ยี่ห้อ : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>ยี่ห้อ  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.BrandName', {
                             initialValue: productData.BrandName,
@@ -98,10 +99,10 @@ const CollectionCreateForm = Form.create()(
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>ประเภท : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>ประเภท  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         {getFieldDecorator('productData.CategoryID', {
                           initialValue: productData.CategoryID,
                         })(
@@ -117,7 +118,7 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
-                        <label>ราคาเช่าหนึ่งวัน : </label>
+                        <label>ราคาเช่าหนึ่งวัน  </label>
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
@@ -127,24 +128,16 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
-                        {form.getFieldValue('productData.IsDay') === true ? (
                           <FormItem className="inputcenter">
                             {getFieldDecorator('productData.RentDay_Fee', {
                               initialValue: productData.RentDay_Fee,
-                            })(<InputNumber className="inputnumber" />)}
-                          </FormItem>
-                        ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentDay_Fee', {
-                              initialValue: productData.RentDay_Fee,
-                            })(<InputNumber className="inputnumber" disabled />)}
-                          </FormItem>
-                        )}
+                            })(<InputNumber className="inputnumber" disabled={!form.getFieldValue('productData.IsDay')}/>)}
+                          </FormItem>        
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
-                        <label>ราคาเช่าครึ่งวัน : </label>
+                        <label>ราคาเช่าครึ่งวัน  </label>
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
@@ -153,25 +146,17 @@ const CollectionCreateForm = Form.create()(
                           })(<Checkbox />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-8 inputcenter">
-                        {form.getFieldValue('productData.IsHaftDay') === true ? (
+                      <div className="col-md-8 inputcenter">                    
                           <FormItem className="inputcenter">
                             {getFieldDecorator('productData.RentHalfDay_Fee', {
                               initialValue: productData.RentHalfDay_Fee,
-                            })(<InputNumber className="inputnumber" />)}
-                          </FormItem>
-                        ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentHalfDay_Fee', {
-                              initialValue: productData.RentHalfDay_Fee,
-                            })(<InputNumber className="inputnumber" disabled />)}
-                          </FormItem>
-                        )}
+                            })(<InputNumber className="inputnumber" disabled={!form.getFieldValue('productData.IsHaftDay')}/>)}
+                          </FormItem>               
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-md-3 labelcenter">
-                        <label>ราคาเช่าหนึ่งชั่วโมง : </label>
+                        <label>ราคาเช่าหนึ่งชั่วโมง  </label>
                       </div>
                       <div className="col-md-1 inputcenter">
                         <FormItem className="inputcenter">
@@ -181,133 +166,125 @@ const CollectionCreateForm = Form.create()(
                         </FormItem>
                       </div>
                       <div className="col-md-8 inputcenter">
-                        {form.getFieldValue('productData.IsHour') === true ? (
                           <FormItem className="inputcenter">
                             {getFieldDecorator('productData.RentHour_Fee', {
                               initialValue: productData.RentHour_Fee,
-                            })(<InputNumber className="inputnumber" />)}
-                          </FormItem>
-                        ) : (
-                          <FormItem className="inputcenter">
-                            {getFieldDecorator('productData.RentHour_Fee', {
-                              initialValue: productData.RentHour_Fee,
-                            })(<InputNumber className="inputnumber" disabled />)}
-                          </FormItem>
-                        )}
+                            })(<InputNumber className="inputnumber" disabled={form.getFieldValue('productData.IsHour')}/>)}
+                          </FormItem>                  
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>จำนวนวันขั้นต่ำที่ให้เช่า : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>จำนวนวันขั้นต่ำที่ให้เช่า  </label>
                       </div>
-                      <div className="col-md-3 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.RentDay', {
                             initialValue: productData.RentDay,
                           })(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6" />
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>แบบที่ 1 : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>แบบที่ 1  </label>
                       </div>
-                      <div className="col-md-3 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.DepositType1', {
                             initialValue: productData.DepositType1,
                           })(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6" />
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>แบบที่ 2 : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>แบบที่ 2  </label>
                       </div>
-                      <div className="col-md-3 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.DepositType2', {
                             initialValue: productData.DepositType2,
                           })(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6" />
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>ราคาในสัญญา : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>ราคาในสัญญา  </label>
                       </div>
-                      <div className="col-md-3 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.ContactPrice', {
                             initialValue: productData.ContactPrice,
+                            rules: [{ required: true, message: 'กรุณาระบุ ราคาในสัญญา !' }],
                           })(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6" />
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>ราคาที่ซื้อ : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>ราคาที่ซื้อ  </label>
                       </div>
-                      <div className="col-md-3 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.PurchasePrice', {
                             initialValue: productData.PurchasePrice,
+                            rules: [{ required: true, message: 'กรุณาระบุ ราคาที่ซื้อ !' }],
                           })(<InputNumber />)}
                         </FormItem>
                       </div>
-                      <div className="col-md-6" />
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>Serial Number : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>Serial Number  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.SerialNumber', {
                             initialValue: productData.SerialNumber,
+                            rules: [{ required: true, message: 'กรุณาระบุ Serial Number !' }],
                           })(<Input />)}
                         </FormItem>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>วันที่ซื้อ : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>วันที่ซื้อ  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.PurchaseDate', {
                             initialValue:
                               productData.PurchaseDate == null
                                 ? null
                                 : moment(productData.PurchaseDate),
+                            rules: [{ type: 'object',required: true, message: 'กรุณาเลือก วันที่ซื้อ !' }],
                           })(<DatePicker />)}
                         </FormItem>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>วันที่หมดประกัน : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>วันที่หมดประกัน  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.ExpireDate', {
                             initialValue:
                               productData.ExpireDate == null
                                 ? null
                                 : moment(productData.ExpireDate),
+                                rules: [{ type: 'object',required: true, message: 'กรุณาเลือก วันที่หมดประกัน !' }],
                           })(<DatePicker />)}
                         </FormItem>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>สถานที่ซื้อ/ประกัน : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>สถานที่ซื้อ/ประกัน  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Location', {
                             initialValue: productData.Location,
@@ -317,10 +294,10 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <br />
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>Remark (สภาพตำหนิ) : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>Remark (สภาพตำหนิ)  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Remark', {
                             initialValue: productData.Remark,
@@ -330,10 +307,10 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <br />
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>Note : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>Note  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Note', {
                             initialValue: productData.Note,
@@ -343,10 +320,10 @@ const CollectionCreateForm = Form.create()(
                     </div>
                     <br />
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>สถานะหน้าเว็บ : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>สถานะหน้าเว็บ  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.isShow')(
                             <Radio.Group>
@@ -358,10 +335,10 @@ const CollectionCreateForm = Form.create()(
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-md-3 labelcenter">
-                        <label>สถานะอุปกรณ์ : </label>
+                      <div className="col-md-4 labelcenter">
+                        <label>สถานะอุปกรณ์  </label>
                       </div>
-                      <div className="col-md-9 inputcenter">
+                      <div className="col-md-8 inputcenter">
                         <FormItem className="inputcenter">
                           {getFieldDecorator('productData.Status')(
                             <Radio.Group>
@@ -439,10 +416,10 @@ const CollectionCreateForm = Form.create()(
                 <div className="card-body">
                   <Button onClick={onCreate} type="primary">
                     {productData.ProductID === null || productData.ProductID === undefined
-                      ? 'Create'
-                      : 'Edit'}
+                      ? 'สร้าง'
+                      : 'แก้ไข'}
                   </Button>
-                  <Button>Cancel</Button>
+                  <Button>ยกเลิก</Button>
                 </div>
               </div>
             </div>
@@ -538,23 +515,6 @@ class ProductDetail extends React.Component {
   }
 
   handleChange = ({ fileList }) => this.setState({ fileList })
-
-  showDeleteConfirm(record) {
-    let T = record
-    confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte ProductID = {record.id}</div>,
-      okText: 'Yes',
-      okType: 'danger',
-      cancelText: 'No',
-      onOk() {
-        console.log('OK')
-      },
-      onCancel() {
-        console.log('Cancel')
-      },
-    })
-  }
 
   onInputChange = e => {
     this.setState({ searchText: e.target.value })

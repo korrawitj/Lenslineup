@@ -25,11 +25,13 @@ class ProductInclude extends React.Component {
     console.log(props)
     var _this = this
     Modal.confirm({
-      title: 'Are you sure delete this row?',
-      content: <div>Delelte Product Item = {record.ItemID}</div>,
-      okText: 'Yes',
+      title: 'คุณแน่ใจหรือไม่ที่จะลบ อุปกรณ์ที่ให้ไประหว่างเช่า?',
+      content: <div> {record.Name}</div>,
+      okText: 'ตกลง',
       okType: 'danger',
-      cancelText: 'No',
+      cancelText: 'ยกเลิก',
+      iconType: 'close-circle',
+      centered: true,
       onOk: () => {
         console.log(props)
         if (props.productID !== null && props.DataSourceTa !== []) {
@@ -44,31 +46,6 @@ class ProductInclude extends React.Component {
       onCancel() {
         console.log('Cancel')
       },
-    })
-  }
-  showData(record) {
-    let T = record
-    Modal.info({
-      title: <div>อุปกรณ์จัดชุด {record.ItemID}</div>,
-      width: 1000,
-
-      content: (
-        <div className="row">
-          <div className="col-md-4">
-            <label>อุปกรณ์</label>
-          </div>
-          <div className="col-md-6">{record.Name}</div>
-          <div className="col-md-4">
-            <label>ราคาในสัญญา</label>
-          </div>
-          <div className="col-md-6">{record.ContractPrice}</div>
-          <div className="col-md-4">
-            <label>จำนวน</label>
-          </div>
-          <div className="col-md-6">{record.Quantity}</div>
-        </div>
-      ),
-      onOk() {},
     })
   }
   handleChange = value => {
@@ -145,12 +122,12 @@ class ProductInclude extends React.Component {
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
-            <strong>อุปกรณ์ที่ติดไปด้วย</strong>
+            <strong>อุปกรณ์ที่ให้ไประหว่างเช่า</strong>
           </div>
         </div>
         <div className="card-body">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-sm-6">
               <Select
                 placeholder="Please select"
                 style={{ width: '100%' }}
@@ -163,11 +140,11 @@ class ProductInclude extends React.Component {
                 ))}
               </Select>
             </div>
-            <div className="col-md-3">
-              <Button onClick={this.handleAdd} type="primary">
-                Add
+            <div className="col-sm-3">
+            <Button onClick={this.handleAdd} type="primary" style={{float:'right'}}>
+                เพิ่ม
               </Button>
-            </div>
+              </div>
           </div>
           <br />
           <Table

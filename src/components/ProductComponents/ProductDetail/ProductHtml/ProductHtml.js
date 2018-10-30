@@ -19,10 +19,10 @@ class ProductHtml extends React.Component {
             <hr />
             <div className="card-body">
               <div className="row">
-                <div className="col-md-3 labelcenter">
+                <div className="col-md-4 labelcenter">
                   <label>Display Name </label>
                 </div>
-                <div className="col-md-9 inputcenter">
+                <div className="col-md-8 inputcenter">
                   <FormItem className="inputcenter">
                     {getFieldDecorator('productData.DisplayName', {
                       initialValue: productData.DisplayName,
@@ -32,10 +32,10 @@ class ProductHtml extends React.Component {
               </div>
               <br />
               <div className="row">
-                <div className="col-md-3 labelcenter">
+                <div className="col-md-4 labelcenter">
                   <label>Meta Title Tag </label>
                 </div>
-                <div className="col-md-9 inputcenter">
+                <div className="col-md-8 inputcenter">
                   <FormItem className="inputcenter">
                     {getFieldDecorator('productData.MetaTitle', {
                       initialValue: productData.MetaTitle,
@@ -45,10 +45,10 @@ class ProductHtml extends React.Component {
               </div>
               <br />
               <div className="row">
-                <div className="col-md-3 labelcenter">
+                <div className="col-md-4 labelcenter">
                   <label>Meta Description Tag </label>
                 </div>
-                <div className="col-md-9 inputcenter">
+                <div className="col-md-8 inputcenter">
                   <FormItem className="inputcenter">
                     {getFieldDecorator('productData.MetaDescription', {
                       initialValue: productData.MetaDescription,
@@ -58,10 +58,10 @@ class ProductHtml extends React.Component {
               </div>
               <br />
               <div className="row">
-                <div className="col-md-3 labelcenter">
+                <div className="col-md-4 labelcenter">
                   <label>Permalink </label>
                 </div>
-                <div className="col-md-9 inputcenter">
+                <div className="col-md-8 inputcenter">
                   <FormItem className="inputcenter">
                     {getFieldDecorator('productData.Permalink', {
                       initialValue: productData.Permalink,
@@ -71,10 +71,10 @@ class ProductHtml extends React.Component {
               </div>
               <br />
               <div className="row">
-                <div className="col-md-3 labelcenter">
+                <div className="col-md-4 labelcenter">
                   <label>Description </label>
                 </div>
-                <div className="col-md-9 inputcenter">
+                <div className="col-md-8 inputcenter">
                   <FormItem className="inputcenter">
                     {getFieldDecorator('productData.Description', {
                       initialValue: productData.Description,
@@ -84,10 +84,10 @@ class ProductHtml extends React.Component {
               </div>
               <br />
               <div className="row">
-                <div className="col-md-3 labelcenter">
+                <div className="col-md-4 labelcenter">
                   <label>Description1 </label>
                 </div>
-                <div className="col-md-9 inputcenter">
+                <div className="col-md-8 inputcenter">
                   <FormItem className="inputcenter">
                     {getFieldDecorator('productData.Description1', {
                       initialValue: productData.Description1,
@@ -97,10 +97,10 @@ class ProductHtml extends React.Component {
               </div>
               <br />
               <div className="row">
-                <div className="col-md-3 labelcenter">
+                <div className="col-md-4 labelcenter">
                   <label>ข้อมูลในสัญญาเช่าเพิ่มเติม / ข้อมูลการตรวจรับของ </label>
                 </div>
-                <div className="col-md-9 inputcenter">
+                <div className="col-md-8 inputcenter">
                   <FormItem className="inputcenter">
                     {getFieldDecorator('productData.Note', {
                       initialValue: productData.Note,
