@@ -59,7 +59,7 @@ class ProductList extends React.Component {
   }
 
   handleChange = ({ fileList }) => this.setState({ fileList })
-  showDeleteConfirm(record,props) {
+  showDeleteConfirm(record, props) {
     let T = record
     confirm({
       title: 'คุณแน่ใจหรือไม่ที่จะลบ อุปกรณ์?',
@@ -168,7 +168,7 @@ class ProductList extends React.Component {
             <strong>อุปกรณ์ทั้งหมด</strong>
           </div>
           <Link to="/Product/list/detail" className="navbar-item">
-            <Button type="primary" style={{float:'right'}}>
+            <Button type="primary" style={{ float: 'right' }}>
               เพิ่มอุปกรณ์
             </Button>
           </Link>
