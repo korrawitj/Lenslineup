@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Icon, Input, Button, Modal, Form, message,InputNumber } from 'antd'
+import { Table, Icon, Input, Button, Modal, Form, message, InputNumber } from 'antd'
 import * as actionCreators from '../../../../store/axios/productItem'
 import { connect } from 'react-redux'
 import '../../index.css'
@@ -230,7 +230,7 @@ class ProductItem extends React.Component {
     }
   }
   onCreateProductItem = () => {
-    this.setState({ productItemData: {}})
+    this.setState({ productItemData: {} })
     this.showModal()
   }
   componentDidMount() {
