@@ -68,7 +68,7 @@ const CollectionCreateForm = Form.create()(
 )
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
-  pageSize:15,
+  pageSize: 15,
   showSizeChanger: false,
   current: 1,
   size: 'small',
@@ -161,7 +161,7 @@ class Holiday extends React.Component {
     })
   }
 
-  handleTableChange = (pagination) => {
+  handleTableChange = pagination => {
     if (this.state.pager) {
       const pager = { ...this.state.pager }
       if (pager.pageSize !== pagination.pageSize) {

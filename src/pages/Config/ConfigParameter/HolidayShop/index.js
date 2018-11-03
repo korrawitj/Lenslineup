@@ -9,7 +9,7 @@ const RadioGroup = Radio.Group
 const FormItem = Form.Item
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
-  pageSize:15,
+  pageSize: 15,
   showSizeChanger: false,
   current: 1,
   size: 'small',
