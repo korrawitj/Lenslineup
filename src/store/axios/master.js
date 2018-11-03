@@ -97,7 +97,6 @@ export function deleteHolidayShop(Id) {
 }
 
 export function updateHolidayShop(data) {
-  debugger
   return dispatch => {
     return axios
       .post('/api/masterHoliday/updateHolidayShop', { holidayShopData: data })

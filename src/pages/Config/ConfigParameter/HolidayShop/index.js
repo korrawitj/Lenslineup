@@ -150,7 +150,7 @@ class HolidayShop extends React.Component {
             />
           </span>
         ),
-        sorter: (a, b) => a.receive - b.receive,
+        sorter: (a, b) => a.recurring - b.recurring,
       },
       {
         title: 'รายละเอียด',

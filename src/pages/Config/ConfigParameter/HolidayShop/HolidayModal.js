@@ -10,6 +10,7 @@ const HolidayModal = Form.create()(
     render() {
       const { visible, onCancel, onSubmitData, form, holidayShopData } = this.props
       const { getFieldDecorator } = form
+      console.log(holidayShopData)
       return (
         <Modal
           title={holidayShopData.shopID != null ? 'แก้ไขวันหยุดร้าน' : 'เพิ่มวันหยุดร้าน'}
