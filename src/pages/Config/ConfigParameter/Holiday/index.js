@@ -31,16 +31,16 @@ const CollectionCreateForm = Form.create()(
                   rules: [{ type: 'object', required: true, message: 'กรุณาเลือก วันที่ !' }],
                 })(<DatePicker />)}
               </FormItem>
-              <FormItem label="ข้อความ">
+              <FormItem label="รายละเอียด">
                 {getFieldDecorator('holidayData.message', {
                   initialValue: holiDaydata.message,
-                  rules: [{ required: true, message: 'กรุณากรอก ข้อความ !' }],
+                  rules: [{ required: true, message: 'กรุณากรอก รายละเอียด !' }],
                 })(<TextArea />)}
               </FormItem>
-              <FormItem label="การรับ">
+              <FormItem label="รับ">
                 {getFieldDecorator('holidayData.receive', {
                   initialValue: holiDaydata.receive,
-                  rules: [{ required: true, message: 'กรุณาเลือก การรับ !' }],
+                  rules: [{ required: true, message: 'กรุณาเลือก รับ !' }],
                 })(
                   <RadioGroup name="radiogroup">
                     <Radio value={true}>Yes</Radio>
@@ -48,10 +48,10 @@ const CollectionCreateForm = Form.create()(
                   </RadioGroup>,
                 )}
               </FormItem>
-              <FormItem label="การคืน">
+              <FormItem label="คืน">
                 {getFieldDecorator('holidayData.recurring', {
                   initialValue: holiDaydata.recurring,
-                  rules: [{ required: true, message: 'กรุณาเลือก การคืน !' }],
+                  rules: [{ required: true, message: 'กรุณาเลือก คืน !' }],
                 })(
                   <RadioGroup name="radiogroup1">
                     <Radio value={true}>Yes</Radio>
@@ -68,7 +68,8 @@ const CollectionCreateForm = Form.create()(
 )
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
-  showSizeChanger: true,
+  pageSize:15,
+  showSizeChanger: false,
   current: 1,
   size: 'small',
   showTotal: total => `Total ${total} items`,
@@ -144,6 +145,7 @@ class Holiday extends React.Component {
       okType: 'danger',
       cancelText: 'ยกเลิก',
       centered: true,
+      iconType: 'close-circle',
       async onOk() {
         // var Item = props.master.holidayData
         // var removeItem = record.holidayID
@@ -159,7 +161,7 @@ class Holiday extends React.Component {
     })
   }
 
-  handleTableChange = (pagination, filters, sorter) => {
+  handleTableChange = (pagination) => {
     if (this.state.pager) {
       const pager = { ...this.state.pager }
       if (pager.pageSize !== pagination.pageSize) {
@@ -180,14 +182,14 @@ class Holiday extends React.Component {
 
     const columnsholiday = [
       {
-        title: 'วันหยุด',
+        title: 'วันที่',
         dataIndex: 'date',
         key: 'date',
         render: text => <span>{text}</span>,
         sorter: (a, b) => a.date - b.date,
       },
       {
-        title: 'การรับ',
+        title: 'รับ',
         dataIndex: 'receive',
         key: 'receive',
         render: text => (
@@ -203,7 +205,7 @@ class Holiday extends React.Component {
         sorter: (a, b) => a.receive - b.receive,
       },
       {
-        title: 'การคืน',
+        title: 'คืน',
         dataIndex: 'recurring',
         key: 'recurring',
         render: text => (
@@ -219,7 +221,7 @@ class Holiday extends React.Component {
         sorter: (a, b) => a.receive - b.receive,
       },
       {
-        title: 'ข้อความ',
+        title: 'รายละเอียด',
         dataIndex: 'message',
         key: 'message',
         render: text => <span>{text}</span>,
@@ -252,10 +254,10 @@ class Holiday extends React.Component {
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
-            <strong>วันหยุด</strong>
+            <strong>วันหยุดร้าน</strong>
           </div>
           <Button type="primary" onClick={this.onCreateHoliday} style={{ float: 'right' }}>
-            เพิ่มวันหยุด
+            เพิ่ม
           </Button>
         </div>
         <div className="card-body">

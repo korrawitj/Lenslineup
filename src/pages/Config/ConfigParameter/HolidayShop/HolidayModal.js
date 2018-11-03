@@ -22,22 +22,22 @@ const HolidayModal = Form.create()(
         >
           <div className="card-body">
             <Form layout="vertical">
-              <FormItem label="วันที่">
+              <FormItem label="ทุกๆวัน">
                 {getFieldDecorator('holidayShopData.date', {
                   initialValue: moment(holidayShopData.date),
-                  rules: [{ type: 'object', required: true, message: 'กรุณาเลือก วันที่ !' }],
+                  rules: [{ type: 'object', required: true, message: 'กรุณาเลือก ทุกๆวัน !' }],
                 })(<DatePicker />)}
               </FormItem>
-              <FormItem label="ข้อความ">
+              <FormItem label="รายละเอียด">
                 {getFieldDecorator('holidayShopData.message', {
                   initialValue: holidayShopData.message,
-                  rules: [{ required: true, message: 'กรุณากรอก ข้อความ !' }],
+                  rules: [{ required: true, message: 'กรุณากรอก รายละเอียด !' }],
                 })(<TextArea />)}
               </FormItem>
-              <FormItem label="การรับ">
+              <FormItem label="รับ">
                 {getFieldDecorator('holidayShopData.receive', {
                   initialValue: holidayShopData.receive,
-                  rules: [{ required: true, message: 'กรุณาเลือก การรับ !' }],
+                  rules: [{ required: true, message: 'กรุณาเลือก รับ !' }],
                 })(
                   <RadioGroup name="radiogroup">
                     <Radio value={true}>Yes</Radio>
@@ -45,10 +45,10 @@ const HolidayModal = Form.create()(
                   </RadioGroup>,
                 )}
               </FormItem>
-              <FormItem label="การคืน">
+              <FormItem label="คืน">
                 {getFieldDecorator('holidayShopData.recurring', {
                   initialValue: holidayShopData.recurring,
-                  rules: [{ required: true, message: 'กรุณาเลือก การคืน !' }],
+                  rules: [{ required: true, message: 'กรุณาเลือก คืน !' }],
                 })(
                   <RadioGroup name="radiogroup1">
                     <Radio value={true}>Yes</Radio>

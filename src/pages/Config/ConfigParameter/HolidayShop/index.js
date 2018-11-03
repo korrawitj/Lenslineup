@@ -9,7 +9,8 @@ const RadioGroup = Radio.Group
 const FormItem = Form.Item
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
-  showSizeChanger: true,
+  pageSize:15,
+  showSizeChanger: false,
   current: 1,
   size: 'small',
   showTotal: total => `Total ${total} items`,
@@ -72,6 +73,7 @@ class HolidayShop extends React.Component {
       okType: 'danger',
       cancelText: 'ยกเลิก',
       centered: true,
+      iconType: 'close-circle',
       async onOk() {
         await parent.deleteHolidayShop(record.shopID)
         parent.getAllDataHolidayShop()
@@ -112,14 +114,14 @@ class HolidayShop extends React.Component {
     let { pager } = this.state
     const columnsholidayshop = [
       {
-        title: 'วันหยุดร้าน',
+        title: 'ทุกๆวัน',
         dataIndex: 'date',
         key: 'date',
         render: text => <span>{text}</span>,
         sorter: (a, b) => a.date - b.date,
       },
       {
-        title: 'การรับ',
+        title: 'รับ',
         dataIndex: 'receive',
         key: 'receive',
         render: text => (
@@ -135,7 +137,7 @@ class HolidayShop extends React.Component {
         sorter: (a, b) => a.receive - b.receive,
       },
       {
-        title: 'การคืน',
+        title: 'คืน',
         dataIndex: 'recurring',
         key: 'recurring',
         render: text => (
@@ -151,7 +153,7 @@ class HolidayShop extends React.Component {
         sorter: (a, b) => a.receive - b.receive,
       },
       {
-        title: 'ข้อความ',
+        title: 'รายละเอียด',
         dataIndex: 'message',
         key: 'message',
         render: text => <span>{text}</span>,
@@ -183,10 +185,10 @@ class HolidayShop extends React.Component {
       <div className="card">
         <div className="card-header">
           <div className="utils__title">
-            <strong>วันหยุดร้าน</strong>
+            <strong>วันหยุดประจำร้าน</strong>
           </div>
           <Button type="primary" onClick={this.onAdd} style={{ float: 'right' }}>
-            เพิ่มวันหยุดร้าน
+            เพิ่ม
           </Button>
         </div>
         <div className="card-body">

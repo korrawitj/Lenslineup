@@ -128,6 +128,7 @@ class PickUp extends React.Component {
       okText: 'ตกลง',
       okType: 'danger',
       cancelText: 'ยกเลิก',
+      iconType: 'close-circle',
       centered: true,
       async onOk() {
         await parent.deleteDataPickup(record.pickupID)

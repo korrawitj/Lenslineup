@@ -100,6 +100,7 @@ class ManageRecurring extends React.Component {
       okType: 'danger',
       cancelText: 'ยกเลิก',
       centered: true,
+      iconType: 'close-circle',
       async onOk() {
         await parent.deleteMasterManageRecurring(record.manageID)
         await parent.getAllDataManage()
